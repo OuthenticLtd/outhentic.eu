@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Don't index the editor
+Disallow: /editor
+Disallow: /editor.html
+
+Sitemap: https://outhentic.eu/sitemap.xml

@@ -2,6 +2,62 @@
    URL pattern: article.html?slug=ethno-bulgaria-2023
    Reads window.OUTHENTIC_NEWS, finds matching post, renders. */
 (function () {
+
+  // ----- SEO: per-article canonical + Article JSON-LD ----- 
+  function injectArticleSeo(post) {
+    if (!post) return;
+    var lang = (document.documentElement.lang || 'en').toLowerCase().startsWith('bg') ? 'bg' : 'en';
+    var inBg = location.pathname.indexOf('/bg/') !== -1;
+    var pathEn = '/article?slug=' + post.slug;
+    var pathBg = '/bg/article?slug=' + post.slug;
+    var canon = 'https://outhentic.eu' + (inBg ? pathBg : pathEn);
+    // Update or insert <link rel="canonical">
+    var c = document.querySelector('link[rel="canonical"]');
+    if (!c) { c = document.createElement('link'); c.setAttribute('rel','canonical'); document.head.appendChild(c); }
+    c.setAttribute('href', canon);
+    // Update <title> + description
+    var title = (post['title_' + lang] || post.title_en || 'Article');
+    document.title = title + ' — Outhentic';
+    var desc = (post['excerpt_' + lang] || post.excerpt_en || '').replace(/\s+/g,' ').slice(0, 160);
+    var md = document.querySelector('meta[name="description"]');
+    if (!md) { md = document.createElement('meta'); md.setAttribute('name','description'); document.head.appendChild(md); }
+    md.setAttribute('content', desc);
+    // Update og:title / og:description / og:url / og:image
+    function setOg(prop, val) {
+      var m = document.querySelector('meta[property="og:' + prop + '"]');
+      if (!m) { m = document.createElement('meta'); m.setAttribute('property','og:' + prop); document.head.appendChild(m); }
+      m.setAttribute('content', val);
+    }
+    setOg('title', title);
+    setOg('description', desc);
+    setOg('url', canon);
+    if (post.image) setOg('image', 'https://outhentic.eu/' + post.image);
+    setOg('type', 'article');
+
+    // Inject Article JSON-LD
+    var ld = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": title,
+      "description": desc,
+      "datePublished": post.date,
+      "image": post.image ? ['https://outhentic.eu/' + post.image] : undefined,
+      "inLanguage": lang,
+      "author": { "@type": "MusicGroup", "name": "Outhentic", "url": "https://outhentic.eu/" },
+      "publisher": { "@type": "MusicGroup", "name": "Outhentic", "url": "https://outhentic.eu/", "logo": { "@type": "ImageObject", "url": "https://outhentic.eu/assets/img/logo.png" } },
+      "mainEntityOfPage": canon
+    };
+    // Remove any prior dynamic LD
+    var prior = document.querySelector('script[data-ld="article"]');
+    if (prior) prior.remove();
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.setAttribute('data-ld', 'article');
+    s.textContent = JSON.stringify(ld);
+    document.head.appendChild(s);
+  }
+
+
   var root = document.getElementById('article-root');
   if (!root || !window.OUTHENTIC_NEWS) {
     if (root) root.innerHTML = '<section class="section"><div class="wrap"><p class="muted">Article not available.</p></div></section>';
