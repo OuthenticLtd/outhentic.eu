@@ -1,24 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="robots" content="noindex">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
 <title>Page moved — Outhentic</title>
-<link rel="canonical" href="https://outhentic.eu/">
-<meta http-equiv="refresh" content="3;url=/">
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="canonical" href="https://outhentic.eu/" />
+<meta http-equiv="refresh" content="6;url=/" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  body{font-family:"Inter",system-ui,sans-serif; max-width:540px; margin:80px auto; padding:0 24px; text-align:center; color:#0E0E0E; line-height:1.6}
-  h1{font-family:"Fraunces",serif; font-weight:300; font-size:2rem; margin:0 0 12px}
-  p{color:#4A4A4A}
-  a{color:#8B6727}
+  :root {
+    --bg: #FAFAF7; --ink: #0E0E0E; --ink-soft: #4A4A4A; --muted: #7A7872;
+    --line: #DCD7CB; --accent: #B8893E; --accent-deep: #8B6727;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink);
+    display: flex; flex-direction: column; min-height: 100vh;
+    line-height: 1.6;
+  }
+  .wrap {
+    flex: 1;
+    max-width: 640px; margin: 0 auto;
+    padding: 80px 24px 60px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 24px;
+  }
+  .logo img { height: 36px; width: auto; }
+  .eyebrow {
+    font-size: .78rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--accent-deep); margin: 0;
+  }
+  .eyebrow::before { content: "—"; margin-right: .6em; opacity: .55; }
+  h1 {
+    font-family: "Fraunces", serif; font-weight: 300; letter-spacing: -.02em;
+    font-size: clamp(2.4rem, 6vw, 4rem); margin: 0; line-height: 1.05;
+    color: var(--ink);
+  }
+  p { color: var(--ink-soft); font-size: 1.05rem; max-width: 50ch; margin: 0; }
+  .actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 24px;
+    font-size: .82rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em;
+    border: 1px solid var(--ink); background: transparent; color: var(--ink);
+    text-decoration: none;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .btn:hover { background: var(--ink); color: var(--bg); }
+  .btn--accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn--accent:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; }
+  .countdown {
+    font-size: .76rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); margin-top: 12px;
+  }
+  footer {
+    text-align: center; padding: 24px;
+    font-size: .76rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); border-top: 1px solid var(--line);
+  }
+  footer a { color: var(--ink); text-decoration: none; }
+  footer a:hover { color: var(--accent-deep); }
 </style>
 </head>
 <body>
-<h1>This page has moved.</h1>
-<p>The page you were looking for has been retired or moved during our site rebuild. You'll be redirected to <a href="/">outhentic.eu</a> in a moment.</p>
+<main class="wrap">
+  <a href="/" class="logo" aria-label="Outhentic"><img src="/assets/img/logo.png" alt="Outhentic" /></a>
+  <span class="eyebrow">404 · Page moved</span>
+  <h1>This page has moved.</h1>
+  <p>The page you were looking for has been retired or moved during our site rebuild. Head back to the home page and you'll find what you need.</p>
+  <div class="actions">
+    <a class="btn btn--accent" href="/">Home →</a>
+    <a class="btn" href="/news">Latest news →</a>
+  </div>
+  <div class="countdown" id="countdown">Redirecting in 5…</div>
+</main>
+<footer>
+  © <span data-year>2026</span> Outhentic · <a href="mailto:info@outhentic.eu">info@outhentic.eu</a>
+</footer>
 <script>
-  // If we recognise a known WordPress slug pattern, redirect smartly. Otherwise → home.
-  setTimeout(function () { location.replace("/"); }, 2000);
+  // Live year + countdown
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+  var n = 5;
+  var cd = document.getElementById('countdown');
+  var t = setInterval(function () {
+    n--;
+    if (cd) cd.textContent = 'Redirecting in ' + n + '…';
+    if (n <= 0) { clearInterval(t); location.replace('/'); }
+  }, 1000);
 </script>
 </body>
 </html>
