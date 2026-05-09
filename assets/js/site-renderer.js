@@ -30,32 +30,39 @@
     return inBg ? '../' + p : p;
   }
 
-  /* ----- Main nav: relabel + reorder cross-page items ----- */
-  if (Array.isArray(data.nav) && data.nav.length) {
-    var navMap = {};
-    data.nav.forEach(function (item) { if (item && item.id) navMap[item.id] = item; });
+  /* ----- Main nav: rebuild per-page menu from site-data ----- */
+  // <body data-nav-page="group|foundation|news"> tells us which menu to use.
+  // Backward-compat: if data.nav is still an array (old format), treat it as a
+  // single shared menu applied to every page.
+  if (data.nav) {
+    var pageKey = (document.body && document.body.getAttribute('data-nav-page')) || '';
+    var items = null;
+    if (Array.isArray(data.nav)) {
+      items = data.nav; // old format
+    } else if (pageKey && Array.isArray(data.nav[pageKey])) {
+      items = data.nav[pageKey];
+    }
 
-    document.querySelectorAll('.nav-links').forEach(function (navEl) {
-      var keyed = Array.prototype.slice.call(navEl.querySelectorAll('a[data-nav-key]'));
-      if (!keyed.length) return;
-
-      keyed.forEach(function (a) {
-        var item = navMap[a.dataset.navKey];
-        if (!item) return;
-        a.textContent = pick(item, 'label');
-        if (item.href) a.setAttribute('href', fixPath(item.href));
+    if (items && items.length) {
+      document.querySelectorAll('.nav-links').forEach(function (navEl) {
+        // Remove every existing <a> in the menu (keep .lang-toggle)
+        Array.prototype.slice.call(navEl.children).forEach(function (child) {
+          if (child.tagName === 'A') navEl.removeChild(child);
+        });
+        var langToggle = navEl.querySelector('.lang-toggle');
+        items.forEach(function (item) {
+          var a = document.createElement('a');
+          var href = item.href || '';
+          if (href.charAt(0) !== '#' && !/^(https?:|\.\.|\/|mailto:)/.test(href)) {
+            href = fixPath(href);
+          }
+          a.setAttribute('href', href);
+          a.textContent = pick(item, 'label');
+          if (langToggle) navEl.insertBefore(a, langToggle);
+          else navEl.appendChild(a);
+        });
       });
-
-      var sorted = data.nav
-        .map(function (item) { return keyed.find(function (a) { return a.dataset.navKey === item.id; }); })
-        .filter(Boolean);
-      sorted.forEach(function (a) { a.remove(); });
-      var langToggle = navEl.querySelector('.lang-toggle');
-      sorted.forEach(function (a) {
-        if (langToggle) navEl.insertBefore(a, langToggle);
-        else navEl.appendChild(a);
-      });
-    });
+    }
   }
 
   /* ----- Hero ----- */

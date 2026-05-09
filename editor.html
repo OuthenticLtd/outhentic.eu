@@ -193,9 +193,9 @@
   <!-- ============== MENU TAB ============== -->
   <div class="panel hidden" data-panel="menu">
     <div class="help">
-      <h3>Main menu</h3>
-      <p>Cross-page items that appear in the top navigation on every page (Outhentic Group, Foundation, News). Edit labels, URL, and order. Use ↑ ↓ to reorder.</p>
-      <p>Section anchors like <em>About</em>, <em>Music</em>, <em>Members</em> live inside each page and aren't editable here.</p>
+      <h3>Main menu — per page</h3>
+      <p>Each page has its OWN menu, fully editable: labels, URLs, and order. Three sections below — one for each page (Group, Foundation, News).</p>
+      <p>Use <code>#section</code> in the URL field for in-page anchors (e.g. <code>#about</code>, <code>#music</code>); they only work on the page they belong to. Use <code>page.html</code> (e.g. <code>foundation.html</code>) for cross-page links.</p>
     </div>
     <div class="toolbar">
       <button id="menu-add" class="btn">＋ Add item</button>
@@ -827,16 +827,34 @@
   });
 
   // =================================================================
-  // MENU TAB
+  // MENU TAB — per-page menus (group / foundation / news)
   // =================================================================
-  function renderMenuCard(m, idx) {
-    return '<article class="card" data-mn-idx="' + idx + '">' +
+  var MENU_PAGES = [
+    { key: 'group',      label: 'Group page (group.html)' },
+    { key: 'foundation', label: 'Foundation page (foundation.html)' },
+    { key: 'news',       label: 'News & Article pages (news.html, article.html)' }
+  ];
+
+  // Migrate old array-format nav to per-page object format on load
+  function ensureNav() {
+    if (!site.nav) site.nav = {};
+    if (Array.isArray(site.nav)) {
+      // keep as default for all pages
+      var legacy = site.nav;
+      site.nav = { group: legacy.slice(), foundation: legacy.slice(), news: legacy.slice() };
+    }
+    MENU_PAGES.forEach(function (p) {
+      if (!Array.isArray(site.nav[p.key])) site.nav[p.key] = [];
+    });
+  }
+
+  function renderMenuCard(m, idx, pageKey) {
+    return '<article class="card" data-mn-page="' + pageKey + '" data-mn-idx="' + idx + '">' +
       '<div class="card-head">' +
         '<h3 class="title-preview">' + escapeText(m.label_en || m.label_bg || '(unnamed)') + '</h3>' +
-        '<span class="meta-preview">' + escapeText(m.id || '') + '</span>' +
+        '<span class="meta-preview">' + escapeText(m.href || '') + '</span>' +
       '</div>' +
-      field('ID (key)', '<input type="text" data-mk="id" value="' + escapeAttr(m.id) + '" placeholder="group" style="width:100%; padding:8px 10px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem;"/><p style="font-size:.72rem; color:var(--muted); margin:6px 0 0;">Stable identifier — must match <code>data-nav-key="..."</code> in your HTML. Use <code>group</code>, <code>foundation</code>, <code>news</code>.</p>') +
-      field('URL (href)', '<input type="text" data-mk="href" value="' + escapeAttr(m.href) + '" placeholder="group.html" style="width:100%; padding:8px 10px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem;"/>') +
+      field('URL (href)', '<input type="text" data-mk="href" value="' + escapeAttr(m.href) + '" placeholder="#about or news.html" style="width:100%; padding:8px 10px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem;"/><p style="font-size:.72rem; color:var(--muted); margin:6px 0 0;">Use <code>#section</code> for in-page anchors, or <code>page.html</code> for cross-page links.</p>') +
       field('Label', bilingualText('mlabel', m.label_en, m.label_bg)) +
       '<div class="card-actions">' +
         '<span style="color:var(--muted); font-size:.82rem;">Item #' + (idx + 1) + '</span>' +
@@ -849,18 +867,31 @@
     '</article>';
   }
   function renderMenu() {
-    site.nav = site.nav || [];
-    $('#menu-list').innerHTML = site.nav.map(renderMenuCard).join('');
-    $('#menu-count').textContent = site.nav.length;
+    ensureNav();
+    var html = '';
+    MENU_PAGES.forEach(function (p) {
+      var arr = site.nav[p.key];
+      html += '<section style="margin-bottom:36px;" data-mn-section="' + p.key + '">' +
+        '<div style="display:flex; align-items:center; justify-content:space-between; padding-bottom:8px; margin-bottom:14px; border-bottom:2px solid var(--ink);">' +
+          '<h3 style="font-family:Fraunces,serif; font-weight:400; font-size:1.3rem; margin:0;">' + escapeText(p.label) + '</h3>' +
+          '<button class="btn btn--small" data-mn-add="' + p.key + '" type="button">＋ Add item to ' + escapeText(p.key) + '</button>' +
+        '</div>' +
+        arr.map(function (m, i) { return renderMenuCard(m, i, p.key); }).join('') +
+      '</section>';
+    });
+    $('#menu-list').innerHTML = html;
+    var total = site.nav.group.length + site.nav.foundation.length + site.nav.news.length;
+    $('#menu-count').textContent = total;
   }
   $('#menu-list').addEventListener('input', function (e) {
     var card = e.target.closest('[data-mn-idx]'); if (!card) return;
+    var pageKey = card.dataset.mnPage;
     var idx = +card.dataset.mnIdx;
-    var item = site.nav[idx]; if (!item) return;
+    var item = site.nav[pageKey] && site.nav[pageKey][idx]; if (!item) return;
     if (e.target.dataset.mk) {
       item[e.target.dataset.mk] = e.target.value;
       setDirty('site', true);
-      if (e.target.dataset.mk === 'id') card.querySelector('.meta-preview').textContent = item.id || '';
+      if (e.target.dataset.mk === 'href') card.querySelector('.meta-preview').textContent = item.href || '';
       return;
     }
     if (e.target.dataset.key && e.target.dataset.key.indexOf('mlabel_') === 0) {
@@ -872,21 +903,35 @@
     }
   });
   $('#menu-list').addEventListener('click', function (e) {
+    // Per-page Add button
+    var addBtn = e.target.closest('[data-mn-add]');
+    if (addBtn) {
+      var k = addBtn.dataset.mnAdd;
+      site.nav[k] = site.nav[k] || [];
+      site.nav[k].push({ href: '', label_en: '', label_bg: '' });
+      setDirty('site', true); renderMenu();
+      return;
+    }
     var btn = e.target.closest('[data-mact]'); if (!btn) return;
-    var card = e.target.closest('[data-mn-idx]'); var idx = +card.dataset.mnIdx;
+    var card = e.target.closest('[data-mn-idx]');
+    var pageKey = card.dataset.mnPage;
+    var idx = +card.dataset.mnIdx;
+    var arr = site.nav[pageKey];
+    if (!arr) return;
     if (btn.dataset.mact === 'delete') {
       if (!confirm('Delete this menu item?')) return;
-      site.nav.splice(idx, 1);
+      arr.splice(idx, 1);
     } else if (btn.dataset.mact === 'up' && idx > 0) {
-      var t = site.nav[idx - 1]; site.nav[idx - 1] = site.nav[idx]; site.nav[idx] = t;
-    } else if (btn.dataset.mact === 'down' && idx < site.nav.length - 1) {
-      var t2 = site.nav[idx + 1]; site.nav[idx + 1] = site.nav[idx]; site.nav[idx] = t2;
+      var t = arr[idx - 1]; arr[idx - 1] = arr[idx]; arr[idx] = t;
+    } else if (btn.dataset.mact === 'down' && idx < arr.length - 1) {
+      var t2 = arr[idx + 1]; arr[idx + 1] = arr[idx]; arr[idx] = t2;
     } else return;
     setDirty('site', true); renderMenu();
   });
+  // Top-level "Add item" button — adds to whichever section is first (group)
   $('#menu-add').addEventListener('click', function () {
-    site.nav = site.nav || [];
-    site.nav.push({ id: 'item-' + Date.now(), href: '', label_en: '', label_bg: '' });
+    ensureNav();
+    site.nav.group.push({ href: '', label_en: '', label_bg: '' });
     setDirty('site', true); renderMenu();
   });
 

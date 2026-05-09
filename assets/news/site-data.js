@@ -22,15 +22,34 @@ window.OUTHENTIC_SITE = {
     address_bg: "София 1592, България"
   },
 
-  /* Main navigation menu — cross-page items (Group / Foundation / News).
-     Order here is the order the user sees in the menu.
-     Each item has a stable `id` matching the data-nav-key in HTML;
-     site-renderer.js rewrites label and order on every page. */
-  nav: [
-    { id: "group",      href: "group.html",      label_en: "Outhentic Group",      label_bg: "Група Аутентик" },
-    { id: "foundation", href: "foundation.html", label_en: "Outhentic Foundation", label_bg: "Фондация Аутентик" },
-    { id: "news",       href: "news.html",       label_en: "News",                 label_bg: "Новини" }
-  ],
+  /* Main navigation menu — fully editable per page.
+     Each top-level key (group/foundation/news) is a different page's menu.
+     Section anchors like "#about" only work on the page they belong to.
+     Each item: { href, label_en, label_bg }. Order here is what shows in nav. */
+  nav: {
+    group: [
+      { href: "#about",          label_en: "About",                label_bg: "За нас" },
+      { href: "#music",          label_en: "Music",                label_bg: "Музика" },
+      { href: "#members",        label_en: "Members",              label_bg: "Състав" },
+      { href: "#live",           label_en: "Live",                 label_bg: "Галерия" },
+      { href: "foundation.html", label_en: "Outhentic Foundation", label_bg: "Фондация Аутентик" },
+      { href: "news.html",       label_en: "News",                 label_bg: "Новини" },
+      { href: "#contact",        label_en: "Contact",              label_bg: "Контакти" }
+    ],
+    foundation: [
+      { href: "group.html",      label_en: "Outhentic Group",      label_bg: "Група Аутентик" },
+      { href: "#mission",        label_en: "About",                label_bg: "За нас" },
+      { href: "#ethno",          label_en: "ETHNO Bulgaria",       label_bg: "ЕТНО България" },
+      { href: "#projects",       label_en: "World Fest 2019",      label_bg: "World Fest 2019" },
+      { href: "news.html",       label_en: "News",                 label_bg: "Новини" },
+      { href: "#support",        label_en: "Support us",           label_bg: "Подкрепи ни" }
+    ],
+    news: [
+      { href: "group.html",      label_en: "Outhentic Group",      label_bg: "Група Аутентик" },
+      { href: "foundation.html", label_en: "Outhentic Foundation", label_bg: "Фондация Аутентик" },
+      { href: "news.html",       label_en: "News",                 label_bg: "Новини" }
+    ]
+  },
 
   /* Hero sections — top banner of group.html and foundation.html.
      Image path is relative to site root (no leading slash).
