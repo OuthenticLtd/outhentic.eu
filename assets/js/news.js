@@ -52,7 +52,7 @@
                (cat && date ? ' · ' : '') + (cat ? cat : '');
 
     // Link to internal article page if there's a slug
-    var href = slug ? 'article.html?slug=' + slug : '';
+    var href = slug ? 'article?slug=' + slug : '';
     var imgWrap = href
       ? '<a class="news-card-img" href="' + href + '"><img src="' + img + '" alt="' + title + '" loading="lazy"/></a>'
       : '<div class="news-card-img"><img src="' + img + '" alt="' + title + '" loading="lazy"/></div>';

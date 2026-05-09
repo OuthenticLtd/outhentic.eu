@@ -25,11 +25,11 @@
   // Update lang toggle to point to the same slug in the other language
   var enLink = document.querySelector('a[data-lang-en]');
   var bgLink = document.querySelector('a[data-lang-bg]');
-  if (enLink && slug) enLink.href = (inBg ? '../article.html' : 'article.html') + '?slug=' + slug;
-  if (bgLink && slug) bgLink.href = (inBg ? 'article.html' : 'bg/article.html') + '?slug=' + slug;
+  if (enLink && slug) enLink.href = (inBg ? '../article' : 'article') + '?slug=' + slug;
+  if (bgLink && slug) bgLink.href = (inBg ? 'article' : 'bg/article') + '?slug=' + slug;
 
   if (!post) {
-    root.innerHTML = '<section class="section"><div class="wrap"><h1>404</h1><p class="muted">' + t.notFound + '</p><p><a class="news-link" href="' + (inBg ? 'news.html' : 'news.html') + '">' + t.back + '</a></p></div></section>';
+    root.innerHTML = '<section class="section"><div class="wrap"><h1>404</h1><p class="muted">' + t.notFound + '</p><p><a class="news-link" href="' + (inBg ? 'news' : 'news') + '">' + t.back + '</a></p></div></section>';
     return;
   }
 
@@ -55,7 +55,7 @@
   var img = post.image || '';
   if (inBg && img && !/^(https?:|\.\.|\/)/.test(img)) img = '../' + img;
   var body = pick(post, 'body') || '<p>' + escape(pick(post, 'excerpt')) + '</p>';
-  var newsHref = inBg ? 'news.html' : 'news.html';
+  var newsHref = inBg ? 'news' : 'news';
 
   // Update document title and meta description
   document.title = (lang === 'bg' ? 'Outhentic — ' : 'Outhentic — ') + (pick(post, 'title') || '');

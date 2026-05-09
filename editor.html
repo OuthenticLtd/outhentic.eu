@@ -629,7 +629,7 @@
     var meta_bg_text = (h.meta_bg || []).join('\n');
     var preview = h.image ? '<img class="hero-img-preview" src="' + escapeAttr(h.image) + '" alt=""/>' : '<div class="hero-img-preview"></div>';
     return '<article class="card" data-hero-key="' + key + '">' +
-      '<h3 class="hero-card-head">' + label + ' <span class="pill">/' + (key === 'group' ? 'group.html' : 'foundation.html') + '</span></h3>' +
+      '<h3 class="hero-card-head">' + label + ' <span class="pill">/' + (key === 'group' ? 'group' : 'foundation') + '</span></h3>' +
       preview +
       field('Image path', '<input type="text" data-h="image" value="' + escapeAttr(h.image) + '" placeholder="assets/img/hero-band.jpg"/>') +
       field('Image alt', bilingualText('h_image_alt', h.image_alt_en, h.image_alt_bg)) +

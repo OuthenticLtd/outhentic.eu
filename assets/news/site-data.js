@@ -22,22 +22,22 @@ window.OUTHENTIC_SITE = {
       { href: "#music",          label_en: "Music",                label_bg: "Музика" },
       { href: "#members",        label_en: "Members",              label_bg: "Състав" },
       { href: "#live",           label_en: "Live",                 label_bg: "Галерия" },
-      { href: "foundation.html", label_en: "Outhentic Foundation", label_bg: "Фондация Аутентик" },
-      { href: "news.html",       label_en: "News",                 label_bg: "Новини" },
+      { href: "foundation", label_en: "Outhentic Foundation", label_bg: "Фондация Аутентик" },
+      { href: "news",       label_en: "News",                 label_bg: "Новини" },
       { href: "#contact",        label_en: "Contact",              label_bg: "Контакти" }
     ],
     foundation: [
-      { href: "group.html",      label_en: "Outhentic Group",      label_bg: "Група Аутентик" },
+      { href: "group",      label_en: "Outhentic Group",      label_bg: "Група Аутентик" },
       { href: "#mission",        label_en: "About",                label_bg: "За нас" },
       { href: "#ethno",          label_en: "ETHNO Bulgaria",       label_bg: "ЕТНО България" },
       { href: "#projects",       label_en: "World Fest 2019",      label_bg: "World Fest 2019" },
-      { href: "news.html",       label_en: "News",                 label_bg: "Новини" },
+      { href: "news",       label_en: "News",                 label_bg: "Новини" },
       { href: "#support",        label_en: "Support us",           label_bg: "Подкрепи ни" }
     ],
     news: [
-      { href: "group.html",      label_en: "Outhentic Group",      label_bg: "Група Аутентик" },
-      { href: "foundation.html", label_en: "Outhentic Foundation", label_bg: "Фондация Аутентик" },
-      { href: "news.html",       label_en: "News",                 label_bg: "Новини" }
+      { href: "group",      label_en: "Outhentic Group",      label_bg: "Група Аутентик" },
+      { href: "foundation", label_en: "Outhentic Foundation", label_bg: "Фондация Аутентик" },
+      { href: "news",       label_en: "News",                 label_bg: "Новини" }
     ]
   },
 
@@ -89,19 +89,19 @@ window.OUTHENTIC_SITE = {
 >>>>>>> 69cf73ad062b280123c0ca3095cef6fcca38a75c
     {
       "id": "group",
-      "href": "group.html",
+      "href": "group",
       "label_en": "Outhentic Group",
       "label_bg": "Група Аутентик"
     },
     {
       "id": "foundation",
-      "href": "foundation.html",
+      "href": "foundation",
       "label_en": "Outhentic Foundation",
       "label_bg": "Фондация Аутентик"
     },
     {
       "id": "news",
-      "href": "news.html",
+      "href": "news",
       "label_en": "News",
       "label_bg": "Новини"
     }
@@ -205,88 +205,4 @@ window.OUTHENTIC_SITE = {
       "role_en": "Co-founder",
       "role_bg": "Съосновател",
       "bio_en": "One of the most distinctive Bulgarian singers and co-founder of the Outhentic Foundation. Coordinator and project manager for foundation initiatives — including World Fest Plovdiv 2019 — with extensive experience in cultural project management.",
-      "bio_bg": "Една от най-разпознаваемите български певици и съосновател на Фондация Аутентик. Координатор и проектен мениджър за инициативи на фондацията — включително World Fest Plovdiv 2019 — с обширен опит в културния проектен мениджмънт."
-    },
-    {
-      "photo": "",
-      "name_en": "Alexandrina Vasileva",
-      "name_bg": "Александрина Василева",
-      "role_en": "Co-founder · Finance",
-      "role_bg": "Съосновател · Финанси",
-      "bio_en": "Co-founder of the Outhentic Foundation. Brings solid financial and accounting experience — a business consultant, financial expert and accountant — and has led project proposals and event coordination including World Fest Plovdiv 2019.",
-      "bio_bg": "Съосновател на Фондация Аутентик. Носи солиден финансов и счетоводен опит — бизнес консултант, финансов експерт и счетоводител — и е ръководила проектни предложения и координация на събития, включително World Fest Plovdiv 2019."
-    }
-  ],
-  "gallery": [
-    {
-      "src": "assets/img/gallery/world-fest-plovdiv-2.jpg",
-      "alt_en": "Outhentic at World Fest Plovdiv",
-      "alt_bg": "Outhentic на World Fest Plovdiv"
-    },
-    {
-      "src": "assets/img/gallery/zhivko-world-fest.jpg",
-      "alt_en": "Zhivko Vasilev at World Fest Plovdiv",
-      "alt_bg": "Живко Василев на World Fest Plovdiv"
-    },
-    {
-      "src": "assets/img/gallery/borislav-world-fest.jpg",
-      "alt_en": "Borislav Iliev at World Fest Plovdiv",
-      "alt_bg": "Борислав Илиев на World Fest Plovdiv"
-    },
-    {
-      "src": "assets/img/gallery/varna-jazz-days-2020.jpg",
-      "alt_en": "Outhentic at Varna Jazz Days 2020",
-      "alt_bg": "Outhentic на Варненски джаз дни 2020"
-    },
-    {
-      "src": "assets/img/gallery/sofia-live-club.jpg",
-      "alt_en": "Outhentic at Sofia Live Club",
-      "alt_bg": "Outhentic в Sofia Live Club"
-    },
-    {
-      "src": "assets/img/gallery/fusion-fest.jpg",
-      "alt_en": "Outhentic at Fusion Fest, Veliko Tarnovo",
-      "alt_bg": "Outhentic на Fusion Fest, Велико Търново"
-    },
-    {
-      "src": "assets/img/gallery/in-plovdiv.jpg",
-      "alt_en": "Outhentic in Plovdiv",
-      "alt_bg": "Outhentic в Пловдив"
-    },
-    {
-      "src": "assets/img/gallery/outhentic-band-2024.jpg",
-      "alt_en": "Outhentic band photo",
-      "alt_bg": "Outhentic"
-    },
-    {
-      "src": "assets/img/gallery/zhivko-rayna.jpg",
-      "alt_en": "Zhivko and Rayna",
-      "alt_bg": "Живко и Райна"
-    },
-    {
-      "src": "assets/img/gallery/rayna-zhivko.jpg",
-      "alt_en": "Rayna and Zhivko",
-      "alt_bg": "Райна и Живко"
-    },
-    {
-      "src": "assets/img/gallery/zhivko-kabana.jpg",
-      "alt_en": "Zhivko Vasilev at Kino Kabana",
-      "alt_bg": "Живко Василев в Кино Кабана"
-    },
-    {
-      "src": "assets/img/gallery/rayna-vasileva.jpg",
-      "alt_en": "Rayna Vasileva of Outhentic",
-      "alt_bg": "Райна Василева"
-    },
-    {
-      "src": "assets/img/gallery/rashe-nosiya.jpg",
-      "alt_en": "Rayna in traditional Bulgarian costume",
-      "alt_bg": "Райна в българска народна носия"
-    },
-    {
-      "src": "assets/img/gallery/outhentic-2024.jpg",
-      "alt_en": "Outhentic on stage",
-      "alt_bg": "Outhentic"
-    }
-  ]
-};
+      "bio_bg": "Една от най-разпознаваемите български певици и съосновател на Фондация Аутентик. Координатор и проектен мениджър за инициативи на фондацията — включително World Fest Plovdiv 2019 — с обширен опит в ку
