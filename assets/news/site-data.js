@@ -53,12 +53,23 @@ window.OUTHENTIC_SITE = {
       "meta_bg": []
     },
     "foundation": {
-      "image": "assets/img/foundation/hero-ethno.jpg",
+      "image": "assets/img/foundation-hero/ethno-106.jpg",
       "images": [
-        "assets/img/foundation/hero-ethno.jpg",
-        "assets/img/foundation/world-fest-plovdiv.jpg",
-        "assets/img/foundation/zhivko-plovdiv.jpg",
-        "assets/img/foundation/rayna-plovdiv.jpg"
+        "assets/img/foundation-hero/ethno-106.jpg",
+        "assets/img/foundation-hero/ethno-105.jpg",
+        "assets/img/foundation-hero/ethno-112.jpg",
+        "assets/img/foundation-hero/ethno-131.jpg",
+        "assets/img/foundation-hero/ethno-125.jpg",
+        "assets/img/foundation-hero/ethno-2.jpg",
+        "assets/img/foundation-hero/ethno-10.jpg",
+        "assets/img/foundation-hero/ethno-14.jpg",
+        "assets/img/foundation-hero/ethno-23.jpg",
+        "assets/img/foundation-hero/ethno-35.jpg",
+        "assets/img/foundation-hero/ethno-39.jpg",
+        "assets/img/foundation-hero/ethno-41.jpg",
+        "assets/img/foundation-hero/ethno-47.jpg",
+        "assets/img/foundation-hero/ethno-51.jpg",
+        "assets/img/foundation-hero/ethno-61.jpg"
       ],
       "image_alt_en": "ETHNO Bulgaria 2023",
       "image_alt_bg": "ЕТНО България 2023",
