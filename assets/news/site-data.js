@@ -25,8 +25,8 @@ window.OUTHENTIC_SITE = {
       { "href": "group",      "label_en": "Outhentic Group",      "label_bg": "Група Аутентик" },
       { "href": "foundation", "label_en": "Outhentic Foundation", "label_bg": "Фондация Аутентик" },
       { "href": "#mission",   "label_en": "About",                "label_bg": "За нас" },
-      { "href": "#ethno",     "label_en": "ETHNO Bulgaria",       "label_bg": "ЕТНО България" },
-      { "href": "#projects",  "label_en": "World Fest 2019",      "label_bg": "World Fest 2019" },
+      { "href": "#ethno",     "label_en": "Projects",             "label_bg": "Проекти" },
+      { "href": "#team",      "label_en": "Team",                 "label_bg": "Екип" },
       { "href": "news",       "label_en": "News",                 "label_bg": "Новини" },
       { "href": "#support",   "label_en": "Support us",           "label_bg": "Подкрепи ни" }
     ],
