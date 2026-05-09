@@ -181,6 +181,15 @@
     return m + ':' + (sec < 10 ? '0' + sec : sec);
   }
 
+  // When the page is inside /bg/, prepend ../ to root-relative audio paths
+  // so they still resolve to the same files at the site root.
+  var inBg = location.pathname.indexOf('/bg/') !== -1;
+  function fixAudioPath(p) {
+    if (!p) return p;
+    if (/^(https?:|\.\.|\/)/.test(p)) return p;
+    return inBg ? '../' + p : p;
+  }
+
   function buildPlayer(root) {
     var key = root.getAttribute('data-album');
     var data = window.OUTHENTIC_ALBUMS[key];
@@ -221,7 +230,7 @@
       if (i >= data.tracks.length) i = 0;
       current = i;
       var t = data.tracks[i];
-      audio.src = t.src;
+      audio.src = fixAudioPath(t.src);
       // UI
       elNumNow.textContent = (i + 1).toString().padStart(2, '0');
       elTitleNow.textContent = t.title;
