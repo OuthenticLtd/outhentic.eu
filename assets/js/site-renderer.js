@@ -99,14 +99,41 @@
         if (img) img.parentNode.insertBefore(n, img.nextSibling);
         else section.insertBefore(n, section.firstChild);
       }
-      // Set CSS variables so the @keyframes timing scales with image count
       var n = h.images.length;
-      var totalSec = n * 5;
+      var slotSec = 5;          // each image dwells 5s
+      var fadeSec = 1.5;        // crossfade 1.5s for very smooth blend
+      var totalSec = n * slotSec;
       section.style.setProperty('--hero-cycle', totalSec + 's');
       section.style.setProperty('--hero-count', n);
-      // Stagger each image's animation-delay by 5s
+
+      // Build keyframes scaled to this image count.
+      // Each image's slot = 100/n %. Solid time = (slot - fade) of cycle.
+      // Negative delays put images at staggered cycle-positions on first paint
+      // so when image N fades out, image N+1 is already fading in => crossfade.
+      var slotPct  = 100 / n;
+      var fadePct  = (fadeSec / totalSec) * 100;
+      var solidEnd = (slotPct - fadePct).toFixed(3);
+      var slotEnd  = slotPct.toFixed(3);
+      var fadeIn   = (100 - fadePct).toFixed(3);
+      var prevStyle = document.getElementById('hero-slider-keyframes');
+      if (prevStyle) prevStyle.remove();
+      var styleEl = document.createElement('style');
+      styleEl.id = 'hero-slider-keyframes';
+      styleEl.textContent =
+        '@keyframes hero-slider-fade {' +
+          '0% { opacity: 1; }' +
+          solidEnd + '% { opacity: 1; }' +
+          slotEnd  + '% { opacity: 0; }' +
+          fadeIn   + '% { opacity: 0; }' +
+          '100% { opacity: 1; }' +
+        '}';
+      document.head.appendChild(styleEl);
+
+      // Negative delays: image i sits at "i full slots into the cycle" already
+      // when t=0. Delay = i*slot - cycle. Image 0 lands at peak (animation 0%),
+      // image 1 sits 1 slot ahead = 1 slot before peak (about to fade in), etc.
       Array.prototype.slice.call(section.querySelectorAll('.hero-img')).forEach(function (el, idx) {
-        el.style.animationDelay = (idx * 5) + 's';
+        el.style.animationDelay = (idx * slotSec - totalSec) + 's';
       });
     }
 

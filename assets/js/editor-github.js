@@ -301,7 +301,8 @@
       'input[data-key="image"]',
       'input[data-key="src"]',
       'input[data-key="cover"]',
-      'input[data-h="image"]'
+      'input[data-h="image"]',
+      'input[data-slider-input]'
     ];
     var inputs = document.querySelectorAll(selectors.join(','));
     inputs.forEach(function (inp) {

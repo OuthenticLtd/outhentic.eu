@@ -628,10 +628,29 @@
     var meta_en_text = (h.meta_en || []).join('\n');
     var meta_bg_text = (h.meta_bg || []).join('\n');
     var preview = h.image ? '<img class="hero-img-preview" src="' + escapeAttr(h.image) + '" alt=""/>' : '<div class="hero-img-preview"></div>';
+
+    // Slider images list — each row has thumb + path input + ↑ ↓ Remove
+    var defaultFolder = (key === 'foundation') ? 'assets/img/foundation-hero/' : 'assets/img/';
+    var sliderRows = (h.images || []).map(function (src, i) {
+      var thumb = src ? '<img src="' + escapeAttr(src) + '" alt="" style="width:48px; height:48px; object-fit:cover; border:1px solid var(--line); flex-shrink:0;"/>' : '<div style="width:48px; height:48px; background:var(--bg-alt); border:1px solid var(--line); flex-shrink:0;"></div>';
+      return '<div class="slider-row" data-slider-idx="' + i + '" style="display:flex; gap:10px; align-items:center; padding:6px 0; border-bottom:1px solid var(--line);">' +
+        thumb +
+        '<input type="text" data-slider-input value="' + escapeAttr(src) + '" data-upload-folder="' + defaultFolder + '" placeholder="' + escapeAttr(defaultFolder) + 'photo.jpg" style="flex:1; padding:6px 8px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.82rem; font-family:JetBrains Mono,monospace;"/>' +
+        '<button class="btn btn--small" data-slider-act="up"   type="button" title="Move up">↑</button>' +
+        '<button class="btn btn--small" data-slider-act="down" type="button" title="Move down">↓</button>' +
+        '<button class="btn btn--small btn--danger" data-slider-act="del" type="button" title="Remove">×</button>' +
+      '</div>';
+    }).join('');
+
     return '<article class="card" data-hero-key="' + key + '">' +
       '<h3 class="hero-card-head">' + label + ' <span class="pill">/' + (key === 'group' ? 'group' : 'foundation') + '</span></h3>' +
       preview +
-      field('Image path', '<input type="text" data-h="image" value="' + escapeAttr(h.image) + '" placeholder="assets/img/hero-band.jpg"/>') +
+      field('Image path', '<input type="text" data-h="image" value="' + escapeAttr(h.image) + '" placeholder="assets/img/hero-band.jpg"/><p style="font-size:.72rem; color:var(--muted); margin:6px 0 0;">Single fallback image — used when the slider list below is empty.</p>') +
+      field('Slider images',
+        '<div class="slider-list" data-slider-list>' + sliderRows + '</div>' +
+        '<button type="button" class="btn btn--small" data-slider-add style="margin-top:10px;">＋ Add image</button>' +
+        '<p style="font-size:.72rem; color:var(--muted); margin:8px 0 0;">Add 2+ images for a 5-second crossfade slideshow. Click ↑ ↓ to reorder, × to remove. Use the <strong>Upload file</strong> button next to each path to upload from your computer.</p>'
+      ) +
       field('Image alt', bilingualText('h_image_alt', h.image_alt_en, h.image_alt_bg)) +
       field('Eyebrow', bilingualText('h_eyebrow', h.eyebrow_en, h.eyebrow_bg)) +
       field('Title', bilingualText('h_title', h.title_en, h.title_bg, 'textarea')) +
@@ -687,6 +706,45 @@
     if (metaLang) {
       h['meta_' + metaLang] = e.target.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
       setDirty('site', true); return;
+    }
+    // Slider image path edit
+    if (e.target.hasAttribute && e.target.hasAttribute('data-slider-input')) {
+      var row = e.target.closest('[data-slider-idx]');
+      if (!row) return;
+      var i = +row.dataset.sliderIdx;
+      h.images = h.images || [];
+      h.images[i] = e.target.value;
+      var thumb = row.querySelector('img');
+      if (thumb) thumb.src = e.target.value;
+      setDirty('site', true);
+    }
+  });
+
+  // Slider buttons (add / move / remove)
+  $('#hero-form').addEventListener('click', function (e) {
+    var card = e.target.closest('[data-hero-key]'); if (!card) return;
+    var key = card.dataset.heroKey;
+    var h = site.hero[key];
+    h.images = h.images || [];
+
+    if (e.target.closest('[data-slider-add]')) {
+      h.images.push('');
+      setDirty('site', true); renderHero(); return;
+    }
+    var actBtn = e.target.closest('[data-slider-act]');
+    if (actBtn) {
+      var row = e.target.closest('[data-slider-idx]');
+      var i = +row.dataset.sliderIdx;
+      var act = actBtn.dataset.sliderAct;
+      if (act === 'del') {
+        if (!confirm('Remove this image from the slider?')) return;
+        h.images.splice(i, 1);
+      } else if (act === 'up' && i > 0) {
+        var t = h.images[i-1]; h.images[i-1] = h.images[i]; h.images[i] = t;
+      } else if (act === 'down' && i < h.images.length - 1) {
+        var t2 = h.images[i+1]; h.images[i+1] = h.images[i]; h.images[i] = t2;
+      } else return;
+      setDirty('site', true); renderHero();
     }
   });
 
