@@ -782,6 +782,33 @@ body.lightbox-locked { overflow: hidden; }
   font-size: .7em;
 }
 
+/* ---------- Hero slideshow (multiple images, 5s each, crossfade) ----------
+   When the hero gets the .hero-slider class (from site-renderer.js), every
+   <img class="hero-img"> inside it animates through a shared cycle.
+   --hero-cycle = total cycle length (5s × image count), set inline.
+   The animation-delay on each image is also set inline (0s, 5s, 10s...). */
+.hero.hero-slider .hero-img {
+  opacity: 0;
+  animation: hero-slider-fade var(--hero-cycle, 20s) infinite;
+}
+/* Each image: opaque for ~4s, fade out 1s, hidden until cycle wraps.
+   The 25% mark scales — for a 20s cycle, 25% = 5s, which is one image's slot.
+   For other counts the percentages stay relative since delay is per-image. */
+@keyframes hero-slider-fade {
+  0%   { opacity: 1; }
+  /* visible window — first slot of the cycle (0% to one-Nth) */
+  /* the dwell time is set generously, then a quick fade to 0 just before the next image takes over */
+  20%  { opacity: 1; }
+  25%  { opacity: 0; }
+  95%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+/* Reduce-motion users: no animation */
+@media (prefers-reduced-motion: reduce) {
+  .hero.hero-slider .hero-img { animation: none; opacity: 1; }
+  .hero.hero-slider .hero-img:nth-child(n+2) { display: none; }
+}
+
 /* ---------- Hero image focal point ---------- */
 .hero-img--band {
   /* Desktop default: centered */

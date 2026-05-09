@@ -78,6 +78,38 @@
       if (alt) img.setAttribute('alt', alt);
     }
 
+    // If h.images is an array of 2+ paths, build a fading slideshow.
+    // Each image stays visible 5s; total cycle = 5s × N. CSS @keyframes handle the fade.
+    if (Array.isArray(h.images) && h.images.length > 1) {
+      section.classList.add('hero-slider');
+      var altText = pick(h, 'image_alt');
+      // Wipe and rebuild the .hero-img stack
+      Array.prototype.slice.call(section.querySelectorAll('.hero-img')).forEach(function (el) {
+        if (el !== img) el.parentNode.removeChild(el);
+      });
+      // Make sure base .hero-img has the first image
+      if (img) img.setAttribute('src', fixPath(h.images[0]));
+      // Append the rest right after the first <img>
+      for (var i = 1; i < h.images.length; i++) {
+        var n = document.createElement('img');
+        n.className = 'hero-img';
+        n.setAttribute('src', fixPath(h.images[i]));
+        n.setAttribute('alt', altText || '');
+        n.setAttribute('loading', 'lazy');
+        if (img) img.parentNode.insertBefore(n, img.nextSibling);
+        else section.insertBefore(n, section.firstChild);
+      }
+      // Set CSS variables so the @keyframes timing scales with image count
+      var n = h.images.length;
+      var totalSec = n * 5;
+      section.style.setProperty('--hero-cycle', totalSec + 's');
+      section.style.setProperty('--hero-count', n);
+      // Stagger each image's animation-delay by 5s
+      Array.prototype.slice.call(section.querySelectorAll('.hero-img')).forEach(function (el, idx) {
+        el.style.animationDelay = (idx * 5) + 's';
+      });
+    }
+
     if (h.mobile_focus) {
       section.style.setProperty('--hero-mobile-focus', h.mobile_focus);
     }

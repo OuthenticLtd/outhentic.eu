@@ -54,6 +54,12 @@ window.OUTHENTIC_SITE = {
     },
     "foundation": {
       "image": "assets/img/foundation/hero-ethno.jpg",
+      "images": [
+        "assets/img/foundation/hero-ethno.jpg",
+        "assets/img/foundation/world-fest-plovdiv.jpg",
+        "assets/img/foundation/zhivko-plovdiv.jpg",
+        "assets/img/foundation/rayna-plovdiv.jpg"
+      ],
       "image_alt_en": "ETHNO Bulgaria 2023",
       "image_alt_bg": "ЕТНО България 2023",
       "eyebrow_en": "Outhentic Foundation · Est. 2018",
