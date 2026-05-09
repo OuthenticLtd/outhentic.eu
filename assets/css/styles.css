@@ -700,6 +700,14 @@ body.lightbox-locked { overflow: hidden; }
   align-items: center;
   min-width: 0;
 }
+@media (max-width: 600px) {
+  /* Mobile: stack so the time doesn't overlap the track number / title. */
+  .player-progress-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .player-progress-row .player-time { font-size: .72rem; }
+}
 .player-progress {
   position: relative;
   height: 4px;

@@ -12,21 +12,23 @@ window.OUTHENTIC_SITE = {
   },
   "nav": {
     "group": [
+      { "href": "group",      "label_en": "Outhentic Group",      "label_bg": "Група Аутентик" },
+      { "href": "foundation", "label_en": "Outhentic Foundation", "label_bg": "Фондация Аутентик" },
       { "href": "#about",     "label_en": "About",                "label_bg": "За нас" },
       { "href": "#music",     "label_en": "Music",                "label_bg": "Музика" },
       { "href": "#members",   "label_en": "Members",              "label_bg": "Състав" },
       { "href": "#live",      "label_en": "Live",                 "label_bg": "Галерия" },
-      { "href": "foundation", "label_en": "Outhentic Foundation", "label_bg": "Фондация Аутентик" },
       { "href": "news",       "label_en": "News",                 "label_bg": "Новини" },
       { "href": "#contact",   "label_en": "Contact",              "label_bg": "Контакти" }
     ],
     "foundation": [
-      { "href": "group",      "label_en": "Outhentic Group", "label_bg": "Група Аутентик" },
-      { "href": "#mission",   "label_en": "About",           "label_bg": "За нас" },
-      { "href": "#ethno",     "label_en": "ETHNO Bulgaria",  "label_bg": "ЕТНО България" },
-      { "href": "#projects",  "label_en": "World Fest 2019", "label_bg": "World Fest 2019" },
-      { "href": "news",       "label_en": "News",            "label_bg": "Новини" },
-      { "href": "#support",   "label_en": "Support us",      "label_bg": "Подкрепи ни" }
+      { "href": "group",      "label_en": "Outhentic Group",      "label_bg": "Група Аутентик" },
+      { "href": "foundation", "label_en": "Outhentic Foundation", "label_bg": "Фондация Аутентик" },
+      { "href": "#mission",   "label_en": "About",                "label_bg": "За нас" },
+      { "href": "#ethno",     "label_en": "ETHNO Bulgaria",       "label_bg": "ЕТНО България" },
+      { "href": "#projects",  "label_en": "World Fest 2019",      "label_bg": "World Fest 2019" },
+      { "href": "news",       "label_en": "News",                 "label_bg": "Новини" },
+      { "href": "#support",   "label_en": "Support us",           "label_bg": "Подкрепи ни" }
     ],
     "news": [
       { "href": "group",      "label_en": "Outhentic Group",      "label_bg": "Група Аутентик" },
