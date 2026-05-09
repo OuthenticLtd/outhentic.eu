@@ -475,15 +475,21 @@ body.lightbox-locked { overflow: hidden; }
   position: relative; overflow: hidden;
   display: flex; flex-direction: column;
   min-height: 50vh;
-  height: 50dvh;
+  /* Mobile: each card half the available viewport (after header is scrolled past).
+     --landing-h = header height, set inline by index.html's script on load. */
+  height: calc((100dvh - var(--landing-h, 140px)) / 2);
   border-bottom: 1px solid var(--line);
   color: #fff;
   text-decoration: none;
   isolation: isolate;
 }
 @media (min-width: 900px) {
-  /* Desktop: side-by-side, full-height columns — drop the height cap. */
-  .landing-card { height: auto; min-height: 100vh; }
+  /* Desktop: cards are side-by-side, each fills the full available viewport
+     (after header is scrolled past). */
+  .landing-card {
+    height: calc(100dvh - var(--landing-h, 140px));
+    min-height: calc(100vh - 140px);
+  }
 }
 @media (min-width: 900px) {
   .landing-card { border-bottom: 0; }

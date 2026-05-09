@@ -73,13 +73,23 @@
 <script src="assets/js/site-renderer.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script>
-  // On mobile, scroll past the header on first load so both cards are visible.
-  if (window.innerWidth < 900) {
-    document.addEventListener('DOMContentLoaded', function () {
-      var split = document.querySelector('.landing-split');
-      if (split) window.scrollTo(0, split.offsetTop);
-    });
+  // Measure the actual header height (logo + tagline) and:
+  //  1. expose it as a CSS variable so card heights can subtract it,
+  //  2. scroll past it on initial load so cards fill the viewport exactly.
+  function setupLanding() {
+    var split = document.querySelector('.landing-split');
+    if (!split) return;
+    var headerH = split.offsetTop;
+    document.documentElement.style.setProperty('--landing-h', headerH + 'px');
+    window.scrollTo(0, headerH);
   }
+  document.addEventListener('DOMContentLoaded', setupLanding);
+  // Re-measure when fonts load + on resize, in case dimensions shift
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setupLanding);
+  window.addEventListener('resize', function () {
+    var split = document.querySelector('.landing-split');
+    if (split) document.documentElement.style.setProperty('--landing-h', split.offsetTop + 'px');
+  });
 </script>
 </body>
 </html>
