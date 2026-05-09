@@ -12,7 +12,6 @@ window.OUTHENTIC_SITE = {
   },
   "nav": {
     "group": [
-      { "href": "group",      "label_en": "Outhentic Group",      "label_bg": "Група Аутентик" },
       { "href": "foundation", "label_en": "Outhentic Foundation", "label_bg": "Фондация Аутентик" },
       { "href": "#about",     "label_en": "About",                "label_bg": "За нас" },
       { "href": "#music",     "label_en": "Music",                "label_bg": "Музика" },
@@ -23,7 +22,6 @@ window.OUTHENTIC_SITE = {
     ],
     "foundation": [
       { "href": "group",      "label_en": "Outhentic Group",      "label_bg": "Група Аутентик" },
-      { "href": "foundation", "label_en": "Outhentic Foundation", "label_bg": "Фондация Аутентик" },
       { "href": "#mission",   "label_en": "About",                "label_bg": "За нас" },
       { "href": "#ethno",     "label_en": "Projects",             "label_bg": "Проекти" },
       { "href": "#team",      "label_en": "Team",                 "label_bg": "Екип" },
