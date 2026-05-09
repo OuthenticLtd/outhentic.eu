@@ -64,5 +64,14 @@
 <script src="assets/news/site-data.js" defer></script>
 <script src="assets/js/site-renderer.js" defer></script>
 <script src="assets/js/main.js" defer></script>
+<script>
+  // On mobile, scroll past the header on first load so both cards are visible.
+  if (window.innerWidth < 900) {
+    document.addEventListener('DOMContentLoaded', function () {
+      var split = document.querySelector('.landing-split');
+      if (split) window.scrollTo(0, split.offsetTop);
+    });
+  }
+</script>
 </body>
 </html>
