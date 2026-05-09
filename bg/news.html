@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Новини — Outhentic</title>
+<meta name="description" content="Най-новото за Група Аутентик и Фондация Аутентик — концерти, издания, фестивали и проекти." />
+<meta name="theme-color" content="#FAFAF7" />
+
+<meta property="og:title" content="Новини — Outhentic" />
+<meta property="og:description" content="Най-новото от Outhentic — концерти, албуми, фестивали и проекти." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://outhentic.eu/bg/news.html" />
+<meta property="og:image" content="../assets/img/hero-band.jpg" />
+
+<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+<link rel="shortcut icon" href="../favicon.ico" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Outhentic"><img src="../assets/img/logo.png" alt="Outhentic" /></a>
+    <button class="nav-toggle" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav-links" aria-label="Основно меню">
+      <a href="group.html" data-nav-key="group">Групата</a>
+      <a href="foundation.html" data-nav-key="foundation">Фондацията</a>
+      <a href="news.html" data-nav-key="news" class="nav-cta">Новини</a>
+      <span class="lang-toggle"><a href="../news.html">EN</a><span class="lang-sep">·</span><a href="news.html" class="is-active">BG</a></span>
+    </nav>
+  </div>
+</header>
+
+<section class="section" style="padding-bottom: 0;">
+  <div class="wrap">
+    <div class="section-title" style="margin-bottom: 36px;">
+      <span class="eyebrow">Новини</span>
+      <h2>Последните новини от Outhentic.</h2>
+      <p class="muted" style="max-width:60ch;">Концерти, издания, фестивали и проекти от Група Аутентик и Фондация Аутентик.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 32px;">
+  <div class="wrap">
+    <div class="news-grid" id="news-grid">
+      <!-- Картичките с новини се рендерират от ../assets/js/news.js на базата на posts.json -->
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-logo">
+        <img src="../assets/img/logo.png" alt="Outhentic" />
+        <p>Извън автентичното.<br>Българска етно-джаз формация от 2012 г.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Групата</h5>
+        <ul>
+          <li><a href="group.html#about">За нас</a></li>
+          <li><a href="group.html#music">Музика</a></li>
+          <li><a href="group.html#members">Състав</a></li>
+          <li><a href="group.html#live">Галерия</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Фондацията</h5>
+        <ul>
+          <li><a href="foundation.html#mission">За нас</a></li>
+          <li><a href="foundation.html#ethno">ЕТНО България</a></li>
+          <li><a href="foundation.html#projects">World Fest 2019</a></li>
+          <li><a href="foundation.html#support">Подкрепи ни</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Контакти</h5>
+        <ul>
+          <li><a href="mailto:info@outhentic.eu">info@outhentic.eu</a></li>
+          <li>София 1592, България</li>
+          <li><a href="https://www.facebook.com/outhentic.band" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.instagram.com/outhentic.eu" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@Outhentic_Music" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Outhentic. Всички права запазени.</span>
+      <span>София 1592, България</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/news/posts.js" defer></script>
+<script src="../assets/js/news.js" defer></script>
+<script src="../assets/news/site-data.js" defer></script>
+<script src="../assets/js/site-renderer.js" defer></script>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>
