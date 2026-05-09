@@ -1,0 +1,13 @@
+# Outhentic — files NOT shipped to the public repo.
+# editor.html / editor-github.js ARE public (password-gated).
+
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+README.md
+AUDIO-HOSTING.md
+admin/
+save.php

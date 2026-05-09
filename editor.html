@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Editor — Outhentic</title>
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Quill 2.0 — WYSIWYG editor (loaded once, used for article bodies) -->
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js" defer></script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --bg: #FAFAF7; --ink: #0E0E0E; --ink-soft: #4A4A4A; --muted: #7A7872;
+    --line: #DCD7CB; --accent: #B8893E; --accent-deep: #8B6727; --bg-alt: #F1EEE6;
+    --warn: #b53a3a;
+  }
+  body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+  a { color: var(--accent-deep); }
+  .ed-wrap { max-width: 1040px; margin: 0 auto; padding: 24px 24px 80px; }
+
+  /* Gate */
+  .gate { max-width: 420px; margin: 80px auto; padding: 36px 32px; background: #fff; border: 1px solid var(--line); text-align: center; }
+  .gate h2 { font-family: "Fraunces", serif; font-weight: 400; font-size: 1.6rem; margin: 0 0 8px; }
+  .gate p { color: var(--muted); margin: 0 0 24px; font-size: .92rem; }
+  .gate input[type="password"] { width: 100%; padding: 12px 14px; font: inherit; font-size: 1rem; border: 1px solid var(--line); border-radius: 2px; outline: none; margin-bottom: 12px; }
+  .gate input:focus { border-color: var(--accent); }
+  .gate .err { color: var(--warn); font-size: .85rem; margin: -4px 0 12px; min-height: 1.2em; }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; font: inherit; font-size: .82rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; cursor: pointer; border: 1px solid var(--ink); background: transparent; color: var(--ink); transition: background .15s, color .15s; }
+  .btn:hover { background: var(--ink); color: var(--bg); }
+  .btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn--primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; }
+  .btn--danger { color: var(--warn); border-color: var(--warn); }
+  .btn--danger:hover { background: var(--warn); color: #fff; }
+  .btn--small { padding: 7px 12px; font-size: .72rem; letter-spacing: .12em; }
+
+  /* Header + tabs */
+  .ed-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 0 18px; margin-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .ed-head h1 { font-family: "Fraunces", serif; font-weight: 300; margin: 0; font-size: 1.6rem; }
+  .ed-head .meta { font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .tabs { display: flex; gap: 0; overflow-x: auto; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+  .tab { padding: 14px 20px; font-size: .82rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); cursor: pointer; background: transparent; border: 0; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; }
+  .tab:hover { color: var(--ink); }
+  .tab.is-active { color: var(--ink); border-bottom-color: var(--accent); }
+
+  /* Toolbar */
+  .toolbar { position: sticky; top: 0; z-index: 10; padding: 12px 0; margin: -12px 0 24px; background: rgba(250,250,247,.94); backdrop-filter: blur(8px); display: flex; gap: 12px; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--line); }
+  .toolbar .spacer { flex: 1; }
+  .toolbar .status { font-size: .82rem; color: var(--muted); }
+  .toolbar .status strong { color: var(--accent-deep); }
+
+  /* Cards */
+  .card { background: #fff; border: 1px solid var(--line); padding: 22px 24px; margin-bottom: 18px; }
+  .card-head { display: flex; gap: 14px; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .card-head .title-preview { font-family: "Fraunces", serif; font-weight: 400; font-size: 1.15rem; margin: 0; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .card-head .meta-preview { font-size: .76rem; color: var(--muted); letter-spacing: .12em; }
+
+  /* Fields */
+  .field { display: grid; grid-template-columns: 110px 1fr; gap: 8px 14px; align-items: start; margin-bottom: 12px; }
+  .field > label { font-size: .72rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); padding-top: 10px; }
+  .field input, .field textarea, .field select { width: 100%; padding: 8px 10px; font: inherit; font-size: .92rem; border: 1px solid var(--line); border-radius: 2px; outline: none; background: var(--bg); }
+  .field textarea { font-family: inherit; line-height: 1.5; min-height: 70px; resize: vertical; }
+  .field textarea[data-tall] { min-height: 200px; font-family: "JetBrains Mono", monospace; font-size: .82rem; }
+  .field input:focus, .field textarea:focus { border-color: var(--accent); }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pair > div > div { font-size: .68rem; color: var(--muted); margin-bottom: 4px; letter-spacing: .14em; text-transform: uppercase; }
+  details summary { cursor: pointer; font-weight: 600; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-deep); padding: 10px 0; }
+  details[open] summary { color: var(--ink); }
+
+  /* Quill — match editor look */
+  .ql-toolbar.ql-snow { border: 1px solid var(--line); border-radius: 2px 2px 0 0; background: var(--bg-alt); }
+  .ql-container.ql-snow { border: 1px solid var(--line); border-top: 0; border-radius: 0 0 2px 2px; background: #fff; min-height: 240px; font-family: "Fraunces", "Inter", serif; font-size: 1rem; }
+  .ql-editor { min-height: 240px; line-height: 1.6; }
+  .ql-editor p { margin: 0 0 .8em; }
+  .ql-editor h2 { font-family: "Fraunces", serif; font-weight: 400; font-size: 1.4rem; margin: 1em 0 .4em; }
+  .ql-editor h3 { font-family: "Fraunces", serif; font-weight: 400; font-size: 1.2rem; margin: 1em 0 .4em; }
+  .ql-editor img { max-width: 100%; height: auto; }
+  .body-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
+  .body-pair > div > .body-lang { font-size: .68rem; color: var(--muted); margin-bottom: 6px; letter-spacing: .14em; text-transform: uppercase; }
+  @media (max-width: 900px) { .body-pair { grid-template-columns: 1fr; } }
+  .body-toggle-html { font-size: .72rem; color: var(--accent-deep); cursor: pointer; margin-left: 10px; text-transform: uppercase; letter-spacing: .12em; background: none; border: 0; padding: 0; }
+  .body-html-textarea { width: 100%; min-height: 240px; padding: 10px; font-family: "JetBrains Mono", monospace; font-size: .8rem; border: 1px solid var(--line); background: #fff; outline: none; line-height: 1.5; }
+  .body-html-textarea:focus { border-color: var(--accent); }
+
+  .card-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .add-btn-wrap { display: flex; justify-content: center; padding: 22px; border: 2px dashed var(--line); margin-bottom: 22px; }
+  .add-btn-wrap:hover { border-color: var(--accent); }
+
+  .help { background: var(--bg-alt); padding: 16px 20px; margin-bottom: 22px; border-left: 3px solid var(--accent); font-size: .9rem; }
+  .help h3 { margin: 0 0 6px; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-deep); }
+  .help p { margin: 0 0 4px; }
+  .help code { background: #fff; padding: 1px 6px; font-size: .85em; border: 1px solid var(--line); }
+
+  /* Image previews on member/gallery items */
+  .img-preview { width: 80px; height: 80px; object-fit: cover; background: var(--bg-alt); border: 1px solid var(--line); flex-shrink: 0; }
+  .img-row { display: flex; align-items: center; gap: 12px; }
+  .img-row .field { flex: 1; margin: 0; }
+
+  /* Hero panel */
+  .hero-card-head { font-family: "Fraunces", serif; font-weight: 400; font-size: 1.3rem; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 12px; }
+  .hero-card-head .pill { font-family: "Inter", sans-serif; font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-deep); background: var(--bg-alt); padding: 4px 10px; border: 1px solid var(--line); }
+  .hero-meta-list { display: grid; gap: 8px; }
+  .hero-meta-list input { width: 100%; padding: 8px 10px; font: inherit; font-size: .92rem; border: 1px solid var(--line); background: var(--bg); }
+  .hero-img-preview { width: 100%; max-width: 360px; aspect-ratio: 16/9; object-fit: cover; background: var(--bg-alt); border: 1px solid var(--line); display: block; margin-bottom: 10px; }
+
+  .hidden { display: none !important; }
+  @media (max-width: 720px) {
+    .field { grid-template-columns: 1fr; }
+    .pair { grid-template-columns: 1fr; }
+    .ed-head h1 { font-size: 1.3rem; }
+    .tab { padding: 12px 14px; font-size: .72rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate" class="gate">
+  <h2>Outhentic — Editor</h2>
+  <p>Enter the editor password to continue.</p>
+  <form id="gate-form">
+    <input id="gate-pw" type="password" autocomplete="off" placeholder="Password" autofocus />
+    <div id="gate-err" class="err"></div>
+    <button class="btn btn--primary" type="submit">Unlock</button>
+  </form>
+  <p style="font-size: .76rem; color: var(--muted); margin-top: 22px;">
+    Custom password set. Change it by replacing PASSWORD_HASH in this file with a new SHA-256 hash.
+  </p>
+</div>
+
+<!-- EDITOR -->
+<div id="editor" class="ed-wrap hidden">
+  <div class="ed-head">
+    <h1>Outhentic editor</h1>
+    <span class="meta">All editable content</span>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab is-active" data-tab="news">News</button>
+    <button class="tab" data-tab="hero">Hero</button>
+    <button class="tab" data-tab="menu">Menu</button>
+    <button class="tab" data-tab="albums">Albums</button>
+    <button class="tab" data-tab="members-group">Group members</button>
+    <button class="tab" data-tab="members-foundation">Foundation team</button>
+    <button class="tab" data-tab="gallery">Gallery</button>
+    <button class="tab" data-tab="settings">Settings</button>
+  </div>
+
+  <!-- ============== NEWS TAB ============== -->
+  <div class="panel" data-panel="news">
+    <div class="help">
+      <h3>How it works</h3>
+      <p>Edit news posts below, then click <strong>Download posts.js</strong>.</p>
+      <p>Upload the file to <code>assets/news/posts.js</code> on your server — or use <strong>Save to GitHub</strong> if connected.</p>
+      <p>The body field is a rich-text editor. Click <em>HTML</em> if you ever need to paste raw HTML.</p>
+    </div>
+    <div class="toolbar">
+      <button id="news-add" class="btn">＋ Add post</button>
+      <button id="news-download" class="btn btn--primary">Download posts.js</button>
+      <button id="news-reload" class="btn btn--small">Reload</button>
+      <span class="spacer"></span>
+      <span class="status"><strong id="news-count">0</strong> posts · <span id="news-dirty">saved</span></span>
+    </div>
+    <div id="news-list"></div>
+    <div class="add-btn-wrap"><button class="btn" onclick="document.getElementById('news-add').click()">＋ Add post</button></div>
+  </div>
+
+  <!-- ============== HERO TAB ============== -->
+  <div class="panel hidden" data-panel="hero">
+    <div class="help">
+      <h3>Hero sections</h3>
+      <p>The big banner at the top of the Group page and the Foundation page. Edit the photo, eyebrow, title, lead paragraph and button — for both languages.</p>
+      <p>Foundation also has the meta strip below the button (JMI, ETHNO Bulgaria, address — one item per line).</p>
+    </div>
+    <div class="toolbar">
+      <button class="btn btn--primary site-download">Download site-data.js</button>
+      <button class="btn btn--small site-reload">Reload</button>
+      <span class="spacer"></span>
+      <span class="status"><span class="site-dirty">saved</span></span>
+    </div>
+    <div id="hero-form"></div>
+  </div>
+
+  <!-- ============== MENU TAB ============== -->
+  <div class="panel hidden" data-panel="menu">
+    <div class="help">
+      <h3>Main menu</h3>
+      <p>Cross-page items that appear in the top navigation on every page (Outhentic Group, Foundation, News). Edit labels, URL, and order. Use ↑ ↓ to reorder.</p>
+      <p>Section anchors like <em>About</em>, <em>Music</em>, <em>Members</em> live inside each page and aren't editable here.</p>
+    </div>
+    <div class="toolbar">
+      <button id="menu-add" class="btn">＋ Add item</button>
+      <button class="btn btn--primary site-download">Download site-data.js</button>
+      <button class="btn btn--small site-reload">Reload</button>
+      <span class="spacer"></span>
+      <span class="status"><strong id="menu-count">0</strong> items · <span class="site-dirty">saved</span></span>
+    </div>
+    <div id="menu-list"></div>
+  </div>
+
+  <!-- ============== ALBUMS TAB ============== -->
+  <div class="panel hidden" data-panel="albums">
+    <div class="help">
+      <h3>Albums &amp; tracks</h3>
+      <p>Edit album metadata, upload covers, add and reorder tracks, upload .mp3 files directly. Each track's <strong>duration</strong> is auto-detected after upload.</p>
+      <p>Click <strong>Download albums.js</strong> after editing — or use <strong>Save to GitHub</strong> if connected.</p>
+    </div>
+    <div class="toolbar">
+      <button id="albums-add" class="btn">＋ Add album</button>
+      <button id="albums-download" class="btn btn--primary">Download albums.js</button>
+      <button id="albums-reload" class="btn btn--small">Reload</button>
+      <span class="spacer"></span>
+      <span class="status"><strong id="albums-count">0</strong> albums · <span id="albums-dirty">saved</span></span>
+    </div>
+    <div id="albums-list"></div>
+  </div>
+
+  <!-- ============== GROUP MEMBERS TAB ============== -->
+  <div class="panel hidden" data-panel="members-group">
+    <div class="help">
+      <h3>Band members</h3>
+      <p>Photo, name, role, bio for each band member — both languages.</p>
+      <p>Click <strong>Download site-data.js</strong> at the top after editing.</p>
+    </div>
+    <div class="toolbar">
+      <button id="gm-add" class="btn">＋ Add member</button>
+      <button class="btn btn--primary site-download">Download site-data.js</button>
+      <button class="btn btn--small site-reload">Reload</button>
+      <span class="spacer"></span>
+      <span class="status"><strong id="gm-count">0</strong> members · <span class="site-dirty">saved</span></span>
+    </div>
+    <div id="gm-list"></div>
+  </div>
+
+  <!-- ============== FOUNDATION MEMBERS TAB ============== -->
+  <div class="panel hidden" data-panel="members-foundation">
+    <div class="help">
+      <h3>Foundation team</h3>
+      <p>Photo, name, role, bio for each foundation team member — both languages.</p>
+    </div>
+    <div class="toolbar">
+      <button id="fm-add" class="btn">＋ Add member</button>
+      <button class="btn btn--primary site-download">Download site-data.js</button>
+      <button class="btn btn--small site-reload">Reload</button>
+      <span class="spacer"></span>
+      <span class="status"><strong id="fm-count">0</strong> members · <span class="site-dirty">saved</span></span>
+    </div>
+    <div id="fm-list"></div>
+  </div>
+
+  <!-- ============== GALLERY TAB ============== -->
+  <div class="panel hidden" data-panel="gallery">
+    <div class="help">
+      <h3>Gallery photos</h3>
+      <p>Photos shown in the Live section of the Group page. Each photo has an image path and bilingual alt text. Use ↑ ↓ to reorder.</p>
+    </div>
+    <div class="toolbar">
+      <button id="gal-add" class="btn">＋ Add photo</button>
+      <button class="btn btn--primary site-download">Download site-data.js</button>
+      <button class="btn btn--small site-reload">Reload</button>
+      <span class="spacer"></span>
+      <span class="status"><strong id="gal-count">0</strong> photos · <span class="site-dirty">saved</span></span>
+    </div>
+    <div id="gal-list"></div>
+  </div>
+
+  <!-- ============== SETTINGS TAB ============== -->
+  <div class="panel hidden" data-panel="settings">
+    <div class="help">
+      <h3>Site settings</h3>
+      <p>Social links, contact email and address. Used in every page footer.</p>
+    </div>
+    <div class="toolbar">
+      <button class="btn btn--primary site-download">Download site-data.js</button>
+      <button class="btn btn--small site-reload">Reload</button>
+      <span class="spacer"></span>
+      <span class="status"><span class="site-dirty">saved</span></span>
+    </div>
+    <div id="settings-form" class="card"></div>
+  </div>
+
+</div>
+
+<!-- Load both data files -->
+<script src="assets/news/posts.js"></script>
+<script src="assets/news/site-data.js"></script>
+<script src="assets/js/albums.js"></script>
+<script>
+/* =====================================================================
+   Outhentic editor — single-page, password-gated, no backend.
+   Edits posts.js (News) and site-data.js (everything else).
+   ===================================================================== */
+(function () {
+  // SHA-256 of the default password "outhentic"
+  var PASSWORD_HASH = "eb4d5cd77d5621734c946630c6690809d458181770e2b3f5e9b5c5578de523dc";
+
+  async function sha256(s) {
+    var buf = new TextEncoder().encode(s);
+    var hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+  }
+  window.sha256 = sha256;
+
+  var $ = function (sel, root) { return (root || document).querySelector(sel); };
+  var $$ = function (sel, root) { return Array.from((root || document).querySelectorAll(sel)); };
+
+  var posts = [];
+  var site = {};
+  var albums = {};
+  var dirty = { news: false, site: false, albums: false };
+  var quills = {}; // map idx_lang -> Quill instance, e.g. "0_en"
+
+  function setDirty(which, d) {
+    dirty[which] = d;
+    if (which === 'news') {
+      var s = $('#news-dirty'); if (s) { s.textContent = d ? '● unsaved' : 'saved'; s.style.color = d ? 'var(--warn)' : 'var(--muted)'; }
+    } else if (which === 'albums') {
+      var sa = $('#albums-dirty'); if (sa) { sa.textContent = d ? '● unsaved' : 'saved'; sa.style.color = d ? 'var(--warn)' : 'var(--muted)'; }
+    } else {
+      $$('.site-dirty').forEach(function (s) { s.textContent = d ? '● unsaved' : 'saved'; s.style.color = d ? 'var(--warn)' : 'var(--muted)'; });
+    }
+  }
+
+  function escapeAttr(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function escapeText(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function field(label, html) { return '<div class="field"><label>' + label + '</label><div>' + html + '</div></div>'; }
+  function bilingualText(key, en, bg, tag) {
+    tag = tag || 'input';
+    var elen = tag === 'textarea' ? '<textarea data-key="' + key + '_en">' + escapeText(en) + '</textarea>' : '<input type="text" data-key="' + key + '_en" value="' + escapeAttr(en) + '"/>';
+    var elbg = tag === 'textarea' ? '<textarea data-key="' + key + '_bg">' + escapeText(bg) + '</textarea>' : '<input type="text" data-key="' + key + '_bg" value="' + escapeAttr(bg) + '"/>';
+    return '<div class="pair"><div><div>EN</div>' + elen + '</div><div><div>BG</div>' + elbg + '</div></div>';
+  }
+
+  // ----- GATE -----
+  $('#gate-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var pw = $('#gate-pw').value;
+    var hash = await sha256(pw);
+    if (hash === PASSWORD_HASH) {
+      sessionStorage.setItem('outhentic-editor-unlocked', '1');
+      window.__outhenticEditorPassword = pw;
+      sessionStorage.setItem('outhentic-editor-pw', pw);
+      unlock();
+    } else {
+      $('#gate-err').textContent = 'Wrong password.';
+      $('#gate-pw').select();
+    }
+  });
+  if (sessionStorage.getItem('outhentic-editor-unlocked') === '1') {
+    window.__outhenticEditorPassword = sessionStorage.getItem('outhentic-editor-pw') || '';
+    // Defer until after the IIFE finishes assigning the var-bound render*
+    // functions further down (renderGroupMembers, renderFoundationMembers).
+    setTimeout(unlock, 0);
+  }
+
+  function ensureHero(s) {
+    s.hero = s.hero || {};
+    var blank = function () { return { image: '', image_alt_en: '', image_alt_bg: '',
+      eyebrow_en: '', eyebrow_bg: '', title_en: '', title_bg: '', lead_en: '', lead_bg: '',
+      button_en: '', button_bg: '', button_href: '#', mobile_focus: 'center center',
+      meta_en: [], meta_bg: [] }; };
+    s.hero.group = Object.assign(blank(), s.hero.group || {});
+    s.hero.foundation = Object.assign(blank(), s.hero.foundation || {});
+    if (!Array.isArray(s.hero.group.meta_en)) s.hero.group.meta_en = [];
+    if (!Array.isArray(s.hero.group.meta_bg)) s.hero.group.meta_bg = [];
+    if (!Array.isArray(s.hero.foundation.meta_en)) s.hero.foundation.meta_en = [];
+    if (!Array.isArray(s.hero.foundation.meta_bg)) s.hero.foundation.meta_bg = [];
+    return s;
+  }
+
+  function unlock() {
+    $('#gate').classList.add('hidden');
+    $('#editor').classList.remove('hidden');
+    // Diagnostic banner — surfaces any data-load issue right at the top of the editor
+    var diagMsgs = [];
+    if (!window.OUTHENTIC_NEWS) diagMsgs.push('posts.js did not load (window.OUTHENTIC_NEWS is undefined)');
+    if (!window.OUTHENTIC_SITE) diagMsgs.push('site-data.js did not load (window.OUTHENTIC_SITE is undefined)');
+    if (!window.OUTHENTIC_ALBUMS) diagMsgs.push('albums.js did not load (window.OUTHENTIC_ALBUMS is undefined)');
+    if (diagMsgs.length) {
+      var diag = document.createElement('div');
+      diag.style.cssText = 'background:#b53a3a; color:#fff; padding:14px 20px; margin:0 -24px 18px; font-size:.9rem; line-height:1.6;';
+      diag.innerHTML = '<strong>Editor data could not load:</strong><ul style="margin:6px 0 0 20px; padding:0;">' +
+        diagMsgs.map(function (m) { return '<li>' + m + '</li>'; }).join('') + '</ul>' +
+        '<p style="margin:10px 0 0; opacity:.85;">Open DevTools (F12) and look at the Network tab to confirm the file was fetched.</p>';
+      $('#editor').insertBefore(diag, $('#editor').firstChild);
+    }
+    posts = (window.OUTHENTIC_NEWS && window.OUTHENTIC_NEWS.posts) ? JSON.parse(JSON.stringify(window.OUTHENTIC_NEWS.posts)) : [];
+    site = window.OUTHENTIC_SITE ? JSON.parse(JSON.stringify(window.OUTHENTIC_SITE)) : { social: {}, contact: {}, groupMembers: [], foundationMembers: [], gallery: [] };
+    site.social = site.social || {};
+    site.contact = site.contact || {};
+    site.groupMembers = site.groupMembers || [];
+    site.foundationMembers = site.foundationMembers || [];
+    site.gallery = site.gallery || [];
+    ensureHero(site);
+    albums = window.OUTHENTIC_ALBUMS ? JSON.parse(JSON.stringify(window.OUTHENTIC_ALBUMS)) : {};
+    // Wait for Quill to load (it's deferred), then render
+    waitForQuill(renderAll);
+  }
+
+  function waitForQuill(cb) {
+    if (window.Quill) { cb(); return; }
+    var t = 0;
+    var iv = setInterval(function () {
+      if (window.Quill) { clearInterval(iv); cb(); }
+      else if (++t > 50) { clearInterval(iv); cb(); /* fall back to plain textareas */ }
+    }, 100);
+  }
+
+  // ----- TABS -----
+  $$('.tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      $$('.tab').forEach(function (x) { x.classList.remove('is-active'); });
+      t.classList.add('is-active');
+      $$('.panel').forEach(function (p) { p.classList.add('hidden'); });
+      $('[data-panel="' + t.dataset.tab + '"]').classList.remove('hidden');
+      // Safety net: re-render the active panel in case its DOM was cleared
+      try {
+        var tab = t.dataset.tab;
+        if (tab === 'hero' && typeof renderHero === 'function') renderHero();
+        else if (tab === 'menu' && typeof renderMenu === 'function') renderMenu();
+        else if (tab === 'albums' && typeof renderAlbums === 'function') renderAlbums();
+        else if (tab === 'gallery' && typeof renderGallery === 'function') renderGallery();
+        else if (tab === 'settings' && typeof renderSettings === 'function') renderSettings();
+        else if (tab === 'members-group' && typeof renderGroupMembers === 'function') renderGroupMembers();
+        else if (tab === 'members-foundation' && typeof renderFoundationMembers === 'function') renderFoundationMembers();
+      } catch (err) { console.warn('Editor re-render failed:', err); }
+    });
+  });
+
+  // =================================================================
+  // NEWS TAB
+  // =================================================================
+  function renderNewsCard(p, idx) {
+    return '<article class="card" data-idx="' + idx + '" data-section="news">' +
+      '<div class="card-head">' +
+        '<h3 class="title-preview">' + escapeText(p.title_en || p.title_bg || '(untitled)') + '</h3>' +
+        '<span class="meta-preview">' + escapeText(p.date || '') + '</span>' +
+      '</div>' +
+      field('Date', '<input type="date" data-key="date" value="' + escapeAttr(p.date) + '"/>') +
+      field('Slug', '<input type="text" data-key="slug" value="' + escapeAttr(p.slug) + '"/>') +
+      field('Image', '<input type="text" data-key="image" value="' + escapeAttr(p.image) + '"/>') +
+      field('Category', bilingualText('category', p.category_en, p.category_bg)) +
+      field('Title', bilingualText('title', p.title_en, p.title_bg)) +
+      field('Excerpt', bilingualText('excerpt', p.excerpt_en, p.excerpt_bg, 'textarea')) +
+      '<details data-body-details="' + idx + '"><summary>Article body — rich text (click to edit)</summary>' +
+        '<div class="body-pair">' +
+          '<div>' +
+            '<div class="body-lang">EN <button type="button" class="body-toggle-html" data-toggle-html="' + idx + '_en">HTML</button></div>' +
+            '<div class="body-quill" data-quill="' + idx + '_en"></div>' +
+            '<textarea class="body-html-textarea hidden" data-html-mirror="' + idx + '_en"></textarea>' +
+          '</div>' +
+          '<div>' +
+            '<div class="body-lang">BG <button type="button" class="body-toggle-html" data-toggle-html="' + idx + '_bg">HTML</button></div>' +
+            '<div class="body-quill" data-quill="' + idx + '_bg"></div>' +
+            '<textarea class="body-html-textarea hidden" data-html-mirror="' + idx + '_bg"></textarea>' +
+          '</div>' +
+        '</div>' +
+      '</details>' +
+      '<div class="card-actions">' +
+        '<span style="color:var(--muted); font-size:.82rem;">Post #' + (idx + 1) + '</span>' +
+        '<div style="display:flex; gap:8px;">' +
+          '<button class="btn btn--small" data-act="up">↑</button>' +
+          '<button class="btn btn--small" data-act="down">↓</button>' +
+          '<button class="btn btn--small btn--danger" data-act="delete">Delete</button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function initQuillForPost(idx) {
+    if (!window.Quill) return;
+    ['en', 'bg'].forEach(function (lang) {
+      var key = idx + '_' + lang;
+      var div = document.querySelector('[data-quill="' + key + '"]');
+      if (!div || quills[key]) return;
+      var q = new Quill(div, {
+        theme: 'snow',
+        modules: {
+          toolbar: [
+            [{ header: [false, 2, 3] }],
+            ['bold', 'italic', 'underline'],
+            ['blockquote'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['link', 'image', 'video'],
+            ['clean']
+          ]
+        }
+      });
+      // Seed content from posts
+      q.root.innerHTML = posts[idx]['body_' + lang] || '';
+      q.on('text-change', function () {
+        if (!quills[key]) return;
+        posts[idx]['body_' + lang] = q.root.innerHTML;
+        // Mirror to the textarea (so HTML toggle stays in sync if shown later)
+        var ta = document.querySelector('[data-html-mirror="' + key + '"]');
+        if (ta) ta.value = q.root.innerHTML;
+        setDirty('news', true);
+      });
+      quills[key] = q;
+      // Also seed the HTML textarea
+      var ta = document.querySelector('[data-html-mirror="' + key + '"]');
+      if (ta) ta.value = posts[idx]['body_' + lang] || '';
+    });
+  }
+
+  function destroyAllQuills() {
+    Object.keys(quills).forEach(function (k) { delete quills[k]; });
+  }
+
+  function renderNews() {
+    destroyAllQuills();
+    $('#news-list').innerHTML = posts.map(renderNewsCard).join('');
+    $('#news-count').textContent = posts.length;
+    setDirty('news', dirty.news);
+    // Lazy-init Quill: only when the user opens the body details.
+    $$('details[data-body-details]').forEach(function (det) {
+      det.addEventListener('toggle', function () {
+        if (det.open) initQuillForPost(+det.dataset.bodyDetails);
+      });
+    });
+  }
+
+  $('#news-list').addEventListener('input', function (e) {
+    var card = e.target.closest('.card[data-section="news"]'); if (!card) return;
+    var idx = +card.dataset.idx;
+    var k = e.target.dataset.key;
+    if (k) {
+      posts[idx][k] = e.target.value;
+      setDirty('news', true);
+      if (k === 'title_en' || k === 'title_bg') {
+        card.querySelector('.title-preview').textContent = posts[idx].title_en || posts[idx].title_bg || '(untitled)';
+      }
+      if (k === 'date') card.querySelector('.meta-preview').textContent = posts[idx].date || '';
+    }
+    // HTML mirror textarea
+    var mirror = e.target.dataset.htmlMirror;
+    if (mirror) {
+      var parts = mirror.split('_');
+      var i = +parts[0], lang = parts[1];
+      posts[i]['body_' + lang] = e.target.value;
+      // Push back into Quill if visible later
+      if (quills[mirror]) quills[mirror].root.innerHTML = e.target.value;
+      setDirty('news', true);
+    }
+  });
+
+  $('#news-list').addEventListener('click', function (e) {
+    // HTML toggle
+    var t = e.target.closest('[data-toggle-html]');
+    if (t) {
+      e.preventDefault();
+      var key = t.dataset.toggleHtml;
+      var quillDiv = document.querySelector('[data-quill="' + key + '"]');
+      var quillToolbar = quillDiv && quillDiv.previousElementSibling && quillDiv.previousElementSibling.classList.contains('ql-toolbar') ? quillDiv.previousElementSibling : null;
+      var ta = document.querySelector('[data-html-mirror="' + key + '"]');
+      if (!ta || !quillDiv) return;
+      var showingHtml = !ta.classList.contains('hidden');
+      if (showingHtml) {
+        // Push HTML back into Quill, hide HTML
+        if (quills[key]) quills[key].root.innerHTML = ta.value;
+        ta.classList.add('hidden');
+        quillDiv.classList.remove('hidden');
+        if (quillToolbar) quillToolbar.classList.remove('hidden');
+        t.textContent = 'HTML';
+      } else {
+        // Show HTML, hide Quill
+        ta.value = quills[key] ? quills[key].root.innerHTML : (posts[+key.split('_')[0]]['body_' + key.split('_')[1]] || '');
+        ta.classList.remove('hidden');
+        quillDiv.classList.add('hidden');
+        if (quillToolbar) quillToolbar.classList.add('hidden');
+        t.textContent = 'Visual';
+      }
+      return;
+    }
+
+    var btn = e.target.closest('button[data-act]'); if (!btn) return;
+    var card = e.target.closest('.card'); var idx = +card.dataset.idx;
+    if (btn.dataset.act === 'delete') {
+      if (!confirm('Delete this post?')) return;
+      posts.splice(idx, 1);
+    } else if (btn.dataset.act === 'up' && idx > 0) {
+      var t1 = posts[idx-1]; posts[idx-1] = posts[idx]; posts[idx] = t1;
+    } else if (btn.dataset.act === 'down' && idx < posts.length - 1) {
+      var t2 = posts[idx+1]; posts[idx+1] = posts[idx]; posts[idx] = t2;
+    } else return;
+    setDirty('news', true); renderNews();
+  });
+
+  $('#news-add').addEventListener('click', function () {
+    posts.unshift({
+      date: new Date().toISOString().slice(0, 10),
+      slug: 'new-post-' + Date.now(),
+      category_en: 'News', category_bg: 'Новини',
+      title_en: '', title_bg: '', excerpt_en: '', excerpt_bg: '',
+      body_en: '', body_bg: '',
+      image: 'assets/img/logo-mark.png'
+    });
+    setDirty('news', true); renderNews(); window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  $('#news-reload').addEventListener('click', function () {
+    if (dirty.news && !confirm('Discard unsaved news changes?')) return;
+    location.reload();
+  });
+  $('#news-download').addEventListener('click', function () {
+    var sorted = posts.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+    download('posts.js',
+      "/* Outhentic news posts — bilingual (en/bg) with full article bodies and embedded photos.\n" +
+      "   Edited via /editor.html on " + new Date().toISOString().slice(0,19).replace('T',' ') + " UTC. */\n" +
+      "window.OUTHENTIC_NEWS = " + JSON.stringify({ posts: sorted }, null, 2) + ";\n");
+    setDirty('news', false);
+    alert('posts.js downloaded.\n\nUpload it to assets/news/posts.js on your server.');
+  });
+
+  // =================================================================
+  // HERO TAB
+  // =================================================================
+  function renderHeroCard(label, key) {
+    var h = site.hero[key];
+    var meta_en_text = (h.meta_en || []).join('\n');
+    var meta_bg_text = (h.meta_bg || []).join('\n');
+    var preview = h.image ? '<img class="hero-img-preview" src="' + escapeAttr(h.image) + '" alt=""/>' : '<div class="hero-img-preview"></div>';
+    return '<article class="card" data-hero-key="' + key + '">' +
+      '<h3 class="hero-card-head">' + label + ' <span class="pill">/' + (key === 'group' ? 'group.html' : 'foundation.html') + '</span></h3>' +
+      preview +
+      field('Image path', '<input type="text" data-h="image" value="' + escapeAttr(h.image) + '" placeholder="assets/img/hero-band.jpg"/>') +
+      field('Image alt', bilingualText('h_image_alt', h.image_alt_en, h.image_alt_bg)) +
+      field('Eyebrow', bilingualText('h_eyebrow', h.eyebrow_en, h.eyebrow_bg)) +
+      field('Title', bilingualText('h_title', h.title_en, h.title_bg, 'textarea')) +
+      '<p style="font-size:.78rem; color:var(--muted); margin: -6px 124px 12px; padding-left:0;">Inline HTML allowed: <code>&lt;br&gt;</code>, <code>&amp;nbsp;</code>, <code>&lt;em&gt;</code>.</p>' +
+      field('Lead text', bilingualText('h_lead', h.lead_en, h.lead_bg, 'textarea')) +
+      field('Button text', bilingualText('h_button', h.button_en, h.button_bg)) +
+      field('Button link', '<input type="text" data-h="button_href" value="' + escapeAttr(h.button_href) + '" placeholder="#music"/>') +
+      field('Mobile focus',
+        '<select data-h="mobile_focus" style="width:100%; padding:8px 10px; font:inherit; font-size:.92rem; border:1px solid var(--line); background:var(--bg);">' +
+          ['center center','100% center','0% center','center 0%','center 100%','75% center','25% center','100% 0%','0% 0%','100% 100%','0% 100%']
+            .map(function (v) {
+              var label = { 'center center':'Center', '100% center':'Right', '0% center':'Left', 'center 0%':'Top', 'center 100%':'Bottom',
+                            '75% center':'75% right', '25% center':'25% left', '100% 0%':'Top-right', '0% 0%':'Top-left',
+                            '100% 100%':'Bottom-right', '0% 100%':'Bottom-left' }[v];
+              var sel = (h.mobile_focus || 'center center') === v ? ' selected' : '';
+              return '<option value="' + v + '"' + sel + '>' + label + ' (' + v + ')</option>';
+            }).join('') +
+        '</select>' +
+        '<input type="text" data-h="mobile_focus" value="' + escapeAttr(h.mobile_focus || 'center center') + '" placeholder="custom: e.g. 80% 30%" style="width:100%; padding:6px 10px; margin-top:4px; font:inherit; font-size:.82rem; border:1px solid var(--line); background:var(--bg); font-family:JetBrains Mono,monospace;"/>') +
+      field('Meta strip',
+        '<div class="pair">' +
+          '<div><div>EN (one per line)</div><textarea data-h-meta="en" rows="3" style="width:100%; padding:8px 10px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem;">' + escapeText(meta_en_text) + '</textarea></div>' +
+          '<div><div>BG (one per line)</div><textarea data-h-meta="bg" rows="3" style="width:100%; padding:8px 10px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem;">' + escapeText(meta_bg_text) + '</textarea></div>' +
+        '</div>') +
+    '</article>';
+  }
+
+  function renderHero() {
+    $('#hero-form').innerHTML =
+      renderHeroCard('Group hero', 'group') +
+      renderHeroCard('Foundation hero', 'foundation');
+  }
+
+  $('#hero-form').addEventListener('input', function (e) {
+    var card = e.target.closest('[data-hero-key]'); if (!card) return;
+    var key = card.dataset.heroKey;
+    var h = site.hero[key];
+    var keyAttr = e.target.dataset.h;
+    if (keyAttr) {
+      h[keyAttr] = e.target.value;
+      if (keyAttr === 'image') {
+        var img = card.querySelector('.hero-img-preview');
+        if (img && img.tagName === 'IMG') img.src = e.target.value;
+      }
+      setDirty('site', true); return;
+    }
+    if (e.target.dataset.key && e.target.dataset.key.indexOf('h_') === 0) {
+      var rest = e.target.dataset.key.slice(2);
+      h[rest] = e.target.value;
+      setDirty('site', true); return;
+    }
+    var metaLang = e.target.dataset.hMeta;
+    if (metaLang) {
+      h['meta_' + metaLang] = e.target.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+      setDirty('site', true); return;
+    }
+  });
+
+  // =================================================================
+  // MEMBERS (group + foundation share the same UI shape)
+  // =================================================================
+  function renderMemberCard(m, idx, listId) {
+    var preview = m.photo ? '<img class="img-preview" src="' + escapeAttr(m.photo) + '" alt=""/>' : '<div class="img-preview"></div>';
+    return '<article class="card" data-idx="' + idx + '" data-section="' + listId + '">' +
+      '<div class="card-head">' +
+        '<h3 class="title-preview">' + escapeText(m.name_en || m.name_bg || '(unnamed)') + '</h3>' +
+        '<span class="meta-preview">' + escapeText(m.role_en || '') + '</span>' +
+      '</div>' +
+      '<div class="img-row" style="margin-bottom:14px;">' + preview +
+        '<div style="flex:1;"><label style="font-size:.72rem; text-transform:uppercase; letter-spacing:.14em; color:var(--muted);">Photo path</label>' +
+        '<input type="text" data-key="photo" value="' + escapeAttr(m.photo) + '" placeholder="assets/img/band/name.jpg" style="width:100%; padding:8px 10px; border:1px solid var(--line); background:var(--bg); margin-top:4px;"/></div>' +
+      '</div>' +
+      field('Name', bilingualText('name', m.name_en, m.name_bg)) +
+      field('Role', bilingualText('role', m.role_en, m.role_bg)) +
+      field('Bio', bilingualText('bio', m.bio_en, m.bio_bg, 'textarea')) +
+      '<div class="card-actions">' +
+        '<span style="color:var(--muted); font-size:.82rem;">#' + (idx + 1) + '</span>' +
+        '<div style="display:flex; gap:8px;">' +
+          '<button class="btn btn--small" data-act="up">↑</button>' +
+          '<button class="btn btn--small" data-act="down">↓</button>' +
+          '<button class="btn btn--small btn--danger" data-act="delete">Delete</button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+  function setupMemberPanel(arrName, listEl, countEl, addBtn, prefix) {
+    function renderList() {
+      listEl.innerHTML = site[arrName].map(function (m, i) { return renderMemberCard(m, i, prefix); }).join('');
+      countEl.textContent = site[arrName].length;
+    }
+    listEl.addEventListener('input', function (e) {
+      var card = e.target.closest('.card[data-section="' + prefix + '"]'); if (!card) return;
+      var idx = +card.dataset.idx;
+      site[arrName][idx][e.target.dataset.key] = e.target.value;
+      setDirty('site', true);
+      if (e.target.dataset.key === 'name_en' || e.target.dataset.key === 'name_bg') {
+        card.querySelector('.title-preview').textContent = site[arrName][idx].name_en || site[arrName][idx].name_bg || '(unnamed)';
+      }
+      if (e.target.dataset.key === 'role_en') card.querySelector('.meta-preview').textContent = site[arrName][idx].role_en || '';
+      if (e.target.dataset.key === 'photo') {
+        var img = card.querySelector('img.img-preview');
+        if (img) img.src = e.target.value;
+      }
+    });
+    listEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-act]'); if (!btn) return;
+      var card = e.target.closest('.card'); var idx = +card.dataset.idx;
+      if (btn.dataset.act === 'delete') { if (!confirm('Delete this member?')) return; site[arrName].splice(idx, 1); }
+      else if (btn.dataset.act === 'up' && idx > 0) { var t=site[arrName][idx-1]; site[arrName][idx-1]=site[arrName][idx]; site[arrName][idx]=t; }
+      else if (btn.dataset.act === 'down' && idx < site[arrName].length - 1) { var t=site[arrName][idx+1]; site[arrName][idx+1]=site[arrName][idx]; site[arrName][idx]=t; }
+      else return;
+      setDirty('site', true); renderList();
+    });
+    addBtn.addEventListener('click', function () {
+      site[arrName].push({ photo: '', name_en: '', name_bg: '', role_en: '', role_bg: '', bio_en: '', bio_bg: '' });
+      setDirty('site', true); renderList();
+    });
+    return renderList;
+  }
+  var renderGroupMembers = setupMemberPanel('groupMembers', $('#gm-list'), $('#gm-count'), $('#gm-add'), 'gm');
+  var renderFoundationMembers = setupMemberPanel('foundationMembers', $('#fm-list'), $('#fm-count'), $('#fm-add'), 'fm');
+
+  // =================================================================
+  // GALLERY
+  // =================================================================
+  function renderGalleryCard(g, idx) {
+    var preview = g.src ? '<img class="img-preview" src="' + escapeAttr(g.src) + '" alt=""/>' : '<div class="img-preview"></div>';
+    return '<article class="card" data-idx="' + idx + '" data-section="gallery">' +
+      '<div class="img-row">' + preview +
+        '<div style="flex:1;"><label style="font-size:.72rem; text-transform:uppercase; letter-spacing:.14em; color:var(--muted);">Image path</label>' +
+        '<input type="text" data-key="src" value="' + escapeAttr(g.src) + '" placeholder="assets/img/gallery/photo.jpg" style="width:100%; padding:8px 10px; border:1px solid var(--line); background:var(--bg); margin-top:4px;"/></div>' +
+      '</div>' +
+      '<div style="margin-top:12px;">' + field('Alt text', bilingualText('alt', g.alt_en, g.alt_bg)) + '</div>' +
+      '<div class="card-actions">' +
+        '<span style="color:var(--muted); font-size:.82rem;">Photo #' + (idx + 1) + '</span>' +
+        '<div style="display:flex; gap:8px;">' +
+          '<button class="btn btn--small" data-act="up">↑</button>' +
+          '<button class="btn btn--small" data-act="down">↓</button>' +
+          '<button class="btn btn--small btn--danger" data-act="delete">Delete</button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+  function renderGallery() {
+    $('#gal-list').innerHTML = site.gallery.map(renderGalleryCard).join('');
+    $('#gal-count').textContent = site.gallery.length;
+  }
+  $('#gal-list').addEventListener('input', function (e) {
+    var card = e.target.closest('.card[data-section="gallery"]'); if (!card) return;
+    var idx = +card.dataset.idx;
+    site.gallery[idx][e.target.dataset.key] = e.target.value;
+    setDirty('site', true);
+    if (e.target.dataset.key === 'src') {
+      var img = card.querySelector('img.img-preview');
+      if (img) img.src = e.target.value;
+    }
+  });
+  $('#gal-list').addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-act]'); if (!btn) return;
+    var card = e.target.closest('.card'); var idx = +card.dataset.idx;
+    if (btn.dataset.act === 'delete') { if (!confirm('Delete this photo?')) return; site.gallery.splice(idx, 1); }
+    else if (btn.dataset.act === 'up' && idx > 0) { var t=site.gallery[idx-1]; site.gallery[idx-1]=site.gallery[idx]; site.gallery[idx]=t; }
+    else if (btn.dataset.act === 'down' && idx < site.gallery.length - 1) { var t=site.gallery[idx+1]; site.gallery[idx+1]=site.gallery[idx]; site.gallery[idx]=t; }
+    else return;
+    setDirty('site', true); renderGallery();
+  });
+  $('#gal-add').addEventListener('click', function () {
+    site.gallery.push({ src: '', alt_en: '', alt_bg: '' });
+    setDirty('site', true); renderGallery();
+  });
+
+  // =================================================================
+  // SETTINGS
+  // =================================================================
+  function renderSettings() {
+    var s = site.social || {}, c = site.contact || {};
+    $('#settings-form').innerHTML =
+      '<h3 style="margin-top:0;font-family:Fraunces,serif;font-weight:400;">Social links</h3>' +
+      field('Facebook',  '<input type="text" data-set-key="social.facebook"  value="' + escapeAttr(s.facebook)  + '"/>') +
+      field('Instagram', '<input type="text" data-set-key="social.instagram" value="' + escapeAttr(s.instagram) + '"/>') +
+      field('YouTube',   '<input type="text" data-set-key="social.youtube"   value="' + escapeAttr(s.youtube)   + '"/>') +
+      '<h3 style="margin-top:24px;font-family:Fraunces,serif;font-weight:400;">Contact</h3>' +
+      field('Email',     '<input type="email" data-set-key="contact.email" value="' + escapeAttr(c.email) + '"/>') +
+      field('Address EN','<input type="text" data-set-key="contact.address_en" value="' + escapeAttr(c.address_en) + '"/>') +
+      field('Address BG','<input type="text" data-set-key="contact.address_bg" value="' + escapeAttr(c.address_bg) + '"/>');
+  }
+  $('#settings-form').addEventListener('input', function (e) {
+    var k = e.target.dataset.setKey; if (!k) return;
+    var parts = k.split('.');
+    site[parts[0]] = site[parts[0]] || {};
+    site[parts[0]][parts[1]] = e.target.value;
+    setDirty('site', true);
+  });
+
+  // =================================================================
+  // MENU TAB
+  // =================================================================
+  function renderMenuCard(m, idx) {
+    return '<article class="card" data-mn-idx="' + idx + '">' +
+      '<div class="card-head">' +
+        '<h3 class="title-preview">' + escapeText(m.label_en || m.label_bg || '(unnamed)') + '</h3>' +
+        '<span class="meta-preview">' + escapeText(m.id || '') + '</span>' +
+      '</div>' +
+      field('ID (key)', '<input type="text" data-mk="id" value="' + escapeAttr(m.id) + '" placeholder="group" style="width:100%; padding:8px 10px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem;"/><p style="font-size:.72rem; color:var(--muted); margin:6px 0 0;">Stable identifier — must match <code>data-nav-key="..."</code> in your HTML. Use <code>group</code>, <code>foundation</code>, <code>news</code>.</p>') +
+      field('URL (href)', '<input type="text" data-mk="href" value="' + escapeAttr(m.href) + '" placeholder="group.html" style="width:100%; padding:8px 10px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem;"/>') +
+      field('Label', bilingualText('mlabel', m.label_en, m.label_bg)) +
+      '<div class="card-actions">' +
+        '<span style="color:var(--muted); font-size:.82rem;">Item #' + (idx + 1) + '</span>' +
+        '<div style="display:flex; gap:8px;">' +
+          '<button class="btn btn--small" data-mact="up">↑</button>' +
+          '<button class="btn btn--small" data-mact="down">↓</button>' +
+          '<button class="btn btn--small btn--danger" data-mact="delete">Delete</button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+  function renderMenu() {
+    site.nav = site.nav || [];
+    $('#menu-list').innerHTML = site.nav.map(renderMenuCard).join('');
+    $('#menu-count').textContent = site.nav.length;
+  }
+  $('#menu-list').addEventListener('input', function (e) {
+    var card = e.target.closest('[data-mn-idx]'); if (!card) return;
+    var idx = +card.dataset.mnIdx;
+    var item = site.nav[idx]; if (!item) return;
+    if (e.target.dataset.mk) {
+      item[e.target.dataset.mk] = e.target.value;
+      setDirty('site', true);
+      if (e.target.dataset.mk === 'id') card.querySelector('.meta-preview').textContent = item.id || '';
+      return;
+    }
+    if (e.target.dataset.key && e.target.dataset.key.indexOf('mlabel_') === 0) {
+      var lang = e.target.dataset.key.slice(7);
+      item['label_' + lang] = e.target.value;
+      setDirty('site', true);
+      card.querySelector('.title-preview').textContent = item.label_en || item.label_bg || '(unnamed)';
+      return;
+    }
+  });
+  $('#menu-list').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-mact]'); if (!btn) return;
+    var card = e.target.closest('[data-mn-idx]'); var idx = +card.dataset.mnIdx;
+    if (btn.dataset.mact === 'delete') {
+      if (!confirm('Delete this menu item?')) return;
+      site.nav.splice(idx, 1);
+    } else if (btn.dataset.mact === 'up' && idx > 0) {
+      var t = site.nav[idx - 1]; site.nav[idx - 1] = site.nav[idx]; site.nav[idx] = t;
+    } else if (btn.dataset.mact === 'down' && idx < site.nav.length - 1) {
+      var t2 = site.nav[idx + 1]; site.nav[idx + 1] = site.nav[idx]; site.nav[idx] = t2;
+    } else return;
+    setDirty('site', true); renderMenu();
+  });
+  $('#menu-add').addEventListener('click', function () {
+    site.nav = site.nav || [];
+    site.nav.push({ id: 'item-' + Date.now(), href: '', label_en: '', label_bg: '' });
+    setDirty('site', true); renderMenu();
+  });
+
+  // =================================================================
+  // ALBUMS TAB
+  // =================================================================
+  function fmtTime(s) {
+    s = +s || 0;
+    var m = Math.floor(s / 60), r = Math.floor(s % 60);
+    return m + ':' + (r < 10 ? '0' : '') + r;
+  }
+  function renderTrackRow(t, tIdx, akey) {
+    return '<div class="track-row" data-track-idx="' + tIdx + '" style="display:grid; grid-template-columns: 36px 1fr 110px auto; gap:10px; align-items:center; padding:8px 0; border-bottom:1px solid var(--line);">' +
+      '<span style="color:var(--muted); font-size:.82rem;">' + (tIdx + 1) + '</span>' +
+      '<div>' +
+        '<input type="text" data-key="title" value="' + escapeAttr(t.title) + '" placeholder="Track title" style="width:100%; padding:6px 8px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem;"/>' +
+        '<input type="text" data-key="src" value="' + escapeAttr(t.src) + '" placeholder="assets/audio/yestoday/01-track.mp3" style="width:100%; padding:6px 8px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.78rem; margin-top:4px; font-family:JetBrains Mono,monospace;"/>' +
+      '</div>' +
+      '<div style="font-size:.82rem; color:var(--muted);">' +
+        '<input type="number" step="0.001" data-key="duration" value="' + escapeAttr(t.duration) + '" style="width:100%; padding:6px 8px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.82rem;"/>' +
+        '<span class="track-time" style="font-size:.7rem;">' + fmtTime(t.duration) + '</span>' +
+      '</div>' +
+      '<div style="display:flex; gap:4px;">' +
+        '<button class="btn btn--small" data-tact="up" type="button" title="Move up">↑</button>' +
+        '<button class="btn btn--small" data-tact="down" type="button" title="Move down">↓</button>' +
+        '<button class="btn btn--small btn--danger" data-tact="delete" type="button" title="Delete">×</button>' +
+      '</div>' +
+    '</div>';
+  }
+  function renderAlbumCard(akey) {
+    var a = albums[akey];
+    var coverPreview = a.cover ? '<img src="' + escapeAttr(a.cover) + '" alt="" style="width:120px; height:120px; object-fit:cover; border:1px solid var(--line); display:block;"/>'
+                              : '<div style="width:120px; height:120px; background:var(--bg-alt); border:1px solid var(--line);"></div>';
+    var totalSec = (a.tracks || []).reduce(function (s, t) { return s + (+t.duration || 0); }, 0);
+    return '<article class="card" data-album-key="' + akey + '">' +
+      '<div class="card-head">' +
+        '<h3 class="title-preview">' + escapeText(a.album || '(untitled album)') + '</h3>' +
+        '<span class="meta-preview">' + escapeText(akey) + ' . ' + (a.tracks || []).length + ' tracks . ' + fmtTime(totalSec) + '</span>' +
+      '</div>' +
+      '<div style="display:flex; gap:18px; margin-bottom:18px; align-items:flex-start;">' +
+        coverPreview +
+        '<div style="flex:1; display:grid; gap:10px;">' +
+          '<label style="font-size:.72rem; text-transform:uppercase; letter-spacing:.14em; color:var(--muted);">Slug (URL key)<input type="text" data-akey="key" value="' + escapeAttr(akey) + '" placeholder="yestoday" style="width:100%; padding:6px 8px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem; margin-top:4px;"/></label>' +
+          '<label style="font-size:.72rem; text-transform:uppercase; letter-spacing:.14em; color:var(--muted);">Album title<input type="text" data-akey="album" value="' + escapeAttr(a.album) + '" placeholder="YesToday" style="width:100%; padding:6px 8px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem; margin-top:4px;"/></label>' +
+          '<label style="font-size:.72rem; text-transform:uppercase; letter-spacing:.14em; color:var(--muted);">Year<input type="number" data-akey="year" value="' + escapeAttr(a.year) + '" placeholder="2016" style="width:120px; padding:6px 8px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem; margin-top:4px;"/></label>' +
+          '<label style="font-size:.72rem; text-transform:uppercase; letter-spacing:.14em; color:var(--muted);">Cover image path<input type="text" data-key="cover" value="' + escapeAttr(a.cover) + '" placeholder="assets/img/albums/yestoday.jpg" style="width:100%; padding:6px 8px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.78rem; margin-top:4px; font-family:JetBrains Mono,monospace;"/></label>' +
+          '<label style="font-size:.72rem; text-transform:uppercase; letter-spacing:.14em; color:var(--muted);">Preview seconds (0 = unlimited)<input type="number" min="0" data-akey="preview_seconds" value="' + escapeAttr(typeof a.preview_seconds === "number" ? a.preview_seconds : 30) + '" placeholder="30" style="width:120px; padding:6px 8px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.92rem; margin-top:4px;"/></label>' +
+          '<label style="font-size:.72rem; text-transform:uppercase; letter-spacing:.14em; color:var(--muted);">Buy URL (Shopify, Bandcamp...)<input type="url" data-akey="buy_url" value="' + escapeAttr(a.buy_url) + '" placeholder="https://zhivkovasilev.com/products/yestoday" style="width:100%; padding:6px 8px; border:1px solid var(--line); background:var(--bg); font:inherit; font-size:.82rem; margin-top:4px; font-family:JetBrains Mono,monospace;"/></label>' +
+        '</div>' +
+      '</div>' +
+      '<h4 style="font-family:Fraunces,serif; font-weight:400; margin:14px 0 8px;">Tracks <span style="color:var(--muted); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;">duration auto-fills on upload</span></h4>' +
+      '<div style="display:grid; grid-template-columns: 36px 1fr 110px auto; gap:10px; padding:6px 0; border-bottom:2px solid var(--ink); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);"><span>#</span><span>Title / Source</span><span>Duration (s)</span><span>Actions</span></div>' +
+      '<div class="tracks-list">' + (a.tracks || []).map(function (t, i) { return renderTrackRow(t, i, akey); }).join('') + '</div>' +
+      '<div style="margin-top:12px; display:flex; gap:8px; justify-content:space-between;">' +
+        '<button class="btn btn--small" data-aact="add-track" type="button">＋ Add track</button>' +
+        '<button class="btn btn--small btn--danger" data-aact="delete-album" type="button">Delete album</button>' +
+      '</div>' +
+    '</article>';
+  }
+  function renderAlbums() {
+    var keys = Object.keys(albums);
+    $('#albums-list').innerHTML = keys.map(renderAlbumCard).join('');
+    var ac = $('#albums-count'); if (ac) ac.textContent = keys.length;
+    setDirty('albums', dirty.albums);
+  }
+  $('#albums-list').addEventListener('input', function (e) {
+    var card = e.target.closest('[data-album-key]'); if (!card) return;
+    var akey = card.dataset.albumKey;
+    var a = albums[akey]; if (!a) return;
+    if (e.target.dataset.akey) {
+      var ak = e.target.dataset.akey;
+      if (ak === 'key') {
+        var newKey = e.target.value.trim() || akey;
+        if (newKey !== akey && !albums[newKey]) {
+          albums[newKey] = albums[akey];
+          delete albums[akey];
+          setDirty('albums', true); renderAlbums();
+          return;
+        }
+      } else if (ak === 'year') {
+        a.year = +e.target.value || a.year;
+      } else if (ak === 'preview_seconds') {
+        a.preview_seconds = parseInt(e.target.value, 10);
+        if (isNaN(a.preview_seconds) || a.preview_seconds < 0) a.preview_seconds = 0;
+      } else {
+        a[ak] = e.target.value;
+      }
+      setDirty('albums', true);
+      if (ak === 'album') card.querySelector('.title-preview').textContent = a.album || '(untitled album)';
+      return;
+    }
+    if (e.target.dataset.key === 'cover') {
+      a.cover = e.target.value;
+      var img = card.querySelector('img');
+      if (img) img.src = e.target.value;
+      setDirty('albums', true);
+      return;
+    }
+    var row = e.target.closest('[data-track-idx]');
+    if (row) {
+      var ti = +row.dataset.trackIdx;
+      var k = e.target.dataset.key;
+      if (k === 'duration') a.tracks[ti].duration = parseFloat(e.target.value) || 0;
+      else a.tracks[ti][k] = e.target.value;
+      setDirty('albums', true);
+      var tt = row.querySelector('.track-time');
+      if (tt && k === 'duration') tt.textContent = fmtTime(a.tracks[ti].duration);
+      return;
+    }
+  });
+  $('#albums-list').addEventListener('click', function (e) {
+    var card = e.target.closest('[data-album-key]'); if (!card) return;
+    var akey = card.dataset.albumKey;
+    var a = albums[akey]; if (!a) return;
+    var aBtn = e.target.closest('[data-aact]');
+    if (aBtn) {
+      if (aBtn.dataset.aact === 'add-track') {
+        a.tracks = a.tracks || [];
+        a.tracks.push({ src: '', title: 'New track', duration: 0 });
+        setDirty('albums', true); renderAlbums();
+      } else if (aBtn.dataset.aact === 'delete-album') {
+        if (!confirm('Delete album?')) return;
+        delete albums[akey];
+        setDirty('albums', true); renderAlbums();
+      }
+      return;
+    }
+    var tBtn = e.target.closest('[data-tact]');
+    if (tBtn) {
+      var row = e.target.closest('[data-track-idx]');
+      var ti = +row.dataset.trackIdx;
+      if (tBtn.dataset.tact === 'delete') {
+        if (!confirm('Delete track?')) return;
+        a.tracks.splice(ti, 1);
+      } else if (tBtn.dataset.tact === 'up' && ti > 0) {
+        var x = a.tracks[ti - 1]; a.tracks[ti - 1] = a.tracks[ti]; a.tracks[ti] = x;
+      } else if (tBtn.dataset.tact === 'down' && ti < a.tracks.length - 1) {
+        var y = a.tracks[ti + 1]; a.tracks[ti + 1] = a.tracks[ti]; a.tracks[ti] = y;
+      } else return;
+      setDirty('albums', true); renderAlbums();
+    }
+  });
+  var albumsAddBtn = $('#albums-add');
+  if (albumsAddBtn) albumsAddBtn.addEventListener('click', function () {
+    var newKey = prompt('Slug for new album (URL key):');
+    if (!newKey) return;
+    newKey = newKey.toLowerCase().replace(/[^a-z0-9-]+/g, '-');
+    if (!newKey || albums[newKey]) { alert('Invalid or duplicate slug.'); return; }
+    albums[newKey] = { album: newKey, year: new Date().getFullYear(), cover: '', tracks: [], preview_seconds: 30, buy_url: '' };
+    setDirty('albums', true); renderAlbums();
+  });
+  var albumsReloadBtn = $('#albums-reload');
+  if (albumsReloadBtn) albumsReloadBtn.addEventListener('click', function () {
+    if (dirty.albums && !confirm('Discard unsaved album changes?')) return;
+    location.reload();
+  });
+  var albumsDownloadBtn = $('#albums-download');
+  if (albumsDownloadBtn) albumsDownloadBtn.addEventListener('click', function () {
+    var content = "/* Outhentic - album data. Edited via /editor.html on " +
+      new Date().toISOString().slice(0,19).replace('T',' ') + " UTC. */\n" +
+      "window.OUTHENTIC_ALBUMS = " + JSON.stringify(albums, null, 2) + ";\n";
+    download('albums.js', content);
+    setDirty('albums', false);
+    alert('albums.js downloaded.');
+  });
+
+  // =================================================================
+  // SITE-WIDE DOWNLOAD
+  // =================================================================
+  $$('.site-download').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var content =
+        "/* Outhentic - site-wide editable content. Edited via /editor.html on " +
+        new Date().toISOString().slice(0,19).replace('T',' ') + " UTC. */\n" +
+        "window.OUTHENTIC_SITE = " + JSON.stringify(site, null, 2) + ";\n";
+      download('site-data.js', content);
+      setDirty('site', false);
+      alert('site-data.js downloaded.');
+    });
+  });
+  $$('.site-reload').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (dirty.site && !confirm('Discard unsaved changes?')) return;
+      location.reload();
+    });
+  });
+
+
+  function download(name, content) {
+    var blob = new Blob([content], { type: 'application/javascript;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function renderAll() {
+    renderNews();
+    renderHero();
+    renderMenu();
+    renderAlbums();
+    renderGroupMembers();
+    renderFoundationMembers();
+    renderGallery();
+    renderSettings();
+  }
+
+  window.addEventListener('beforeunload', function (e) {
+    if (dirty.news || dirty.site || dirty.albums) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  window.__outhenticEditorState = {
+    get posts() { return posts; },
+    get site() { return site; },
+    get albums() { return albums; }
+  };
+})();
+</script>
+
+<script src="assets/js/editor-github.js" defer></script>
+</body>
+</html>
