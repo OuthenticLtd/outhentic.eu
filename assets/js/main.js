@@ -57,9 +57,11 @@
     items.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  // ----- Footer year -----
-  var y = document.querySelector('[data-year]');
-  if (y) y.textContent = new Date().getFullYear();
+  // ----- Footer year — always updates to the current year on load -----
+  var thisYear = new Date().getFullYear();
+  document.querySelectorAll('[data-year]').forEach(function (el) {
+    el.textContent = thisYear;
+  });
 
   // ----- Lightbox with prev/next navigation -----
   var triggers = Array.prototype.slice.call(document.querySelectorAll('.lightbox-trigger'));
