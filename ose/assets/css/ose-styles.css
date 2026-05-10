@@ -1067,8 +1067,8 @@ a.hub-card { display: block; color: inherit; }
   border: 1px solid var(--line);
   border-radius: 18px;
   overflow: hidden;
-  aspect-ratio: 9 / 11;
-  max-width: 380px;
+  aspect-ratio: 4 / 5;
+  max-width: 260px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -1077,6 +1077,397 @@ a.hub-card { display: block; color: inherit; }
   position: relative;
 }
 .tut-scene-viz svg { width: 100%; height: 100%; display: block; }
+
+/* Interactive demo block — sits between the hero and the walkthrough */
+.tut-demo {
+  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 32px;
+  margin: 40px 0 56px;
+  position: relative;
+  overflow: hidden;
+}
+.tut-demo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--tut-accent, #FF8A2A) 50%, transparent), transparent 60%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+.tut-demo-label {
+  font-family: var(--mono-font);
+  font-size: .72rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--tut-accent);
+  margin-bottom: 8px;
+}
+.tut-demo h3 {
+  margin: 0 0 18px;
+  font-size: 1.5rem;
+  color: var(--ink);
+  font-weight: 700;
+}
+.tut-demo-body { display: grid; gap: 24px; align-items: center; }
+@media (min-width: 720px) { .tut-demo-body { grid-template-columns: 1fr 1.2fr; gap: 36px; } }
+.tut-demo-canvas {
+  background: #000;
+  border-radius: 14px;
+  padding: 24px;
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.tut-demo-controls { display: flex; flex-direction: column; gap: 18px; }
+.tut-demo-row { display: flex; align-items: center; gap: 16px; }
+.tut-demo-row label {
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex: 0 0 auto;
+  min-width: 70px;
+}
+
+/* Range slider — accent-styled */
+.tut-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-2);
+  outline: none;
+}
+.tut-slider::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--bg-2); }
+.tut-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--tut-accent, var(--accent-orange));
+  cursor: pointer;
+  margin-top: -8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+.tut-slider::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--tut-accent, var(--accent-orange));
+  border: 0;
+  cursor: pointer;
+}
+.tut-slider-value {
+  font-family: var(--mono-font);
+  font-size: .9rem;
+  color: var(--ink);
+  font-weight: 600;
+  flex: 0 0 auto;
+  min-width: 60px;
+  text-align: right;
+}
+
+/* Big primary demo button */
+.tut-demo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1px solid var(--tut-accent);
+  background: color-mix(in srgb, var(--tut-accent) 18%, transparent);
+  color: var(--tut-accent);
+  cursor: pointer;
+  transition: all .15s;
+}
+.tut-demo-btn:hover { background: var(--tut-accent); color: #000; }
+.tut-demo-btn[data-running="true"] { background: var(--tut-accent); color: #000; }
+
+.tut-demo-stat {
+  display: flex; flex-direction: column;
+  align-items: center;
+  font-family: var(--mono-font);
+  color: var(--ink);
+  font-size: 2.4rem;
+  font-weight: 300;
+  letter-spacing: -.02em;
+}
+.tut-demo-stat .tut-demo-stat-label {
+  font-size: .7rem;
+  letter-spacing: .22em;
+  color: var(--muted);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* Demo: beat-dot strip */
+.tut-beat-strip { display: flex; gap: 10px; margin-top: 16px; }
+.tut-beat-dot {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.10);
+  display: grid; place-items: center;
+  font-family: var(--mono-font);
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .12s;
+  border: 1px solid transparent;
+}
+.tut-beat-dot[data-state="accent"]  { background: var(--tut-accent); color: #000; }
+.tut-beat-dot[data-state="silent"]  { background: transparent; border-color: rgba(255,255,255,0.10); color: rgba(255,255,255,0.20); }
+.tut-beat-dot.is-playing { transform: scale(1.18); box-shadow: 0 0 0 4px color-mix(in srgb, var(--tut-accent) 30%, transparent); }
+
+/* Tuner demo styles */
+.tut-tuner-demo-face {
+  width: 220px; height: 130px; position: relative;
+  margin-bottom: 14px;
+}
+.tut-tuner-demo-face svg { width: 100%; height: 100%; }
+
+/* Long-press demo pad */
+.tut-longpress-pad {
+  width: 100%; max-width: 280px;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  transition: background .2s;
+}
+.tut-longpress-pad:hover { background: var(--surface-2); }
+.tut-longpress-pad-label {
+  font-family: var(--mono-font);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  text-align: center;
+  pointer-events: none;
+}
+.tut-longpress-ring {
+  position: absolute;
+  width: 60%; aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--tut-accent);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 1s linear, opacity .2s;
+  transform: scale(0.2);
+}
+.tut-longpress-pad[data-pressing="true"] .tut-longpress-ring {
+  opacity: 1;
+  transform: scale(1.5);
+}
+.tut-longpress-pad[data-bound="true"] {
+  background: color-mix(in srgb, var(--tut-accent) 14%, var(--surface));
+  border-color: var(--tut-accent);
+}
+.tut-longpress-pad[data-bound="true"] .tut-longpress-pad-label { color: var(--tut-accent); }
+
+/* MIDI Learn sheet that slides up from the demo bottom */
+.tut-midi-sheet {
+  position: absolute;
+  inset-inline: 0; bottom: 0;
+  background: var(--bg-2);
+  border-top: 1px solid var(--tut-accent);
+  border-radius: 18px 18px 0 0;
+  padding: 22px 28px 28px;
+  transform: translateY(100%);
+  transition: transform .35s cubic-bezier(.2,.9,.3,1);
+  text-align: center;
+}
+.tut-midi-sheet[data-open="true"] { transform: translateY(0); }
+.tut-midi-sheet-title {
+  font-size: .76rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--tut-accent);
+  margin-bottom: 6px;
+}
+.tut-midi-sheet-body { color: var(--ink-soft); font-size: .92rem; }
+.tut-midi-listening-dots span {
+  display: inline-block;
+  width: 6px; height: 6px;
+  margin: 0 3px;
+  border-radius: 50%;
+  background: var(--tut-accent);
+  animation: tut-listening-blink 1.2s ease-in-out infinite;
+}
+.tut-midi-listening-dots span:nth-child(2) { animation-delay: .2s; }
+.tut-midi-listening-dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes tut-listening-blink {
+  0%, 100% { opacity: .3; transform: scale(.8); }
+  50%      { opacity: 1;  transform: scale(1.2); }
+}
+
+/* Speed-pitch demo waveform — animates scaleX with the slider */
+.tut-wave-display {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 8px;
+}
+.tut-wave-display .tut-wave-bar {
+  background: var(--tut-accent);
+  width: 3px;
+  border-radius: 1.5px;
+  opacity: 0.85;
+  transform-origin: center;
+}
+.tut-wave-display-stretch {
+  transform: scaleX(var(--stretch, 1));
+  transform-origin: left center;
+  transition: transform .12s linear;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Layer-keyboard demo */
+.tut-keys {
+  display: flex;
+  position: relative;
+  height: 140px;
+  width: 100%;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  user-select: none;
+}
+.tut-key {
+  flex: 1;
+  background: #FFFFF0;
+  border-right: 1px solid #0a0a0d;
+  position: relative;
+  cursor: pointer;
+  transition: background .1s;
+}
+.tut-key:last-child { border-right: 0; }
+.tut-key.is-playing { background: var(--tut-accent); }
+.tut-key-label {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono-font);
+  font-size: .62rem;
+  color: rgba(0,0,0,0.6);
+  pointer-events: none;
+}
+
+/* Tutorial hero visual — also smaller now */
+.tut-hero .tut-scene-viz { max-width: 260px; }
+@media (min-width: 920px) { .tut-hero .tut-scene-viz { max-width: 280px; } }
+
+/* Tuner demo LEDs — driven by data-on attribute from JS */
+.tut-tuner-led {
+  width: 38px; height: 18px;
+  border-radius: 4px;
+  background: #080808;
+  border: 1px solid #1A1A1A;
+  display: grid; place-items: center;
+  position: relative;
+}
+.tut-tuner-led-bulb {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  transition: background-color .15s, box-shadow .15s;
+}
+.tut-tuner-led[data-color="red"] .tut-tuner-led-bulb   { background: rgba(226,80,58,0.30); }
+.tut-tuner-led[data-color="green"] .tut-tuner-led-bulb { background: rgba(60,203,105,0.30); }
+.tut-tuner-led[data-on="true"][data-color="red"]   .tut-tuner-led-bulb { background: #E2503A; box-shadow: 0 0 8px rgba(226,80,58,0.7); }
+.tut-tuner-led[data-on="true"][data-color="green"] .tut-tuner-led-bulb { background: #3CCB69; box-shadow: 0 0 12px rgba(60,203,105,0.85); }
+
+/* Toggle checkbox styled as accent switch */
+.tut-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .82rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  user-select: none;
+}
+.tut-toggle input { display: none; }
+.tut-toggle .tut-toggle-track {
+  width: 38px; height: 22px;
+  border-radius: 11px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  position: relative;
+  transition: all .15s;
+}
+.tut-toggle .tut-toggle-track::before {
+  content: "";
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: all .15s;
+}
+.tut-toggle input:checked + .tut-toggle-track {
+  background: color-mix(in srgb, var(--tut-accent) 30%, var(--bg-2));
+  border-color: var(--tut-accent);
+}
+.tut-toggle input:checked + .tut-toggle-track::before {
+  left: 18px;
+  background: var(--tut-accent);
+}
+
+/* Tutorial demo metric (e.g. live BPM) */
+.tut-demo-metric {
+  display: flex; flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  font-family: var(--mono-font);
+}
+.tut-demo-metric-value {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--ink);
+  letter-spacing: -.02em;
+}
+.tut-demo-metric-label {
+  font-size: .68rem;
+  letter-spacing: .18em;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Caption under canvas */
+.tut-demo-caption {
+  margin-top: 14px;
+  font-size: .85rem;
+  color: var(--muted);
+  text-align: center;
+  font-style: italic;
+}
 
 .tut-tips {
   margin-top: 48px;

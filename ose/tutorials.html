@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tutorials — OSE | Real scenarios for people who play</title>
-<meta name="description" content="Six animated, scene-by-scene tutorials for the Outhentic Sound Engine: slow down a song without changing pitch, layer two voices in one preset, snap-in-tune, capture an idea between sets, set up a 5/4 metronome, bind a foot pedal with MIDI Learn." />
+<title>Tutorials — OSE | Hands-on, interactive walkthroughs</title>
+<meta name="description" content="Five hands-on tutorials for the Outhentic Sound Engine — actually working demos right in your browser. Tap a real metronome, drag a real speed slider, watch a tuner needle snap green, long-press to bind a foot pedal." />
 <meta name="theme-color" content="#050507" />
 <meta property="og:title" content="OSE Tutorials" />
-<meta property="og:description" content="Six animated walkthroughs for OSE — real scenarios, real screens, real workflows." />
+<meta property="og:description" content="Hands-on, interactive walkthroughs you can play with right in the browser." />
 <meta property="og:url" content="https://outhentic.eu/ose/tutorials.html" />
 <meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
 <link rel="canonical" href="https://outhentic.eu/ose/tutorials.html" />
@@ -31,678 +31,515 @@
 <section class="section">
   <div class="wrap">
 
-    <!-- ============== HERO ============== -->
-    <div class="reveal" style="max-width: 820px; margin-bottom: 56px;">
-      <span class="eyebrow eyebrow--grad">Six real scenarios</span>
+    <div class="reveal" style="max-width: 760px; margin-bottom: 56px;">
+      <span class="eyebrow eyebrow--grad">Hands-on · Interactive</span>
       <h1>Tutorials.</h1>
-      <p class="lead">Each one starts where you actually are — backstage, at soundcheck, at home practising — and walks the screen-by-screen flow with the same animated visuals you'd see on the phone. No marketing language, no abstract feature lists. Real workflows for people who play.</p>
+      <p class="lead">Each one starts with a real-world scenario. Then you actually play with the feature — a working metronome, a real speed slider, a tuner needle that snaps green when you ask it to. Hold and drag to learn. The walkthroughs at the bottom of each tutorial mirror the screen flow on your phone.</p>
     </div>
 
-    <!-- ============== TOC ============== -->
     <nav class="tut-toc reveal">
-      <a href="#slow-down">
-        <div class="tut-toc-num">01 · PRACTICE</div>
-        <div class="tut-toc-title">Slow a song down to learn it</div>
+      <a href="#metronome">
+        <div class="tut-toc-num">01 · METRONOME</div>
+        <div class="tut-toc-title">A working 5/4 metronome</div>
       </a>
-      <a href="#layer-voices">
-        <div class="tut-toc-num">02 · PLAY</div>
-        <div class="tut-toc-title">Layer two voices in one preset</div>
+      <a href="#slow-down">
+        <div class="tut-toc-num">02 · PRACTICE</div>
+        <div class="tut-toc-title">Slow down without changing pitch</div>
       </a>
       <a href="#tune-snap">
         <div class="tut-toc-num">03 · TUNER</div>
-        <div class="tut-toc-title">Tune to ±3 cents with the snap lock</div>
+        <div class="tut-toc-title">Snap-in-tune at ±3 cents</div>
       </a>
-      <a href="#capture-idea">
-        <div class="tut-toc-num">04 · AUDIO</div>
-        <div class="tut-toc-title">Capture an idea between sets</div>
-      </a>
-      <a href="#metronome-5-4">
-        <div class="tut-toc-num">05 · METRONOME</div>
-        <div class="tut-toc-title">A 5/4 metronome with custom accents</div>
+      <a href="#layer-voices">
+        <div class="tut-toc-num">04 · PLAY</div>
+        <div class="tut-toc-title">Layer two voices on one keyboard</div>
       </a>
       <a href="#midi-learn">
-        <div class="tut-toc-num">06 · LIVE</div>
-        <div class="tut-toc-title">Bind a foot pedal with MIDI Learn</div>
+        <div class="tut-toc-num">05 · LIVE</div>
+        <div class="tut-toc-title">Bind a foot pedal in two seconds</div>
       </a>
     </nav>
 
-    <hr class="divider" style="margin: 80px 0 0;" />
+    <hr class="divider" style="margin: 64px 0 0;" />
 
 
     <!-- ====================================================== -->
-    <!-- ============== TUTORIAL 01 — PRACTICE ================ -->
+    <!-- == TUTORIAL 01 — METRONOME (working demo) =========== -->
     <!-- ====================================================== -->
-    <article id="slow-down" class="tutorial mc--practice">
+    <article id="metronome" class="tutorial mc--metronome">
       <div class="tut-hero">
         <div>
-          <div class="tut-num">Tutorial 01 · Practice Module</div>
-          <h2>Slow a song down to learn it.</h2>
-          <p class="tut-scenario">You found a riff on a video. The fingers fly, the notes blur. You drop the audio into Practice, slow it to 70%, and the pitch stays exactly where it was. Loop the hard bar, drill it, ramp it back up.</p>
+          <div class="tut-num">Tutorial 01 · Metronome</div>
+          <h2>A polygon you can feel.</h2>
+          <p class="tut-scenario">You're working on a 5/4 fill. The polygon at the centre of the metronome is a pentagon — five sides, one per beat. The bright dot orbits it, landing on each vertex precisely on the beat. Beat 1 is accented; you feel which side of the bar you're on at a glance.</p>
           <div class="tut-meta">
-            <span class="tag">Practice Module</span>
-            <span class="tag tag--muted">4 min · Beginner</span>
+            <span class="tag">Metronome</span>
+            <span class="tag tag--muted">3 min · Beginner</span>
           </div>
         </div>
-        <!-- Hero illustration: A waveform stretching while a speed wheel rotates -->
         <div class="tut-scene-viz">
-          <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-            <rect width="380" height="460" fill="#0a0d0c"/>
-            <!-- Big speed wheel -->
-            <g transform="translate(190,160)">
-              <circle r="100" fill="none" stroke="rgba(93,202,165,0.20)" stroke-width="1"/>
-              <circle r="84"  fill="#0e1112" stroke="rgba(93,202,165,0.40)" stroke-width="1.4"/>
-              <g class="tut-speed-wheel">
-                <line x1="0" y1="-72" x2="0" y2="-50" stroke="#5DCAA5" stroke-width="3" stroke-linecap="round"/>
-                <circle r="6" fill="#5DCAA5"/>
-              </g>
-              <text y="6" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="32" text-anchor="middle" font-weight="700">70%</text>
-              <text y="32" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="3" text-anchor="middle">SPEED</text>
+          <svg viewBox="0 0 220 280" preserveAspectRatio="xMidYMid meet">
+            <rect width="220" height="280" fill="#0a0a0d"/>
+            <text x="20" y="50" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="38" font-weight="300" letter-spacing="-1.5">120</text>
+            <text x="20" y="68" fill="#FAC775" font-family="JetBrains Mono, monospace" font-size="8" font-weight="800" letter-spacing="2">BPM · MODERATO</text>
+            <g transform="translate(110,160)">
+              <polygon points="0,-50 48,-15 30,42 -30,42 -48,-15" fill="none" stroke="#FAC775" stroke-width="2.4" stroke-linejoin="round"/>
+              <circle r="6" fill="#FFFFFF">
+                <animateTransform attributeName="transform" type="translate" dur="2.5s" repeatCount="indefinite"
+                                  values="0,-50; 48,-15; 30,42; -30,42; -48,-15; 0,-50"
+                                  keyTimes="0; 0.2; 0.4; 0.6; 0.8; 1" calcMode="discrete"/>
+              </circle>
             </g>
-            <!-- Stretching waveform below -->
-            <text x="30" y="320" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">PHASE-LOCKED STRETCH · PITCH HOLDS</text>
-            <g class="tut-waveform-stretch">
-              <g fill="#5DCAA5" opacity="0.85">
-                <rect x="20"  y="350" width="3" height="44" rx="1"/><rect x="28"  y="362" width="3" height="20" rx="1"/>
-                <rect x="36"  y="346" width="3" height="52" rx="1"/><rect x="44"  y="356" width="3" height="32" rx="1"/>
-                <rect x="52"  y="340" width="3" height="64" rx="1"/><rect x="60"  y="358" width="3" height="28" rx="1"/>
-                <rect x="68"  y="350" width="3" height="44" rx="1"/><rect x="76"  y="338" width="3" height="68" rx="1"/>
-                <rect x="84"  y="356" width="3" height="32" rx="1"/><rect x="92"  y="344" width="3" height="56" rx="1"/>
-                <rect x="100" y="350" width="3" height="44" rx="1"/><rect x="108" y="362" width="3" height="20" rx="1"/>
-                <rect x="116" y="340" width="3" height="64" rx="1"/><rect x="124" y="356" width="3" height="32" rx="1"/>
-                <rect x="132" y="346" width="3" height="52" rx="1"/><rect x="140" y="358" width="3" height="28" rx="1"/>
-                <rect x="148" y="338" width="3" height="68" rx="1"/><rect x="156" y="350" width="3" height="44" rx="1"/>
-                <rect x="164" y="346" width="3" height="52" rx="1"/><rect x="172" y="356" width="3" height="32" rx="1"/>
-                <rect x="180" y="340" width="3" height="64" rx="1"/><rect x="188" y="354" width="3" height="36" rx="1"/>
-                <rect x="196" y="350" width="3" height="44" rx="1"/><rect x="204" y="338" width="3" height="68" rx="1"/>
-                <rect x="212" y="356" width="3" height="32" rx="1"/><rect x="220" y="346" width="3" height="52" rx="1"/>
-                <rect x="228" y="340" width="3" height="64" rx="1"/><rect x="236" y="356" width="3" height="32" rx="1"/>
-                <rect x="244" y="350" width="3" height="44" rx="1"/><rect x="252" y="338" width="3" height="68" rx="1"/>
-              </g>
-            </g>
-            <!-- Fixed pitch indicator: a horizontal frequency line that doesn't move -->
-            <line x1="20" y1="430" x2="260" y2="430" stroke="#5DCAA5" stroke-width="0.6" stroke-dasharray="2 4" opacity="0.5"/>
-            <text x="265" y="434" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">A 440 Hz</text>
+            <text x="110" y="252" fill="#FAC775" font-family="Inter, sans-serif" font-size="14" font-weight="900" text-anchor="middle">5 / 4</text>
           </svg>
         </div>
       </div>
 
+      <!-- WORKING METRONOME DEMO -->
+      <section class="tut-demo" data-demo="metronome">
+        <div class="tut-demo-label">Try it · Working demo</div>
+        <h3>Tap START. The polygon and the click are real.</h3>
+        <div class="tut-demo-body">
+          <div class="tut-demo-canvas">
+            <svg viewBox="-80 -80 160 160" width="200" height="200" data-met-poly>
+              <polygon points="0,-50 50,0 0,50 -50,0" fill="none" stroke="#FAC775" stroke-width="2" stroke-linejoin="round"/>
+              <polygon points="0,-36 36,0 0,36 -36,0" fill="#FAC775" opacity="0.18"/>
+              <circle r="6" fill="#FFFFFF" data-met-dot cx="0" cy="-50">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="0.4s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+            <div class="tut-beat-strip" data-met-beats></div>
+            <div class="tut-demo-caption">Tap any beat dot to cycle silent → normal → accent.</div>
+          </div>
+          <div class="tut-demo-controls">
+            <div class="tut-demo-row">
+              <label>BPM</label>
+              <input type="range" class="tut-slider" min="40" max="220" value="120" data-met-bpm />
+              <span class="tut-slider-value" data-met-bpm-value>120 BPM</span>
+            </div>
+            <div class="tut-demo-row">
+              <label>Beats</label>
+              <input type="range" class="tut-slider" min="2" max="9" value="4" step="1" data-met-sig />
+              <span class="tut-slider-value" data-met-sig-value>4 / 4</span>
+            </div>
+            <button class="tut-demo-btn" data-met-start>START</button>
+            <p style="font-size:.85rem;color:var(--muted);margin:0;">The polygon morphs as you change the time signature. Drag BEATS up to 5 — pentagon. Up to 6 — hexagon.</p>
+          </div>
+        </div>
+      </section>
+
       <div class="tut-scenes">
-        <!-- Scene 1 -->
         <div class="tut-scene">
           <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 01</strong> Open the Practice Module</div>
-            <h3>Land on the take you want to study.</h3>
-            <p>From the home grid, tap the <strong>Practice</strong> tile — the mint-coloured one. The module opens straight on the Library lens because Practice never has the recorder visible; you're here to play <em>along</em> with audio you brought in.</p>
-            <p>Search by name, narrow by folder, or scroll. Pick the take.</p>
+            <div class="tut-scene-num"><strong>SCENE 01</strong> Open the Metronome from the home grid</div>
+            <h3>The hero is the ClickTrackFace.</h3>
+            <p>A 220–280dp tall amber-glass card with a 50sp light-weight monospace BPM digit. The eyebrow under it reads <code>BPM · MODERATO</code> — and updates live as you drag. Under 60: LARGO. Under 76: ADAGIO. Under 108: ANDANTE. Under 120: MODERATO. Under 156: ALLEGRO. Above: VIVACE, PRESTO, PRESTISSIMO.</p>
           </div>
           <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <!-- Tiny home grid showing PRACTICE highlighted -->
-              <g transform="translate(20,30)">
-                <text fill="#ECECEE" font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3">OSE</text>
+            <svg viewBox="0 0 220 280" preserveAspectRatio="xMidYMid meet">
+              <rect width="220" height="280" fill="#0a0a0d"/>
+              <rect x="14" y="14" width="192" height="252" rx="14" fill="rgba(250,199,117,0.10)" stroke="#FAC775" stroke-opacity="0.5"/>
+              <text x="26" y="58" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="36" font-weight="300" letter-spacing="-1.5">132</text>
+              <text x="26" y="76" fill="#FAC775" font-family="JetBrains Mono, monospace" font-size="8" font-weight="800" letter-spacing="2">BPM · ALLEGRETTO</text>
+              <g transform="translate(110,170)">
+                <polygon points="0,-40 38,-12 24,32 -24,32 -38,-12" fill="none" stroke="#FAC775" stroke-width="2"/>
               </g>
-              <g transform="translate(20,60)">
-                <!-- 4×2 mini grid -->
-                <rect x="0"   y="0" width="80" height="80" rx="10" fill="#141318" stroke="rgba(255,138,42,0.4)"/>
-                <text x="10" y="18" fill="#FF8A2A" font-size="9" font-weight="700" font-family="Inter, sans-serif" letter-spacing="1.5">PLAY</text>
-                <rect x="86"  y="0" width="80" height="80" rx="10" fill="#141318" stroke="rgba(224,90,107,0.4)"/>
-                <text x="96" y="18" fill="#E05A6B" font-size="9" font-weight="700" font-family="Inter, sans-serif" letter-spacing="1.5">AUDIO</text>
-                <rect x="172" y="0" width="80" height="80" rx="10" fill="#141318" stroke="rgba(177,139,255,0.4)"/>
-                <text x="182" y="18" fill="#B18BFF" font-size="9" font-weight="700" font-family="Inter, sans-serif" letter-spacing="1.5">MIDI</text>
-                <!-- PRACTICE — highlighted with ripple -->
-                <rect x="258" y="0" width="80" height="80" rx="10" fill="rgba(93,202,165,0.18)" stroke="#5DCAA5" stroke-width="2"/>
-                <text x="268" y="18" fill="#5DCAA5" font-size="9" font-weight="700" font-family="Inter, sans-serif" letter-spacing="1.5">PRACTICE</text>
-                <circle class="tut-ripple" cx="298" cy="40" r="32" fill="none" stroke="#5DCAA5" stroke-width="2"/>
-                <!-- Finger tap -->
-                <g class="tut-finger" transform="translate(298,40)">
-                  <circle r="14" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)"/>
-                  <path d="M-4 -2 L-2 -10 L0 -10 L2 -2 L8 -2 L8 6 L-4 6 Z" fill="#FFFFFF"/>
-                </g>
-              </g>
-              <!-- Library list arriving -->
-              <g transform="translate(20,180)">
-                <rect x="0" y="0" width="318" height="36" rx="8" fill="#141318" stroke="rgba(93,202,165,0.40)"/>
-                <text x="14" y="22" fill="#ECECEE" font-family="Inter, sans-serif" font-size="11" font-weight="600">Stranger Things — Main Theme</text>
-                <text x="290" y="22" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" text-anchor="end">2:34</text>
-                <rect x="0"  y="44" width="318" height="36" rx="8" fill="#141318" stroke="rgba(255,255,255,0.06)"/>
-                <text x="14" y="66" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11">Bach BWV 1007</text>
-                <text x="290" y="66" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">3:12</text>
-                <rect x="0"  y="88" width="318" height="36" rx="8" fill="#141318" stroke="rgba(255,255,255,0.06)"/>
-                <text x="14" y="110" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11">Etude in A — take 3</text>
-                <text x="290" y="110" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">1:48</text>
-                <rect x="0"  y="132" width="318" height="36" rx="8" fill="#141318" stroke="rgba(255,255,255,0.06)"/>
-                <text x="14" y="154" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11">Long tones — D minor</text>
-                <text x="290" y="154" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">4:02</text>
-              </g>
-              <text x="20" y="430" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">PRACTICE · LIBRARY</text>
+              <text x="110" y="246" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="22" font-weight="300" text-anchor="middle">5 / 4</text>
             </svg>
           </div>
         </div>
-
-        <!-- Scene 2 -->
         <div class="tut-scene">
           <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 02</strong> Tap OPEN to enter the Editor</div>
-            <h3>Practice opens the take fullscreen.</h3>
-            <p>The mini-visualiser at the top of the Library has an <strong>OPEN</strong> pill in mint. Tap it — or tap anywhere on the waveform thumbnail — and the whole screen lifts into the Audio Editor with the take loaded and the playhead pinned at the centre.</p>
-            <p>Same editor the Audio Module uses. Same engine. Different framing: in Practice you're not editing the take, you're studying it.</p>
+            <div class="tut-scene-num"><strong>SCENE 02</strong> Tap beat numerals to cycle accents</div>
+            <h3>Beat 1 accented. Beat 3 silent. Beat 5 ghosted.</h3>
+            <p>Below the hero, a strip of beat numerals shows each beat. Tap any beat to cycle: silent → normal → accent. Try this in the demo above — tap any of the numbered dots. The active beat lights up while the click runs.</p>
           </div>
           <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <!-- Mini viz card collapsing into editor -->
-              <rect x="14" y="14" width="352" height="120" rx="14" fill="#141318" stroke="rgba(93,202,165,0.40)"/>
-              <text x="28" y="36" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">SELECTED · STRANGER THINGS THEME</text>
-              <!-- OPEN pill -->
-              <rect x="28" y="46" width="58" height="22" rx="6" fill="#5DCAA5"/>
-              <text x="57" y="60" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="9" font-weight="900" letter-spacing="1.4" text-anchor="middle">OPEN</text>
-              <!-- Mini wave -->
-              <g fill="#5DCAA5" opacity="0.45" transform="translate(28,90)">
-                <rect x="0" y="-14" width="3" height="14"/><rect x="6" y="-22" width="3" height="22"/>
-                <rect x="12" y="-18" width="3" height="18"/><rect x="18" y="-26" width="3" height="26"/>
-                <rect x="24" y="-14" width="3" height="14"/><rect x="30" y="-22" width="3" height="22"/>
-                <rect x="36" y="-18" width="3" height="18"/><rect x="42" y="-28" width="3" height="28"/>
-                <rect x="48" y="-22" width="3" height="22"/><rect x="54" y="-14" width="3" height="14"/>
-                <rect x="60" y="-26" width="3" height="26"/><rect x="66" y="-18" width="3" height="18"/>
-                <rect x="72" y="-22" width="3" height="22"/><rect x="78" y="-30" width="3" height="30"/>
-                <rect x="84" y="-22" width="3" height="22"/><rect x="90" y="-14" width="3" height="14"/>
-                <rect x="96" y="-26" width="3" height="26"/><rect x="102" y="-18" width="3" height="18"/>
-                <rect x="108" y="-22" width="3" height="22"/><rect x="114" y="-30" width="3" height="30"/>
-                <rect x="120" y="-22" width="3" height="22"/><rect x="126" y="-26" width="3" height="26"/>
-                <rect x="132" y="-18" width="3" height="18"/><rect x="138" y="-14" width="3" height="14"/>
-                <rect x="144" y="-22" width="3" height="22"/><rect x="150" y="-26" width="3" height="26"/>
-                <rect x="156" y="-22" width="3" height="22"/><rect x="162" y="-14" width="3" height="14"/>
-                <rect x="168" y="-30" width="3" height="30"/><rect x="174" y="-22" width="3" height="22"/>
-                <rect x="180" y="-18" width="3" height="18"/><rect x="186" y="-26" width="3" height="26"/>
-                <rect x="192" y="-22" width="3" height="22"/><rect x="198" y="-30" width="3" height="30"/>
-                <rect x="204" y="-22" width="3" height="22"/><rect x="210" y="-26" width="3" height="26"/>
-                <rect x="216" y="-18" width="3" height="18"/><rect x="222" y="-22" width="3" height="22"/>
-                <rect x="228" y="-14" width="3" height="14"/><rect x="234" y="-22" width="3" height="22"/>
-                <rect x="240" y="-26" width="3" height="26"/><rect x="246" y="-18" width="3" height="18"/>
-                <rect x="252" y="-22" width="3" height="22"/><rect x="258" y="-30" width="3" height="30"/>
-                <rect x="264" y="-22" width="3" height="22"/><rect x="270" y="-26" width="3" height="26"/>
-                <rect x="276" y="-18" width="3" height="18"/><rect x="282" y="-14" width="3" height="14"/>
-                <rect x="288" y="-22" width="3" height="22"/><rect x="294" y="-26" width="3" height="26"/>
-                <rect x="300" y="-22" width="3" height="22"/><rect x="306" y="-18" width="3" height="18"/>
-                <rect x="312" y="-22" width="3" height="22"/><rect x="318" y="-30" width="3" height="30"/>
+            <svg viewBox="0 0 220 280" preserveAspectRatio="xMidYMid meet">
+              <rect width="220" height="280" fill="#0a0a0d"/>
+              <text x="20" y="40" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">BEAT STRIP · TAP TO CYCLE</text>
+              <g transform="translate(20,80)">
+                <rect x="0"   y="0" width="34" height="42" rx="6" fill="#FAC775"/>
+                <text x="17" y="28" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="14" font-weight="900" text-anchor="middle">1</text>
+                <rect x="40"  y="0" width="34" height="42" rx="6" fill="rgba(255,255,255,0.10)"/>
+                <text x="57" y="28" fill="#FAC775" font-family="Inter, sans-serif" font-size="14" font-weight="900" text-anchor="middle">2</text>
+                <rect x="80"  y="0" width="34" height="42" rx="6" fill="none" stroke="rgba(255,255,255,0.10)" stroke-dasharray="3 3"/>
+                <text x="97" y="28" fill="rgba(250,199,117,0.30)" font-family="Inter, sans-serif" font-size="14" font-weight="900" text-anchor="middle">3</text>
+                <rect x="120" y="0" width="34" height="42" rx="6" fill="rgba(255,255,255,0.10)"/>
+                <text x="137" y="28" fill="#FAC775" font-family="Inter, sans-serif" font-size="14" font-weight="900" text-anchor="middle">4</text>
+                <rect x="160" y="0" width="34" height="42" rx="6" fill="rgba(255,255,255,0.06)"/>
+                <text x="177" y="28" fill="rgba(250,199,117,0.55)" font-family="Inter, sans-serif" font-size="14" font-weight="900" text-anchor="middle">5</text>
               </g>
-              <!-- Finger tap on OPEN -->
-              <circle class="tut-ripple" cx="57" cy="57" r="22" fill="none" stroke="#5DCAA5" stroke-width="2"/>
-              <!-- Editor expanding below -->
-              <g transform="translate(0,160)">
-                <rect x="14" y="0" width="352" height="280" rx="14" fill="#0a0a0d" stroke="rgba(93,202,165,0.30)"/>
-                <text x="28" y="22" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">AUDIO EDITOR · FULLSCREEN</text>
-                <!-- Centred playhead -->
-                <line x1="190" y1="36" x2="190" y2="260" stroke="#5DCAA5" stroke-width="2" class="anim-playhead"/>
-                <!-- Big waveform -->
-                <g fill="#5DCAA5" opacity="0.7" transform="translate(28,148)">
-                  <rect x="0" y="-50" width="4" height="100"/><rect x="8" y="-72" width="4" height="100"/>
-                  <rect x="16" y="-30" width="4" height="60"/><rect x="24" y="-66" width="4" height="100"/>
-                  <rect x="32" y="-44" width="4" height="80"/><rect x="40" y="-72" width="4" height="100"/>
-                  <rect x="48" y="-30" width="4" height="60"/><rect x="56" y="-58" width="4" height="100"/>
-                  <rect x="64" y="-50" width="4" height="100"/><rect x="72" y="-44" width="4" height="80"/>
-                  <rect x="80" y="-66" width="4" height="100"/><rect x="88" y="-30" width="4" height="60"/>
-                  <rect x="96" y="-50" width="4" height="100"/><rect x="104" y="-72" width="4" height="100"/>
-                  <rect x="112" y="-44" width="4" height="80"/><rect x="120" y="-58" width="4" height="100"/>
-                  <rect x="128" y="-30" width="4" height="60"/><rect x="136" y="-50" width="4" height="100"/>
-                  <rect x="144" y="-72" width="4" height="100"/><rect x="152" y="-30" width="4" height="60"/>
-                  <rect x="160" y="-50" width="4" height="100"/><rect x="168" y="-66" width="4" height="100"/>
-                  <rect x="176" y="-44" width="4" height="80"/><rect x="184" y="-50" width="4" height="100"/>
-                  <rect x="192" y="-66" width="4" height="100"/><rect x="200" y="-44" width="4" height="80"/>
-                  <rect x="208" y="-30" width="4" height="60"/><rect x="216" y="-50" width="4" height="100"/>
-                  <rect x="224" y="-72" width="4" height="100"/><rect x="232" y="-44" width="4" height="80"/>
-                  <rect x="240" y="-66" width="4" height="100"/><rect x="248" y="-50" width="4" height="100"/>
-                  <rect x="256" y="-30" width="4" height="60"/><rect x="264" y="-44" width="4" height="80"/>
-                  <rect x="272" y="-66" width="4" height="100"/><rect x="280" y="-50" width="4" height="100"/>
-                  <rect x="288" y="-44" width="4" height="80"/><rect x="296" y="-30" width="4" height="60"/>
-                </g>
-              </g>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Scene 3 -->
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 03</strong> Open the SPEED &amp; PITCH fold</div>
-            <h3>The fold strip is at the bottom of the editor.</h3>
-            <p>Five icon-only tabs: <strong>EDIT · SPEED &amp; PITCH · LOOPS · REPAIR · DSP</strong>. Tap the speed-gauge icon. The fold expands above the canvas with a semitone wheel, a cents slider, and a speed wheel.</p>
-            <p>The wheel is the one you want. It's connected to a phase-locked phase-vocoder under the hood — what that means in practice: you can change time without changing pitch, and vice versa. They're decoupled.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <!-- Waveform up top, faded -->
-              <rect x="14" y="14" width="352" height="120" rx="14" fill="#0a0a0d" stroke="rgba(93,202,165,0.20)"/>
-              <text x="28" y="34" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">EDITOR CANVAS · ABOVE</text>
-              <line x1="190" y1="44" x2="190" y2="124" stroke="#5DCAA5" stroke-width="1.5" opacity="0.5"/>
-              <!-- Fold body popping in -->
-              <rect x="14" y="148" width="352" height="220" rx="14" fill="#141318" stroke="#5DCAA5" stroke-width="1"/>
-              <text x="28" y="170" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" font-weight="700">SPEED &amp; PITCH · ACTIVE</text>
-              <!-- Speed wheel -->
-              <g transform="translate(85,256)">
-                <circle r="56" fill="none" stroke="rgba(93,202,165,0.20)"/>
-                <circle r="48" fill="#0a0a0d" stroke="rgba(93,202,165,0.40)"/>
-                <g class="tut-speed-wheel">
-                  <line x1="0" y1="-40" x2="0" y2="-28" stroke="#5DCAA5" stroke-width="2.5" stroke-linecap="round"/>
-                </g>
-                <text y="6" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700" text-anchor="middle">70%</text>
-                <text y="78" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2" text-anchor="middle">SPEED</text>
-              </g>
-              <!-- Semi wheel -->
-              <g transform="translate(190,256)">
-                <circle r="56" fill="none" stroke="rgba(93,202,165,0.20)"/>
-                <circle r="48" fill="#0a0a0d" stroke="rgba(93,202,165,0.40)"/>
-                <line x1="0" y1="-40" x2="0" y2="-28" stroke="#5DCAA5" stroke-width="2.5" stroke-linecap="round"/>
-                <text y="6" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700" text-anchor="middle">±0</text>
-                <text y="78" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2" text-anchor="middle">SEMI</text>
-              </g>
-              <!-- Cents slider -->
-              <g transform="translate(295,256)">
-                <rect x="-8" y="-44" width="16" height="88" rx="8" fill="#0a0a0d" stroke="rgba(93,202,165,0.40)"/>
-                <rect x="-6" y="-4" width="12" height="14" rx="4" fill="#5DCAA5"/>
-                <text y="78" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2" text-anchor="middle">CENTS</text>
-              </g>
-              <!-- Fold tab strip at bottom -->
-              <rect x="14" y="384" width="352" height="56" rx="10" fill="#0A0A0A" stroke="rgba(255,255,255,0.06)"/>
-              <g font-family="Inter, sans-serif" font-size="8" font-weight="900" letter-spacing="1.2" text-anchor="middle">
-                <text x="50"  y="420" fill="rgba(93,202,165,0.5)">EDIT</text>
-                <rect x="83" y="392" width="74" height="40" rx="6" fill="#5DCAA5"/>
-                <text x="120" y="420" fill="#0a0a0d">SPEED</text>
-                <text x="190" y="420" fill="rgba(93,202,165,0.5)">LOOPS</text>
-                <text x="260" y="420" fill="rgba(93,202,165,0.5)">REPAIR</text>
-                <text x="330" y="420" fill="rgba(93,202,165,0.5)">DSP</text>
-              </g>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Scene 4 -->
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 04</strong> Drag the speed wheel</div>
-            <h3>The waveform compresses. The pitch holds.</h3>
-            <p>Drag the wheel down toward 50%. The waveform on the canvas above visibly stretches — same audio, longer in time. Hit <strong>play</strong> and listen: the pitch is exactly where it was. Notes hold their place, transients stay sharp.</p>
-            <p>This isn't a slow-down with the chipmunk effect. It's the same engine the Audio Editor uses everywhere else. Quality is the same whether you're stretching by 5% or by 50%.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <!-- Two waveforms — at 100% and at 70% -->
-              <text x="20" y="40" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">100% · ORIGINAL</text>
-              <g fill="#7A7A82" opacity="0.5" transform="translate(20,90)">
-                <rect x="0"   y="-26" width="3" height="52"/><rect x="6"   y="-18" width="3" height="36"/>
-                <rect x="12"  y="-30" width="3" height="60"/><rect x="18"  y="-22" width="3" height="44"/>
-                <rect x="24"  y="-34" width="3" height="68"/><rect x="30"  y="-22" width="3" height="44"/>
-                <rect x="36"  y="-26" width="3" height="52"/><rect x="42"  y="-30" width="3" height="60"/>
-                <rect x="48"  y="-18" width="3" height="36"/><rect x="54"  y="-26" width="3" height="52"/>
-                <rect x="60"  y="-30" width="3" height="60"/><rect x="66"  y="-22" width="3" height="44"/>
-                <rect x="72"  y="-26" width="3" height="52"/><rect x="78"  y="-34" width="3" height="68"/>
-                <rect x="84"  y="-22" width="3" height="44"/><rect x="90"  y="-26" width="3" height="52"/>
-                <rect x="96"  y="-18" width="3" height="36"/><rect x="102" y="-30" width="3" height="60"/>
-                <rect x="108" y="-26" width="3" height="52"/><rect x="114" y="-22" width="3" height="44"/>
-                <rect x="120" y="-30" width="3" height="60"/><rect x="126" y="-26" width="3" height="52"/>
-                <rect x="132" y="-22" width="3" height="44"/><rect x="138" y="-26" width="3" height="52"/>
-                <rect x="144" y="-30" width="3" height="60"/><rect x="150" y="-18" width="3" height="36"/>
-                <rect x="156" y="-26" width="3" height="52"/>
-              </g>
-              <!-- 70% — same content but visually wider so each peak takes more horizontal space -->
-              <text x="20" y="200" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" font-weight="700">70% · STRETCHED · SAME PITCH</text>
-              <g fill="#5DCAA5" opacity="0.85" transform="translate(20,260)">
-                <rect x="0"   y="-26" width="4" height="52"/><rect x="9"   y="-18" width="4" height="36"/>
-                <rect x="18"  y="-30" width="4" height="60"/><rect x="27"  y="-22" width="4" height="44"/>
-                <rect x="36"  y="-34" width="4" height="68"/><rect x="45"  y="-22" width="4" height="44"/>
-                <rect x="54"  y="-26" width="4" height="52"/><rect x="63"  y="-30" width="4" height="60"/>
-                <rect x="72"  y="-18" width="4" height="36"/><rect x="81"  y="-26" width="4" height="52"/>
-                <rect x="90"  y="-30" width="4" height="60"/><rect x="99"  y="-22" width="4" height="44"/>
-                <rect x="108" y="-26" width="4" height="52"/><rect x="117" y="-34" width="4" height="68"/>
-                <rect x="126" y="-22" width="4" height="44"/><rect x="135" y="-26" width="4" height="52"/>
-                <rect x="144" y="-18" width="4" height="36"/><rect x="153" y="-30" width="4" height="60"/>
-                <rect x="162" y="-26" width="4" height="52"/><rect x="171" y="-22" width="4" height="44"/>
-                <rect x="180" y="-30" width="4" height="60"/><rect x="189" y="-26" width="4" height="52"/>
-                <rect x="198" y="-22" width="4" height="44"/><rect x="207" y="-26" width="4" height="52"/>
-                <rect x="216" y="-30" width="4" height="60"/><rect x="225" y="-18" width="4" height="36"/>
-                <rect x="234" y="-26" width="4" height="52"/>
-              </g>
-              <!-- Pitch fingerprint that doesn't move -->
-              <text x="20" y="370" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">PITCH FINGERPRINT · UNCHANGED</text>
-              <g transform="translate(20,400)">
-                <line x1="0"   y1="0" x2="350" y2="0" stroke="rgba(93,202,165,0.25)" stroke-width="0.6" stroke-dasharray="2 4"/>
-                <line x1="0"   y1="14" x2="350" y2="14" stroke="rgba(93,202,165,0.4)" stroke-width="0.6"/>
-                <line x1="0"   y1="28" x2="350" y2="28" stroke="rgba(93,202,165,0.25)" stroke-width="0.6" stroke-dasharray="2 4"/>
-                <text x="358" y="18" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="end">A 440 Hz</text>
-              </g>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Scene 5 -->
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 05</strong> Loop the hard bar</div>
-            <h3>Drag a region. Promote it to a loop.</h3>
-            <p>Toggle the Select tool from the editor's toolbar (the rectangle icon). Drag a rectangle around the bar that's giving you trouble. Tap the loop verb. The selection promotes to a loop region — sky-blue pillars at each end, sample-perfect when it wraps.</p>
-            <p>Now play. The two-bar passage drills itself for you while you focus on the fingers.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <!-- Waveform with selection rectangle drawn -->
-              <rect x="14" y="60" width="352" height="200" rx="14" fill="#0a0a0d" stroke="rgba(93,202,165,0.30)"/>
-              <text x="28" y="82" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">EDITOR CANVAS</text>
-              <!-- Selection rect drawing animation -->
-              <g class="tut-sel-draw">
-                <rect x="120" y="92" width="140" height="160" fill="#5DCAA5" fill-opacity="0.18" stroke="#5DCAA5" stroke-width="1"/>
-              </g>
-              <!-- Waveform -->
-              <g fill="#5DCAA5" opacity="0.8" transform="translate(28,170)">
-                <rect x="0"  y="-30" width="3" height="60"/><rect x="6"  y="-44" width="3" height="80"/>
-                <rect x="12" y="-22" width="3" height="44"/><rect x="18" y="-50" width="3" height="100"/>
-                <rect x="24" y="-30" width="3" height="60"/><rect x="30" y="-40" width="3" height="80"/>
-                <rect x="36" y="-22" width="3" height="44"/><rect x="42" y="-50" width="3" height="100"/>
-                <rect x="48" y="-30" width="3" height="60"/><rect x="54" y="-44" width="3" height="80"/>
-                <rect x="60" y="-22" width="3" height="44"/><rect x="66" y="-30" width="3" height="60"/>
-                <rect x="72" y="-44" width="3" height="80"/><rect x="78" y="-22" width="3" height="44"/>
-                <rect x="84" y="-50" width="3" height="100"/><rect x="90" y="-30" width="3" height="60"/>
-                <rect x="96" y="-40" width="3" height="80"/><rect x="102" y="-22" width="3" height="44"/>
-                <rect x="108" y="-50" width="3" height="100"/><rect x="114" y="-30" width="3" height="60"/>
-                <rect x="120" y="-44" width="3" height="80"/><rect x="126" y="-22" width="3" height="44"/>
-                <rect x="132" y="-50" width="3" height="100"/><rect x="138" y="-30" width="3" height="60"/>
-                <rect x="144" y="-40" width="3" height="80"/><rect x="150" y="-22" width="3" height="44"/>
-                <rect x="156" y="-50" width="3" height="100"/><rect x="162" y="-30" width="3" height="60"/>
-                <rect x="168" y="-44" width="3" height="80"/><rect x="174" y="-22" width="3" height="44"/>
-                <rect x="180" y="-50" width="3" height="100"/><rect x="186" y="-30" width="3" height="60"/>
-                <rect x="192" y="-40" width="3" height="80"/><rect x="198" y="-22" width="3" height="44"/>
-                <rect x="204" y="-50" width="3" height="100"/><rect x="210" y="-30" width="3" height="60"/>
-                <rect x="216" y="-44" width="3" height="80"/><rect x="222" y="-22" width="3" height="44"/>
-                <rect x="228" y="-50" width="3" height="100"/>
-                <rect x="234" y="-30" width="3" height="60"/><rect x="240" y="-44" width="3" height="80"/>
-                <rect x="246" y="-22" width="3" height="44"/><rect x="252" y="-30" width="3" height="60"/>
-                <rect x="258" y="-44" width="3" height="80"/><rect x="264" y="-22" width="3" height="44"/>
-                <rect x="270" y="-50" width="3" height="100"/><rect x="276" y="-30" width="3" height="60"/>
-                <rect x="282" y="-40" width="3" height="80"/><rect x="288" y="-22" width="3" height="44"/>
-                <rect x="294" y="-50" width="3" height="100"/><rect x="300" y="-30" width="3" height="60"/>
-                <rect x="306" y="-44" width="3" height="80"/>
-              </g>
-              <!-- Loop pillars appearing later -->
-              <g class="tut-loop-pillar">
-                <line x1="120" y1="92" x2="120" y2="252" stroke="#4FA8FF" stroke-width="2"/>
-                <circle cx="120" cy="172" r="5" fill="#4FA8FF"/>
-                <line x1="260" y1="92" x2="260" y2="252" stroke="#4FA8FF" stroke-width="2"/>
-                <circle cx="260" cy="172" r="5" fill="#4FA8FF"/>
-              </g>
-              <!-- Loop label -->
-              <text x="190" y="296" fill="#4FA8FF" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="2">LOOP · BAR 17–18 · WRAPS SAMPLE-PERFECT</text>
+              <text x="110" y="180" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="10" text-anchor="middle">→ silent → normal → accent →</text>
+              <rect x="20" y="216" width="180" height="38" rx="8" fill="#FAC775"/>
+              <text x="110" y="240" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="11" font-weight="900" text-anchor="middle" letter-spacing="3">START</text>
             </svg>
           </div>
         </div>
       </div>
 
       <div class="tut-tips">
-        <h4>Pro tips for Practice</h4>
+        <h4>Pro tips</h4>
         <ul>
-          <li>The phase-locked stretch lets you change pitch and time independently. Drop the speed to 70% AND transpose down a semitone if the song is in the wrong key for your voice.</li>
-          <li>Marker pins work great in Practice. Drop a marker at the start of every difficult passage so you can jump between them with the −5s / +5s chrome bar buttons.</li>
-          <li>Bind your foot pedal to the loop's start/stop via MIDI Learn (long-press). Hands-free practice is the dream.</li>
-          <li>The Practice library shares takes with the Audio module's library. Recordings made anywhere in OSE show up here automatically.</li>
+          <li><strong>The polygon is the time signature.</strong> Triangle = 3, square = 4, pentagon = 5, hexagon = 6. Once you've got it, you can sight-read odd-meter pieces faster.</li>
+          <li>Tempo word lookup: under 60 = LARGO; 60–76 = ADAGIO; 76–108 = ANDANTE; 108–120 = MODERATO; 120–156 = ALLEGRO; 156–168 = VIVACE; 168–200 = PRESTO; above = PRESTISSIMO.</li>
+          <li>Bind the TAP button via MIDI Learn (long-press) so a foot pedal sets tempo on stage.</li>
+          <li>The metronome is also reachable from the Play Module via the metronome chip in the top bar — same engine, same presets.</li>
         </ul>
       </div>
     </article>
 
 
     <!-- ====================================================== -->
-    <!-- ============== TUTORIAL 02 — PLAY ==================== -->
+    <!-- == TUTORIAL 02 — SPEED / PITCH (working demo) ======= -->
     <!-- ====================================================== -->
-    <article id="layer-voices" class="tutorial mc--play">
+    <article id="slow-down" class="tutorial mc--practice">
       <div class="tut-hero">
         <div>
-          <div class="tut-num">Tutorial 02 · Play Module</div>
-          <h2>Layer two voices in one preset.</h2>
-          <p class="tut-scenario">Solo piano on the bottom half of the keyboard. Strings join from middle C up. Be the whole band — left hand bass, right hand pad, all from one preset. The keyboard's tinted in stripes so you can see exactly which voice you're triggering.</p>
+          <div class="tut-num">Tutorial 02 · Practice Module</div>
+          <h2>Slow down without changing pitch.</h2>
+          <p class="tut-scenario">You found a riff on a video. The fingers fly, the notes blur. You drop the audio into Practice, slow it to 70%, and the pitch stays exactly where it was. Loop the hard bar, drill it, ramp it back up.</p>
           <div class="tut-meta">
-            <span class="tag">Play Module</span>
-            <span class="tag tag--muted">5 min · Intermediate</span>
+            <span class="tag">Practice Module</span>
+            <span class="tag tag--muted">4 min · Beginner</span>
           </div>
         </div>
-        <!-- Hero illustration: Two-zone keyboard -->
         <div class="tut-scene-viz">
-          <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-            <rect width="380" height="460" fill="#0e0c08"/>
-            <text x="20" y="40" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3">‹  PIANO &amp; STRINGS  ›</text>
-            <text x="20" y="58" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">2 ZONES · 21 KEYS · LIVE</text>
-            <!-- 14 white keys -->
-            <g transform="translate(20,90)">
-              <g>
-                <rect x="0"   y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="24"  y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="48"  y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="72"  y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="96"  y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="120" y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="144" y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="168" y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="192" y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="216" y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="240" y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="264" y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="288" y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-                <rect x="312" y="0" width="22" height="320" rx="2" fill="#FFFFF0"/>
-              </g>
-              <!-- Left half tinted gold (piano zone) -->
-              <rect x="0" y="0" width="166" height="320" fill="#FF8A2A" fill-opacity="0.25"/>
-              <!-- Right half tinted blue (strings zone) -->
-              <rect x="168" y="0" width="166" height="320" fill="#4AA3FF" fill-opacity="0.25"/>
-              <!-- Black keys -->
-              <g fill="#0a0a0d">
-                <rect x="14"  y="0" width="14" height="200"/><rect x="38"  y="0" width="14" height="200"/>
-                <rect x="86"  y="0" width="14" height="200"/><rect x="110" y="0" width="14" height="200"/>
-                <rect x="134" y="0" width="14" height="200"/><rect x="182" y="0" width="14" height="200"/>
-                <rect x="206" y="0" width="14" height="200"/><rect x="254" y="0" width="14" height="200"/>
-                <rect x="278" y="0" width="14" height="200"/><rect x="302" y="0" width="14" height="200"/>
-              </g>
-              <!-- Zone split marker -->
-              <line x1="166" y1="0" x2="166" y2="320" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>
-              <text x="80" y="-10" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="9" font-weight="900" text-anchor="middle" letter-spacing="2">PIANO</text>
-              <text x="248" y="-10" fill="#4AA3FF" font-family="Inter, sans-serif" font-size="9" font-weight="900" text-anchor="middle" letter-spacing="2">STRINGS</text>
+          <svg viewBox="0 0 220 280" preserveAspectRatio="xMidYMid meet">
+            <rect width="220" height="280" fill="#0a0d0c"/>
+            <g transform="translate(110,90)">
+              <circle r="58" fill="#0e1112" stroke="#5DCAA5" stroke-width="1.5"/>
+              <line x1="0" y1="-40" x2="0" y2="-26" stroke="#5DCAA5" stroke-width="3" stroke-linecap="round">
+                <animateTransform attributeName="transform" type="rotate" dur="5s" values="0;-100;0" keyTimes="0;0.5;1" repeatCount="indefinite"/>
+              </line>
+              <text y="6" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700" text-anchor="middle">70%</text>
             </g>
+            <text x="110" y="180" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" text-anchor="middle">PITCH HOLDS · A 440 HZ</text>
+            <line x1="20" y1="208" x2="200" y2="208" stroke="#5DCAA5" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.5"/>
+            <text x="110" y="252" fill="#5DCAA5" font-family="Inter, sans-serif" font-size="14" font-weight="900" text-anchor="middle">PHASE-LOCKED</text>
           </svg>
         </div>
       </div>
 
+      <!-- WORKING SPEED/PITCH DEMO -->
+      <section class="tut-demo" data-demo="speed-pitch">
+        <div class="tut-demo-label">Try it · Independent speed and pitch</div>
+        <h3>Drag SPEED. The waveform stretches. The pitch holds.</h3>
+        <div class="tut-demo-body">
+          <div class="tut-demo-canvas">
+            <div class="tut-wave-display" data-sp-stretch></div>
+            <div style="display:flex;justify-content:space-between;width:100%;margin-top:14px;">
+              <div class="tut-demo-metric">
+                <span class="tut-demo-metric-value" data-sp-pitch-hz>440.0 Hz</span>
+                <span class="tut-demo-metric-label">PITCH</span>
+              </div>
+              <div class="tut-demo-metric" style="align-items:flex-end;">
+                <span class="tut-demo-metric-value" data-sp-speed-value>100%</span>
+                <span class="tut-demo-metric-label">SPEED</span>
+              </div>
+            </div>
+            <div class="tut-demo-caption">Independent. Drag PITCH down a semitone, the waveform doesn't move.</div>
+          </div>
+          <div class="tut-demo-controls">
+            <div class="tut-demo-row">
+              <label>Speed</label>
+              <input type="range" class="tut-slider" min="0.5" max="2.0" step="0.05" value="1.0" data-sp-speed />
+            </div>
+            <div class="tut-demo-row">
+              <label>Pitch</label>
+              <input type="range" class="tut-slider" min="-12" max="12" step="1" value="0" data-sp-pitch />
+              <span class="tut-slider-value" data-sp-pitch-value>+0 st</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--muted);margin:0;">Phase-locked phase-vocoder under the hood. In OSE it operates on real audio at studio quality — here in the browser it's a visual demo of the decoupling.</p>
+          </div>
+        </div>
+      </section>
+
       <div class="tut-scenes">
         <div class="tut-scene">
           <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 01</strong> Open the Instrument Editor</div>
-            <h3>Tap the pencil in the top bar.</h3>
-            <p>From the Play Module, the four chrome icons in the top bar are: metronome, edit pencil, sessions and record. Tap the <strong>pencil</strong>. It tilts and dips slightly — the writing-posture animation — then the Instrument Editor dialog opens.</p>
-            <p>Inside, you'll see the current instrument as a single layer. We're about to add a second.</p>
+            <div class="tut-scene-num"><strong>SCENE 01</strong> Open the take from the Library</div>
+            <h3>Practice opens the take fullscreen.</h3>
+            <p>The mini-visualiser at the top of the Practice library has an <strong>OPEN</strong> pill in mint. Tap it — or tap anywhere on the waveform thumbnail — and the editor opens. Same engine the Audio Module uses.</p>
           </div>
           <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <!-- Top bar with 4 chrome icons -->
-              <rect x="0" y="20" width="380" height="56" fill="#0a0a0d"/>
-              <text x="20" y="56" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="14" font-weight="700" letter-spacing="3">PLAY</text>
-              <!-- Metronome -->
-              <g transform="translate(180,38)" stroke="#7A7A82" stroke-width="1.4" fill="none" stroke-linecap="round">
-                <path d="M3 18 L9 4 L15 18 Z M9 4 L15 18"/>
+            <svg viewBox="0 0 220 280" preserveAspectRatio="xMidYMid meet">
+              <rect width="220" height="280" fill="#050507"/>
+              <rect x="14" y="14" width="192" height="80" rx="10" fill="#141318" stroke="rgba(93,202,165,0.40)"/>
+              <rect x="22" y="22" width="38" height="18" rx="5" fill="#5DCAA5"/>
+              <text x="41" y="34" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="8" font-weight="900" letter-spacing="1.4" text-anchor="middle">OPEN</text>
+              <g fill="#5DCAA5" opacity="0.5" transform="translate(22,72)">
+                <rect x="0" y="-12" width="2" height="12"/><rect x="4" y="-18" width="2" height="18"/>
+                <rect x="8" y="-8" width="2" height="8"/><rect x="12" y="-22" width="2" height="22"/>
+                <rect x="16" y="-14" width="2" height="14"/><rect x="20" y="-18" width="2" height="18"/>
+                <rect x="24" y="-22" width="2" height="22"/><rect x="28" y="-12" width="2" height="12"/>
+                <rect x="32" y="-18" width="2" height="18"/><rect x="36" y="-22" width="2" height="22"/>
+                <rect x="40" y="-14" width="2" height="14"/><rect x="44" y="-18" width="2" height="18"/>
+                <rect x="48" y="-22" width="2" height="22"/><rect x="52" y="-12" width="2" height="12"/>
+                <rect x="56" y="-18" width="2" height="18"/><rect x="60" y="-14" width="2" height="14"/>
+                <rect x="64" y="-22" width="2" height="22"/><rect x="68" y="-12" width="2" height="12"/>
+                <rect x="72" y="-18" width="2" height="18"/><rect x="76" y="-8" width="2" height="8"/>
+                <rect x="80" y="-22" width="2" height="22"/><rect x="84" y="-14" width="2" height="14"/>
+                <rect x="88" y="-18" width="2" height="18"/><rect x="92" y="-22" width="2" height="22"/>
+                <rect x="96" y="-14" width="2" height="14"/><rect x="100" y="-18" width="2" height="18"/>
+                <rect x="104" y="-22" width="2" height="22"/><rect x="108" y="-12" width="2" height="12"/>
+                <rect x="112" y="-18" width="2" height="18"/><rect x="116" y="-22" width="2" height="22"/>
+                <rect x="120" y="-14" width="2" height="14"/><rect x="124" y="-18" width="2" height="18"/>
+                <rect x="128" y="-22" width="2" height="22"/><rect x="132" y="-14" width="2" height="14"/>
+                <rect x="136" y="-12" width="2" height="12"/><rect x="140" y="-18" width="2" height="18"/>
+                <rect x="144" y="-8" width="2" height="8"/><rect x="148" y="-22" width="2" height="22"/>
+                <rect x="152" y="-14" width="2" height="14"/><rect x="156" y="-18" width="2" height="18"/>
+                <rect x="160" y="-22" width="2" height="22"/><rect x="164" y="-14" width="2" height="14"/>
+                <rect x="168" y="-12" width="2" height="12"/>
               </g>
-              <!-- Edit pencil — highlighted -->
-              <g transform="translate(220,38)" stroke="#FF8A2A" stroke-width="1.6" fill="none" stroke-linecap="round">
-                <path d="M3 17 L3 21 L7 21 L19 9 L15 5 L3 17 Z"/>
-              </g>
-              <circle class="tut-ripple" cx="232" cy="48" r="20" fill="none" stroke="#FF8A2A" stroke-width="2"/>
-              <!-- Sessions -->
-              <g transform="translate(260,38)" stroke="#7A7A82" stroke-width="1.4" fill="none" stroke-linecap="round">
-                <line x1="2" y1="6" x2="18" y2="6"/><line x1="2" y1="12" x2="18" y2="12"/><line x1="2" y1="18" x2="18" y2="18"/>
-              </g>
-              <!-- Record -->
-              <circle cx="306" cy="48" r="9" fill="#EF4B4B" class="tut-rec"/>
-              <!-- Instrument editor dialog -->
-              <rect x="14" y="120" width="352" height="320" rx="16" fill="#141318" stroke="rgba(255,138,42,0.45)"/>
-              <text x="190" y="146" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="2.5" text-anchor="middle">INSTRUMENT EDITOR</text>
-              <line x1="28" y1="156" x2="352" y2="156" stroke="rgba(255,255,255,0.06)"/>
-              <!-- Layer 1 row -->
-              <rect x="28" y="178" width="324" height="64" rx="10" fill="#0a0a0d" stroke="rgba(255,138,42,0.30)"/>
-              <rect x="40" y="194" width="20" height="32" rx="4" fill="#FF8A2A"/>
-              <text x="72" y="212" fill="#ECECEE" font-family="Inter, sans-serif" font-size="13" font-weight="700">LAYER 1 · OUTHENTIC SYNTH</text>
-              <text x="72" y="230" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">A0 — C8 · FULL RANGE</text>
-              <!-- Add layer dashed -->
-              <rect x="28" y="258" width="324" height="48" rx="10" fill="none" stroke="rgba(255,138,42,0.55)" stroke-dasharray="6 4"/>
-              <text x="190" y="288" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="11" font-weight="900" text-anchor="middle" letter-spacing="2">＋ ADD LAYER</text>
+              <rect x="14" y="106" width="192" height="40" rx="8" fill="#141318" stroke="#5DCAA5" stroke-width="1"/>
+              <text x="22" y="124" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700">Stranger Things — Theme</text>
+              <text x="22" y="138" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8">2:34 · selected</text>
+              <rect x="14" y="156" width="192" height="32" rx="8" fill="#141318"/>
+              <text x="22" y="174" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="10">Bach BWV 1007</text>
+              <rect x="14" y="196" width="192" height="32" rx="8" fill="#141318"/>
+              <text x="22" y="214" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="10">Etude in A — take 3</text>
+              <rect x="14" y="236" width="192" height="32" rx="8" fill="#141318"/>
+              <text x="22" y="254" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="10">Long tones — D minor</text>
             </svg>
           </div>
         </div>
 
         <div class="tut-scene">
           <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 02</strong> Add the second layer</div>
-            <h3>Pick the strings.</h3>
-            <p>Tap <strong>＋ Add Layer</strong>. The Instrument Source picker opens — a chip strip across the top (Favourites, OSE built-ins, Imported SoundFonts, User Presets, Multi-Presets), a search field, and a vertical grid of folders and instrument cards. Each card carries the instrument's skin colour.</p>
-            <p>Find your strings preset. Tap it. The new layer drops into the editor with sky-blue accent.</p>
+            <div class="tut-scene-num"><strong>SCENE 02</strong> Open SPEED &amp; PITCH, drop a loop</div>
+            <h3>The fold sits at the bottom of the editor.</h3>
+            <p>Five icon-only fold tabs: <strong>EDIT · SPEED &amp; PITCH · LOOPS · REPAIR · DSP</strong>. Tap the gauge icon for SPEED &amp; PITCH. A semitone wheel, a cents slider and the speed wheel appear.</p>
+            <p>Then drag a region with the Select tool, promote it to a loop, and the loop wraps sample-perfect. Drill the bar, ramp the speed back up.</p>
           </div>
           <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <!-- Layer 1 -->
-              <rect x="14" y="40" width="352" height="56" rx="10" fill="#0a0a0d" stroke="rgba(255,138,42,0.40)"/>
-              <rect x="26" y="54" width="18" height="28" rx="4" fill="#FF8A2A"/>
-              <text x="56" y="68" fill="#ECECEE" font-family="Inter, sans-serif" font-size="11" font-weight="700">LAYER 1 · GRAND PIANO</text>
-              <text x="56" y="84" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">A0 — C8</text>
-              <!-- Layer 2 — animating in -->
-              <g class="tut-layer-drop">
-                <rect x="14" y="108" width="352" height="56" rx="10" fill="#0a0a0d" stroke="#4AA3FF"/>
-                <rect x="26" y="122" width="18" height="28" rx="4" fill="#4AA3FF"/>
-                <text x="56" y="136" fill="#ECECEE" font-family="Inter, sans-serif" font-size="11" font-weight="700">LAYER 2 · STRINGS — SECTION</text>
-                <text x="56" y="152" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">A0 — C8 · NEEDS RANGE</text>
+            <svg viewBox="0 0 220 280" preserveAspectRatio="xMidYMid meet">
+              <rect width="220" height="280" fill="#050507"/>
+              <rect x="14" y="14" width="192" height="100" rx="10" fill="#141318" stroke="rgba(93,202,165,0.30)"/>
+              <text x="22" y="32" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" letter-spacing="2">SPEED &amp; PITCH · ACTIVE</text>
+              <g transform="translate(56,76)">
+                <circle r="22" fill="#0a0a0d" stroke="#5DCAA5"/>
+                <line x1="0" y1="-16" x2="0" y2="-8" stroke="#5DCAA5" stroke-width="2"/>
+                <text y="4" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">70%</text>
               </g>
-              <!-- Picker grid -->
-              <text x="20" y="208" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">INSTRUMENT SOURCE PICKER</text>
-              <g transform="translate(14,224)">
-                <rect x="0" y="0" width="84" height="100" rx="10" fill="#141318" stroke="rgba(74,163,255,0.4)" stroke-width="1.5"/>
-                <rect x="12" y="14" width="60" height="56" rx="6" fill="rgba(74,163,255,0.25)"/>
-                <text x="42" y="86" fill="#4AA3FF" font-family="Inter, sans-serif" font-size="9" font-weight="900" text-anchor="middle">STRINGS</text>
-                <rect x="92" y="0" width="84" height="100" rx="10" fill="#141318" stroke="rgba(255,255,255,0.10)"/>
-                <text x="134" y="86" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" font-weight="900" text-anchor="middle">PADS</text>
-                <rect x="184" y="0" width="84" height="100" rx="10" fill="#141318" stroke="rgba(255,255,255,0.10)"/>
-                <text x="226" y="86" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" font-weight="900" text-anchor="middle">BASS</text>
-                <rect x="276" y="0" width="84" height="100" rx="10" fill="#141318" stroke="rgba(255,255,255,0.10)"/>
-                <text x="318" y="86" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" font-weight="900" text-anchor="middle">CHOIR</text>
+              <g transform="translate(110,76)">
+                <circle r="22" fill="#0a0a0d" stroke="#5DCAA5"/>
+                <text y="4" fill="#5DCAA5" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">±0</text>
               </g>
-              <!-- Tap ripple on STRINGS -->
-              <circle class="tut-ripple" cx="56" cy="274" r="32" fill="none" stroke="#4AA3FF" stroke-width="2"/>
-            </svg>
-          </div>
-        </div>
+              <g transform="translate(164,76)">
+                <rect x="-7" y="-22" width="14" height="44" rx="7" fill="#0a0a0d" stroke="#5DCAA5"/>
+                <rect x="-5" y="-2" width="10" height="10" rx="3" fill="#5DCAA5"/>
+              </g>
+              <text x="56" y="110" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing="1.5" text-anchor="middle">SPEED</text>
+              <text x="110" y="110" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing="1.5" text-anchor="middle">SEMI</text>
+              <text x="164" y="110" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing="1.5" text-anchor="middle">CENTS</text>
 
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 03</strong> Set the key range</div>
-            <h3>Strings start at middle C.</h3>
-            <p>In the Layer 2 row, tap the key-range field. Two thumb pillars appear on a tiny piano strip. Drag the left thumb up to <strong>C4</strong>. Now the strings only sound from C4 upward — below that, you only hear the piano.</p>
-            <p>Each layer carries its own key range, instrument source, skin colour, microtonal scale and display name.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <text x="20" y="40" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">LAYER 2 · KEY RANGE</text>
-              <!-- Mini piano strip -->
-              <rect x="14" y="60" width="352" height="80" rx="6" fill="#0a0a0d" stroke="rgba(255,255,255,0.08)"/>
-              <g transform="translate(20,68)">
-                <g fill="#FFFFF0">
-                  <rect x="0"  y="0" width="20" height="64" rx="1"/><rect x="22" y="0" width="20" height="64" rx="1"/>
-                  <rect x="44" y="0" width="20" height="64" rx="1"/><rect x="66" y="0" width="20" height="64" rx="1"/>
-                  <rect x="88" y="0" width="20" height="64" rx="1"/><rect x="110" y="0" width="20" height="64" rx="1"/>
-                  <rect x="132" y="0" width="20" height="64" rx="1"/><rect x="154" y="0" width="20" height="64" rx="1"/>
-                  <rect x="176" y="0" width="20" height="64" rx="1"/><rect x="198" y="0" width="20" height="64" rx="1"/>
-                  <rect x="220" y="0" width="20" height="64" rx="1"/><rect x="242" y="0" width="20" height="64" rx="1"/>
-                  <rect x="264" y="0" width="20" height="64" rx="1"/><rect x="286" y="0" width="20" height="64" rx="1"/>
-                  <rect x="308" y="0" width="20" height="64" rx="1"/>
-                </g>
-                <!-- Tinted right half -->
-                <rect x="154" y="0" width="174" height="64" fill="#4AA3FF" fill-opacity="0.30"/>
-                <!-- Black keys -->
-                <g fill="#0a0a0d">
-                  <rect x="13" y="0" width="14" height="40"/><rect x="35" y="0" width="14" height="40"/>
-                  <rect x="79" y="0" width="14" height="40"/><rect x="101" y="0" width="14" height="40"/>
-                  <rect x="123" y="0" width="14" height="40"/><rect x="167" y="0" width="14" height="40"/>
-                  <rect x="189" y="0" width="14" height="40"/><rect x="233" y="0" width="14" height="40"/>
-                  <rect x="255" y="0" width="14" height="40"/><rect x="277" y="0" width="14" height="40"/>
-                </g>
-                <!-- Drag pillar at C4 -->
-                <line x1="154" y1="-6" x2="154" y2="70" stroke="#4AA3FF" stroke-width="2"/>
-                <circle cx="154" cy="-6" r="6" fill="#4AA3FF"/>
-                <text x="154" y="-12" fill="#4AA3FF" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">C4</text>
-              </g>
-              <text x="190" y="180" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">STRINGS · C4 — C8</text>
-              <!-- Save button -->
-              <rect x="14" y="216" width="352" height="50" rx="10" fill="#FF8A2A"/>
-              <text x="190" y="248" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="13" font-weight="900" letter-spacing="3" text-anchor="middle">SAVE AS NEW PRESET</text>
-            </svg>
-          </div>
-        </div>
+              <rect x="14" y="128" width="192" height="80" rx="10" fill="#0a0a0d" stroke="rgba(93,202,165,0.25)"/>
+              <rect x="80" y="138" width="60" height="60" fill="#5DCAA5" fill-opacity="0.18" stroke="#4FA8FF" stroke-width="1"/>
+              <line x1="80" y1="138" x2="80" y2="198" stroke="#4FA8FF" stroke-width="1.5"/>
+              <line x1="140" y1="138" x2="140" y2="198" stroke="#4FA8FF" stroke-width="1.5"/>
+              <text x="110" y="226" fill="#4FA8FF" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" text-anchor="middle">LOOP · BAR 17–18</text>
 
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 04</strong> Play. The keyboard tells you which voice you're on.</div>
-            <h3>Two-colour stripes mean two voices.</h3>
-            <p>Close the editor. Look at the keyboard. The bottom half is tinted in the piano's accent. The top half is tinted blue for the strings. Where the two zones overlap (if you set them to), you'd see stripes of both colours on the same key.</p>
-            <p>Pull a chord. Left hand under C4 — piano. Right hand above — strings. Both, played together, become the texture of the song.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#0e0c08"/>
-              <text x="20" y="36" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">PLAY · LAYERED PRESET LIVE</text>
-              <!-- Big keyboard -->
-              <g transform="translate(14,70)">
-                <g>
-                  <rect x="0"   y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="26"  y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="52"  y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="78"  y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="104" y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="130" y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="156" y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="182" y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="208" y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="234" y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="260" y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="286" y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                  <rect x="312" y="0" width="24" height="360" rx="2" fill="#FFFFF0"/>
-                </g>
-                <!-- Zone tints -->
-                <rect x="0" y="0" width="180" height="360" fill="#FF8A2A" fill-opacity="0.20"/>
-                <rect x="182" y="0" width="170" height="360" fill="#4AA3FF" fill-opacity="0.20"/>
-                <!-- Black keys -->
-                <g fill="#0a0a0d">
-                  <rect x="16"  y="0" width="16" height="220"/><rect x="42"  y="0" width="16" height="220"/>
-                  <rect x="94"  y="0" width="16" height="220"/><rect x="120" y="0" width="16" height="220"/>
-                  <rect x="146" y="0" width="16" height="220"/><rect x="198" y="0" width="16" height="220"/>
-                  <rect x="224" y="0" width="16" height="220"/><rect x="276" y="0" width="16" height="220"/>
-                  <rect x="302" y="0" width="16" height="220"/>
-                </g>
-                <!-- Active key flashes (left hand chord on piano) -->
-                <rect x="2"   y="0" width="20" height="360" fill="#FF8A2A" fill-opacity="0.55"/>
-                <rect x="54"  y="0" width="20" height="360" fill="#FF8A2A" fill-opacity="0.55"/>
-                <rect x="106" y="0" width="20" height="360" fill="#FF8A2A" fill-opacity="0.55"/>
-                <!-- Active key flashes (right hand chord on strings) -->
-                <rect x="184" y="0" width="20" height="360" fill="#4AA3FF" fill-opacity="0.55"/>
-                <rect x="236" y="0" width="20" height="360" fill="#4AA3FF" fill-opacity="0.55"/>
-                <rect x="288" y="0" width="20" height="360" fill="#4AA3FF" fill-opacity="0.55"/>
-              </g>
+              <rect x="14" y="246" width="192" height="22" rx="6" fill="#0A0A0A"/>
+              <rect x="48" y="252" width="38" height="10" rx="2" fill="#5DCAA5"/>
+              <text x="22" y="262" fill="rgba(93,202,165,0.5)" font-family="Inter, sans-serif" font-size="6" font-weight="900">EDIT</text>
+              <text x="62" y="262" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="6" font-weight="900">SPEED</text>
+              <text x="110" y="262" fill="rgba(93,202,165,0.5)" font-family="Inter, sans-serif" font-size="6" font-weight="900">LOOPS</text>
+              <text x="158" y="262" fill="rgba(93,202,165,0.5)" font-family="Inter, sans-serif" font-size="6" font-weight="900">REPAIR</text>
+              <text x="196" y="262" fill="rgba(93,202,165,0.5)" font-family="Inter, sans-serif" font-size="6" font-weight="900">DSP</text>
             </svg>
           </div>
         </div>
       </div>
 
       <div class="tut-tips">
-        <h4>Pro tips for layered presets</h4>
+        <h4>Pro tips</h4>
         <ul>
-          <li>Multi-instrument zones can OVERLAP. Set Layer 1's range to A0–C8 and Layer 2's range to C4–C8. Below C4 you only hear Layer 1; above C4 you hear both, layered.</li>
-          <li>Each zone has its own skin colour (12 user-selectable skins). Pick contrasting colours so your eyes can separate the zones at a glance on a busy keyboard.</li>
-          <li>Each zone can also carry its own microtonal scale via the small scale micro-button on the right edge of the zone header. Useful for sitar over a Western lead.</li>
-          <li>Built-in OSE instruments are read-only. The save button forces \"Save as New Preset\" — your edit becomes its own thing in the User Presets folder.</li>
+          <li>Speed and pitch are <strong>independent</strong>. Drop the speed to 70% AND transpose down a semitone if the song is in the wrong key for your voice.</li>
+          <li>Loop edges are sky-blue and grid-snap. Long-press the middle of the loop region to drag the whole thing, not just one edge.</li>
+          <li>Marker pins inside Practice carry over when you open the same take from Audio Module — the take library is shared.</li>
+          <li>Bind your foot pedal to the loop's start/stop via MIDI Learn (long-press the loop button).</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ====================================================== -->
+    <!-- == TUTORIAL 03 — TUNER (working demo) ============== -->
+    <!-- ====================================================== -->
+    <article id="tune-snap" class="tutorial mc--tuner">
+      <div class="tut-hero">
+        <div>
+          <div class="tut-num">Tutorial 03 · Tuner</div>
+          <h2>The needle locks at ±3 cents.</h2>
+          <p class="tut-scenario">Two minutes before downbeat. The bass is flat. The Tuner snaps green when you're inside ±3 cents — no twitching needle, no doubt. A 1-cent flutter doesn't pull the readout around.</p>
+          <div class="tut-meta">
+            <span class="tag">Tuner</span>
+            <span class="tag tag--muted">2 min · Beginner</span>
+          </div>
+        </div>
+        <div class="tut-scene-viz">
+          <svg viewBox="0 0 220 280" preserveAspectRatio="xMidYMid meet">
+            <rect width="220" height="280" fill="#1A1A1A"/>
+            <path d="M 30 170 A 80 80 0 0 1 190 170" fill="none" stroke="#0F0F0F" stroke-width="14"/>
+            <path d="M 105 92 A 80 80 0 0 1 115 92" fill="none" stroke="#3CCB69" stroke-width="14" opacity="0.18"/>
+            <g transform="translate(110,170)">
+              <line x1="0" y1="0" x2="0" y2="-72" stroke="#3CCB69" stroke-width="2.5"/>
+              <circle r="6" fill="#1F1F1F" stroke="#3CCB69"/>
+              <circle r="2" fill="#3CCB69"/>
+            </g>
+            <text x="110" y="232" fill="#3CCB69" font-family="Inter, sans-serif" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="-1">A4</text>
+            <text x="110" y="252" fill="#3CCB69" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">+0¢ · LOCKED</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- WORKING TUNER DEMO -->
+      <section class="tut-demo" data-demo="tuner">
+        <div class="tut-demo-label">Try it · Tuner snap-in-tune</div>
+        <h3>Drag the slider. Watch the needle snap when you're close.</h3>
+        <div class="tut-demo-body">
+          <div class="tut-demo-canvas">
+            <svg viewBox="-110 -110 220 130" width="280" height="160" style="margin-bottom:10px;">
+              <!-- Halo (only visible when snapped) -->
+              <circle cx="0" cy="0" r="100" fill="none" stroke="#3CCB69" stroke-width="3" data-tn-halo opacity="0">
+                <animate attributeName="opacity" values="0.4;0.8;0.4" dur="1.4s" repeatCount="indefinite"/>
+              </circle>
+              <!-- Arc background -->
+              <path d="M -90 0 A 90 90 0 0 1 90 0" fill="none" stroke="#0F0F0F" stroke-width="16"/>
+              <!-- Green zone -->
+              <path d="M -10 -89 A 90 90 0 0 1 10 -89" fill="none" stroke="#3CCB69" stroke-width="16" opacity="0.18"/>
+              <!-- Tick marks -->
+              <line x1="-90" y1="0" x2="-78" y2="-3" stroke="#7A7A82" stroke-width="1"/>
+              <line x1="-45" y1="-78" x2="-39" y2="-68" stroke="#7A7A82" stroke-width="1"/>
+              <line x1="0"   y1="-90" x2="0"   y2="-78" stroke="#3CCB69" stroke-width="1.5"/>
+              <line x1="45"  y1="-78" x2="39"  y2="-68" stroke="#7A7A82" stroke-width="1"/>
+              <line x1="90"  y1="0" x2="78"  y2="-3" stroke="#7A7A82" stroke-width="1"/>
+              <!-- Needle -->
+              <g data-tn-needle transform="rotate(0 0 0)" style="transition: transform 0.2s ease-out;">
+                <line x1="0" y1="0" x2="0" y2="-82" stroke="#ECECEE" stroke-width="2"/>
+                <circle r="6" fill="#1F1F1F" stroke="#3A3A3A"/>
+                <circle r="2" fill="#85B7EB"/>
+              </g>
+            </svg>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div class="tut-demo-stat" style="font-size:2.2rem;" data-tn-note>A4</div>
+              <div class="tut-demo-stat" style="font-size:1.8rem;font-weight:600;" data-tn-cents>+0¢</div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:14px;">
+              <span class="tut-tuner-led" data-tn-led-flat data-color="red" data-on="false"><span class="tut-tuner-led-bulb"></span></span>
+              <span class="tut-tuner-led" data-tn-led-in   data-color="green" data-on="true"><span class="tut-tuner-led-bulb"></span></span>
+              <span class="tut-tuner-led" data-tn-led-sharp data-color="red" data-on="false"><span class="tut-tuner-led-bulb"></span></span>
+            </div>
+          </div>
+          <div class="tut-demo-controls">
+            <div class="tut-demo-row">
+              <label>Cents</label>
+              <input type="range" class="tut-slider" min="-50" max="50" step="1" value="0" data-tn-tune />
+            </div>
+            <label class="tut-toggle">
+              <input type="checkbox" checked data-tn-snap />
+              <span class="tut-toggle-track"></span>
+              <span>Snap-in-tune at ±3¢</span>
+            </label>
+            <p style="font-size:.85rem;color:var(--muted);margin:0;">Slide the needle to ±2 cents — it snaps to centre and the green LED locks. Toggle <em>Snap-in-tune</em> off to see the raw drift the engine actually publishes.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="tut-tips">
+        <h4>Pro tips</h4>
+        <ul>
+          <li>The just-noticeable-difference for pitch is around 5–6 cents. The 3-cent snap band sits comfortably inside that, so the lock confirms <em>you're there</em> rather than fighting a forever-twitching reading.</li>
+          <li>The reference tone runs at the device's native output sample rate. Cheap converters resample at 44.1k or 48k regardless of source — OSE bypasses that so the reference stays exactly on pitch.</li>
+          <li>Tuning fork = percussive ADSR pluck. Speaker = continuous sine. Use the fork to match by ear, the speaker to hold a note for a full bar of tuning.</li>
+          <li>Settings cover Notation (English-Sharp / English-Flat / German / Solfège), Temperament (Equal / Just / Pythagorean), Transposition (±12 semitones).</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ====================================================== -->
+    <!-- == TUTORIAL 04 — LAYER KEYBOARD (interactive) ====== -->
+    <!-- ====================================================== -->
+    <article id="layer-voices" class="tutorial mc--play">
+      <div class="tut-hero">
+        <div>
+          <div class="tut-num">Tutorial 04 · Play Module</div>
+          <h2>Two voices, one keyboard.</h2>
+          <p class="tut-scenario">Solo piano on the bottom half of the keyboard. Strings join from the split point up. Be the whole band — left hand bass, right hand pad, all from one preset. The keyboard is tinted in stripes so you can see exactly which voice you're triggering.</p>
+          <div class="tut-meta">
+            <span class="tag">Play Module</span>
+            <span class="tag tag--muted">5 min · Intermediate</span>
+          </div>
+        </div>
+        <div class="tut-scene-viz">
+          <svg viewBox="0 0 220 280" preserveAspectRatio="xMidYMid meet">
+            <rect width="220" height="280" fill="#0e0c08"/>
+            <text x="20" y="40" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2.5">‹  PIANO &amp; STRINGS  ›</text>
+            <g transform="translate(20,80)">
+              <g fill="#FFFFF0">
+                <rect x="0" y="0" width="22" height="180" rx="2"/>
+                <rect x="24" y="0" width="22" height="180" rx="2"/>
+                <rect x="48" y="0" width="22" height="180" rx="2"/>
+                <rect x="72" y="0" width="22" height="180" rx="2"/>
+                <rect x="96" y="0" width="22" height="180" rx="2"/>
+                <rect x="120" y="0" width="22" height="180" rx="2"/>
+                <rect x="144" y="0" width="22" height="180" rx="2"/>
+                <rect x="168" y="0" width="22" height="180" rx="2"/>
+              </g>
+              <rect x="0" y="0" width="94" height="180" fill="#FF8A2A" fill-opacity="0.30"/>
+              <rect x="96" y="0" width="94" height="180" fill="#4AA3FF" fill-opacity="0.30"/>
+              <g fill="#0a0a0d">
+                <rect x="14" y="0" width="14" height="112"/>
+                <rect x="38" y="0" width="14" height="112"/>
+                <rect x="86" y="0" width="14" height="112"/>
+                <rect x="110" y="0" width="14" height="112"/>
+                <rect x="134" y="0" width="14" height="112"/>
+                <rect x="158" y="0" width="14" height="112"/>
+              </g>
+              <line x1="94" y1="-4" x2="94" y2="184" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- WORKING LAYERED KEYBOARD DEMO -->
+      <section class="tut-demo" data-demo="layer-keys">
+        <div class="tut-demo-label">Try it · Tap the keyboard</div>
+        <h3>Drag the split point. Tap a key to hear which voice.</h3>
+        <div class="tut-demo-body">
+          <div class="tut-demo-canvas">
+            <div class="tut-keys" data-lk-keys></div>
+            <div style="display:flex;justify-content:space-between;width:100%;margin-top:18px;">
+              <div class="tut-demo-metric">
+                <span class="tut-demo-metric-value" style="color:#FF8A2A;">Piano</span>
+                <span class="tut-demo-metric-label" data-lk-piano-label>C4 — F4</span>
+              </div>
+              <div class="tut-demo-metric" style="align-items:flex-end;">
+                <span class="tut-demo-metric-value" style="color:#4AA3FF;">Strings</span>
+                <span class="tut-demo-metric-label" data-lk-strings-label>G4 — B5</span>
+              </div>
+            </div>
+          </div>
+          <div class="tut-demo-controls">
+            <div class="tut-demo-row">
+              <label>Split</label>
+              <input type="range" class="tut-slider" min="1" max="13" value="4" step="1" data-lk-split />
+              <span class="tut-slider-value" data-lk-split-value>G4</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--muted);margin:0;">In OSE each layer can carry its own instrument source, key range, skin colour, microtonal scale and display name. Where ranges overlap, both voices play at once.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="tut-tips">
+        <h4>Pro tips</h4>
+        <ul>
+          <li>Multi-instrument zones can <strong>overlap</strong>. Set Layer 1's range to the full keyboard and Layer 2 only to the upper half — below the split you hear Layer 1; above, you hear both, layered.</li>
+          <li>Each zone has its own skin colour (12 user-selectable). Pick contrasting colours so your eyes can separate the zones at a glance on a busy keyboard.</li>
+          <li>Each zone can carry its own microtonal scale via the small scale micro-button on the right edge of the zone header. Useful for sitar over a Western lead.</li>
+          <li>Built-in OSE instruments are read-only — the save button forces "Save as New Preset". Your edit becomes its own thing in the User Presets folder.</li>
           <li>Drum-pad mode is a layout toggle on the preset, not a separate module. The same multi-zone concept becomes 16 colour-coded pads.</li>
         </ul>
       </div>
@@ -710,790 +547,67 @@
 
 
     <!-- ====================================================== -->
-    <!-- ============== TUTORIAL 03 — TUNER =================== -->
-    <!-- ====================================================== -->
-    <article id="tune-snap" class="tutorial mc--tuner">
-      <div class="tut-hero">
-        <div>
-          <div class="tut-num">Tutorial 03 · Tuner</div>
-          <h2>Tune to ±3 cents and let the snap-lock confirm.</h2>
-          <p class="tut-scenario">Two minutes before downbeat. The bass is flat and there's no time. Open the Tuner. The vintage half-arc dial wakes up. Pluck — needle drifts. You tighten — needle approaches centre. Inside ±3 cents the whole thing snaps green and the LED haloes light up. You're done. You go back to the song.</p>
-          <div class="tut-meta">
-            <span class="tag">Tuner</span>
-            <span class="tag tag--muted">2 min · Beginner</span>
-          </div>
-        </div>
-        <div class="tut-scene-viz">
-          <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <radialGradient id="tutTunerBg" cx="0.5" cy="0.85" r="0.7">
-                <stop offset="0" stop-color="#1F1F1F"/><stop offset="1" stop-color="#050505"/>
-              </radialGradient>
-            </defs>
-            <rect width="380" height="460" fill="url(#tutTunerBg)"/>
-            <!-- Half-arc -->
-            <path d="M50 320 A140 140 0 0 1 330 320" fill="none" stroke="#0F0F0F" stroke-width="22"/>
-            <path d="M50 320 A140 140 0 0 1 330 320" fill="none" stroke="rgba(133,183,235,0.20)" stroke-width="1"/>
-            <!-- Green zone -->
-            <path d="M183 184 A140 140 0 0 1 197 184" fill="none" stroke="#3CCB69" stroke-width="22" opacity="0.18"/>
-            <!-- Tick marks -->
-            <g stroke="#7A7A82" stroke-width="1">
-              <line x1="50"  y1="320" x2="60"  y2="318"/>
-              <line x1="100" y1="240" x2="110" y2="246"/>
-              <line x1="190" y1="180" x2="190" y2="194"/>
-              <line x1="280" y1="240" x2="270" y2="246"/>
-              <line x1="330" y1="320" x2="320" y2="318"/>
-            </g>
-            <text x="190" y="174" fill="#3CCB69" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">0</text>
-            <!-- Snap halo (animated) -->
-            <circle class="tut-tuner-snap" cx="190" cy="320" r="158" fill="none" stroke="#3CCB69" stroke-width="2" opacity="0"/>
-            <!-- Needle -->
-            <g transform="translate(190,320)">
-              <g class="tut-tuner-needle">
-                <line x1="0" y1="0" x2="0" y2="-128" stroke="#ECECEE" stroke-width="2" stroke-linecap="round"/>
-                <circle r="10" fill="#1F1F1F" stroke="#3A3A3A"/>
-                <circle r="4" fill="#85B7EB"/>
-              </g>
-            </g>
-            <!-- Note -->
-            <text x="190" y="402" fill="#3CCB69" font-family="Inter, sans-serif" font-size="56" font-weight="600" text-anchor="middle" letter-spacing="-2">A4</text>
-            <text x="190" y="426" fill="#3CCB69" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle" letter-spacing="2">+0¢ · 440.0 Hz · LOCKED</text>
-          </svg>
-        </div>
-      </div>
-
-      <div class="tut-scenes">
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 01</strong> Open the Tuner</div>
-            <h3>Home grid → TUNER tile.</h3>
-            <p>The Tuner's accent is sky blue. The screen wakes up with a vintage PTU-2-style meter face — warm amber glass, half-arc dial, ghost note label, 32-band live spectrum ribbon below the dial. Below the dial sits a 3-LED tuning strip: red flat / green in-tune / red sharp.</p>
-            <p>If you've never granted microphone permission, OSE asks now. The tuner doesn't store anything — the audio goes straight to the YIN pitch detector and never touches disk.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <text x="20" y="36" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">HOME GRID</text>
-              <!-- 4×2 mini grid showing TUNER highlighted -->
-              <g transform="translate(14,60)">
-                <rect x="0"   y="0" width="80" height="80" rx="10" fill="#141318" stroke="rgba(255,138,42,0.30)"/>
-                <rect x="86"  y="0" width="80" height="80" rx="10" fill="#141318" stroke="rgba(224,90,107,0.30)"/>
-                <rect x="172" y="0" width="80" height="80" rx="10" fill="#141318" stroke="rgba(177,139,255,0.30)"/>
-                <rect x="258" y="0" width="80" height="80" rx="10" fill="#141318" stroke="rgba(93,202,165,0.30)"/>
-                <rect x="0"   y="86" width="80" height="80" rx="10" fill="#141318" stroke="rgba(250,199,117,0.30)"/>
-                <!-- Highlighted -->
-                <rect x="86" y="86" width="80" height="80" rx="10" fill="rgba(133,183,235,0.18)" stroke="#85B7EB" stroke-width="2"/>
-                <text x="98" y="106" fill="#85B7EB" font-size="10" font-weight="700" font-family="Inter, sans-serif" letter-spacing="1.5">TUNER</text>
-                <text x="98" y="156" fill="#7A7A82" font-size="8" font-family="Inter, sans-serif">chromatic</text>
-                <circle class="tut-ripple" cx="126" cy="126" r="36" fill="none" stroke="#85B7EB" stroke-width="2"/>
-                <rect x="172" y="86" width="80" height="80" rx="10" fill="#141318" stroke="rgba(79,209,197,0.30)"/>
-                <rect x="258" y="86" width="80" height="80" rx="10" fill="#141318" stroke="rgba(243,139,160,0.30)"/>
-              </g>
-              <!-- Permission prompt -->
-              <rect x="14" y="270" width="352" height="80" rx="14" fill="#141318" stroke="rgba(133,183,235,0.40)"/>
-              <text x="28" y="294" fill="#85B7EB" font-family="Inter, sans-serif" font-size="11" font-weight="700">Allow OSE to record audio?</text>
-              <text x="28" y="316" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11">Used only for live pitch detection. Nothing is</text>
-              <text x="28" y="332" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11">stored or transmitted.</text>
-              <rect x="240" y="304" width="100" height="32" rx="8" fill="#85B7EB"/>
-              <text x="290" y="324" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="10" font-weight="900" letter-spacing="1.5" text-anchor="middle">ALLOW</text>
-            </svg>
-          </div>
-        </div>
-
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 02</strong> Play a note. Watch the needle drift.</div>
-            <h3>Around ±10 cents, the needle is alive.</h3>
-            <p>Pluck the string. The note name lights up — let's say <strong>A3</strong> — and the needle starts moving. If you're flat, the needle sits left of centre. Sharp, right of centre. The cents readout under the dial shows you exactly: <code>−12¢</code>, <code>+8¢</code>, etc.</p>
-            <p>The 32 bands of the live spectrum ribbon under the dial show your harmonic content — useful for stringed instruments where you want to see overtones settle.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <radialGradient id="tutTunerBg2" cx="0.5" cy="0.85" r="0.7">
-                  <stop offset="0" stop-color="#1F1F1F"/><stop offset="1" stop-color="#050505"/>
-                </radialGradient>
-              </defs>
-              <rect width="380" height="460" fill="url(#tutTunerBg2)"/>
-              <path d="M50 280 A140 140 0 0 1 330 280" fill="none" stroke="#0F0F0F" stroke-width="22"/>
-              <path d="M183 144 A140 140 0 0 1 197 144" fill="none" stroke="#3CCB69" stroke-width="22" opacity="0.18"/>
-              <!-- Needle drifting (no snap yet) -->
-              <g transform="translate(190,280)">
-                <g class="anim-tuner-needle">
-                  <line x1="0" y1="0" x2="0" y2="-128" stroke="#ECECEE" stroke-width="2" stroke-linecap="round"/>
-                  <circle r="10" fill="#1F1F1F" stroke="#3A3A3A"/>
-                  <circle r="4" fill="#85B7EB"/>
-                </g>
-              </g>
-              <!-- Live spectrum ribbon -->
-              <g transform="translate(40,330)">
-                <text x="0" y="-8" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2">LIVE SPECTRUM</text>
-                <rect class="anim-mb-1" x="0"   y="0" width="8" height="28" fill="#85B7EB"/>
-                <rect class="anim-mb-2" x="10"  y="0" width="8" height="22" fill="#85B7EB"/>
-                <rect class="anim-mb-3" x="20"  y="0" width="8" height="32" fill="#85B7EB"/>
-                <rect class="anim-mb-4" x="30"  y="0" width="8" height="18" fill="#85B7EB"/>
-                <rect class="anim-mb-5" x="40"  y="0" width="8" height="26" fill="#85B7EB"/>
-                <rect class="anim-mb-6" x="50"  y="0" width="8" height="22" fill="#85B7EB"/>
-                <rect class="anim-mb-7" x="60"  y="0" width="8" height="14" fill="#85B7EB"/>
-                <rect class="anim-mb-8" x="70"  y="0" width="8" height="20" fill="#85B7EB"/>
-                <rect class="anim-mb-1" x="80"  y="0" width="8" height="24" fill="#85B7EB"/>
-                <rect class="anim-mb-2" x="90"  y="0" width="8" height="18" fill="#85B7EB"/>
-                <rect class="anim-mb-3" x="100" y="0" width="8" height="22" fill="#85B7EB"/>
-                <rect class="anim-mb-4" x="110" y="0" width="8" height="16" fill="#85B7EB"/>
-                <rect class="anim-mb-5" x="120" y="0" width="8" height="20" fill="#85B7EB"/>
-                <rect class="anim-mb-6" x="130" y="0" width="8" height="14" fill="#85B7EB"/>
-                <rect class="anim-mb-7" x="140" y="0" width="8" height="18" fill="#85B7EB"/>
-                <rect class="anim-mb-8" x="150" y="0" width="8" height="14" fill="#85B7EB"/>
-                <rect class="anim-mb-1" x="160" y="0" width="8" height="22" fill="#85B7EB"/>
-                <rect class="anim-mb-2" x="170" y="0" width="8" height="16" fill="#85B7EB"/>
-                <rect class="anim-mb-3" x="180" y="0" width="8" height="14" fill="#85B7EB"/>
-                <rect class="anim-mb-4" x="190" y="0" width="8" height="20" fill="#85B7EB"/>
-                <rect class="anim-mb-5" x="200" y="0" width="8" height="14" fill="#85B7EB"/>
-                <rect class="anim-mb-6" x="210" y="0" width="8" height="18" fill="#85B7EB"/>
-                <rect class="anim-mb-7" x="220" y="0" width="8" height="12" fill="#85B7EB"/>
-                <rect class="anim-mb-8" x="230" y="0" width="8" height="16" fill="#85B7EB"/>
-                <rect class="anim-mb-1" x="240" y="0" width="8" height="12" fill="#85B7EB"/>
-                <rect class="anim-mb-2" x="250" y="0" width="8" height="16" fill="#85B7EB"/>
-                <rect class="anim-mb-3" x="260" y="0" width="8" height="10" fill="#85B7EB"/>
-                <rect class="anim-mb-4" x="270" y="0" width="8" height="14" fill="#85B7EB"/>
-                <rect class="anim-mb-5" x="280" y="0" width="8" height="10" fill="#85B7EB"/>
-                <rect class="anim-mb-6" x="290" y="0" width="8" height="12" fill="#85B7EB"/>
-              </g>
-              <!-- Cents readout -->
-              <text x="190" y="408" fill="#85B7EB" font-family="Inter, sans-serif" font-size="32" font-weight="600" text-anchor="middle" letter-spacing="-1">A3</text>
-              <text x="190" y="436" fill="#85B7EB" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle" letter-spacing="2">−12¢ · 218.4 Hz</text>
-            </svg>
-          </div>
-        </div>
-
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 03</strong> Tighten until the needle locks</div>
-            <h3>Inside ±3 cents, OSE makes a decision.</h3>
-            <p>The just-noticeable-difference for pitch is around 5–6 cents. The 3-cent band sits comfortably inside that. So when you cross into ±3 cents, the needle <strong>snaps to centre</strong>, the cents readout paints LED green, and the LED haloes around the dial light up.</p>
-            <p>A 1-cent flutter doesn't pull the needle around — the lock is forgiving on purpose. Your eyes get a clear "yes, you're there" instead of fighting a forever-twitching reading.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <radialGradient id="tutTunerBg3" cx="0.5" cy="0.85" r="0.7">
-                  <stop offset="0" stop-color="#1F1F1F"/><stop offset="1" stop-color="#050505"/>
-                </radialGradient>
-              </defs>
-              <rect width="380" height="460" fill="url(#tutTunerBg3)"/>
-              <!-- Pulsing green halo -->
-              <circle cx="190" cy="280" r="158" fill="none" stroke="#3CCB69" stroke-width="3" opacity="0.5">
-                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.4s" repeatCount="indefinite"/>
-              </circle>
-              <path d="M50 280 A140 140 0 0 1 330 280" fill="none" stroke="#0F0F0F" stroke-width="22"/>
-              <path d="M183 144 A140 140 0 0 1 197 144" fill="none" stroke="#3CCB69" stroke-width="22" opacity="0.5"/>
-              <!-- Needle locked at centre -->
-              <g transform="translate(190,280)">
-                <line x1="0" y1="0" x2="0" y2="-128" stroke="#3CCB69" stroke-width="2.5" stroke-linecap="round"/>
-                <circle r="10" fill="#1F1F1F" stroke="#3CCB69"/>
-                <circle r="4" fill="#3CCB69"/>
-              </g>
-              <!-- 3 LEDs — middle is green and pulsing -->
-              <g transform="translate(118,330)">
-                <rect x="0"   y="0" width="40" height="22" rx="4" fill="#080808" stroke="#1A1A1A"/>
-                <circle cx="20" cy="11" r="5" fill="rgba(226,80,58,0.3)"/>
-                <text x="20" y="38" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">FLAT</text>
-                <rect x="52"  y="0" width="40" height="22" rx="4" fill="#080808" stroke="#3CCB69"/>
-                <circle cx="72" cy="11" r="5" fill="#3CCB69">
-                  <animate attributeName="opacity" values="0.6;1;0.6" dur="1.6s" repeatCount="indefinite"/>
-                </circle>
-                <text x="72" y="38" fill="#3CCB69" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">IN&nbsp;TUNE</text>
-                <rect x="104" y="0" width="40" height="22" rx="4" fill="#080808" stroke="#1A1A1A"/>
-                <circle cx="124" cy="11" r="5" fill="rgba(226,80,58,0.3)"/>
-                <text x="124" y="38" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">SHARP</text>
-              </g>
-              <text x="190" y="416" fill="#3CCB69" font-family="Inter, sans-serif" font-size="48" font-weight="600" text-anchor="middle" letter-spacing="-2">A3</text>
-              <text x="190" y="438" fill="#3CCB69" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle" letter-spacing="2">+0¢ · 220.0 Hz · LOCKED</text>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="tut-tips">
-        <h4>Pro tips for the Tuner</h4>
-        <ul>
-          <li>The reference tone runs at the device's native output sample rate. Cheap converters often resample at 44.1k or 48k regardless of source — OSE bypasses that so the reference tone stays exactly on pitch.</li>
-          <li>The <strong>tuning fork</strong> button gives you a percussive ADSR pluck. The <strong>speaker</strong> button gives you a sustained sine. Use the fork to match by ear, the speaker to hold a note for a full bar's worth of tuning.</li>
-          <li>Switch input device or USB channel mid-session — the engine restarts cleanly without you needing to leave the module.</li>
-          <li>Settings → Notation lets you swap between English-Sharp / English-Flat / German / Solfège. Settings → Temperament covers Equal / Just / Pythagorean. Settings → Transposition handles transposing instruments (Bb trumpet, etc.).</li>
-          <li>Snap-in-tune is UI-only — the engine still publishes the raw cents value. Toggle it off in Settings if you'd rather see every micro-flutter.</li>
-        </ul>
-      </div>
-    </article>
-
-
-    <!-- ====================================================== -->
-    <!-- ============== TUTORIAL 04 — AUDIO =================== -->
-    <!-- ====================================================== -->
-    <article id="capture-idea" class="tutorial mc--audio">
-      <div class="tut-hero">
-        <div>
-          <div class="tut-num">Tutorial 04 · Audio Module</div>
-          <h2>Capture an idea between sets.</h2>
-          <p class="tut-scenario">Set's over. You're tearing down. An idea hits — a hook, a chord, a melody you'll forget in two minutes. Tap AUDIO. The module opens straight on the recorder lens because that's where you usually want to be when you tap AUDIO. Tap REC. Hum it, sing it, play it. Tap STOP. It's saved. The full editor is waiting for you when you get home.</p>
-          <div class="tut-meta">
-            <span class="tag">Audio Module</span>
-            <span class="tag tag--muted">3 min · Beginner</span>
-          </div>
-        </div>
-        <div class="tut-scene-viz">
-          <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-            <rect width="380" height="460" fill="#0a0506"/>
-            <!-- Live waveform drawing -->
-            <text x="20" y="40" fill="#E05A6B" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="2.5">LIVE · CAPTURE</text>
-            <g transform="translate(14,200)">
-              <line x1="190" y1="-120" x2="190" y2="120" stroke="#E05A6B" stroke-width="1.5"/>
-              <g fill="#E05A6B">
-                <rect class="tut-live-1" x="14" y="-50" width="6" height="100" opacity="0"/>
-                <rect class="tut-live-1" x="24" y="-32" width="6" height="64" opacity="0"/>
-                <rect class="tut-live-2" x="34" y="-72" width="6" height="144" opacity="0"/>
-                <rect class="tut-live-2" x="44" y="-44" width="6" height="88" opacity="0"/>
-                <rect class="tut-live-3" x="54" y="-58" width="6" height="116" opacity="0"/>
-                <rect class="tut-live-3" x="64" y="-86" width="6" height="172" opacity="0"/>
-                <rect class="tut-live-4" x="74" y="-32" width="6" height="64" opacity="0"/>
-                <rect class="tut-live-4" x="84" y="-58" width="6" height="116" opacity="0"/>
-                <rect class="tut-live-5" x="94" y="-72" width="6" height="144" opacity="0"/>
-                <rect class="tut-live-5" x="104" y="-44" width="6" height="88" opacity="0"/>
-                <rect class="tut-live-6" x="114" y="-100" width="6" height="200" opacity="0"/>
-                <rect class="tut-live-6" x="124" y="-58" width="6" height="116" opacity="0"/>
-                <rect class="tut-live-7" x="134" y="-32" width="6" height="64" opacity="0"/>
-                <rect class="tut-live-7" x="144" y="-72" width="6" height="144" opacity="0"/>
-                <rect class="tut-live-8" x="154" y="-44" width="6" height="88" opacity="0"/>
-                <rect class="tut-live-8" x="164" y="-86" width="6" height="172" opacity="0"/>
-                <rect class="tut-live-9" x="174" y="-32" width="6" height="64" opacity="0"/>
-                <rect class="tut-live-9" x="184" y="-72" width="6" height="144" opacity="0"/>
-                <rect class="tut-live-10" x="200" y="-58" width="6" height="116" opacity="0"/>
-                <rect class="tut-live-10" x="210" y="-44" width="6" height="88" opacity="0"/>
-              </g>
-            </g>
-            <!-- Big REC FAB pulsing -->
-            <g transform="translate(190,360)" class="tut-rec">
-              <circle r="48" fill="#EF4B4B" stroke="rgba(255,138,42,0.45)" stroke-width="1"/>
-              <text y="6" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="18" font-weight="900" letter-spacing="2" text-anchor="middle">REC</text>
-            </g>
-            <!-- Timer -->
-            <text x="190" y="430" fill="#EF4B4B" font-family="JetBrains Mono, monospace" font-size="16" font-weight="900" text-anchor="middle">0:42.108 · RECORDING</text>
-          </svg>
-        </div>
-      </div>
-
-      <div class="tut-scenes">
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 01</strong> Decide MONITOR / PRINT before you record</div>
-            <h3>Both default to OFF. That's deliberate.</h3>
-            <p>OFF on MONITOR means you don't hear yourself. OFF on PRINT means the DSP chain is bypassed in the file — you get the raw input. That's the safest default for capturing an idea fast: silent, dry, fast.</p>
-            <p>Turn MONITOR on if you want to hear yourself. Turn PRINT on if you want the EQ / compression / reverb you've dialled in to bake into the file. They're independent — any combination is valid.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <text x="20" y="36" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">RECORDER · DSP CHAIN · IN</text>
-              <!-- DSP card with toggles at the bottom -->
-              <rect x="14" y="60" width="352" height="240" rx="14" fill="#141318" stroke="rgba(224,90,107,0.30)"/>
-              <!-- 5-tab strip -->
-              <g font-family="Inter, sans-serif" font-size="9" font-weight="900" letter-spacing="1.5">
-                <text x="48" y="86" fill="#E05A6B" text-anchor="middle">IN</text>
-                <text x="116" y="86" fill="#7A7A82" text-anchor="middle">EQ</text>
-                <text x="190" y="86" fill="#7A7A82" text-anchor="middle">AMP</text>
-                <text x="264" y="86" fill="#7A7A82" text-anchor="middle">FX</text>
-                <text x="332" y="86" fill="#7A7A82" text-anchor="middle">OUT</text>
-              </g>
-              <line x1="34" y1="92" x2="62" y2="92" stroke="#E05A6B" stroke-width="2"/>
-              <!-- Knobs -->
-              <g>
-                <circle cx="68" cy="160" r="22" fill="none" stroke="#E05A6B" stroke-width="2"/>
-                <line x1="68" y1="138" x2="68" y2="148" stroke="#E05A6B" stroke-width="2"/>
-                <text x="68" y="200" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">GAIN</text>
-                <circle cx="148" cy="160" r="22" fill="none" stroke="#E05A6B" stroke-width="2"/>
-                <line x1="148" y1="142" x2="158" y2="155" stroke="#E05A6B" stroke-width="2"/>
-                <text x="148" y="200" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">HP</text>
-                <circle cx="232" cy="160" r="22" fill="none" stroke="rgba(224,90,107,0.40)" stroke-width="2"/>
-                <line x1="232" y1="160" x2="244" y2="170" stroke="rgba(224,90,107,0.40)" stroke-width="2"/>
-                <text x="232" y="200" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">LP</text>
-                <circle cx="312" cy="160" r="22" fill="none" stroke="rgba(224,90,107,0.40)" stroke-width="2"/>
-                <line x1="312" y1="160" x2="300" y2="170" stroke="rgba(224,90,107,0.40)" stroke-width="2"/>
-                <text x="312" y="200" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">NR</text>
-              </g>
-              <!-- Helper text -->
-              <text x="28" y="232" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8">IN · silent capture · file stays dry</text>
-              <!-- Toggle pills -->
-              <rect x="14" y="320" width="172" height="44" rx="10" fill="#141318" stroke="rgba(255,255,255,0.10)"/>
-              <text x="100" y="348" fill="#7A7A82" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2" text-anchor="middle">MONITOR · OFF</text>
-              <rect x="194" y="320" width="172" height="44" rx="10" fill="#141318" stroke="rgba(255,255,255,0.10)"/>
-              <text x="280" y="348" fill="#7A7A82" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2" text-anchor="middle">PRINT · OFF</text>
-              <text x="190" y="396" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Default: silent, dry, ready</text>
-            </svg>
-          </div>
-        </div>
-
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 02</strong> Hit the REC pill</div>
-            <h3>Pre-roll counts down if you set one.</h3>
-            <p>The 64dp red REC circle is at the bottom of the recorder lens, with a 36dp safe-area cushion. If you've set pre-roll to 3, 5 or 10 seconds in Settings, a giant accent number overlays the screen counting down. Tap during pre-roll to cancel.</p>
-            <p>Once it's running, the timer turns red, the visualiser switches to live waveform mode, and new peak buckets grow leftward past the centred playhead.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <!-- Live waveform card -->
-              <rect x="14" y="40" width="352" height="180" rx="14" fill="#141318" stroke="rgba(224,90,107,0.40)"/>
-              <text x="28" y="62" fill="#E05A6B" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" font-weight="700">LIVE WAVEFORM · RECORDING</text>
-              <!-- Centred playhead -->
-              <line x1="190" y1="76" x2="190" y2="208" stroke="#E05A6B" stroke-width="1.5"/>
-              <!-- Live bars -->
-              <g fill="#E05A6B">
-                <rect class="tut-live-1" x="22"  y="100" width="5" height="80" opacity="0"/>
-                <rect class="tut-live-1" x="32"  y="116" width="5" height="48" opacity="0"/>
-                <rect class="tut-live-2" x="42"  y="92"  width="5" height="96" opacity="0"/>
-                <rect class="tut-live-2" x="52"  y="108" width="5" height="64" opacity="0"/>
-                <rect class="tut-live-3" x="62"  y="86"  width="5" height="108" opacity="0"/>
-                <rect class="tut-live-3" x="72"  y="120" width="5" height="40" opacity="0"/>
-                <rect class="tut-live-4" x="82"  y="100" width="5" height="80" opacity="0"/>
-                <rect class="tut-live-4" x="92"  y="92"  width="5" height="96" opacity="0"/>
-                <rect class="tut-live-5" x="102" y="108" width="5" height="64" opacity="0"/>
-                <rect class="tut-live-5" x="112" y="86"  width="5" height="108" opacity="0"/>
-                <rect class="tut-live-6" x="122" y="100" width="5" height="80" opacity="0"/>
-                <rect class="tut-live-6" x="132" y="92"  width="5" height="96" opacity="0"/>
-                <rect class="tut-live-7" x="142" y="116" width="5" height="48" opacity="0"/>
-                <rect class="tut-live-7" x="152" y="86"  width="5" height="108" opacity="0"/>
-                <rect class="tut-live-8" x="162" y="100" width="5" height="80" opacity="0"/>
-                <rect class="tut-live-8" x="172" y="120" width="5" height="40" opacity="0"/>
-                <rect class="tut-live-9" x="182" y="92"  width="5" height="96" opacity="0"/>
-              </g>
-              <!-- Timer -->
-              <text x="190" y="280" fill="#EF4B4B" font-family="JetBrains Mono, monospace" font-size="44" font-weight="900" text-anchor="middle" letter-spacing="-1" class="anim-rec">0:42.108</text>
-              <text x="190" y="298" fill="#EF4B4B" font-family="Inter, sans-serif" font-size="9" font-weight="900" letter-spacing="2" text-anchor="middle">RECORDING</text>
-              <!-- L/R meters -->
-              <rect x="50"  y="316" width="280" height="6" rx="3" fill="#1c1c22"/>
-              <rect x="50"  y="316" width="190" height="6" rx="3" fill="#E05A6B"/>
-              <text x="32" y="322" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">L</text>
-              <rect x="50"  y="328" width="280" height="6" rx="3" fill="#1c1c22"/>
-              <rect x="50"  y="328" width="170" height="6" rx="3" fill="#E05A6B"/>
-              <text x="32" y="334" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">R</text>
-              <!-- REC pill (transitioning to STOP) -->
-              <g transform="translate(190,400)" class="tut-rec">
-                <circle r="40" fill="#EF4B4B" stroke="rgba(255,138,42,0.45)"/>
-                <text y="6" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="14" font-weight="900" letter-spacing="2" text-anchor="middle">STOP</text>
-              </g>
-            </svg>
-          </div>
-        </div>
-
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 03</strong> Stop, the take auto-selects</div>
-            <h3>Go listen. Edit later if you want.</h3>
-            <p>Tap STOP. The take publishes and immediately auto-selects in the visualiser at the top so you can audition it. Flip to LIBRARY and the new take is at the top of the list. Tap it later from anywhere — the Audio Editor opens fullscreen, your edits are non-destructive, you can Bounce or Revert at any time.</p>
-            <p>If you turned PRINT on, the offline DSP bake fires when you leave the lens or start a new take. PRINT bakes <em>on leave</em>, not on stop — stopping is for staying and listening to what you just played.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <!-- Lens chip showing LIBRARY -->
-              <rect x="14" y="40" width="352" height="44" rx="10" fill="#141318" stroke="rgba(224,90,107,0.40)"/>
-              <rect x="22" y="48" width="156" height="28" rx="6" fill="rgba(224,90,107,0.05)"/>
-              <text x="100" y="66" fill="rgba(224,90,107,0.50)" font-family="Inter, sans-serif" font-size="10" font-weight="900" letter-spacing="1.4" text-anchor="middle">RECORD</text>
-              <rect x="186" y="48" width="156" height="28" rx="6" fill="#E05A6B" fill-opacity="0.18" stroke="#E05A6B" stroke-width="0.5"/>
-              <text x="264" y="66" fill="#E05A6B" font-family="Inter, sans-serif" font-size="10" font-weight="900" letter-spacing="1.4" text-anchor="middle">LIBRARY</text>
-              <!-- New take at top of list -->
-              <rect x="14" y="100" width="352" height="80" rx="14" fill="#141318" stroke="#E05A6B" stroke-width="1.5"/>
-              <text x="28" y="124" fill="#ECECEE" font-family="Inter, sans-serif" font-size="13" font-weight="700">Idea — 9:42 PM · just now</text>
-              <text x="28" y="142" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">0:42.108 · WAV · selected</text>
-              <!-- Mini wave -->
-              <g fill="#E05A6B" opacity="0.6" transform="translate(28,168)">
-                <rect x="0"  y="-8" width="2" height="8"/><rect x="4"  y="-12" width="2" height="12"/>
-                <rect x="8"  y="-6" width="2" height="6"/><rect x="12" y="-14" width="2" height="14"/>
-                <rect x="16" y="-8" width="2" height="8"/><rect x="20" y="-10" width="2" height="10"/>
-                <rect x="24" y="-12" width="2" height="12"/><rect x="28" y="-6" width="2" height="6"/>
-                <rect x="32" y="-14" width="2" height="14"/><rect x="36" y="-8" width="2" height="8"/>
-                <rect x="40" y="-10" width="2" height="10"/><rect x="44" y="-12" width="2" height="12"/>
-                <rect x="48" y="-6" width="2" height="6"/><rect x="52" y="-14" width="2" height="14"/>
-                <rect x="56" y="-8" width="2" height="8"/><rect x="60" y="-10" width="2" height="10"/>
-                <rect x="64" y="-12" width="2" height="12"/><rect x="68" y="-8" width="2" height="8"/>
-                <rect x="72" y="-14" width="2" height="14"/><rect x="76" y="-6" width="2" height="6"/>
-              </g>
-              <!-- Older takes -->
-              <rect x="14" y="200" width="352" height="56" rx="10" fill="#141318" stroke="rgba(255,255,255,0.06)"/>
-              <text x="28" y="220" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11" font-weight="600">Soundcheck — main room</text>
-              <text x="28" y="238" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">2:14 · earlier today</text>
-              <rect x="14" y="266" width="352" height="56" rx="10" fill="#141318" stroke="rgba(255,255,255,0.06)"/>
-              <text x="28" y="286" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11" font-weight="600">Demo verse 1</text>
-              <text x="28" y="304" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">1:08 · last week</text>
-              <!-- Floating REC FAB -->
-              <g transform="translate(330,400)">
-                <circle r="32" fill="#EF4B4B"/>
-                <text y="6" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="1.4" text-anchor="middle">REC</text>
-              </g>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="tut-tips">
-        <h4>Pro tips for fast capture</h4>
-        <ul>
-          <li>The library lens has a floating <strong>REC FAB</strong> at bottom-right. One tap arms recording from anywhere — no need to flip lenses first.</li>
-          <li>Settings → Recording Settings has a <strong>"Block calls during recording"</strong> switch that pushes the device into Do-Not-Disturb (alarms only) for the duration of the take. No more ruined captures because someone called.</li>
-          <li>Built-in microphones collapse to a single "Internal device" row in the input picker. Plug in a USB interface and every channel appears.</li>
-          <li>Effect tail length (OFF / AUTO / 1s … 15s) controls how much reverb/delay decay gets captured after you stop. AUTO ends when the tail decays to silence.</li>
-          <li>Pair MONITOR and PRINT off to capture silently. Both on, you hear yourself and bake the chain. Either-or is fine too — it's a matrix, not a single switch.</li>
-        </ul>
-      </div>
-    </article>
-
-
-    <!-- ====================================================== -->
-    <!-- ============== TUTORIAL 05 — METRONOME =============== -->
-    <!-- ====================================================== -->
-    <article id="metronome-5-4" class="tutorial mc--metronome">
-      <div class="tut-hero">
-        <div>
-          <div class="tut-num">Tutorial 05 · Metronome</div>
-          <h2>A 5/4 metronome with a polygon you can feel.</h2>
-          <p class="tut-scenario">You're working on a 5/4 fill. The polygon at the centre of the metronome's hero face is a pentagon — five sides, one per beat. The bright dot orbits its perimeter and lands on each vertex precisely on the beat. Beat 1 is accented; you feel exactly which side of the bar you're on at a glance.</p>
-          <div class="tut-meta">
-            <span class="tag">Metronome</span>
-            <span class="tag tag--muted">3 min · Beginner</span>
-          </div>
-        </div>
-        <div class="tut-scene-viz">
-          <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <linearGradient id="tutMetGlass" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FAC775" stop-opacity="0.20"/>
-                <stop offset="0.6" stop-color="#FAC775" stop-opacity="0.05"/>
-                <stop offset="1" stop-color="#1C1814" stop-opacity="0.50"/>
-              </linearGradient>
-            </defs>
-            <rect width="380" height="460" fill="#0a0a0d"/>
-            <rect x="14" y="14" width="352" height="380" rx="14" fill="url(#tutMetGlass)" stroke="#FAC775" stroke-opacity="0.5"/>
-            <text x="40" y="74" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="50" font-weight="300" letter-spacing="-2.5">132</text>
-            <text x="40" y="98" fill="#FAC775" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" letter-spacing="2.4">BPM · ALLEGRETTO</text>
-            <text x="340" y="74" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="40" font-weight="300" text-anchor="end" letter-spacing="-1">5/4</text>
-            <text x="340" y="98" fill="#FAC775" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" letter-spacing="2.4" text-anchor="end">METER</text>
-            <!-- Pentagon -->
-            <g transform="translate(190,200)">
-              <polygon points="0,-50 48,-15 30,42 -30,42 -48,-15" fill="none" stroke="#FAC775" stroke-width="2.4" stroke-linejoin="round"/>
-              <polygon points="0,-36 35,-10 22,30 -22,30 -35,-10" fill="#FAC775" opacity="0.18"/>
-              <!-- Orbit dot (animated around 5 vertices) -->
-              <g class="tut-poly-dot">
-                <circle r="6" fill="#FFFFFF"/>
-                <circle r="10" fill="#FFFFFF" fill-opacity="0.35"/>
-              </g>
-            </g>
-            <!-- Beat numerals 1..5 -->
-            <g transform="translate(40,330)">
-              <rect x="0"   y="0" width="50" height="50" rx="8" fill="#FAC775"/>
-              <text x="25" y="34" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="22" font-weight="900" text-anchor="middle">1</text>
-              <rect x="60"  y="0" width="50" height="50" rx="8" fill="rgba(255,255,255,0.12)"/>
-              <text x="85" y="34" fill="#FAC775" font-family="Inter, sans-serif" font-size="22" font-weight="900" text-anchor="middle">2</text>
-              <rect x="120" y="0" width="50" height="50" rx="8" fill="rgba(255,255,255,0.12)"/>
-              <text x="145" y="34" fill="#FAC775" font-family="Inter, sans-serif" font-size="22" font-weight="900" text-anchor="middle">3</text>
-              <rect x="180" y="0" width="50" height="50" rx="8" fill="rgba(255,255,255,0.12)"/>
-              <text x="205" y="34" fill="#FAC775" font-family="Inter, sans-serif" font-size="22" font-weight="900" text-anchor="middle">4</text>
-              <rect x="240" y="0" width="50" height="50" rx="8" fill="rgba(255,255,255,0.12)"/>
-              <text x="265" y="34" fill="#FAC775" font-family="Inter, sans-serif" font-size="22" font-weight="900" text-anchor="middle">5</text>
-            </g>
-            <!-- START -->
-            <rect x="14" y="416" width="352" height="32" rx="10" fill="#FAC775"/>
-            <text x="190" y="438" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="12" font-weight="900" letter-spacing="4" text-anchor="middle">RUNNING</text>
-          </svg>
-        </div>
-      </div>
-
-      <div class="tut-scenes">
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 01</strong> Set the BPM</div>
-            <h3>Drag the scrubber, or tap to numeric-edit.</h3>
-            <p>The hero is the <strong>ClickTrackFace</strong>: a 220–280dp tall amber-glass card with a 50sp light-weight monospace BPM digit and the word <code>ALLEGRO</code> (or whatever marking matches your tempo) under it. Drag the BPM scrubber below the hero or tap the digit to inline-edit with a numeric keyboard.</p>
-            <p>Tempo markings update live: under 60 = LARGO, under 76 = ADAGIO, under 108 = ANDANTE, under 120 = MODERATO, under 156 = ALLEGRO, etc.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#0a0a0d"/>
-              <text x="40" y="80" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="80" font-weight="300" letter-spacing="-4">132</text>
-              <text x="40" y="116" fill="#FAC775" font-family="JetBrains Mono, monospace" font-size="11" font-weight="800" letter-spacing="2.4">BPM · ALLEGRETTO</text>
-              <!-- BPM scrubber -->
-              <text x="20" y="200" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">TEMPO</text>
-              <circle cx="50" cy="240" r="22" fill="#15151a" stroke="rgba(255,255,255,0.18)"/>
-              <line x1="38" y1="240" x2="62" y2="240" stroke="#ECECEE" stroke-width="2"/>
-              <rect x="86" y="234" width="232" height="12" rx="6" fill="#1c1c22"/>
-              <rect x="86" y="234" width="160" height="12" rx="6" fill="#FAC775"/>
-              <circle cx="246" cy="240" r="12" fill="#FAC775"/>
-              <circle cx="340" cy="240" r="22" fill="#15151a" stroke="rgba(255,255,255,0.18)"/>
-              <line x1="328" y1="240" x2="352" y2="240" stroke="#ECECEE" stroke-width="2"/>
-              <line x1="340" y1="228" x2="340" y2="252" stroke="#ECECEE" stroke-width="2"/>
-              <!-- Range markers -->
-              <g font-family="JetBrains Mono, monospace" font-size="8" fill="#7A7A82">
-                <text x="86" y="280">40</text><text x="172" y="280">100</text><text x="258" y="280">160</text><text x="318" y="280">220</text>
-              </g>
-              <!-- Tempo word legend -->
-              <g transform="translate(20,330)">
-                <rect x="0" y="0" width="86" height="22" rx="6" fill="rgba(255,255,255,0.04)"/>
-                <text x="43" y="16" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" font-weight="700" text-anchor="middle">LARGO</text>
-                <rect x="92" y="0" width="86" height="22" rx="6" fill="rgba(255,255,255,0.04)"/>
-                <text x="135" y="16" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" font-weight="700" text-anchor="middle">ANDANTE</text>
-                <rect x="184" y="0" width="86" height="22" rx="6" fill="#FAC775" fill-opacity="0.30" stroke="#FAC775" stroke-width="0.5"/>
-                <text x="227" y="16" fill="#FAC775" font-family="Inter, sans-serif" font-size="9" font-weight="700" text-anchor="middle">ALLEGRETTO</text>
-                <rect x="276" y="0" width="86" height="22" rx="6" fill="rgba(255,255,255,0.04)"/>
-                <text x="319" y="16" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" font-weight="700" text-anchor="middle">PRESTO</text>
-              </g>
-            </svg>
-          </div>
-        </div>
-
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 02</strong> Set the time signature</div>
-            <h3>Watch the polygon morph.</h3>
-            <p>Below the hero, the <strong>BEATS</strong> stepper changes the numerator. Tap + and the polygon at the centre of the hero gains a side. Three beats = triangle. Four = square. Five = pentagon. Six = hexagon. The shape <em>is</em> the time signature.</p>
-            <p>The denominator (the bottom number) is a separate button. Common settings: 3/4, 4/4, 5/4, 6/8, 7/8, 5/8.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#0a0a0d"/>
-              <text x="20" y="40" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">TIME SIGNATURE · MORPH</text>
-              <!-- Three polygons side by side: square → pentagon -->
-              <g transform="translate(70,140)">
-                <polygon points="0,-40 40,0 0,40 -40,0" fill="none" stroke="#FAC775" stroke-width="2" stroke-linejoin="round"/>
-                <text y="80" fill="#7A7A82" font-family="Inter, sans-serif" font-size="10" font-weight="900" text-anchor="middle">4 / 4</text>
-              </g>
-              <g transform="translate(190,140)">
-                <polygon points="0,-40 38,-12 24,32 -24,32 -38,-12" fill="none" stroke="#FAC775" stroke-width="2.5" stroke-linejoin="round"/>
-                <polygon points="0,-30 28,-9 18,24 -18,24 -28,-9" fill="#FAC775" opacity="0.20"/>
-                <text y="80" fill="#FAC775" font-family="Inter, sans-serif" font-size="11" font-weight="900" text-anchor="middle">5 / 4</text>
-              </g>
-              <g transform="translate(310,140)">
-                <polygon points="-40,0 -20,-35 20,-35 40,0 20,35 -20,35" fill="none" stroke="#FAC775" stroke-width="2" stroke-linejoin="round"/>
-                <text y="80" fill="#7A7A82" font-family="Inter, sans-serif" font-size="10" font-weight="900" text-anchor="middle">6 / 8</text>
-              </g>
-              <!-- Stepper -->
-              <text x="20" y="280" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">BEATS PER BAR</text>
-              <circle cx="50" cy="320" r="22" fill="#15151a" stroke="rgba(255,255,255,0.18)"/>
-              <line x1="38" y1="320" x2="62" y2="320" stroke="#ECECEE" stroke-width="2"/>
-              <text x="190" y="332" fill="#FAC775" font-family="Inter, sans-serif" font-size="40" font-weight="700" text-anchor="middle">5</text>
-              <circle cx="330" cy="320" r="22" fill="#15151a" stroke="rgba(255,255,255,0.18)"/>
-              <line x1="318" y1="320" x2="342" y2="320" stroke="#ECECEE" stroke-width="2"/>
-              <line x1="330" y1="308" x2="330" y2="332" stroke="#ECECEE" stroke-width="2"/>
-              <!-- Denominator -->
-              <text x="20" y="394" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">NOTE VALUE</text>
-              <g font-family="Inter, sans-serif" font-size="11" font-weight="900">
-                <rect x="20" y="404" width="64" height="36" rx="8" fill="rgba(255,255,255,0.06)"/>
-                <text x="52" y="426" fill="#7A7A82" text-anchor="middle">2</text>
-                <rect x="92" y="404" width="64" height="36" rx="8" fill="#FAC775" fill-opacity="0.30" stroke="#FAC775"/>
-                <text x="124" y="426" fill="#FAC775" text-anchor="middle">4</text>
-                <rect x="164" y="404" width="64" height="36" rx="8" fill="rgba(255,255,255,0.06)"/>
-                <text x="196" y="426" fill="#7A7A82" text-anchor="middle">8</text>
-                <rect x="236" y="404" width="64" height="36" rx="8" fill="rgba(255,255,255,0.06)"/>
-                <text x="268" y="426" fill="#7A7A82" text-anchor="middle">16</text>
-              </g>
-            </svg>
-          </div>
-        </div>
-
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 03</strong> Tap beat numerals to cycle accents</div>
-            <h3>Beat 1 accented. Beat 3 silent. Beat 5 ghosted.</h3>
-            <p>Below the hero, a strip of beat numerals (1 through your numerator) shows each beat. Tap any beat to cycle its accent state: <strong>silent → normal → accented</strong>. The active beat lights up while the click runs. Tap START. The polygon's orbit dot lands on each vertex on the beat; the click fires; you can hear which side of the bar you're on with your eyes shut.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#0a0a0d"/>
-              <text x="20" y="40" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">BEAT STRIP · 5 BEATS · TAP TO CYCLE</text>
-              <!-- Beat strip -->
-              <g transform="translate(20,80)">
-                <rect x="0" y="0" width="64" height="64" rx="8" fill="#FAC775"/>
-                <text x="32" y="40" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="22" font-weight="900" text-anchor="middle">1</text>
-                <text x="32" y="84" fill="#FAC775" font-family="JetBrains Mono, monospace" font-size="8" font-weight="900" letter-spacing="1.5" text-anchor="middle">ACCENT</text>
-                <rect x="68" y="0" width="64" height="64" rx="8" fill="rgba(255,255,255,0.16)"/>
-                <text x="100" y="40" fill="#FAC775" font-family="Inter, sans-serif" font-size="22" font-weight="900" text-anchor="middle">2</text>
-                <text x="100" y="84" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5" text-anchor="middle">NORMAL</text>
-                <rect x="136" y="0" width="64" height="64" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)" stroke-dasharray="3 3"/>
-                <text x="168" y="40" fill="rgba(250,199,117,0.30)" font-family="Inter, sans-serif" font-size="22" font-weight="900" text-anchor="middle">3</text>
-                <text x="168" y="84" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5" text-anchor="middle">SILENT</text>
-                <rect x="204" y="0" width="64" height="64" rx="8" fill="rgba(255,255,255,0.16)"/>
-                <text x="236" y="40" fill="#FAC775" font-family="Inter, sans-serif" font-size="22" font-weight="900" text-anchor="middle">4</text>
-                <text x="236" y="84" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5" text-anchor="middle">NORMAL</text>
-                <rect x="272" y="0" width="64" height="64" rx="8" fill="rgba(255,255,255,0.06)"/>
-                <text x="304" y="40" fill="rgba(250,199,117,0.55)" font-family="Inter, sans-serif" font-size="22" font-weight="900" text-anchor="middle">5</text>
-                <text x="304" y="84" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5" text-anchor="middle">GHOST</text>
-                <!-- Tap ripple on beat 3 -->
-                <circle class="tut-ripple" cx="168" cy="32" r="32" fill="none" stroke="#FAC775" stroke-width="2"/>
-              </g>
-              <!-- START button -->
-              <rect x="14" y="240" width="352" height="64" rx="14" fill="#FAC775"/>
-              <text x="190" y="280" fill="#0a0a0d" font-family="Inter, sans-serif" font-size="14" font-weight="900" letter-spacing="6" text-anchor="middle">START</text>
-              <!-- Caption -->
-              <text x="190" y="356" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Tap a numeral to cycle its accent.</text>
-              <text x="190" y="376" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Tap START. Listen for beat 1 leading the bar.</text>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="tut-tips">
-        <h4>Pro tips for the metronome</h4>
-        <ul>
-          <li><strong>The polygon is the time signature.</strong> No <code>/4</code> readout needed in chrome. Once you've got the connection, you can sight-read odd-meter pieces faster because the visual matches the physical bar.</li>
-          <li>Tempo word lookup: under 60 = LARGO, 60–76 = ADAGIO, 76–108 = ANDANTE, 108–120 = MODERATO, 120–156 = ALLEGRO, 156–168 = VIVACE, 168–200 = PRESTO, above = PRESTISSIMO.</li>
-          <li>Bind the TAP button via MIDI Learn (long-press) so a foot pedal sets tempo on stage. Two consecutive taps and you've got it.</li>
-          <li>The metronome is also reachable from the Play Module via the metronome chip in the top bar — same engine, same presets, same accents. Change tempo here and the Play Module follows.</li>
-          <li>The orbit dot's cadence tells you immediately when the click is fighting the bar. If the dot lands between vertices, your time signature doesn't match the music.</li>
-        </ul>
-      </div>
-    </article>
-
-
-    <!-- ====================================================== -->
-    <!-- ============== TUTORIAL 06 — MIDI LEARN ============== -->
+    <!-- == TUTORIAL 05 — MIDI LEARN (interactive) ========== -->
     <!-- ====================================================== -->
     <article id="midi-learn" class="tutorial mc--play">
       <div class="tut-hero">
         <div>
-          <div class="tut-num">Tutorial 06 · Live</div>
-          <h2>Bind a foot pedal with MIDI Learn.</h2>
-          <p class="tut-scenario">You're playing live. The hands are full. You don't want to lift one off the keys to flip the loop on the second chorus. Long-press the loop button. The MIDI Learn sheet slides up. Tap your pedal. Done. The pedal is now the loop button. Same trick for transport, sustain, the modulation wheel — anything in OSE responds to it.</p>
+          <div class="tut-num">Tutorial 05 · Live</div>
+          <h2>Bind a foot pedal in two seconds.</h2>
+          <p class="tut-scenario">You're playing live. The hands are full. You don't want to lift one off the keys to flip the loop on the second chorus. Long-press the loop button. The MIDI Learn sheet slides up. Tap your pedal. Done.</p>
           <div class="tut-meta">
             <span class="tag">Live · system-wide</span>
             <span class="tag tag--muted">3 min · Beginner</span>
           </div>
         </div>
         <div class="tut-scene-viz">
-          <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-            <rect width="380" height="460" fill="#050507"/>
-            <text x="20" y="40" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="2.5">MIDI LEARN · LONG-PRESS</text>
-            <!-- Mock control with finger holding -->
-            <g transform="translate(190,180)">
-              <circle r="60" fill="#15151a" stroke="rgba(255,138,42,0.45)" stroke-width="1.5"/>
-              <circle r="44" fill="#0a0a0d" stroke="rgba(255,138,42,0.30)"/>
-              <line x1="0" y1="-30" x2="0" y2="-18" stroke="#FF8A2A" stroke-width="3" stroke-linecap="round"/>
-              <text y="6" fill="#FF8A2A" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700" text-anchor="middle">CUTOFF</text>
-              <!-- Long-press ring (animated) -->
-              <circle class="tut-long-ring" r="60" fill="none" stroke="#FF8A2A" stroke-width="2"/>
+          <svg viewBox="0 0 220 280" preserveAspectRatio="xMidYMid meet">
+            <rect width="220" height="280" fill="#050507"/>
+            <g transform="translate(110,140)">
+              <circle r="56" fill="#15151a" stroke="#FF8A2A" stroke-width="1.5"/>
+              <circle r="44" fill="#0a0a0d" stroke="#FF8A2A" stroke-opacity="0.30"/>
+              <text y="6" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="12" font-weight="900" text-anchor="middle" letter-spacing="2">LOOP</text>
+              <circle r="62" fill="none" stroke="#FF8A2A" stroke-width="2" opacity="0">
+                <animate attributeName="opacity" values="0;0.8;0" dur="1.6s" repeatCount="indefinite"/>
+                <animate attributeName="r" values="50;78;50" dur="1.6s" repeatCount="indefinite"/>
+              </circle>
             </g>
-            <!-- Finger holding -->
-            <g transform="translate(190,220)">
-              <circle r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)"/>
-              <path d="M-6 -2 L-3 -16 L0 -16 L3 -2 L12 -2 L12 10 L-6 10 Z" fill="#FFFFFF"/>
-            </g>
-            <!-- MIDI Learn sheet sliding up -->
-            <g class="tut-sheet-up">
-              <rect x="14" y="280" width="352" height="160" rx="20" fill="#141318" stroke="#FF8A2A" stroke-width="1"/>
-              <text x="190" y="310" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="13" font-weight="900" text-anchor="middle" letter-spacing="2.5">MIDI LEARN · CUTOFF</text>
-              <text x="190" y="338" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="12" text-anchor="middle">Listening for hardware...</text>
-              <!-- 3 dots animation -->
-              <g transform="translate(170,360)">
-                <circle cx="0" cy="0" r="4" fill="#FF8A2A">
-                  <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="14" cy="0" r="4" fill="#FF8A2A">
-                  <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite" begin="0.4s"/>
-                </circle>
-                <circle cx="28" cy="0" r="4" fill="#FF8A2A">
-                  <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite" begin="0.8s"/>
-                </circle>
-              </g>
-              <text x="190" y="404" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" text-anchor="middle">PRESS A KEY · TURN A KNOB · TAP A PEDAL</text>
-            </g>
+            <text x="110" y="240" fill="#FF8A2A" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" text-anchor="middle">LONG-PRESS · 600 MS</text>
           </svg>
         </div>
       </div>
 
-      <div class="tut-scenes">
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 01</strong> Long-press anything you can touch</div>
-            <h3>Knob, slider, pill, transport — they all respond.</h3>
-            <p>Long-press is reserved app-wide for MIDI Learn. There's no other gesture that triggers it, so you don't have to think about whether <em>this</em> button supports it — they all do. The chevrons next to the instrument name. The sustain pedal. The Cut/Copy/Paste verbs. The metronome chip. The PLAY/STOP transport. Anything.</p>
+      <!-- WORKING LONG-PRESS DEMO -->
+      <section class="tut-demo" data-demo="long-press">
+        <div class="tut-demo-label">Try it · Long-press for MIDI Learn</div>
+        <h3>Hold the pad for 600ms. The sheet slides up.</h3>
+        <div class="tut-demo-body">
+          <div class="tut-demo-canvas" style="padding:0;overflow:hidden;">
+            <div class="tut-longpress-pad" data-lp-pad>
+              <span class="tut-longpress-ring"></span>
+              <span class="tut-longpress-pad-label" data-lp-label>LOOP TOGGLE</span>
+            </div>
+            <div class="tut-midi-sheet" data-lp-sheet>
+              <div class="tut-midi-sheet-title">MIDI Learn · Listening</div>
+              <div class="tut-midi-sheet-body">Press a key, turn a knob, tap a pedal</div>
+              <div class="tut-midi-listening-dots" style="margin-top:10px;"><span></span><span></span><span></span></div>
+            </div>
           </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <text x="20" y="36" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">EXAMPLES · ALL ACCEPT MIDI LEARN</text>
-              <!-- Grid of 6 mock controls -->
-              <g transform="translate(20,60)">
-                <rect x="0" y="0" width="100" height="100" rx="14" fill="#141318" stroke="rgba(255,138,42,0.40)"/>
-                <circle cx="50" cy="44" r="22" fill="none" stroke="#FF8A2A" stroke-width="2"/>
-                <line x1="50" y1="22" x2="50" y2="32" stroke="#FF8A2A" stroke-width="2"/>
-                <text x="50" y="86" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">CUTOFF</text>
-                <rect x="120" y="0" width="100" height="100" rx="14" fill="#141318" stroke="rgba(74,163,255,0.40)"/>
-                <rect x="135" y="20" width="70" height="60" rx="6" fill="#0a0a0d"/>
-                <rect x="148" y="38" width="44" height="6" rx="3" fill="#1c1c22"/>
-                <rect x="148" y="38" width="22" height="6" rx="3" fill="#4AA3FF"/>
-                <text x="170" y="74" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">FILTER</text>
-                <rect x="240" y="0" width="100" height="100" rx="14" fill="#141318" stroke="rgba(177,139,255,0.40)"/>
-                <text x="290" y="56" fill="#B18BFF" font-family="Inter, sans-serif" font-size="14" font-weight="900" text-anchor="middle">PLAY</text>
-                <text x="290" y="74" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">TRANSPORT</text>
-              </g>
-              <g transform="translate(20,180)">
-                <rect x="0" y="0" width="100" height="100" rx="14" fill="#141318" stroke="rgba(93,202,165,0.40)"/>
-                <text x="50" y="50" fill="#5DCAA5" font-family="Inter, sans-serif" font-size="12" font-weight="900" text-anchor="middle">LOOP</text>
-                <text x="50" y="86" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">PEDAL TARGET</text>
-                <rect x="120" y="0" width="100" height="100" rx="14" fill="#141318" stroke="rgba(250,199,117,0.40)"/>
-                <text x="170" y="50" fill="#FAC775" font-family="Inter, sans-serif" font-size="14" font-weight="900" text-anchor="middle">TAP</text>
-                <text x="170" y="86" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">TEMPO</text>
-                <rect x="240" y="0" width="100" height="100" rx="14" fill="#141318" stroke="rgba(133,183,235,0.40)"/>
-                <text x="290" y="50" fill="#85B7EB" font-family="Inter, sans-serif" font-size="14" font-weight="900" text-anchor="middle">REC</text>
-                <text x="290" y="86" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">RECORD ARM</text>
-              </g>
-              <text x="190" y="370" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">Long-press any of these for ~500 ms.</text>
-              <text x="190" y="392" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">A ring grows around the control to confirm.</text>
-            </svg>
+          <div class="tut-demo-controls">
+            <p style="font-size:.95rem;color:var(--ink-soft);margin:0;">Hold the orange pad on the left. After 600ms a ring grows around it; the bottom sheet slides up and "listens" for your hardware. After ~1.6s OSE auto-binds (in this demo) and the pad confirms the binding.</p>
+            <button class="tut-demo-btn" data-lp-reset>Reset binding</button>
+            <p style="font-size:.85rem;color:var(--muted);margin:0;">In the real app you'd press a key on your MIDI keyboard or tap a foot pedal — the next CC, note or program-change message gets bound to the long-pressed control. Bindings are global and channel-aware.</p>
           </div>
         </div>
-
-        <div class="tut-scene">
-          <div class="tut-scene-text">
-            <div class="tut-scene-num"><strong>SCENE 02</strong> The MIDI Learn sheet slides up</div>
-            <h3>Press a key, turn a knob, tap a pedal.</h3>
-            <p>The sheet shows you what's listening. Hit the hardware control you want bound. The next CC, note or program-change message OSE receives gets mapped to the long-pressed control. Bindings are global and channel-aware. The sheet shows the binding that was just made and dismisses itself.</p>
-            <p>Bindings live in the Settings → MIDI Mappings category. You can review, clear, or relearn any of them at any time.</p>
-          </div>
-          <div class="tut-scene-viz">
-            <svg viewBox="0 0 380 460" preserveAspectRatio="xMidYMid meet">
-              <rect width="380" height="460" fill="#050507"/>
-              <text x="20" y="40" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="2.5">MIDI MAPPINGS · 4 BOUND</text>
-              <!-- Mappings list -->
-              <g transform="translate(14,60)">
-                <rect x="0" y="0" width="352" height="48" rx="10" fill="#141318" stroke="rgba(255,255,255,0.06)"/>
-                <text x="14" y="22" fill="#ECECEE" font-family="Inter, sans-serif" font-size="11" font-weight="700">CUTOFF</text>
-                <text x="14" y="38" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">CC 74 · CH 1</text>
-                <text x="338" y="32" fill="#FF8A2A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">›</text>
-                <rect x="0" y="56" width="352" height="48" rx="10" fill="#141318" stroke="rgba(255,255,255,0.06)"/>
-                <text x="14" y="78" fill="#ECECEE" font-family="Inter, sans-serif" font-size="11" font-weight="700">SUSTAIN</text>
-                <text x="14" y="94" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">CC 64 · CH 1</text>
-                <rect x="0" y="112" width="352" height="48" rx="10" fill="#141318" stroke="rgba(255,138,42,0.5)"/>
-                <text x="14" y="134" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="11" font-weight="700">LOOP TOGGLE</text>
-                <text x="14" y="150" fill="#FF8A2A" font-family="JetBrains Mono, monospace" font-size="9">CC 67 · FOOT PEDAL · CH 1</text>
-                <text x="338" y="144" fill="#FF8A2A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">●</text>
-                <rect x="0" y="168" width="352" height="48" rx="10" fill="#141318" stroke="rgba(255,255,255,0.06)"/>
-                <text x="14" y="190" fill="#ECECEE" font-family="Inter, sans-serif" font-size="11" font-weight="700">TAP TEMPO</text>
-                <text x="14" y="206" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">NOTE C-2 · CH 16</text>
-              </g>
-              <text x="190" y="316" fill="#FF8A2A" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">LOOP TOGGLE — just bound</text>
-              <text x="190" y="338" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Foot pedal sends CC 67. OSE listens.</text>
-              <text x="190" y="356" fill="#B8B8BD" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">No retraining needed when you switch songs.</text>
-            </svg>
-          </div>
-        </div>
-      </div>
+      </section>
 
       <div class="tut-tips">
-        <h4>Pro tips for live performance</h4>
+        <h4>Pro tips</h4>
         <ul>
-          <li>Bindings are <strong>global and channel-aware</strong>. The same CC can hit different controls when the channel changes, so a multi-instrument setup can use one MIDI controller across many duties.</li>
-          <li>Most useful bindings: a foot pedal to sustain (CC 64 by default), a foot pedal to loop start/stop, a knob to filter cutoff, a fader to expression, the modulation wheel to LFO depth. None of these need a special config — just long-press and assign.</li>
-          <li>Bluetooth MIDI keyboards work the same way. Pair via Settings → Bluetooth MIDI Devices and any binding you make from a Bluetooth controller is identical to a wired one.</li>
-          <li>USB MIDI is plug-and-play. The engine recovers automatically through Android's hot-plug callbacks if a cable disconnects.</li>
+          <li>Long-press is reserved app-wide for MIDI Learn. <strong>Any tappable control</strong> accepts it: knob, slider, pill, transport, the chevrons next to the instrument name, even toolbar verbs.</li>
+          <li>Bindings are global and <strong>channel-aware</strong>. The same CC on a different channel can hit a different control.</li>
+          <li>Most useful bindings for live: foot pedal → sustain (CC 64), foot pedal → loop start/stop, knob → filter cutoff, fader → expression, mod wheel → LFO depth.</li>
+          <li>Bluetooth MIDI keyboards work the same way. Pair via Settings → Bluetooth MIDI Devices.</li>
           <li>Bindings persist between sessions. Set them once during soundcheck and they're there next gig.</li>
         </ul>
       </div>
@@ -1525,5 +639,6 @@
 <script src="assets/data/ose-content.js" defer></script>
 <script src="assets/js/ose-renderer.js" defer></script>
 <script src="assets/js/ose-main.js" defer></script>
+<script src="assets/js/ose-tutorials.js" defer></script>
 </body>
 </html>
