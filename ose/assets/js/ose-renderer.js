@@ -100,28 +100,207 @@
   }
 
   // -------- 8-module grid (landing) --------
+  // Each card mirrors the corresponding *Wide composable in
+  // app/.../main_screen/MainScreenIconsAnimated.kt.
   var gridHost = document.querySelector('[data-ose-module-grid]');
   if (gridHost && Array.isArray(C.modules)) {
-    var icons = {
-      "play":             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"/></svg>',
-      "audio":            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="3" y2="12"/><line x1="6" y1="9" x2="6" y2="15"/><line x1="9" y1="6" x2="9" y2="18"/><line x1="12" y1="3" x2="12" y2="21"/><line x1="15" y1="6" x2="15" y2="18"/><line x1="18" y1="9" x2="18" y2="15"/><line x1="21" y1="12" x2="21" y2="12"/></svg>',
-      "midi":             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="7" y1="6" x2="7" y2="14"/><line x1="11" y1="6" x2="11" y2="14"/><line x1="15" y1="6" x2="15" y2="14"/><line x1="19" y1="6" x2="19" y2="14"/></svg>',
-      "practice":         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>',
-      "metronome":        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21 L12 3 L17 21 Z"/><line x1="12" y1="3" x2="17" y2="14"/></svg>',
-      "tuner":            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16 A9 9 0 0 1 21 16"/><line x1="12" y1="16" x2="14" y2="6"/><circle cx="12" cy="16" r="1.4" fill="currentColor"/></svg>',
-      "signal-generator": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 Q 6 4 9 12 T 15 12 T 21 12"/></svg>',
-      "meters":           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3"  y="14" width="3" height="6"/><rect x="8"  y="10" width="3" height="10"/><rect x="13" y="6"  width="3" height="14"/><rect x="18" y="12" width="3" height="8"/></svg>'
+    // ---- PlayKeysWide: 7 white keys + 5 sharps, accent tint cycles L→R ----
+    function vizPlay() {
+      // viewBox 700×200 — 7 keys at 100 wide, gap 6, sharps centered between
+      // specific pairs (after 0,1,3,4,5 — skip E-F and B-C).
+      var whites = '';
+      var tints = '';
+      for (var i = 0; i < 7; i++) {
+        var x = i * 100 + 3;
+        whites += '<rect x="' + x + '" y="0" width="94" height="200" rx="10" fill="#E8E8EC"/>';
+        tints  += '<rect x="' + x + '" y="0" width="94" height="200" rx="10" fill="currentColor" class="mcw-play-tint mcw-play-tint-' + i + '" opacity="0"/>';
+      }
+      var sharpAfter = [0,1,3,4,5];
+      var sharps = '';
+      sharpAfter.forEach(function (idx) {
+        var cx = (idx + 1) * 100;
+        sharps += '<rect x="' + (cx - 27) + '" y="0" width="55" height="124" rx="8" fill="#0A0A0E"/>';
+      });
+      return '<svg viewBox="0 0 700 200" preserveAspectRatio="none">' +
+             '<g>' + whites + '</g>' +
+             '<g>' + tints + '</g>' +
+             '<g>' + sharps + '</g>' +
+             '</svg>';
+    }
+    // ---- AudioWaveWide: 22 vertical bars, pre-baked heights ----
+    function vizAudio() {
+      var heights = [0.30,0.55,0.80,0.60,0.90,0.45,0.70,0.35,0.65,0.85,0.50,0.75,0.40,0.60,0.30,0.55,0.80,0.45,0.65,0.90,0.50,0.35];
+      var slot = 700 / heights.length;
+      var barW = slot * 0.62;
+      var H = 200;
+      var bars = '';
+      for (var i = 0; i < heights.length; i++) {
+        var barH = heights[i] * H;
+        var x = i * slot + (slot - barW) / 2;
+        var y = H - barH;
+        bars += '<rect class="mcw-audio-bar" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" rx="' + (barW * 0.25).toFixed(1) + '" fill="currentColor"/>';
+      }
+      return '<svg viewBox="0 0 700 200" preserveAspectRatio="none">' + bars + '</svg>';
+    }
+    // ---- MidiWide: 6 note bars across 4 lanes ----
+    function vizMidi() {
+      var notes = [
+        [0.02, 0.16, 1, 'mcw-midi-1'],
+        [0.20, 0.10, 2, 'mcw-midi-2'],
+        [0.32, 0.18, 0, 'mcw-midi-3'],
+        [0.52, 0.12, 1, 'mcw-midi-4'],
+        [0.66, 0.18, 3, 'mcw-midi-5'],
+        [0.86, 0.12, 2, 'mcw-midi-6']
+      ];
+      var W = 700, H = 200;
+      var laneH = H / 4;
+      var barH  = laneH * 0.58;
+      var bars = '';
+      notes.forEach(function (n) {
+        var x = n[0] * W;
+        var w = n[1] * W;
+        var y = n[2] * laneH + (laneH - barH) / 2;
+        bars += '<rect class="' + n[3] + '" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + barH.toFixed(1) + '" rx="' + (barH * 0.32).toFixed(1) + '" fill="currentColor"/>';
+      });
+      return '<svg viewBox="0 0 700 200" preserveAspectRatio="none">' + bars + '</svg>';
+    }
+    // ---- PracticeWide: rail with growing fill + sweeping playhead ----
+    function vizPractice() {
+      var W = 700, H = 200;
+      var midY = H * 0.5;
+      var railH = H * 0.18;
+      var railTop = midY - railH / 2;
+      var markW = W * 0.014;
+      var markH = H * 0.74;
+      var phW = W * 0.022;
+      var phH = H * 0.88;
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' +
+        // Background rail
+        '<rect x="0" y="' + railTop + '" width="' + W + '" height="' + railH + '" rx="' + (railH/2) + '" fill="currentColor" opacity="0.18"/>' +
+        // Filled portion (animates scaleX)
+        '<rect class="mcw-practice-fill" x="0" y="' + railTop + '" width="' + W + '" height="' + railH + '" rx="' + (railH/2) + '" fill="currentColor" opacity="0.55"/>' +
+        // Loop start pillar
+        '<rect x="0" y="' + (midY - markH/2) + '" width="' + markW + '" height="' + markH + '" rx="' + (markW/2) + '" fill="currentColor" opacity="0.85"/>' +
+        // Loop end pillar
+        '<rect x="' + (W - markW) + '" y="' + (midY - markH/2) + '" width="' + markW + '" height="' + markH + '" rx="' + (markW/2) + '" fill="currentColor" opacity="0.85"/>' +
+        // Playhead (sweeps L→R)
+        '<g class="mcw-practice-head">' +
+          '<rect x="' + (-phW * 1.7) + '" y="' + (midY - phH/2) + '" width="' + (phW * 3.4) + '" height="' + phH + '" rx="' + (phW * 1.7) + '" fill="currentColor" opacity="0.32"/>' +
+          '<rect x="' + (-phW/2) + '" y="' + (midY - phH/2) + '" width="' + phW + '" height="' + phH + '" rx="' + (phW/2) + '" fill="currentColor"/>' +
+        '</g>' +
+        '</svg>';
+    }
+    // ---- MetronomeWide: 4 pillars with one active at a time ----
+    function vizMetronome() {
+      var W = 700, H = 200;
+      var slot = W / 4;
+      var barW = slot * 0.32;
+      var barH = H * 0.50;
+      var bars = '';
+      for (var i = 0; i < 4; i++) {
+        var x = i * slot + (slot - barW) / 2;
+        var y = H - barH;
+        bars += '<rect class="mcw-met-' + (i + 1) + '" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" rx="' + (barW * 0.45).toFixed(1) + '" fill="currentColor"/>';
+      }
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' + bars + '</svg>';
+    }
+    // ---- TunerWide: pitch ribbon, 5 cent ticks, drifting needle ----
+    function vizTuner() {
+      var W = 700, H = 200;
+      var midY = H * 0.5;
+      var railH = H * 0.16;
+      var railTop = midY - railH / 2;
+      var centerX = W / 2;
+      var ticks = '';
+      [-0.40, -0.20, 0, 0.20, 0.40].forEach(function (off) {
+        var isCenter = off === 0;
+        var tx = centerX + off * W;
+        var tickH = isCenter ? H * 0.68 : H * 0.45;
+        var tickW = isCenter ? W * 0.018 : W * 0.012;
+        ticks += '<rect x="' + (tx - tickW/2).toFixed(1) + '" y="' + (midY - tickH/2).toFixed(1) + '" width="' + tickW.toFixed(2) + '" height="' + tickH.toFixed(1) + '" rx="' + (tickW/2).toFixed(2) + '" fill="currentColor" opacity="' + (isCenter ? 0.88 : 0.40) + '"/>';
+      });
+      var needleW = W * 0.024;
+      var needleH = H * 0.88;
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' +
+        // Soft full-width rail
+        '<rect x="0" y="' + railTop + '" width="' + W + '" height="' + railH + '" rx="' + (railH/2) + '" fill="currentColor" opacity="0.20"/>' +
+        // Cent ticks
+        ticks +
+        // Needle (drifts ±3% — translateX animates the group)
+        '<g class="mcw-tuner-needle">' +
+          '<rect x="' + (centerX - needleW * 1.6).toFixed(1) + '" y="' + (midY - needleH/2).toFixed(1) + '" width="' + (needleW * 3.2).toFixed(1) + '" height="' + needleH.toFixed(1) + '" rx="' + (needleW * 1.6).toFixed(1) + '" fill="currentColor" opacity="0.28"/>' +
+          '<rect x="' + (centerX - needleW/2).toFixed(1) + '" y="' + (midY - needleH/2).toFixed(1) + '" width="' + needleW.toFixed(1) + '" height="' + needleH.toFixed(1) + '" rx="' + (needleW/2).toFixed(1) + '" fill="currentColor"/>' +
+        '</g>' +
+        '</svg>';
+    }
+    // ---- SignalGenWide: scrolling sine wave with halo ----
+    function vizSignalGen() {
+      var W = 700, H = 200;
+      var midY = H * 0.5;
+      var amp  = H * 0.40;
+      // Pre-compute path for 2 cycles + extra cycle for seamless scroll loop
+      var d = 'M 0 ' + midY;
+      var steps = 80;
+      for (var i = 1; i <= steps; i++) {
+        var t = i / steps;
+        var x = t * (W + 100);  // extra width for scroll
+        var y = midY + Math.sin(t * 4 * Math.PI) * amp;
+        d += ' L ' + x.toFixed(1) + ' ' + y.toFixed(2);
+      }
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" style="overflow:hidden;">' +
+        '<g class="mcw-sine">' +
+          '<path d="' + d + '" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="' + (H * 0.14) + '" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '<path d="' + d + '" fill="none" stroke="currentColor" stroke-width="' + (H * 0.06) + '" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '</g>' +
+        '</svg>';
+    }
+    // ---- MetersWide: 8 vertical FFT bars ----
+    function vizMeters() {
+      var heights = [0.55, 0.78, 0.92, 0.70, 0.85, 0.62, 0.74, 0.50];
+      var W = 700, H = 200;
+      var slot = W / heights.length;
+      var barW = slot * 0.58;
+      var bars = '';
+      for (var i = 0; i < heights.length; i++) {
+        var barH = heights[i] * H;
+        var x = i * slot + (slot - barW) / 2;
+        var y = H - barH;
+        bars += '<rect class="mcw-meter-' + (i + 1) + '" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" rx="' + (barW * 0.18).toFixed(1) + '" fill="currentColor" opacity="0.85"/>';
+      }
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' + bars + '</svg>';
+    }
+    var vizFns = {
+      'play': vizPlay,
+      'audio': vizAudio,
+      'midi': vizMidi,
+      'practice': vizPractice,
+      'metronome': vizMetronome,
+      'tuner': vizTuner,
+      'signal-generator': vizSignalGen,
+      'meters': vizMeters
+    };
+    var classMap = {
+      'play': 'mc--play',
+      'audio': 'mc--audio',
+      'midi': 'mc--midi',
+      'practice': 'mc--practice',
+      'metronome': 'mc--metronome',
+      'tuner': 'mc--tuner',
+      'signal-generator': 'mc--signalgen',
+      'meters': 'mc--meters'
     };
     gridHost.innerHTML = C.modules.map(function (m) {
       var emph = m.id === 'play' ? ' is-emphasized' : '';
+      var cls  = classMap[m.id] || '';
       var href = fixHref('modules/' + m.id + '.html');
+      var viz  = (vizFns[m.id] || function () { return ''; })();
       return (
-        '<a class="module-card' + emph + '" href="' + href + '">' +
-        '<span class="mc-icon">' + (icons[m.id] || '') + '</span>' +
-        '<div>' +
-        '<div class="mc-name">' + (m.shortName || m.name) + '</div>' +
-        '<div class="mc-sub">' + (m.tile_role || '') + '</div>' +
+        '<a class="module-card ' + cls + emph + '" href="' + href + '">' +
+        '<div class="mc-head">' +
+          '<div class="mc-name">' + (m.shortName || m.name) + '</div>' +
+          '<div class="mc-sub">' + (m.tile_role || '') + '</div>' +
         '</div>' +
+        '<div class="mc-viz">' + viz + '</div>' +
         '</a>'
       );
     }).join('');

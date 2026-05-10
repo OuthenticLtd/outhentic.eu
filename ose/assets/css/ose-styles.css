@@ -260,47 +260,89 @@ code, kbd { font-family: var(--mono-font); font-size: .9em; background: var(--bg
 
 a.hub-card { display: block; color: inherit; }
 
-/* Module grid for landing page — 8 modules */
+/* =========================================================
+   Home grid — matches MainScreen.kt
+   Each card: title (accent) + subtitle on top, wide-icon
+   visualization fills the bottom (per *Wide functions in
+   MainScreenIconsAnimated.kt). 14dp corners, 0.5dp accent
+   border, 12dp outer / 16dp gap.
+   ========================================================= */
 .module-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 16px;
 }
 @media (min-width: 720px) { .module-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+
 .module-card {
   aspect-ratio: 1 / 1;
-  display: flex; flex-direction: column; justify-content: space-between;
+  display: flex; flex-direction: column;
   text-align: left;
-  padding: clamp(14px, 2.4vw, 22px);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  padding: 18px 18px 0;
+  background: rgba(20,20,26,0.80);
+  border: 1px solid;
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 14px;
   position: relative; overflow: hidden;
   transition: transform .25s, background .25s, border-color .2s;
+  /* The card's accent color drives both the title text and the SVG
+     stroke/fill via currentColor. */
+  color: var(--c-play);
 }
-.module-card:hover { background: var(--surface-2); transform: translateY(-2px); }
+.module-card:hover { background: rgba(28,28,34,0.92); transform: translateY(-2px); }
+
+.module-card.mc--play       { color: var(--c-play);       border-color: rgba(255,138,42,0.45); }
+.module-card.mc--audio      { color: var(--c-audio);      border-color: rgba(224,90,107,0.45); }
+.module-card.mc--midi       { color: var(--c-midi);       border-color: rgba(177,139,255,0.45); }
+.module-card.mc--practice   { color: var(--c-practice);   border-color: rgba(93,202,165,0.45); }
+.module-card.mc--metronome  { color: var(--c-metronome);  border-color: rgba(250,199,117,0.45); }
+.module-card.mc--tuner      { color: var(--c-tuner);      border-color: rgba(133,183,235,0.45); }
+.module-card.mc--signalgen  { color: var(--c-signalgen);  border-color: rgba(79,209,197,0.45); }
+.module-card.mc--meters     { color: var(--c-meters);     border-color: rgba(243,139,160,0.45); }
+
 .module-card.is-emphasized {
-  background: linear-gradient(135deg, rgba(79,168,255,0.18), rgba(255,139,61,0.20));
-  border-color: rgba(255,139,61,0.30);
+  background:
+    radial-gradient(120% 80% at 80% 100%, rgba(255,138,42,0.30), transparent 60%),
+    radial-gradient(80% 60% at 0% 0%,    rgba(74,163,255,0.10), transparent 70%),
+    rgba(20,20,26,0.92);
 }
-.module-card .mc-icon {
-  width: 36px; height: 36px; flex: 0 0 auto;
-  display: grid; place-items: center;
-  color: var(--accent-orange);
+
+.module-card .mc-head {
+  flex: 0 0 auto;
 }
-.module-card.is-emphasized .mc-icon { color: var(--ink); }
 .module-card .mc-name {
-  font-size: clamp(.82rem, 1.6vw, 1.05rem);
+  font-size: clamp(.95rem, 1.8vw, 1.15rem);
   font-weight: 700;
-  letter-spacing: .04em;
+  letter-spacing: .05em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: currentColor;
+  line-height: 1.1;
 }
 .module-card .mc-sub {
   font-size: .72rem;
+  font-weight: 500;
   color: var(--muted);
-  letter-spacing: .04em;
-  margin-top: 4px;
+  letter-spacing: .02em;
+  margin-top: 6px;
+  line-height: 1.3;
+}
+
+.module-card .mc-viz {
+  flex: 1;
+  margin-top: 14px;
+  display: flex;
+  align-items: end;
+  justify-content: stretch;
+  overflow: hidden;
+}
+.module-card .mc-viz svg {
+  width: 100%;
+  height: 60%;
+  max-height: 70px;
+  display: block;
+}
+@media (min-width: 720px) {
+  .module-card .mc-viz svg { max-height: 90px; }
 }
 
 /* Module page header card */
@@ -637,6 +679,246 @@ a.hub-card { display: block; color: inherit; }
 }
 .anim-cutoff { animation: cutoff-sweep 2.6s linear infinite; }
 
+/* =========================================================
+   Wide-icon animations for the home grid
+   Match MainScreenIconsAnimated.kt — ambient pass (slow
+   loops, low-amplitude motion). Cards read as alive without
+   distracting.
+   ========================================================= */
+
+/* PLAY — 7 white keys, accent tint cycles L→R on a 14s loop.
+   Each key gets the same animation with a 2s delay offset. */
+@keyframes mcw-play-key-tint {
+  0%, 4%, 100% { opacity: 0; }
+  10%, 14%      { opacity: 0.18; }
+}
+.mcw-play-tint   { animation: mcw-play-key-tint 14s linear infinite; }
+.mcw-play-tint-1 { animation-delay: -2s; }
+.mcw-play-tint-2 { animation-delay: -4s; }
+.mcw-play-tint-3 { animation-delay: -6s; }
+.mcw-play-tint-4 { animation-delay: -8s; }
+.mcw-play-tint-5 { animation-delay: -10s; }
+.mcw-play-tint-6 { animation-delay: -12s; }
+
+/* AUDIO — 22 vertical bars, gentle alpha L→R drift on 12s.
+   Almost imperceptible — just enough to feel alive. */
+@keyframes mcw-audio-drift {
+  0%, 100% { opacity: 0.65; }
+  50%      { opacity: 0.78; }
+}
+.mcw-audio-bar { animation: mcw-audio-drift 12s linear infinite; }
+
+/* MIDI — 6 note bars on 4 lanes, alpha pulses out-of-phase, 12s loop. */
+@keyframes mcw-midi-pulse {
+  0%, 100% { opacity: 0.70; }
+  50%      { opacity: 0.84; }
+}
+.mcw-midi-1 { animation: mcw-midi-pulse 12s ease-in-out infinite; }
+.mcw-midi-2 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -1.5s; }
+.mcw-midi-3 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -3s; }
+.mcw-midi-4 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -4.5s; }
+.mcw-midi-5 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -6s; }
+.mcw-midi-6 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -7.5s; }
+
+/* PRACTICE — playhead sweeps L→R on a 14s loop.
+   The filled rail grows behind it, then both snap back. */
+@keyframes mcw-practice-sweep {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+.mcw-practice-head { animation: mcw-practice-sweep 14s linear infinite; }
+@keyframes mcw-practice-fill {
+  0%   { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+.mcw-practice-fill { animation: mcw-practice-fill 14s linear infinite; transform-origin: left center; }
+
+/* METRONOME — 4 pillars, one active at a time. 6s cycle (≈40 bpm equiv) */
+@keyframes mcw-met-1 { 0%, 24% { opacity: .62; transform: scaleY(1.20); } 25%, 100% { opacity: .42; transform: scaleY(1.0); } }
+@keyframes mcw-met-2 { 0%, 24% { opacity: .42; transform: scaleY(1.0); } 25%, 49% { opacity: .62; transform: scaleY(1.20); } 50%, 100% { opacity: .42; transform: scaleY(1.0); } }
+@keyframes mcw-met-3 { 0%, 49% { opacity: .42; transform: scaleY(1.0); } 50%, 74% { opacity: .62; transform: scaleY(1.20); } 75%, 100% { opacity: .42; transform: scaleY(1.0); } }
+@keyframes mcw-met-4 { 0%, 74% { opacity: .42; transform: scaleY(1.0); } 75%, 99% { opacity: .62; transform: scaleY(1.20); } 100% { opacity: .42; transform: scaleY(1.0); } }
+.mcw-met-1 { animation: mcw-met-1 6s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
+.mcw-met-2 { animation: mcw-met-2 6s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
+.mcw-met-3 { animation: mcw-met-3 6s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
+.mcw-met-4 { animation: mcw-met-4 6s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
+
+/* TUNER — needle drifts ±3% on 10s ping-pong */
+@keyframes mcw-tuner-drift {
+  0%, 100% { transform: translateX(-3%); }
+  50%      { transform: translateX(3%);  }
+}
+.mcw-tuner-needle { animation: mcw-tuner-drift 10s ease-in-out infinite; }
+
+/* SIGNAL GEN — sine phase scrolls L→R on a 13s linear loop */
+@keyframes mcw-sine-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100px); }
+}
+.mcw-sine { animation: mcw-sine-scroll 13s linear infinite; }
+
+/* METERS — 8 FFT bars, ±4% height swing on 9s loop */
+@keyframes mcw-meter-1 { 0%,100% { transform: scaleY(0.96); } 50% { transform: scaleY(1.04); } }
+@keyframes mcw-meter-2 { 0%,100% { transform: scaleY(1.02); } 50% { transform: scaleY(0.96); } }
+@keyframes mcw-meter-3 { 0%,100% { transform: scaleY(0.98); } 50% { transform: scaleY(1.04); } }
+@keyframes mcw-meter-4 { 0%,100% { transform: scaleY(1.04); } 50% { transform: scaleY(0.96); } }
+.mcw-meter-1 { animation: mcw-meter-1 9s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
+.mcw-meter-2 { animation: mcw-meter-2 9s ease-in-out infinite; animation-delay: -1.6s; transform-origin: 50% 100%; transform-box: fill-box; }
+.mcw-meter-3 { animation: mcw-meter-3 9s ease-in-out infinite; animation-delay: -3.2s; transform-origin: 50% 100%; transform-box: fill-box; }
+.mcw-meter-4 { animation: mcw-meter-4 9s ease-in-out infinite; animation-delay: -4.8s; transform-origin: 50% 100%; transform-box: fill-box; }
+.mcw-meter-5 { animation: mcw-meter-1 9s ease-in-out infinite; animation-delay: -6.4s; transform-origin: 50% 100%; transform-box: fill-box; }
+.mcw-meter-6 { animation: mcw-meter-2 9s ease-in-out infinite; animation-delay: -8.0s; transform-origin: 50% 100%; transform-box: fill-box; }
+.mcw-meter-7 { animation: mcw-meter-3 9s ease-in-out infinite; animation-delay: -2.4s; transform-origin: 50% 100%; transform-box: fill-box; }
+.mcw-meter-8 { animation: mcw-meter-4 9s ease-in-out infinite; animation-delay: -7.2s; transform-origin: 50% 100%; transform-box: fill-box; }
+
+/* =========================================================
+   Tutorial scene animations — for tutorials.html
+   ========================================================= */
+
+/* Scene reveal on scroll */
+@keyframes tut-scene-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Tap ripple — a circle expands and fades from a tap point */
+@keyframes tut-tap-ripple {
+  0%   { opacity: 0;   transform: scale(0.4); }
+  20%  { opacity: 0.85; }
+  100% { opacity: 0;   transform: scale(2.4); }
+}
+.tut-ripple { animation: tut-tap-ripple 1.6s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+
+/* Finger pointer cycle — slides in, taps (scales), holds, fades */
+@keyframes tut-finger-tap {
+  0%, 5%   { opacity: 0; transform: translate(0,8px) scale(1); }
+  18%      { opacity: 1; transform: translate(0,0) scale(1); }
+  28%      { transform: translate(0,0) scale(0.85); }
+  38%      { transform: translate(0,0) scale(1); }
+  85%, 100%{ opacity: 0; transform: translate(0,0) scale(1); }
+}
+.tut-finger { animation: tut-finger-tap 4s ease-in-out infinite; transform-origin: 50% 90%; transform-box: fill-box; }
+
+/* Long-press hold — finger holds for 1.5s, ring grows, MIDI Learn sheet slides up */
+@keyframes tut-long-press-ring {
+  0%, 10%  { opacity: 0;   r: 6; }
+  20%      { opacity: 0.55; r: 6; }
+  60%      { opacity: 1;    r: 32; }
+  70%, 100%{ opacity: 0;    r: 32; }
+}
+.tut-long-ring { animation: tut-long-press-ring 4.4s ease-out infinite; }
+
+/* Speed wheel — rotating + waveform stretching tied to it */
+@keyframes tut-speed-wheel {
+  0%, 100% { transform: rotate(0deg);   }
+  40%, 60% { transform: rotate(-100deg); }
+}
+.tut-speed-wheel { animation: tut-speed-wheel 5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+@keyframes tut-waveform-stretch {
+  0%, 100% { transform: scaleX(1);   }
+  40%, 60% { transform: scaleX(0.55); }
+}
+.tut-waveform-stretch { animation: tut-waveform-stretch 5s ease-in-out infinite; transform-origin: left center; transform-box: fill-box; }
+
+/* Tuner needle — drifts, then snaps to centre + green halo flashes */
+@keyframes tut-tuner-needle-snap {
+  0%   { transform: rotate(-22deg); }
+  20%  { transform: rotate(15deg);  }
+  35%  { transform: rotate(-10deg); }
+  45%  { transform: rotate(0deg);   }
+  60%, 90% { transform: rotate(0deg); }   /* snap-locked */
+  100% { transform: rotate(-22deg); }
+}
+.tut-tuner-needle { animation: tut-tuner-needle-snap 7s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
+@keyframes tut-tuner-snap-flash {
+  0%, 44% { opacity: 0; }
+  50%, 88% { opacity: 1; }
+  100%    { opacity: 0; }
+}
+.tut-tuner-snap { animation: tut-tuner-snap-flash 7s ease-in-out infinite; }
+
+/* TempoPolygon morph — square → pentagon */
+@keyframes tut-poly-morph-4-5 {
+  0%, 30%  { d: path('M 50,10 L 90,50 L 50,90 L 10,50 Z'); }
+  50%, 100%{ d: path('M 50,10 L 88,38 L 73,82 L 27,82 L 12,38 Z'); }
+}
+.tut-poly-morph { animation: tut-poly-morph-4-5 5s ease-in-out infinite; }
+
+/* TempoPolygon orbit dot — moves around the pentagon's 5 vertices */
+@keyframes tut-poly-dot {
+  0%   { transform: translate(38px, -42px); }
+  20%  { transform: translate(36px, -10px);  }
+  40%  { transform: translate(21px, 30px);   }
+  60%  { transform: translate(-25px, 30px);  }
+  80%  { transform: translate(-39px, -10px); }
+  100% { transform: translate(38px, -42px);  }
+}
+.tut-poly-dot { animation: tut-poly-dot 2.5s steps(5, end) infinite; }
+
+/* REC pill — red pulse */
+@keyframes tut-rec-pulse {
+  0%, 100% { transform: scale(1);    opacity: 0.85; }
+  50%      { transform: scale(1.05); opacity: 1.0;  }
+}
+.tut-rec { animation: tut-rec-pulse 1s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+
+/* Live waveform draw — bars appearing one by one, sweeping right to left */
+@keyframes tut-live-bar-1  { 0%, 8%  { opacity: 0; } 12%, 100% { opacity: 0.92; } }
+@keyframes tut-live-bar-2  { 0%, 16% { opacity: 0; } 20%, 100% { opacity: 0.92; } }
+@keyframes tut-live-bar-3  { 0%, 24% { opacity: 0; } 28%, 100% { opacity: 0.92; } }
+@keyframes tut-live-bar-4  { 0%, 32% { opacity: 0; } 36%, 100% { opacity: 0.92; } }
+@keyframes tut-live-bar-5  { 0%, 40% { opacity: 0; } 44%, 100% { opacity: 0.92; } }
+@keyframes tut-live-bar-6  { 0%, 48% { opacity: 0; } 52%, 100% { opacity: 0.92; } }
+@keyframes tut-live-bar-7  { 0%, 56% { opacity: 0; } 60%, 100% { opacity: 0.92; } }
+@keyframes tut-live-bar-8  { 0%, 64% { opacity: 0; } 68%, 100% { opacity: 0.92; } }
+@keyframes tut-live-bar-9  { 0%, 72% { opacity: 0; } 76%, 100% { opacity: 0.92; } }
+@keyframes tut-live-bar-10 { 0%, 80% { opacity: 0; } 84%, 100% { opacity: 0.92; } }
+.tut-live-1  { animation: tut-live-bar-1  4.5s linear infinite; }
+.tut-live-2  { animation: tut-live-bar-2  4.5s linear infinite; }
+.tut-live-3  { animation: tut-live-bar-3  4.5s linear infinite; }
+.tut-live-4  { animation: tut-live-bar-4  4.5s linear infinite; }
+.tut-live-5  { animation: tut-live-bar-5  4.5s linear infinite; }
+.tut-live-6  { animation: tut-live-bar-6  4.5s linear infinite; }
+.tut-live-7  { animation: tut-live-bar-7  4.5s linear infinite; }
+.tut-live-8  { animation: tut-live-bar-8  4.5s linear infinite; }
+.tut-live-9  { animation: tut-live-bar-9  4.5s linear infinite; }
+.tut-live-10 { animation: tut-live-bar-10 4.5s linear infinite; }
+
+/* Layer dropping in — slides down + fades */
+@keyframes tut-layer-drop {
+  0%, 30%  { opacity: 0; transform: translateY(-12px); }
+  45%, 100%{ opacity: 1; transform: none; }
+}
+.tut-layer-drop { animation: tut-layer-drop 4s ease-out infinite; }
+
+/* MIDI Learn sheet sliding up from the bottom */
+@keyframes tut-sheet-up {
+  0%, 50%   { transform: translateY(100%); opacity: 0; }
+  60%, 100% { transform: translateY(0); opacity: 1; }
+}
+.tut-sheet-up { animation: tut-sheet-up 4.4s ease-out infinite; transform-origin: bottom; transform-box: fill-box; }
+
+/* Selection rectangle drawing on waveform */
+@keyframes tut-sel-draw {
+  0%, 20%  { transform: scaleX(0); }
+  45%, 100%{ transform: scaleX(1); }
+}
+.tut-sel-draw { animation: tut-sel-draw 5s ease-out infinite; transform-origin: left center; transform-box: fill-box; }
+
+/* Loop pillars appearing */
+@keyframes tut-loop-pillar {
+  0%, 40%   { opacity: 0; }
+  55%, 100% { opacity: 1; }
+}
+.tut-loop-pillar { animation: tut-loop-pillar 5s ease-out infinite; }
+
+/* Tile highlight — for "tap this tile" demo */
+@keyframes tut-tile-highlight {
+  0%, 30%  { box-shadow: 0 0 0 0 rgba(255,138,42,0); }
+  50%      { box-shadow: 0 0 0 6px rgba(255,138,42,0.45); }
+  70%, 100%{ box-shadow: 0 0 0 0 rgba(255,138,42,0); }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .anim-glowo-wave, .anim-rec, .anim-rec-glow,
@@ -660,6 +942,178 @@ a.hub-card { display: block; color: inherit; }
 /* List inside content */
 .content ul, .content ol { margin: 0 0 1em; padding-left: 22px; color: var(--ink-soft); }
 .content li { margin-bottom: .35em; }
+
+/* =========================================================
+   Tutorials page
+   ========================================================= */
+.tut-toc {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+.tut-toc a {
+  display: block;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  transition: all .25s;
+}
+.tut-toc a:hover {
+  background: var(--surface-2);
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+.tut-toc .tut-toc-num {
+  font-family: var(--mono-font);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.tut-toc .tut-toc-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.tutorial {
+  margin: 0 0 120px;
+  scroll-margin-top: 80px;
+}
+.tutorial:last-of-type { margin-bottom: 60px; }
+
+.tut-hero {
+  display: grid;
+  gap: 48px;
+  grid-template-columns: 1fr;
+  margin-bottom: 64px;
+  padding: 56px 0 0;
+  border-top: 1px solid var(--line);
+}
+@media (min-width: 920px) {
+  .tut-hero { grid-template-columns: 1.2fr 1fr; align-items: center; }
+}
+.tut-hero h2 {
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin: 12px 0 18px;
+  line-height: 1.05;
+}
+.tut-hero .tut-num {
+  font-family: var(--mono-font);
+  font-size: .76rem;
+  letter-spacing: .22em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.tut-hero .tut-scenario {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  border-left: 2px solid;
+  padding: 4px 0 4px 18px;
+  margin: 22px 0;
+  max-width: 56ch;
+  line-height: 1.55;
+}
+.tut-hero .tut-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+
+.tut-scenes {
+  display: grid;
+  gap: 28px;
+}
+.tut-scene {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 36px 0;
+  border-top: 1px dashed var(--line);
+}
+.tut-scene:first-child { border-top: 0; padding-top: 0; }
+@media (min-width: 720px) {
+  .tut-scene { grid-template-columns: 0.9fr 1.1fr; gap: 56px; }
+  .tut-scene:nth-child(even) > .tut-scene-text { order: 2; }
+  .tut-scene:nth-child(even) > .tut-scene-viz  { order: 1; }
+}
+.tut-scene-num {
+  display: inline-flex;
+  font-family: var(--mono-font);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.tut-scene-num strong { color: currentColor; margin-right: 12px; }
+.tut-scene h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.tut-scene p {
+  margin: 0 0 12px;
+  color: var(--ink-soft);
+  font-size: .98rem;
+  line-height: 1.6;
+}
+.tut-scene-viz {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 9 / 11;
+  max-width: 380px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.tut-scene-viz svg { width: 100%; height: 100%; display: block; }
+
+.tut-tips {
+  margin-top: 48px;
+  padding: 28px 32px;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  border-left-width: 3px;
+}
+.tut-tips h4 {
+  font-size: .76rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: currentColor;
+  margin-bottom: 12px;
+}
+.tut-tips ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+}
+.tut-tips li { margin-bottom: 8px; line-height: 1.55; }
+
+/* Per-tutorial accent — applied to the top-level <article class="tutorial mc--X"> */
+.tutorial.mc--play       { --tut-accent: var(--c-play); }
+.tutorial.mc--audio      { --tut-accent: var(--c-audio); }
+.tutorial.mc--midi       { --tut-accent: var(--c-midi); }
+.tutorial.mc--practice   { --tut-accent: var(--c-practice); }
+.tutorial.mc--metronome  { --tut-accent: var(--c-metronome); }
+.tutorial.mc--tuner      { --tut-accent: var(--c-tuner); }
+.tutorial.mc--signalgen  { --tut-accent: var(--c-signalgen); }
+.tutorial.mc--meters     { --tut-accent: var(--c-meters); }
+.tutorial { color: var(--tut-accent, var(--accent-orange)); }
+.tutorial .tut-scenario { border-color: var(--tut-accent); }
+.tutorial .tag { background: color-mix(in srgb, var(--tut-accent) 15%, transparent); color: var(--tut-accent); border-color: color-mix(in srgb, var(--tut-accent) 30%, transparent); }
+.tutorial .tut-tips { border-left-color: var(--tut-accent); }
+.tutorial .tut-tips h4 { color: var(--tut-accent); }
 
 /* Manual page sub-nav (anchor jump) */
 .sub-nav {
