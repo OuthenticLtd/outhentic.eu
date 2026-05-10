@@ -81,4 +81,4 @@ parent site untouched.
 
 CONTACT
 -------
-For OSE: info@outhentic.eu
+For OSE: ose@outhentic.eu
