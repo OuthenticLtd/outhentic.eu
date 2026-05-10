@@ -44,67 +44,123 @@
       </div>
       <div class="reveal">
         <div class="phone-frame" aria-hidden="true">
-          <svg viewBox="0 0 360 780">
-            <rect width="360" height="780" fill="#050507"/>
-            <rect x="0" y="20" width="360" height="56" fill="#0a0a0d"/>
-            <text x="22" y="56" fill="#ECECEE" font-family="Inter, sans-serif" font-size="14" font-weight="700" letter-spacing="3">SIGNAL GEN</text>
-            <circle cx="332" cy="48" r="11" fill="#15151a" stroke="rgba(255,255,255,0.14)"/>
-            <circle cx="332" cy="48" r="3" fill="#7A7A82"/>
-            <!-- Wave preview -->
-            <rect x="14" y="92" width="332" height="120" rx="14" fill="#0a0a0d" stroke="rgba(255,255,255,0.08)"/>
-            <text x="26" y="112" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">WAVEFORM · SINE</text>
-            <path d="M30 168 Q60 120 90 168 T150 168 T210 168 T270 168 T330 168" fill="none" stroke="#FF8B3D" stroke-width="2"/>
-            <!-- Waveform picker -->
-            <rect x="14" y="226" width="332" height="56" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
-            <g fill="#15151a" stroke="rgba(255,255,255,0.14)">
-              <circle cx="50"  cy="254" r="20"/>
-              <circle cx="98"  cy="254" r="20"/>
-              <circle cx="146" cy="254" r="20"/>
-              <circle cx="194" cy="254" r="20"/>
-              <circle cx="242" cy="254" r="20"/>
-              <circle cx="290" cy="254" r="20"/>
-              <circle cx="338" cy="254" r="20"/>
-            </g>
-            <circle cx="50" cy="254" r="20" fill="#FF8B3D" fill-opacity="0.16" stroke="#FF8B3D"/>
-            <!-- waveform glyphs -->
-            <g stroke="#ECECEE" stroke-width="1.5" fill="none">
-              <path d="M40 254 Q45 248 50 254 T60 254"/>
-              <path d="M88 254 H93 V248 H103 V260 H108"/>
-              <path d="M136 260 L143 248 L149 260 L156 248"/>
-              <path d="M184 260 L194 248 L194 260 L204 248"/>
-            </g>
-            <!-- noise glyphs -->
-            <g fill="#ECECEE">
-              <text x="242" y="258" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">W</text>
-              <text x="290" y="258" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">P</text>
-              <text x="338" y="258" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">B</text>
-            </g>
-            <!-- Frequency big -->
-            <text x="180" y="370" fill="#ECECEE" font-family="Inter, sans-serif" font-size="60" font-weight="700" text-anchor="middle">440</text>
-            <text x="180" y="400" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="3" text-anchor="middle">Hz</text>
-            <!-- Slider -->
-            <rect x="30" y="430" width="300" height="6" rx="3" fill="#1c1c22"/>
-            <rect x="30" y="430" width="180" height="6" rx="3" fill="url(#sgGrad)"/>
-            <circle cx="210" cy="433" r="10" fill="#ECECEE"/>
+          <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet">
             <defs>
-              <linearGradient id="sgGrad" x1="0" y1="0.5" x2="1" y2="0.5">
-                <stop offset="0" stop-color="#4FA8FF"/><stop offset="1" stop-color="#FF8B3D"/>
+              <linearGradient id="sgPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0a0d"/><stop offset="1" stop-color="#0a0e0e"/></linearGradient>
+              <linearGradient id="sgRingGrad" x1="0" y1="0.5" x2="1" y2="0.5">
+                <stop offset="0" stop-color="#4AA3FF"/><stop offset="0.5" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FF8A2A"/>
               </linearGradient>
             </defs>
-            <!-- AMP / Sweep / Auto -->
-            <rect x="14" y="464" width="332" height="80" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
-            <text x="32" y="490" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">AMP</text>
-            <text x="62" y="514" fill="#ECECEE" font-family="JetBrains Mono, monospace" font-size="14">−12 dB</text>
-            <text x="170" y="490" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">SWEEP</text>
-            <text x="206" y="514" fill="#ECECEE" font-family="JetBrains Mono, monospace" font-size="14">OFF</text>
-            <text x="270" y="490" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">AUTO</text>
-            <text x="304" y="514" fill="#ECECEE" font-family="JetBrains Mono, monospace" font-size="14">30s</text>
-            <!-- Transport -->
-            <rect x="14" y="568" width="332" height="80" rx="14" fill="#0a0a0d" stroke="rgba(255,255,255,0.08)"/>
-            <circle cx="180" cy="608" r="22" fill="url(#sgGrad)"/>
-            <polygon points="174,599 174,617 189,608" fill="#000"/>
+            <rect width="380" height="800" fill="url(#sgPlate)"/>
+
+            <!-- TopBar -->
+            <g transform="translate(20,42)">
+              <circle cx="14" cy="14" r="13" fill="none" stroke="url(#sgRingGrad)" stroke-width="2"/>
+              <circle cx="14" cy="14" r="10" fill="#000"/>
+              <g class="anim-glowo-wave">
+                <path d="M 6.25,14 L 8.19,14 L 9.35,11.68 L 10.51,16.33 L 11.68,10.13 L 12.84,17.88 L 14,8.58 L 15.16,19.43 L 16.32,10.13 L 17.49,16.33 L 18.65,11.68 L 19.81,14 L 21.75,14"
+                      fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              <text x="170" y="20" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="14" font-weight="700" letter-spacing="3" text-anchor="middle">SIGNAL GEN</text>
+              <g transform="translate(290,4)" stroke="#ECECEE" stroke-opacity="0.78" stroke-width="1.6" fill="none" stroke-linecap="round">
+                <circle cx="12" cy="14" r="3.4"/>
+                <path d="M12 6 L12 8 M12 20 L12 22 M4 14 L6 14 M18 14 L20 14 M6.4 8.4 L7.8 9.8 M16.2 18.2 L17.6 19.6 M6.4 19.6 L7.8 18.2 M16.2 9.8 L17.6 8.4"/>
+              </g>
+            </g>
+
+            <!-- LiveSpectrumVisualizer (96dp tall) -->
+            <rect x="14" y="100" width="352" height="116" rx="14" fill="#141318" stroke="rgba(79,209,197,0.30)" stroke-width="0.7"/>
+            <text x="28" y="120" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">LIVE SPECTRUM · 440 Hz · SINE</text>
+            <g transform="translate(28,206)">
+              <rect class="anim-mb-1" x="0"   y="-72" width="14" height="72" rx="1.5" fill="#4FD1C5" opacity="0.95"/>
+              <rect class="anim-mb-2" x="20"  y="-64" width="14" height="64" rx="1.5" fill="#4FD1C5" opacity="0.85"/>
+              <rect class="anim-mb-3" x="40"  y="-46" width="14" height="46" rx="1.5" fill="#4FD1C5" opacity="0.75"/>
+              <rect class="anim-mb-4" x="60"  y="-26" width="14" height="26" rx="1.5" fill="#4FD1C5" opacity="0.65"/>
+              <rect class="anim-mb-5" x="80"  y="-16" width="14" height="16" rx="1.5" fill="#4FD1C5" opacity="0.55"/>
+              <rect class="anim-mb-6" x="100" y="-12" width="14" height="12" rx="1.5" fill="#4FD1C5" opacity="0.50"/>
+              <rect class="anim-mb-7" x="120" y="-10" width="14" height="10" rx="1.5" fill="#4FD1C5" opacity="0.45"/>
+              <rect class="anim-mb-8" x="140" y="-8"  width="14" height="8"  rx="1.5" fill="#4FD1C5" opacity="0.40"/>
+              <rect class="anim-mb-1" x="160" y="-7"  width="14" height="7"  rx="1.5" fill="#4FD1C5" opacity="0.40"/>
+              <rect class="anim-mb-2" x="180" y="-6"  width="14" height="6"  rx="1.5" fill="#4FD1C5" opacity="0.35"/>
+              <rect class="anim-mb-3" x="200" y="-5"  width="14" height="5"  rx="1.5" fill="#4FD1C5" opacity="0.35"/>
+              <rect class="anim-mb-4" x="220" y="-4"  width="14" height="4"  rx="1.5" fill="#4FD1C5" opacity="0.30"/>
+              <rect class="anim-mb-5" x="240" y="-3"  width="14" height="3"  rx="1.5" fill="#4FD1C5" opacity="0.30"/>
+              <rect class="anim-mb-6" x="260" y="-3"  width="14" height="3"  rx="1.5" fill="#4FD1C5" opacity="0.25"/>
+              <rect class="anim-mb-7" x="280" y="-3"  width="14" height="3"  rx="1.5" fill="#4FD1C5" opacity="0.25"/>
+              <rect class="anim-mb-8" x="300" y="-3"  width="14" height="3"  rx="1.5" fill="#4FD1C5" opacity="0.25"/>
+            </g>
+
+            <!-- FrequencyCard -->
+            <rect x="14" y="232" width="352" height="92" rx="14" fill="#141318" stroke="rgba(79,209,197,0.30)" stroke-width="0.7"/>
+            <text x="28" y="252" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">FREQUENCY</text>
+            <text x="28" y="296" fill="#ECECEE" font-family="JetBrains Mono, monospace" font-size="36" font-weight="300" letter-spacing="-1">440</text>
+            <text x="118" y="296" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">Hz</text>
+            <!-- log slider -->
+            <rect x="160" y="280" width="190" height="6" rx="3" fill="#1c1c22"/>
+            <rect x="160" y="280" width="100" height="6" rx="3" fill="#4FD1C5"/>
+            <circle cx="260" cy="283" r="10" fill="#4FD1C5"/>
+            <text x="160" y="308" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8">20 Hz</text>
+            <text x="350" y="308" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="end">20 kHz</text>
+
+            <!-- WaveCard — 7 waveform chips -->
+            <rect x="14" y="340" width="352" height="60" rx="14" fill="#141318" stroke="rgba(79,209,197,0.30)" stroke-width="0.7"/>
+            <g>
+              <!-- SINE active -->
+              <rect x="22"  y="354" width="44" height="32" rx="6" fill="#4FD1C5" fill-opacity="0.20" stroke="#4FD1C5" stroke-width="0.6"/>
+              <path d="M30 370 Q36 364 42 370 T54 370" fill="none" stroke="#4FD1C5" stroke-width="1.5" stroke-linecap="round"/>
+              <text x="44" y="392" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="7" font-weight="900" text-anchor="middle">SINE</text>
+              <!-- SQUARE -->
+              <rect x="72" y="354" width="44" height="32" rx="6" fill="#141318" stroke="rgba(255,255,255,0.10)" stroke-width="0.6"/>
+              <path d="M82 372 L82 366 L88 366 L88 374 L96 374 L96 366 L104 366" fill="none" stroke="#ECECEE" stroke-width="1.5"/>
+              <text x="94" y="392" fill="#7A7A82" font-family="Inter, sans-serif" font-size="7" font-weight="900" text-anchor="middle">SQR</text>
+              <!-- SAW -->
+              <rect x="122" y="354" width="44" height="32" rx="6" fill="#141318" stroke="rgba(255,255,255,0.10)" stroke-width="0.6"/>
+              <path d="M132 374 L142 364 L142 374 L150 364 L150 374" fill="none" stroke="#ECECEE" stroke-width="1.5"/>
+              <text x="144" y="392" fill="#7A7A82" font-family="Inter, sans-serif" font-size="7" font-weight="900" text-anchor="middle">SAW</text>
+              <!-- TRIANGLE -->
+              <rect x="172" y="354" width="44" height="32" rx="6" fill="#141318" stroke="rgba(255,255,255,0.10)" stroke-width="0.6"/>
+              <path d="M180 374 L188 364 L196 374 L204 364" fill="none" stroke="#ECECEE" stroke-width="1.5"/>
+              <text x="194" y="392" fill="#7A7A82" font-family="Inter, sans-serif" font-size="7" font-weight="900" text-anchor="middle">TRI</text>
+              <!-- WHITE noise -->
+              <rect x="222" y="354" width="44" height="32" rx="6" fill="#141318" stroke="rgba(255,255,255,0.10)" stroke-width="0.6"/>
+              <text x="244" y="377" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="13" font-weight="900" text-anchor="middle">W</text>
+              <text x="244" y="392" fill="#7A7A82" font-family="Inter, sans-serif" font-size="7" font-weight="900" text-anchor="middle">WHT</text>
+              <!-- PINK noise -->
+              <rect x="272" y="354" width="44" height="32" rx="6" fill="#141318" stroke="rgba(255,255,255,0.10)" stroke-width="0.6"/>
+              <text x="294" y="377" fill="#F38BA0" font-family="Inter, sans-serif" font-size="13" font-weight="900" text-anchor="middle">P</text>
+              <text x="294" y="392" fill="#7A7A82" font-family="Inter, sans-serif" font-size="7" font-weight="900" text-anchor="middle">PNK</text>
+              <!-- BROWN noise -->
+              <rect x="322" y="354" width="44" height="32" rx="6" fill="#141318" stroke="rgba(255,255,255,0.10)" stroke-width="0.6"/>
+              <text x="344" y="377" fill="#A87147" font-family="Inter, sans-serif" font-size="13" font-weight="900" text-anchor="middle">B</text>
+              <text x="344" y="392" fill="#7A7A82" font-family="Inter, sans-serif" font-size="7" font-weight="900" text-anchor="middle">BRN</text>
+            </g>
+
+            <!-- OutputCard (amplitude) -->
+            <rect x="14" y="416" width="352" height="76" rx="14" fill="#141318" stroke="rgba(255,255,255,0.10)" stroke-width="0.7"/>
+            <text x="28" y="436" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">AMPLITUDE</text>
+            <rect x="28" y="464" width="280" height="6" rx="3" fill="#1c1c22"/>
+            <rect x="28" y="464" width="170" height="6" rx="3" fill="#4FD1C5"/>
+            <circle cx="198" cy="467" r="10" fill="#4FD1C5"/>
+            <text x="350" y="471" fill="#ECECEE" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="end">−12 dB</text>
+
+            <!-- TimerSummaryCard + SweepSummaryCard -->
+            <rect x="14"  y="508" width="172" height="68" rx="14" fill="#141318" stroke="rgba(255,255,255,0.10)" stroke-width="0.7"/>
+            <text x="28" y="528" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">AUTO-STOP</text>
+            <text x="28" y="556" fill="#ECECEE" font-family="JetBrains Mono, monospace" font-size="20" font-weight="300">30s</text>
+            <text x="172" y="556" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">FADE 200ms</text>
+
+            <rect x="194" y="508" width="172" height="68" rx="14" fill="#141318" stroke="rgba(255,255,255,0.10)" stroke-width="0.7"/>
+            <text x="208" y="528" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">SWEEP</text>
+            <text x="208" y="556" fill="#ECECEE" font-family="JetBrains Mono, monospace" font-size="20" font-weight="300">OFF</text>
+            <text x="352" y="556" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">LOG</text>
+
+            <!-- TransportRow -->
+            <rect x="14" y="592" width="352" height="76" rx="14" fill="#0a0a0d" stroke="rgba(255,255,255,0.08)"/>
+            <circle cx="190" cy="630" r="26" fill="#4FD1C5" class="anim-rec-glow"/>
+            <polygon points="184,620 184,640 200,630" fill="#0a0a0d"/>
+
             <!-- Bottom hint -->
-            <rect x="120" y="730" width="120" height="4" rx="2" fill="#1c1c22"/>
+            <rect x="130" y="770" width="120" height="4" rx="2" fill="#1c1c22"/>
           </svg>
         </div>
       </div>

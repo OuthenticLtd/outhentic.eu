@@ -54,15 +54,22 @@ HOW THE EDITOR WORKS
   5. The site re-renders on next page load
 
 
-FAVICON SETUP
--------------
-The site references both an SVG and PNG favicon:
+FAVICON + BRAND ASSETS
+----------------------
+The site uses the canonical OSE brand mark — same SVG that's in the app
+repo at branding/ose_logo.svg. Source of truth lives there; this folder
+holds a synced copy.
 
-  /ose/assets/img/ose-logo.svg   ← already created (vector version)
-  /ose/assets/img/ose-logo.png   ← drop your master PNG here (2600×2600 OK,
-                                    browsers will scale it down)
+  /ose/assets/img/ose-logo.svg   ← canonical mark (matches app + Android splash)
+  /ose/assets/img/ose-logo.png   ← optional bitmap fallback (drop your master here)
+  /ose/assets/img/ose-og.svg     ← Open Graph card (1200×630), used for link previews
 
-Modern browsers prefer SVG; older ones fall back to PNG.
+If the canonical SVG ever changes in the app repo, copy these over:
+  branding/ose_logo.svg                       → /ose/assets/img/ose-logo.svg
+  branding/marketing/og_image_1200x630.svg    → /ose/assets/img/ose-og.svg
+
+Modern browsers render the SVG favicon directly; the PNG is the fallback
+for older clients that don't support SVG icons.
 
 
 DEPLOY

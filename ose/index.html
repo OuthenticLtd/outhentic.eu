@@ -14,10 +14,11 @@
 <meta property="og:title" content="OSE — Outhentic Sound Engine" />
 <meta property="og:description" content="The mobile music studio that fits in your pocket. Eight studio-grade modules in one Android app." />
 <meta property="og:url" content="https://outhentic.eu/ose/" />
-<meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-logo.svg" />
+<meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="OSE — Outhentic Sound Engine" />
 <meta name="twitter:description" content="The mobile music studio that fits in your pocket." />
+<meta name="twitter:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
 
 <link rel="canonical" href="https://outhentic.eu/ose/" />
 
@@ -88,66 +89,231 @@
         </div>
       </div>
 
-      <!-- Phone-frame mockup with the 8-module grid -->
+      <!-- Phone-frame mockup — the actual MainScreen with all 8 animated tiles -->
       <div class="reveal">
         <div class="phone-frame" aria-hidden="true">
-          <svg viewBox="0 0 360 780" preserveAspectRatio="xMidYMid meet">
-            <!-- Background -->
-            <rect width="360" height="780" fill="#050507"/>
-            <!-- Status bar -->
-            <text x="22" y="50" fill="#7A7A82" font-family="Inter, sans-serif" font-size="12" font-weight="600">9:41</text>
-            <circle cx="320" cy="46" r="3" fill="#7A7A82"/>
-            <rect x="296" y="42" width="14" height="8" rx="1.5" fill="none" stroke="#7A7A82"/>
-            <!-- Top label -->
-            <text x="22" y="92" fill="#ECECEE" font-family="Inter, sans-serif" font-size="22" font-weight="700">OSE</text>
-            <text x="22" y="112" fill="#7A7A82" font-family="Inter, sans-serif" font-size="11" font-weight="500" letter-spacing="2">OUTHENTIC SOUND ENGINE</text>
-            <!-- 8-tile grid 4 wide x 2 rows; emphasised PLAY -->
-            <!-- Row 1 -->
-            <rect x="22"  y="138" width="74" height="74" rx="14" fill="url(#playGrad)"/>
-            <rect x="100" y="138" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
-            <rect x="178" y="138" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
-            <rect x="256" y="138" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
-            <!-- Row 2 -->
-            <rect x="22"  y="216" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
-            <rect x="100" y="216" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
-            <rect x="178" y="216" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
-            <rect x="256" y="216" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
+          <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet">
             <defs>
-              <linearGradient id="playGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#4FA8FF" stop-opacity="0.30"/>
-                <stop offset="1" stop-color="#FF8B3D" stop-opacity="0.40"/>
-              </linearGradient>
+              <!-- Logo gradient ring -->
               <linearGradient id="ringGrad" x1="0" y1="0.5" x2="1" y2="0.5">
-                <stop offset="0" stop-color="#4FA8FF"/>
-                <stop offset="1" stop-color="#FF8B3D"/>
+                <stop offset="0"   stop-color="#4AA3FF"/>
+                <stop offset="0.5" stop-color="#FFFFFF"/>
+                <stop offset="1"   stop-color="#FF8A2A"/>
+              </linearGradient>
+              <!-- Subtle plate gradient (mainPlateBase + tinted accent wash) -->
+              <linearGradient id="plateBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0"   stop-color="#0a0a0d"/>
+                <stop offset="1"   stop-color="#0e0c10"/>
+              </linearGradient>
+              <!-- Audio ribbon mask (moving brightness through bars) -->
+              <linearGradient id="audioRibbon" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0"   stop-color="#E05A6B" stop-opacity="0.25"/>
+                <stop offset="0.5" stop-color="#E05A6B" stop-opacity="1.0"/>
+                <stop offset="1"   stop-color="#E05A6B" stop-opacity="0.25"/>
               </linearGradient>
             </defs>
-            <!-- Tile labels -->
-            <text x="32" y="200" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">PLAY</text>
-            <text x="110" y="200" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">AUDIO</text>
-            <text x="188" y="200" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">MIDI</text>
-            <text x="266" y="200" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">PRACTICE</text>
-            <text x="32"  y="278" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">METRO</text>
-            <text x="110" y="278" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">TUNER</text>
-            <text x="188" y="278" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">SIG GEN</text>
-            <text x="266" y="278" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">METERS</text>
-            <!-- Mock-area: a wave display -->
-            <rect x="22" y="320" width="316" height="200" rx="14" fill="#0a0a0d" stroke="rgba(255,255,255,0.08)"/>
-            <path d="M30 420 Q60 360 90 420 T150 420 T210 420 T270 420 T330 420" fill="none" stroke="url(#ringGrad)" stroke-width="2" opacity="0.85"/>
-            <path d="M30 420 Q60 480 90 420 T150 420 T210 420 T270 420 T330 420" fill="none" stroke="url(#ringGrad)" stroke-width="2" opacity="0.45"/>
-            <text x="40" y="350" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">VISUALIZER · LIVE</text>
-            <!-- Tools dock -->
-            <rect x="22" y="540" width="316" height="80" rx="14" fill="#0a0a0d" stroke="rgba(255,255,255,0.08)"/>
-            <circle cx="60"  cy="580" r="20" fill="#15151a" stroke="rgba(255,255,255,0.14)"/>
-            <circle cx="120" cy="580" r="20" fill="#15151a" stroke="rgba(255,255,255,0.14)"/>
-            <circle cx="180" cy="580" r="22" fill="url(#ringGrad)"/>
-            <circle cx="240" cy="580" r="20" fill="#15151a" stroke="rgba(255,255,255,0.14)"/>
-            <circle cx="300" cy="580" r="20" fill="#15151a" stroke="rgba(255,255,255,0.14)"/>
-            <!-- REC pill -->
-            <rect x="22" y="640" width="316" height="56" rx="14" fill="#0a0a0d" stroke="#FF8B3D" stroke-opacity="0.6"/>
-            <text x="180" y="675" fill="#FF8B3D" font-family="Inter, sans-serif" font-size="18" font-weight="700" letter-spacing="6" text-anchor="middle">REC</text>
+            <!-- Background plate -->
+            <rect width="380" height="800" fill="url(#plateBg)"/>
+
+            <!-- ============== TOP STRIP (OSE wordmark + gear + PRO) ============== -->
+            <g transform="translate(20,42)">
+              <!-- GlowingO mark -->
+              <circle cx="14" cy="14" r="13" fill="none" stroke="url(#ringGrad)" stroke-width="2"/>
+              <circle cx="14" cy="14" r="10" fill="#000"/>
+              <g class="anim-glowo-wave">
+                <path d="M 6.25,14 L 8.19,14 L 9.35,11.68 L 10.51,16.33 L 11.68,10.13 L 12.84,17.88 L 14,8.58 L 15.16,19.43 L 16.32,10.13 L 17.49,16.33 L 18.65,11.68 L 19.81,14 L 21.75,14"
+                      fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              <!-- OSE wordmark -->
+              <text x="38" y="20" fill="#ECECEE" font-family="Inter, sans-serif" font-size="15" font-weight="700" letter-spacing="2.5">OSE</text>
+              <!-- Gear -->
+              <g transform="translate(280,4)" stroke="#ECECEE" stroke-opacity="0.78" stroke-width="1.6" fill="none" stroke-linecap="round">
+                <circle cx="12" cy="14" r="3.4"/>
+                <path d="M12 6 L12 8 M12 20 L12 22 M4 14 L6 14 M18 14 L20 14 M6.4 8.4 L7.8 9.8 M16.2 18.2 L17.6 19.6 M6.4 19.6 L7.8 18.2 M16.2 9.8 L17.6 8.4"/>
+              </g>
+              <!-- PRO badge -->
+              <rect x="316" y="6" width="32" height="18" rx="9" fill="none" stroke="#FF8A3A" stroke-width="1"/>
+              <text x="332" y="19" fill="#FF8A3A" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1.2" text-anchor="middle">PRO</text>
+            </g>
+
+            <!-- ============== 4×2 TILE GRID ============== -->
+            <!-- Tile dimensions: 168 × 132, gap 16, side padding 12 -->
+            <!-- Row 1: PLAY (orange, emphasised) | AUDIO (red) -->
+            <g class="anim-tile-in" style="animation-delay: 0.00s;">
+              <rect x="12"  y="100" width="168" height="132" rx="14" fill="#141318" stroke="#FF8B3D" stroke-opacity="0.45" stroke-width="0.7"/>
+              <text x="24" y="120" fill="#FF8B3D" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">PLAY</text>
+              <text x="24" y="134" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.8">analog · drum pads</text>
+              <!-- 7-key keyboard with cycling highlight -->
+              <g transform="translate(24,156)">
+                <rect x="0"   y="0" width="20" height="60" rx="2" fill="#FFFFF0"/>
+                <rect x="22"  y="0" width="20" height="60" rx="2" fill="#FFFFF0"/>
+                <rect x="44"  y="0" width="20" height="60" rx="2" fill="#FFFFF0"/>
+                <rect x="66"  y="0" width="20" height="60" rx="2" fill="#FFFFF0"/>
+                <rect x="88"  y="0" width="20" height="60" rx="2" fill="#FFFFF0"/>
+                <rect x="110" y="0" width="20" height="60" rx="2" fill="#FFFFF0"/>
+                <rect x="132" y="0" width="12" height="60" rx="2" fill="#FFFFF0"/>
+                <!-- highlight overlays cycling -->
+                <rect class="anim-key-1" x="0"   y="0" width="20" height="60" rx="2" fill="#FF8B3D" opacity="0"/>
+                <rect class="anim-key-2" x="22"  y="0" width="20" height="60" rx="2" fill="#FF8B3D" opacity="0"/>
+                <rect class="anim-key-3" x="44"  y="0" width="20" height="60" rx="2" fill="#FF8B3D" opacity="0"/>
+                <rect class="anim-key-4" x="66"  y="0" width="20" height="60" rx="2" fill="#FF8B3D" opacity="0"/>
+                <rect class="anim-key-5" x="88"  y="0" width="20" height="60" rx="2" fill="#FF8B3D" opacity="0"/>
+                <rect class="anim-key-6" x="110" y="0" width="20" height="60" rx="2" fill="#FF8B3D" opacity="0"/>
+                <rect class="anim-key-7" x="132" y="0" width="12" height="60" rx="2" fill="#FF8B3D" opacity="0"/>
+                <!-- black keys -->
+                <rect x="14"  y="0" width="12" height="38" rx="1" fill="#0a0a0d"/>
+                <rect x="36"  y="0" width="12" height="38" rx="1" fill="#0a0a0d"/>
+                <rect x="80"  y="0" width="12" height="38" rx="1" fill="#0a0a0d"/>
+                <rect x="102" y="0" width="12" height="38" rx="1" fill="#0a0a0d"/>
+                <rect x="124" y="0" width="12" height="38" rx="1" fill="#0a0a0d"/>
+              </g>
+            </g>
+
+            <!-- AUDIO -->
+            <g class="anim-tile-in" style="animation-delay: 0.06s;">
+              <rect x="196" y="100" width="172" height="132" rx="14" fill="#141318" stroke="#E05A6B" stroke-opacity="0.45" stroke-width="0.7"/>
+              <text x="208" y="120" fill="#E05A6B" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">AUDIO</text>
+              <text x="208" y="134" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.8">record · takes</text>
+              <!-- 22 vertical bars -->
+              <g transform="translate(208,156)">
+                <g fill="#E05A6B" opacity="0.45">
+                  <rect x="0"   y="32" width="3" height="20" rx="1"/><rect x="6"   y="20" width="3" height="32" rx="1"/>
+                  <rect x="12"  y="14" width="3" height="38" rx="1"/><rect x="18"  y="22" width="3" height="30" rx="1"/>
+                  <rect x="24"  y="10" width="3" height="42" rx="1"/><rect x="30"  y="18" width="3" height="34" rx="1"/>
+                  <rect x="36"  y="24" width="3" height="28" rx="1"/><rect x="42"  y="12" width="3" height="40" rx="1"/>
+                  <rect x="48"  y="20" width="3" height="32" rx="1"/><rect x="54"  y="6"  width="3" height="46" rx="1"/>
+                  <rect x="60"  y="16" width="3" height="36" rx="1"/><rect x="66"  y="24" width="3" height="28" rx="1"/>
+                  <rect x="72"  y="14" width="3" height="38" rx="1"/><rect x="78"  y="22" width="3" height="30" rx="1"/>
+                  <rect x="84"  y="10" width="3" height="42" rx="1"/><rect x="90"  y="20" width="3" height="32" rx="1"/>
+                  <rect x="96"  y="28" width="3" height="24" rx="1"/><rect x="102" y="16" width="3" height="36" rx="1"/>
+                  <rect x="108" y="22" width="3" height="30" rx="1"/><rect x="114" y="14" width="3" height="38" rx="1"/>
+                  <rect x="120" y="20" width="3" height="32" rx="1"/><rect x="126" y="26" width="3" height="26" rx="1"/>
+                </g>
+                <!-- moving brightness ribbon (white over the bars) -->
+                <g class="anim-audio-ribbon">
+                  <rect x="-30" y="0" width="60" height="60" fill="url(#audioRibbon)" opacity="0.8"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- Row 2: MIDI | PRACTICE -->
+            <g class="anim-tile-in" style="animation-delay: 0.12s;">
+              <rect x="12"  y="248" width="168" height="132" rx="14" fill="#141318" stroke="#B18BFF" stroke-opacity="0.45" stroke-width="0.7"/>
+              <text x="24" y="268" fill="#B18BFF" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">MIDI</text>
+              <text x="24" y="282" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.8">piano roll · takes</text>
+              <!-- 6 note bars on 4 lanes -->
+              <g transform="translate(24,300)">
+                <line x1="0" y1="10" x2="144" y2="10" stroke="rgba(255,255,255,0.04)"/>
+                <line x1="0" y1="26" x2="144" y2="26" stroke="rgba(255,255,255,0.04)"/>
+                <line x1="0" y1="42" x2="144" y2="42" stroke="rgba(255,255,255,0.04)"/>
+                <line x1="0" y1="58" x2="144" y2="58" stroke="rgba(255,255,255,0.04)"/>
+                <rect class="anim-midi-1" x="6"   y="32"  width="22" height="10" rx="2" fill="#B18BFF"/>
+                <rect class="anim-midi-2" x="32"  y="48"  width="28" height="10" rx="2" fill="#B18BFF"/>
+                <rect class="anim-midi-3" x="64"  y="16"  width="20" height="10" rx="2" fill="#B18BFF"/>
+                <rect class="anim-midi-4" x="88"  y="0"   width="32" height="10" rx="2" fill="#B18BFF"/>
+                <rect class="anim-midi-5" x="42"  y="32"  width="18" height="10" rx="2" fill="#B18BFF"/>
+                <rect class="anim-midi-6" x="124" y="48"  width="20" height="10" rx="2" fill="#B18BFF"/>
+              </g>
+            </g>
+
+            <!-- PRACTICE -->
+            <g class="anim-tile-in" style="animation-delay: 0.18s;">
+              <rect x="196" y="248" width="172" height="132" rx="14" fill="#141318" stroke="#5DCAA5" stroke-opacity="0.45" stroke-width="0.7"/>
+              <text x="208" y="268" fill="#5DCAA5" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">PRACTICE</text>
+              <text x="208" y="282" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.8">record · edit</text>
+              <!-- progress rail with sweeping playhead -->
+              <g transform="translate(208,316)">
+                <rect x="0"   y="20" width="148" height="3" rx="1.5" fill="rgba(255,255,255,0.10)"/>
+                <rect x="0"   y="20" width="148" height="3" rx="1.5" fill="#5DCAA5" opacity="0.32"/>
+                <g class="anim-practice-head">
+                  <rect x="0" y="6" width="2" height="32" rx="1" fill="#5DCAA5"/>
+                  <circle cx="1" cy="22" r="6" fill="#5DCAA5" opacity="0.20"/>
+                  <circle cx="1" cy="22" r="3" fill="#5DCAA5"/>
+                </g>
+                <text x="0"   y="56" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8">0:00</text>
+                <text x="148" y="56" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="end">2:34</text>
+              </g>
+            </g>
+
+            <!-- Row 3: METRONOME | TUNER -->
+            <g class="anim-tile-in" style="animation-delay: 0.24s;">
+              <rect x="12"  y="396" width="168" height="132" rx="14" fill="#141318" stroke="#FAC775" stroke-opacity="0.45" stroke-width="0.7"/>
+              <text x="24" y="416" fill="#FAC775" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">METRONOME</text>
+              <text x="24" y="430" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.8">tap · BPM · subs</text>
+              <text x="24" y="468" fill="#FAC775" font-family="Inter, sans-serif" font-size="26" font-weight="300" letter-spacing="-1">120</text>
+              <text x="92" y="468" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2">BPM · 4/4</text>
+              <!-- 4 beat pillars -->
+              <g transform="translate(24,486)">
+                <rect class="anim-met-1" x="0"  y="0" width="14" height="32" rx="2" fill="#FAC775"/>
+                <rect class="anim-met-2" x="20" y="0" width="14" height="32" rx="2" fill="rgba(255,255,255,0.18)"/>
+                <rect class="anim-met-3" x="40" y="0" width="14" height="32" rx="2" fill="rgba(255,255,255,0.18)"/>
+                <rect class="anim-met-4" x="60" y="0" width="14" height="32" rx="2" fill="rgba(255,255,255,0.18)"/>
+              </g>
+            </g>
+
+            <!-- TUNER -->
+            <g class="anim-tile-in" style="animation-delay: 0.30s;">
+              <rect x="196" y="396" width="172" height="132" rx="14" fill="#141318" stroke="#85B7EB" stroke-opacity="0.45" stroke-width="0.7"/>
+              <text x="208" y="416" fill="#85B7EB" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">TUNER</text>
+              <text x="208" y="430" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.8">chromatic</text>
+              <text x="208" y="468" fill="#3CCB69" font-family="Inter, sans-serif" font-size="24" font-weight="600">A4</text>
+              <text x="244" y="468" fill="#3CCB69" font-family="JetBrains Mono, monospace" font-size="9">+0¢</text>
+              <!-- cent rail -->
+              <g transform="translate(208,486)">
+                <rect x="0" y="14" width="148" height="2" fill="rgba(255,255,255,0.10)"/>
+                <line x1="0"   y1="10" x2="0"   y2="20" stroke="#7A7A82"/>
+                <line x1="36"  y1="11" x2="36"  y2="19" stroke="#7A7A82"/>
+                <line x1="74"  y1="8"  x2="74"  y2="22" stroke="#3CCB69" stroke-width="1.4"/>
+                <line x1="112" y1="11" x2="112" y2="19" stroke="#7A7A82"/>
+                <line x1="148" y1="10" x2="148" y2="20" stroke="#7A7A82"/>
+                <!-- needle -->
+                <g class="anim-tuner-needle">
+                  <line x1="74" y1="32" x2="74" y2="0" stroke="#85B7EB" stroke-width="1.6" stroke-linecap="round"/>
+                  <circle cx="74" cy="32" r="3" fill="#85B7EB"/>
+                </g>
+                <!-- snap halo -->
+                <circle class="anim-tuner-snap" cx="74" cy="15" r="14" fill="none" stroke="#3CCB69" stroke-width="1.5" opacity="0"/>
+              </g>
+            </g>
+
+            <!-- Row 4: SIGNAL GEN | METERS -->
+            <g class="anim-tile-in" style="animation-delay: 0.36s;">
+              <rect x="12"  y="544" width="168" height="132" rx="14" fill="#141318" stroke="#4FD1C5" stroke-opacity="0.45" stroke-width="0.7"/>
+              <text x="24" y="564" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">SIGNAL GEN</text>
+              <text x="24" y="578" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.8">tone · sweep</text>
+              <!-- sine wave scrolling -->
+              <g transform="translate(24,602)">
+                <clipPath id="sgClip"><rect x="0" y="0" width="144" height="56"/></clipPath>
+                <g clip-path="url(#sgClip)">
+                  <g class="anim-sig-sine">
+                    <path d="M-60 28 Q -45 6 -30 28 T 0 28 T 30 28 T 60 28 T 90 28 T 120 28 T 150 28 T 180 28 T 210 28"
+                          fill="none" stroke="#4FD1C5" stroke-width="2" stroke-linecap="round"/>
+                  </g>
+                </g>
+                <text x="0"   y="68" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8">SINE 440 Hz</text>
+              </g>
+            </g>
+
+            <!-- METERS -->
+            <g class="anim-tile-in" style="animation-delay: 0.42s;">
+              <rect x="196" y="544" width="172" height="132" rx="14" fill="#141318" stroke="#F38BA0" stroke-opacity="0.45" stroke-width="0.7"/>
+              <text x="208" y="564" fill="#F38BA0" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">METERS</text>
+              <text x="208" y="578" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.8">dB · FFT</text>
+              <!-- 8 spectrum bars -->
+              <g transform="translate(212,648)">
+                <rect class="anim-mb-1" x="0"   y="-44" width="14" height="44" rx="1.5" fill="#F38BA0"/>
+                <rect class="anim-mb-2" x="18"  y="-44" width="14" height="44" rx="1.5" fill="#F38BA0"/>
+                <rect class="anim-mb-3" x="36"  y="-44" width="14" height="44" rx="1.5" fill="#F38BA0"/>
+                <rect class="anim-mb-4" x="54"  y="-44" width="14" height="44" rx="1.5" fill="#F38BA0"/>
+                <rect class="anim-mb-5" x="72"  y="-44" width="14" height="44" rx="1.5" fill="#F38BA0"/>
+                <rect class="anim-mb-6" x="90"  y="-44" width="14" height="44" rx="1.5" fill="#F38BA0"/>
+                <rect class="anim-mb-7" x="108" y="-44" width="14" height="44" rx="1.5" fill="#F38BA0"/>
+                <rect class="anim-mb-8" x="126" y="-44" width="14" height="44" rx="1.5" fill="#F38BA0"/>
+              </g>
+            </g>
+
             <!-- Bottom hint bar -->
-            <rect x="120" y="730" width="120" height="4" rx="2" fill="#1c1c22"/>
+            <rect x="130" y="770" width="120" height="4" rx="2" fill="#1c1c22"/>
           </svg>
         </div>
       </div>
