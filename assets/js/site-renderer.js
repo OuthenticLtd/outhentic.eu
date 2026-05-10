@@ -52,11 +52,11 @@
         var langToggle = navEl.querySelector('.lang-toggle');
         items.forEach(function (item) {
           var a = document.createElement('a');
-          var href = item.href || '';
-          if (href.charAt(0) !== '#' && !/^(https?:|\.\.|\/|mailto:)/.test(href)) {
-            href = fixPath(href);
-          }
-          a.setAttribute('href', href);
+          // Use href verbatim — do NOT prefix with ../ on BG pages.
+          // Relative URLs resolve correctly via the browser: from /bg/group,
+          // "foundation" becomes /bg/foundation (stays Bulgarian). Prefixing
+          // with ../ would wrongly send the user to /foundation (English).
+          a.setAttribute('href', item.href || '');
           a.textContent = pick(item, 'label');
           if (langToggle) navEl.insertBefore(a, langToggle);
           else navEl.appendChild(a);
