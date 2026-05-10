@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Editor — OSE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Quill 2.0 — WYSIWYG for body fields -->
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js" defer></script>
+
+<link rel="stylesheet" href="assets/css/ose-styles.css" />
+<link rel="icon" type="image/svg+xml" href="assets/img/ose-logo.svg" />
+<style>
+  .ed-wrap { max-width: 1080px; margin: 0 auto; padding: 24px 24px 80px; }
+  .gate { max-width: 420px; margin: 80px auto; padding: 36px 32px; background: var(--surface); border: 1px solid var(--line); text-align: center; border-radius: 14px; }
+  .gate h2 { font-weight: 700; font-size: 1.6rem; margin: 0 0 8px; }
+  .gate p { color: var(--muted); margin: 0 0 24px; font-size: .92rem; }
+  .gate input[type="password"] { width: 100%; padding: 12px 14px; font: inherit; font-size: 1rem; border: 1px solid var(--line); border-radius: 6px; outline: none; margin-bottom: 12px; background: var(--bg); color: var(--ink); }
+  .gate input:focus { border-color: var(--accent-orange); }
+  .gate .err { color: #EF4B4B; font-size: .85rem; margin: -4px 0 12px; min-height: 1.2em; }
+  .gate .btn { width: 100%; justify-content: center; }
+
+  .ed-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 0 18px; margin-bottom: 12px; border-bottom: 1px solid var(--line); flex-wrap: wrap; gap: 12px; }
+  .ed-head h1 { font-weight: 700; margin: 0; font-size: 1.6rem; }
+  .ed-head .meta { font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+  .tabs { display: flex; gap: 0; overflow-x: auto; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+  .tab { padding: 12px 18px; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); cursor: pointer; background: transparent; border: 0; border-bottom: 2px solid transparent; white-space: nowrap; transition: all .15s; }
+  .tab:hover { color: var(--ink); }
+  .tab.is-active { color: var(--ink); border-bottom-color: var(--accent-orange); }
+
+  .toolbar { position: sticky; top: 0; z-index: 10; padding: 12px 0; margin: -12px 0 22px; background: rgba(5,5,7,.94); backdrop-filter: blur(8px); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--line); }
+  .toolbar .spacer { flex: 1; }
+  .toolbar .status { font-size: .82rem; color: var(--muted); }
+  .toolbar .status strong { color: var(--accent-orange); }
+
+  .ed-card { background: var(--surface); border: 1px solid var(--line); padding: 22px 24px; margin-bottom: 18px; border-radius: 14px; }
+  .ed-card-head { display: flex; gap: 14px; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .ed-card-head .title-preview { font-weight: 600; font-size: 1.05rem; margin: 0; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ed-card-head .meta-preview { font-size: .76rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+
+  .field { display: grid; grid-template-columns: 140px 1fr; gap: 8px 14px; align-items: start; margin-bottom: 12px; }
+  .field > label { font-size: .72rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); padding-top: 10px; }
+  .field input, .field textarea, .field select { width: 100%; padding: 9px 11px; font: inherit; font-size: .92rem; border: 1px solid var(--line); border-radius: 6px; outline: none; background: var(--bg); color: var(--ink); }
+  .field textarea { font-family: inherit; line-height: 1.5; min-height: 70px; resize: vertical; }
+  .field input:focus, .field textarea:focus { border-color: var(--accent-orange); }
+  @media (max-width: 720px) { .field { grid-template-columns: 1fr; } }
+
+  /* Quill on dark theme tweaks */
+  .ql-toolbar.ql-snow { border: 1px solid var(--line); border-radius: 6px 6px 0 0; background: var(--bg-2); }
+  .ql-toolbar.ql-snow .ql-stroke { stroke: var(--ink-soft); }
+  .ql-toolbar.ql-snow .ql-fill { fill: var(--ink-soft); }
+  .ql-toolbar.ql-snow .ql-picker { color: var(--ink-soft); }
+  .ql-toolbar.ql-snow button:hover .ql-stroke { stroke: var(--accent-orange); }
+  .ql-container.ql-snow { border: 1px solid var(--line); border-top: 0; border-radius: 0 0 6px 6px; background: var(--bg); min-height: 180px; font-family: "Inter", sans-serif; font-size: 1rem; color: var(--ink); }
+  .ql-editor { min-height: 180px; line-height: 1.6; color: var(--ink); }
+  .ql-editor.ql-blank::before { color: var(--muted); font-style: normal; }
+
+  .ed-card-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .add-btn-wrap { display: flex; justify-content: center; padding: 22px; border: 2px dashed var(--line); margin-bottom: 22px; border-radius: 10px; }
+  .add-btn-wrap:hover { border-color: var(--accent-orange); }
+
+  .help { background: var(--bg-1); padding: 16px 20px; margin-bottom: 22px; border-left: 3px solid var(--accent-orange); font-size: .9rem; border-radius: 6px; }
+  .help h3 { margin: 0 0 6px; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-orange); }
+  .help p { margin: 0 0 4px; }
+  .help code { background: var(--surface); padding: 1px 6px; font-size: .85em; border: 1px solid var(--line); border-radius: 3px; color: var(--ink); }
+
+  .btn--primary { border-color: transparent; background: var(--accent-grad); color: #000; }
+  .btn--primary:hover { filter: brightness(1.08); }
+  .btn--small { padding: 7px 12px; font-size: .72rem; letter-spacing: .12em; }
+  .btn--danger { color: #EF4B4B; border-color: #EF4B4B; }
+  .btn--danger:hover { background: #EF4B4B; color: #fff; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate" class="gate">
+  <h2>OSE — Editor</h2>
+  <p>Enter the editor password to continue.</p>
+  <form id="gate-form">
+    <input id="gate-pw" type="password" autocomplete="off" placeholder="Password" autofocus />
+    <div id="gate-err" class="err"></div>
+    <button class="btn btn--primary" type="submit">Unlock</button>
+  </form>
+  <p style="font-size: .76rem; color: var(--muted); margin-top: 22px;">
+    Default password matches the main outhentic.eu editor. Change it by replacing PASSWORD_HASH in this file with a new SHA-256 hash.
+  </p>
+</div>
+
+<!-- EDITOR -->
+<div id="editor" class="ed-wrap hidden">
+  <div class="ed-head">
+    <div>
+      <h1>OSE editor</h1>
+      <span class="meta">All editable content for outhentic.eu/ose</span>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn btn--primary dl-content">Download ose-content.js</button>
+    <button class="btn btn--small" id="reload-btn">Reload</button>
+    <span class="spacer"></span>
+    <span class="status"><span class="site-dirty">saved</span></span>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab is-active" data-tab="meta">Site</button>
+    <button class="tab" data-tab="hero">Hero</button>
+    <button class="tab" data-tab="pitch">Pitch</button>
+    <button class="tab" data-tab="highlights">Highlights</button>
+    <button class="tab" data-tab="modules">Modules</button>
+    <button class="tab" data-tab="tutorials">Tutorials</button>
+    <button class="tab" data-tab="faq">FAQ</button>
+    <button class="tab" data-tab="footer">Footer</button>
+    <button class="tab" data-tab="legal">Legal</button>
+  </div>
+
+  <div class="panel" data-panel="meta">
+    <div class="help">
+      <h3>Site settings</h3>
+      <p>Global site name, tagline, Play Store URL, contact details. Used in meta tags and footer.</p>
+    </div>
+    <div id="meta-form" class="ed-card"></div>
+  </div>
+
+  <div class="panel hidden" data-panel="hero">
+    <div class="help">
+      <h3>Hero — landing page</h3>
+      <p>The big section at the top of the home page. Eyebrow, two-part title, lead paragraph and the two CTAs.</p>
+    </div>
+    <div id="hero-form" class="ed-card"></div>
+  </div>
+
+  <div class="panel hidden" data-panel="pitch">
+    <div class="help">
+      <h3>Pitch + Home grid intro</h3>
+      <p>The two intro sections under the hero. Eyebrow, title, body for each.</p>
+    </div>
+    <div id="pitch-form" class="ed-card"></div>
+    <div id="homegrid-form" class="ed-card"></div>
+  </div>
+
+  <div class="panel hidden" data-panel="highlights">
+    <div class="help">
+      <h3>Highlights row</h3>
+      <p>Four short cards on the home page. Title + body each.</p>
+    </div>
+    <div id="highlights-list"></div>
+    <div class="add-btn-wrap"><button id="hl-add" class="btn">＋ Add highlight</button></div>
+  </div>
+
+  <div class="panel hidden" data-panel="modules">
+    <div class="help">
+      <h3>Modules</h3>
+      <p>One card per module. Tagline is plain text; body sections (top bar, controls, settings, tips, plus Audio's editor section and Play's hubs section) are rich-text.</p>
+    </div>
+    <div id="modules-list"></div>
+  </div>
+
+  <div class="panel hidden" data-panel="tutorials">
+    <div class="help">
+      <h3>Tutorials</h3>
+      <p>Each tutorial has a title, duration, intro and a list of step entries. Steps render as numbered cards on tutorials.html.</p>
+    </div>
+    <div id="tutorials-list"></div>
+    <div class="add-btn-wrap"><button id="tut-add" class="btn">＋ Add tutorial</button></div>
+  </div>
+
+  <div class="panel hidden" data-panel="faq">
+    <div class="help">
+      <h3>FAQ</h3>
+      <p>Question + answer pairs. Answers accept HTML (links, &lt;code&gt;, etc.).</p>
+    </div>
+    <div id="faq-list"></div>
+    <div class="add-btn-wrap"><button id="faq-add" class="btn">＋ Add Q&amp;A</button></div>
+  </div>
+
+  <div class="panel hidden" data-panel="footer">
+    <div class="help">
+      <h3>Footer</h3>
+      <p>Tagline + four columns of links. Each link has a label and an href.</p>
+    </div>
+    <div id="footer-form" class="ed-card"></div>
+  </div>
+
+  <div class="panel hidden" data-panel="legal">
+    <div class="help">
+      <h3>Privacy &amp; Terms</h3>
+      <p>Long-form rich-text bodies for the Privacy Policy and Terms of Use pages.</p>
+    </div>
+    <div id="legal-form"></div>
+  </div>
+
+</div>
+
+<!-- Load content data -->
+<script src="assets/data/ose-content.js"></script>
+
+<script>
+/* =====================================================================
+   OSE editor — single-page, password-gated, Quill-driven.
+   Edits ose-content.js. Dual save: download or commit to GitHub.
+   ===================================================================== */
+(function () {
+  // SHA-256 of the same password used on outhentic.eu/editor.html ("outhentic")
+  var PASSWORD_HASH = "eb4d5cd77d5621734c946630c6690809d458181770e2b3f5e9b5c5578de523dc";
+
+  async function sha256(s) {
+    var buf = new TextEncoder().encode(s);
+    var hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+  }
+
+  var $ = function (sel, root) { return (root || document).querySelector(sel); };
+  var $$ = function (sel, root) { return Array.from((root || document).querySelectorAll(sel)); };
+
+  // Deep clone of original content so we work on a copy
+  var data = JSON.parse(JSON.stringify(window.OSE_CONTENT || {}));
+  var dirty = false;
+  function markDirty() { dirty = true; var s = $('.site-dirty'); if (s) { s.textContent = 'unsaved'; s.style.color = '#FF8B3D'; } }
+  function markClean() { dirty = false; var s = $('.site-dirty'); if (s) { s.textContent = 'saved'; s.style.color = '#42E07A'; } }
+
+  // ---------- Gate ----------
+  $('#gate-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var pw = $('#gate-pw').value;
+    var hash = await sha256(pw);
+    if (hash === PASSWORD_HASH) {
+      $('#gate').classList.add('hidden');
+      $('#editor').classList.remove('hidden');
+      init();
+    } else {
+      $('#gate-err').textContent = 'Wrong password.';
+    }
+  });
+
+  // ---------- Tabs ----------
+  $$('.tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      $$('.tab').forEach(function (x) { x.classList.remove('is-active'); });
+      t.classList.add('is-active');
+      $$('.panel').forEach(function (p) { p.classList.add('hidden'); });
+      var panel = $('.panel[data-panel="' + t.dataset.tab + '"]');
+      if (panel) panel.classList.remove('hidden');
+    });
+  });
+
+  // ---------- Init ----------
+  function init() {
+    renderMeta();
+    renderHero();
+    renderPitch();
+    renderHighlights();
+    renderModules();
+    renderTutorials();
+    renderFaq();
+    renderFooter();
+    renderLegal();
+    bindToolbar();
+  }
+
+  // Reusable input helpers
+  function inputField(label, value, onChange, opts) {
+    opts = opts || {};
+    var wrap = document.createElement('div');
+    wrap.className = 'field';
+    var lab = document.createElement('label');
+    lab.textContent = label;
+    var ctl;
+    if (opts.tall) {
+      ctl = document.createElement('textarea');
+      ctl.style.minHeight = (opts.minHeight || 70) + 'px';
+    } else {
+      ctl = document.createElement('input');
+      ctl.type = opts.type || 'text';
+    }
+    ctl.value = value == null ? '' : value;
+    if (opts.placeholder) ctl.placeholder = opts.placeholder;
+    ctl.addEventListener('input', function () { onChange(ctl.value); markDirty(); });
+    wrap.appendChild(lab); wrap.appendChild(ctl);
+    return wrap;
+  }
+
+  function quillField(label, html, onChange) {
+    var wrap = document.createElement('div');
+    wrap.style.marginBottom = '14px';
+    var lab = document.createElement('label');
+    lab.style.cssText = 'display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 6px;';
+    lab.textContent = label;
+    var host = document.createElement('div');
+    wrap.appendChild(lab); wrap.appendChild(host);
+    setTimeout(function () {
+      if (!window.Quill) { setTimeout(arguments.callee, 100); return; }
+      var q = new Quill(host, {
+        theme: 'snow',
+        modules: {
+          toolbar: [
+            [{ 'header': [2, 3, 4, false] }],
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['link', 'code', 'blockquote'],
+            ['clean']
+          ]
+        }
+      });
+      q.root.innerHTML = html || '';
+      q.on('text-change', function () {
+        onChange(q.root.innerHTML);
+        markDirty();
+      });
+    }, 50);
+    return wrap;
+  }
+
+  // ---------- Meta ----------
+  function renderMeta() {
+    var host = $('#meta-form'); host.innerHTML = '';
+    var m = data.meta || (data.meta = {});
+    [
+      ['Site name', 'siteName'],
+      ['Full name', 'fullName'],
+      ['Tagline', 'tagline'],
+      ['Short description', 'shortDescription'],
+      ['Play Store URL', 'playStoreUrl'],
+      ['Contact email', 'contactEmail'],
+      ['Address line', 'addressLine'],
+      ['Twitter handle', 'twitterHandle'],
+      ['OG image path', 'ogImage'],
+      ['Version', 'version'],
+      ['Last updated', 'lastUpdated']
+    ].forEach(function (f) {
+      host.appendChild(inputField(f[0], m[f[1]], function (v) { m[f[1]] = v; }));
+    });
+  }
+
+  // ---------- Hero ----------
+  function renderHero() {
+    var host = $('#hero-form'); host.innerHTML = '';
+    var h = data.hero || (data.hero = {});
+    [
+      ['Eyebrow', 'eyebrow'],
+      ['Title — first part', 'title_a'],
+      ['Title — gradient word', 'title_b'],
+      ['Title — third part (optional)', 'title_c'],
+      ['Lead paragraph', 'lead', { tall: true }],
+      ['Primary CTA label', 'ctaPrimaryLabel'],
+      ['Primary CTA href', 'ctaPrimaryHref'],
+      ['Secondary CTA label', 'ctaSecondaryLabel'],
+      ['Secondary CTA href', 'ctaSecondaryHref']
+    ].forEach(function (f) {
+      host.appendChild(inputField(f[0], h[f[1]], function (v) { h[f[1]] = v; }, f[2] || {}));
+    });
+  }
+
+  // ---------- Pitch + Home grid intro ----------
+  function renderPitch() {
+    var hostP = $('#pitch-form'); hostP.innerHTML = '<h3 style="margin:0 0 14px;">Pitch</h3>';
+    var p = data.pitch || (data.pitch = {});
+    hostP.appendChild(inputField('Eyebrow', p.eyebrow, function (v) { p.eyebrow = v; }));
+    hostP.appendChild(inputField('Title', p.title, function (v) { p.title = v; }));
+    hostP.appendChild(quillField('Body (rich text)', p.body_html, function (v) { p.body_html = v; }));
+
+    var hostH = $('#homegrid-form'); hostH.innerHTML = '<h3 style="margin:0 0 14px;">Home grid intro</h3>';
+    var hg = data.homeGrid || (data.homeGrid = {});
+    hostH.appendChild(inputField('Eyebrow', hg.eyebrow, function (v) { hg.eyebrow = v; }));
+    hostH.appendChild(inputField('Title', hg.title, function (v) { hg.title = v; }));
+    hostH.appendChild(quillField('Body (rich text)', hg.body_html, function (v) { hg.body_html = v; }));
+  }
+
+  // ---------- Highlights ----------
+  function renderHighlights() {
+    var host = $('#highlights-list'); host.innerHTML = '';
+    (data.highlights || []).forEach(function (h, i) {
+      var card = document.createElement('div');
+      card.className = 'ed-card';
+      card.innerHTML =
+        '<div class="ed-card-head">' +
+        '<h3 class="title-preview">' + (h.title || 'Highlight ' + (i + 1)) + '</h3>' +
+        '<span class="meta-preview">#' + (i + 1) + '</span>' +
+        '</div>';
+      card.appendChild(inputField('Title', h.title, function (v) { h.title = v; renderHighlights(); }));
+      card.appendChild(inputField('Body', h.body, function (v) { h.body = v; }, { tall: true }));
+      var actions = document.createElement('div');
+      actions.className = 'ed-card-actions';
+      actions.innerHTML = '<span></span>';
+      var del = document.createElement('button');
+      del.className = 'btn btn--danger btn--small'; del.textContent = 'Delete';
+      del.addEventListener('click', function () {
+        if (confirm('Delete this highlight?')) { data.highlights.splice(i, 1); renderHighlights(); markDirty(); }
+      });
+      actions.appendChild(del);
+      card.appendChild(actions);
+      host.appendChild(card);
+    });
+  }
+  $('#hl-add').addEventListener('click', function () {
+    if (!data.highlights) data.highlights = [];
+    data.highlights.push({ title: 'New highlight', body: '' });
+    renderHighlights(); markDirty();
+  });
+
+  // ---------- Modules ----------
+  function renderModules() {
+    var host = $('#modules-list'); host.innerHTML = '';
+    (data.modules || []).forEach(function (m) {
+      var card = document.createElement('div');
+      card.className = 'ed-card';
+      card.innerHTML =
+        '<div class="ed-card-head">' +
+        '<h3 class="title-preview">' + (m.name || m.id) + '</h3>' +
+        '<span class="meta-preview">' + m.id + '</span>' +
+        '</div>';
+      card.appendChild(inputField('Display name', m.name, function (v) { m.name = v; }));
+      card.appendChild(inputField('Short name (tile)', m.shortName, function (v) { m.shortName = v; }));
+      card.appendChild(inputField('Tile role (subtitle)', m.tile_role, function (v) { m.tile_role = v; }));
+      card.appendChild(inputField('Tagline (page hero)', m.tagline, function (v) { m.tagline = v; }, { tall: true }));
+      card.appendChild(inputField('Summary lead', m.summary, function (v) { m.summary = v; }, { tall: true }));
+      card.appendChild(quillField('Top bar — body HTML', m.topbar_html, function (v) { m.topbar_html = v; }));
+      card.appendChild(quillField('Body / controls — HTML', m.body_controls_html, function (v) { m.body_controls_html = v; }));
+      if (m.id === 'play') {
+        card.appendChild(quillField('Hubs — HTML (Play module only)', m.hubs_html, function (v) { m.hubs_html = v; }));
+      }
+      if (m.id === 'audio') {
+        card.appendChild(quillField('Audio Editor — HTML (Audio module only)', m.audio_editor_html, function (v) { m.audio_editor_html = v; }));
+      }
+      card.appendChild(quillField('Settings — HTML', m.settings_html, function (v) { m.settings_html = v; }));
+      card.appendChild(quillField('Tips — HTML', m.tips_html, function (v) { m.tips_html = v; }));
+      host.appendChild(card);
+    });
+  }
+
+  // ---------- Tutorials ----------
+  function renderTutorials() {
+    var host = $('#tutorials-list'); host.innerHTML = '';
+    (data.tutorials || []).forEach(function (t, i) {
+      var card = document.createElement('div');
+      card.className = 'ed-card';
+      card.innerHTML =
+        '<div class="ed-card-head">' +
+        '<h3 class="title-preview">' + (t.title || 'Tutorial') + '</h3>' +
+        '<span class="meta-preview">' + (t.id || '') + '</span>' +
+        '</div>';
+      card.appendChild(inputField('Slug (id)', t.id, function (v) { t.id = v; }));
+      card.appendChild(inputField('Title', t.title, function (v) { t.title = v; renderTutorials(); }));
+      card.appendChild(inputField('Duration', t.duration, function (v) { t.duration = v; }));
+      card.appendChild(inputField('Intro', t.intro, function (v) { t.intro = v; }, { tall: true }));
+
+      var stepsWrap = document.createElement('div');
+      stepsWrap.style.marginTop = '8px';
+      stepsWrap.innerHTML = '<div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px;">Steps</div>';
+      (t.steps || []).forEach(function (s, j) {
+        var srow = document.createElement('div');
+        srow.style.cssText = 'background:var(--bg-1);padding:14px;border:1px solid var(--line);border-radius:8px;margin-bottom:10px;';
+        srow.appendChild(inputField('Step ' + (j + 1) + ' — title', s.h, function (v) { s.h = v; }));
+        srow.appendChild(inputField('Body', s.p, function (v) { s.p = v; }, { tall: true }));
+        var rm = document.createElement('button');
+        rm.className = 'btn btn--small btn--danger'; rm.textContent = 'Remove step';
+        rm.addEventListener('click', function () {
+          if (confirm('Remove this step?')) { t.steps.splice(j, 1); renderTutorials(); markDirty(); }
+        });
+        srow.appendChild(rm);
+        stepsWrap.appendChild(srow);
+      });
+      var addStep = document.createElement('button');
+      addStep.className = 'btn btn--small'; addStep.textContent = '＋ Add step';
+      addStep.addEventListener('click', function () {
+        if (!t.steps) t.steps = [];
+        t.steps.push({ h: 'New step', p: '' });
+        renderTutorials(); markDirty();
+      });
+      stepsWrap.appendChild(addStep);
+      card.appendChild(stepsWrap);
+
+      var actions = document.createElement('div');
+      actions.className = 'ed-card-actions'; actions.innerHTML = '<span></span>';
+      var del = document.createElement('button');
+      del.className = 'btn btn--danger btn--small'; del.textContent = 'Delete tutorial';
+      del.addEventListener('click', function () {
+        if (confirm('Delete this tutorial?')) { data.tutorials.splice(i, 1); renderTutorials(); markDirty(); }
+      });
+      actions.appendChild(del);
+      card.appendChild(actions);
+      host.appendChild(card);
+    });
+  }
+  $('#tut-add').addEventListener('click', function () {
+    if (!data.tutorials) data.tutorials = [];
+    data.tutorials.push({ id: 'new-tutorial', title: 'New tutorial', duration: '3 min', intro: '', steps: [{ h: 'Step 1', p: '' }] });
+    renderTutorials(); markDirty();
+  });
+
+  // ---------- FAQ ----------
+  function renderFaq() {
+    var host = $('#faq-list'); host.innerHTML = '';
+    (data.faq || []).forEach(function (f, i) {
+      var card = document.createElement('div');
+      card.className = 'ed-card';
+      card.innerHTML =
+        '<div class="ed-card-head">' +
+        '<h3 class="title-preview">' + (f.q || 'Question ' + (i + 1)) + '</h3>' +
+        '<span class="meta-preview">#' + (i + 1) + '</span>' +
+        '</div>';
+      card.appendChild(inputField('Question', f.q, function (v) { f.q = v; renderFaq(); }));
+      card.appendChild(inputField('Answer (HTML allowed)', f.a, function (v) { f.a = v; }, { tall: true, minHeight: 100 }));
+      var actions = document.createElement('div');
+      actions.className = 'ed-card-actions'; actions.innerHTML = '<span></span>';
+      var del = document.createElement('button');
+      del.className = 'btn btn--danger btn--small'; del.textContent = 'Delete';
+      del.addEventListener('click', function () {
+        if (confirm('Delete this Q&A?')) { data.faq.splice(i, 1); renderFaq(); markDirty(); }
+      });
+      actions.appendChild(del);
+      card.appendChild(actions);
+      host.appendChild(card);
+    });
+  }
+  $('#faq-add').addEventListener('click', function () {
+    if (!data.faq) data.faq = [];
+    data.faq.push({ q: 'New question', a: '' });
+    renderFaq(); markDirty();
+  });
+
+  // ---------- Footer ----------
+  function renderFooter() {
+    var host = $('#footer-form'); host.innerHTML = '';
+    var f = data.footer || (data.footer = { tagline: '', columns: [] });
+    host.appendChild(inputField('Tagline', f.tagline, function (v) { f.tagline = v; }));
+    (f.columns || []).forEach(function (col, i) {
+      var sec = document.createElement('div');
+      sec.style.cssText = 'background:var(--bg-1);padding:14px;border:1px solid var(--line);border-radius:8px;margin-bottom:10px;';
+      sec.appendChild(inputField('Column ' + (i + 1) + ' — title', col.title, function (v) { col.title = v; }));
+      (col.links || []).forEach(function (l, j) {
+        var lr = document.createElement('div');
+        lr.style.cssText = 'display:grid;grid-template-columns:1fr 1fr 80px;gap:8px;margin-bottom:6px;align-items:center;';
+        var lab = document.createElement('input'); lab.value = l.label; lab.placeholder = 'Label';
+        lab.style.cssText = 'padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);';
+        lab.addEventListener('input', function () { l.label = lab.value; markDirty(); });
+        var hr = document.createElement('input'); hr.value = l.href; hr.placeholder = 'href';
+        hr.style.cssText = 'padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);';
+        hr.addEventListener('input', function () { l.href = hr.value; markDirty(); });
+        var rm = document.createElement('button');
+        rm.className = 'btn btn--small btn--danger'; rm.textContent = '×';
+        rm.addEventListener('click', function () { col.links.splice(j, 1); renderFooter(); markDirty(); });
+        lr.appendChild(lab); lr.appendChild(hr); lr.appendChild(rm);
+        sec.appendChild(lr);
+      });
+      var addLink = document.createElement('button');
+      addLink.className = 'btn btn--small'; addLink.textContent = '＋ Link';
+      addLink.addEventListener('click', function () {
+        if (!col.links) col.links = [];
+        col.links.push({ label: 'Link', href: '#' });
+        renderFooter(); markDirty();
+      });
+      sec.appendChild(addLink);
+      host.appendChild(sec);
+    });
+  }
+
+  // ---------- Legal ----------
+  function renderLegal() {
+    var host = $('#legal-form'); host.innerHTML = '';
+    var p = document.createElement('div'); p.className = 'ed-card';
+    p.innerHTML = '<h3 style="margin:0 0 14px;">Privacy policy</h3>';
+    p.appendChild(quillField('Body (rich text)', data.privacy_html, function (v) { data.privacy_html = v; }));
+    host.appendChild(p);
+    var t = document.createElement('div'); t.className = 'ed-card';
+    t.innerHTML = '<h3 style="margin:0 0 14px;">Terms of use</h3>';
+    t.appendChild(quillField('Body (rich text)', data.terms_html, function (v) { data.terms_html = v; }));
+    host.appendChild(t);
+  }
+
+  // ---------- Toolbar ----------
+  function bindToolbar() {
+    $('.dl-content').addEventListener('click', function () {
+      var js = window.OSE_BUILD_CONTENT_JS();
+      var blob = new Blob([js], { type: 'text/javascript' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'ose-content.js';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      markClean();
+    });
+    $('#reload-btn').addEventListener('click', function () {
+      if (dirty && !confirm('Discard unsaved changes?')) return;
+      location.reload();
+    });
+    window.addEventListener('beforeunload', function (e) {
+      if (dirty) { e.preventDefault(); e.returnValue = ''; return ''; }
+    });
+  }
+
+  // ---------- Build the JS file string from the current data ----------
+  window.OSE_BUILD_CONTENT_JS = function () {
+    var json = JSON.stringify(data, null, 2);
+    return (
+      '/* =========================================================\n' +
+      '   OSE — site-wide editable content.\n' +
+      '   Auto-generated by /ose/editor.html.\n' +
+      '   ========================================================= */\n' +
+      'window.OSE_CONTENT = ' + json + ';\n'
+    );
+  };
+})();
+</script>
+
+<!-- GitHub save layer (adds Save-to-GitHub button next to Download) -->
+<script src="assets/js/editor-github.js"></script>
+</body>
+</html>

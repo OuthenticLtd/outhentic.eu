@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Help &amp; FAQ — OSE | Troubleshooting and answers</title>
+<meta name="description" content="Common questions about the Outhentic Sound Engine: input devices, monitoring vs printing, USB audio, non-destructive editing, MIDI Learn and bug reports." />
+<meta name="theme-color" content="#050507" />
+<meta property="og:title" content="OSE Help &amp; FAQ" />
+<meta property="og:description" content="Common questions and quick troubleshooting for the Outhentic Sound Engine." />
+<meta property="og:url" content="https://outhentic.eu/ose/help.html" />
+<meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-logo.svg" />
+<link rel="canonical" href="https://outhentic.eu/ose/help.html" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/ose-styles.css" />
+<link rel="icon" type="image/svg+xml" href="assets/img/ose-logo.svg" />
+<link rel="alternate icon" href="assets/img/ose-logo.png" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><img src="assets/img/ose-logo.svg" alt="" /><span class="nav-wordmark">OSE</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links" data-ose-nav></nav>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="reveal" style="max-width: 820px; margin-bottom: 48px;">
+      <span class="eyebrow eyebrow--grad">Support</span>
+      <h1>Help &amp; FAQ.</h1>
+      <p class="lead">Quick answers to the questions we hear most often. If yours isn't here, email <a href="mailto:info@outhentic.eu" style="color: var(--accent-orange); text-decoration: underline;">info@outhentic.eu</a> — we read everything.</p>
+    </div>
+
+    <div data-ose-faq class="reveal"></div>
+
+    <hr class="divider"/>
+
+    <h2 class="reveal">Troubleshooting checklist</h2>
+    <p class="reveal" style="max-width: 720px;">When something isn't working, walk this list top-to-bottom. It catches the majority of issues in under a minute.</p>
+
+    <div class="cols-2 reveal" style="margin-top: 24px;">
+      <div class="hub-card">
+        <h3>No signal on Tuner / Meters / Audio</h3>
+        <ol>
+          <li>Open Settings → Audio. Confirm the input device matches what you've got plugged in.</li>
+          <li>If using a USB interface, the channel chooser sits inside the same sheet — pick the channel your microphone or instrument is connected to.</li>
+          <li>Open the Meters module. If the bars move you've got signal — the issue is downstream.</li>
+        </ol>
+      </div>
+      <div class="hub-card">
+        <h3>Crackles or feedback while recording</h3>
+        <ol>
+          <li>Turn MONITOR off — feedback into the same chain you're printing causes runaway loops.</li>
+          <li>Lower the system output level; some devices distort their own loopback past −6 dB.</li>
+          <li>If using USB, check the cable. Bus-powered interfaces sometimes brown out under heavy DSP.</li>
+        </ol>
+      </div>
+      <div class="hub-card">
+        <h3>USB device disappears mid-session</h3>
+        <ol>
+          <li>OSE recovers automatically through Android's audio device callbacks; give it a couple of seconds.</li>
+          <li>If it still doesn't reappear, unplug and replug the device. The picker re-populates on hotplug.</li>
+        </ol>
+      </div>
+      <div class="hub-card">
+        <h3>Edits aren't saving</h3>
+        <ol>
+          <li>Audio edits are virtual until you Bounce. Tap the Bounce button in the Audio Editor to commit.</li>
+          <li>If a take seems lost, the original is still in the take's stash — Revert restores it.</li>
+        </ol>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+
+    <div class="reveal" style="text-align: center; padding-top: 24px;">
+      <h2>Still stuck?</h2>
+      <p class="lead" style="max-width: 540px; margin: 0 auto 28px;">A short message — even just a screenshot — helps us help you. Bug reports go straight to the team that builds OSE.</p>
+      <a class="btn btn--accent" href="mailto:info@outhentic.eu?subject=OSE%20support">Email us <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><div class="foot-mark"><img src="assets/img/ose-logo.svg" alt="" /><span class="nav-wordmark">OSE</span></div><p class="foot-tag" data-ose="footer.tagline"></p></div>
+    <div data-ose-foot-cols style="display: contents;"></div>
+  </div>
+  <div class="foot-bottom"><span>© <span data-year>2026</span> Outhentic Foundation</span><span><a href="https://outhentic.eu/">outhentic.eu</a> · <a href="mailto:info@outhentic.eu">info@outhentic.eu</a></span></div>
+</div></footer>
+
+<script src="assets/data/ose-content.js" defer></script>
+<script src="assets/js/ose-renderer.js" defer></script>
+<script src="assets/js/ose-main.js" defer></script>
+</body>
+</html>

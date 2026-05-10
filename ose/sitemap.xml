@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://outhentic.eu/ose/</loc><priority>1.00</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/manual.html</loc><priority>0.90</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/tutorials.html</loc><priority>0.90</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/help.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/modules/play.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/modules/audio.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/modules/midi.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/modules/practice.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/modules/metronome.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/modules/tuner.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/modules/signal-generator.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/modules/meters.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/privacy.html</loc><priority>0.40</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://outhentic.eu/ose/terms.html</loc><priority>0.40</priority><changefreq>yearly</changefreq></url>
+</urlset>

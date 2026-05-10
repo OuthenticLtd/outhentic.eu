@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Signal Generator — OSE | Pocket bench oscillator and noise source</title>
+<meta name="description" content="OSE's Signal Generator: seven waveforms — Sine, Square, Triangle, Saw and White / Pink / Brown noise — with sweep mode and an auto-stop timer." />
+<meta name="theme-color" content="#050507" />
+<meta property="og:title" content="Signal Generator — OSE" />
+<meta property="og:description" content="Seven waveforms, sweep mode, auto-stop. A pocket bench tool." />
+<meta property="og:url" content="https://outhentic.eu/ose/modules/signal-generator.html" />
+<meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-logo.svg" />
+<link rel="canonical" href="https://outhentic.eu/ose/modules/signal-generator.html" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/css/ose-styles.css" />
+<link rel="icon" type="image/svg+xml" href="../assets/img/ose-logo.svg" />
+<link rel="alternate icon" href="../assets/img/ose-logo.png" />
+</head>
+<body data-module-id="signal-generator">
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../index.html"><img src="../assets/img/ose-logo.svg" alt="" /><span class="nav-wordmark">OSE</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../manual.html" class="is-active">Manual</a>
+      <a href="../tutorials.html">Tutorials</a>
+      <a href="../help.html">Help</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="module-hero">
+      <div class="reveal">
+        <span class="tag tag--blue" data-ose-module="tile_role"></span>
+        <h1 style="margin: 14px 0 .25em;" data-ose-module="name">Signal Generator</h1>
+        <p class="lead" data-ose-module="tagline"></p>
+        <div style="margin-top: 22px;"><a class="btn btn--ghost" href="../manual.html"><span class="arrow">←</span> All modules</a></div>
+      </div>
+      <div class="reveal">
+        <div class="phone-frame" aria-hidden="true">
+          <svg viewBox="0 0 360 780">
+            <rect width="360" height="780" fill="#050507"/>
+            <rect x="0" y="20" width="360" height="56" fill="#0a0a0d"/>
+            <text x="22" y="56" fill="#ECECEE" font-family="Inter, sans-serif" font-size="14" font-weight="700" letter-spacing="3">SIGNAL GEN</text>
+            <circle cx="332" cy="48" r="11" fill="#15151a" stroke="rgba(255,255,255,0.14)"/>
+            <circle cx="332" cy="48" r="3" fill="#7A7A82"/>
+            <!-- Wave preview -->
+            <rect x="14" y="92" width="332" height="120" rx="14" fill="#0a0a0d" stroke="rgba(255,255,255,0.08)"/>
+            <text x="26" y="112" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">WAVEFORM · SINE</text>
+            <path d="M30 168 Q60 120 90 168 T150 168 T210 168 T270 168 T330 168" fill="none" stroke="#FF8B3D" stroke-width="2"/>
+            <!-- Waveform picker -->
+            <rect x="14" y="226" width="332" height="56" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
+            <g fill="#15151a" stroke="rgba(255,255,255,0.14)">
+              <circle cx="50"  cy="254" r="20"/>
+              <circle cx="98"  cy="254" r="20"/>
+              <circle cx="146" cy="254" r="20"/>
+              <circle cx="194" cy="254" r="20"/>
+              <circle cx="242" cy="254" r="20"/>
+              <circle cx="290" cy="254" r="20"/>
+              <circle cx="338" cy="254" r="20"/>
+            </g>
+            <circle cx="50" cy="254" r="20" fill="#FF8B3D" fill-opacity="0.16" stroke="#FF8B3D"/>
+            <!-- waveform glyphs -->
+            <g stroke="#ECECEE" stroke-width="1.5" fill="none">
+              <path d="M40 254 Q45 248 50 254 T60 254"/>
+              <path d="M88 254 H93 V248 H103 V260 H108"/>
+              <path d="M136 260 L143 248 L149 260 L156 248"/>
+              <path d="M184 260 L194 248 L194 260 L204 248"/>
+            </g>
+            <!-- noise glyphs -->
+            <g fill="#ECECEE">
+              <text x="242" y="258" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">W</text>
+              <text x="290" y="258" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">P</text>
+              <text x="338" y="258" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">B</text>
+            </g>
+            <!-- Frequency big -->
+            <text x="180" y="370" fill="#ECECEE" font-family="Inter, sans-serif" font-size="60" font-weight="700" text-anchor="middle">440</text>
+            <text x="180" y="400" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="3" text-anchor="middle">Hz</text>
+            <!-- Slider -->
+            <rect x="30" y="430" width="300" height="6" rx="3" fill="#1c1c22"/>
+            <rect x="30" y="430" width="180" height="6" rx="3" fill="url(#sgGrad)"/>
+            <circle cx="210" cy="433" r="10" fill="#ECECEE"/>
+            <defs>
+              <linearGradient id="sgGrad" x1="0" y1="0.5" x2="1" y2="0.5">
+                <stop offset="0" stop-color="#4FA8FF"/><stop offset="1" stop-color="#FF8B3D"/>
+              </linearGradient>
+            </defs>
+            <!-- AMP / Sweep / Auto -->
+            <rect x="14" y="464" width="332" height="80" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
+            <text x="32" y="490" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">AMP</text>
+            <text x="62" y="514" fill="#ECECEE" font-family="JetBrains Mono, monospace" font-size="14">−12 dB</text>
+            <text x="170" y="490" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">SWEEP</text>
+            <text x="206" y="514" fill="#ECECEE" font-family="JetBrains Mono, monospace" font-size="14">OFF</text>
+            <text x="270" y="490" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">AUTO</text>
+            <text x="304" y="514" fill="#ECECEE" font-family="JetBrains Mono, monospace" font-size="14">30s</text>
+            <!-- Transport -->
+            <rect x="14" y="568" width="332" height="80" rx="14" fill="#0a0a0d" stroke="rgba(255,255,255,0.08)"/>
+            <circle cx="180" cy="608" r="22" fill="url(#sgGrad)"/>
+            <polygon points="174,599 174,617 189,608" fill="#000"/>
+            <!-- Bottom hint -->
+            <rect x="120" y="730" width="120" height="4" rx="2" fill="#1c1c22"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="content reveal" style="max-width: 820px;"><p class="lead" data-ose-module="summary"></p></div>
+
+    <hr class="divider"/>
+    <nav class="sub-nav">
+      <a href="#topbar">Top bar</a>
+      <a href="#body">Controls</a>
+      <a href="#settings">Settings</a>
+      <a href="#tips">Tips</a>
+    </nav>
+    <section id="topbar" class="reveal"><h2>Top bar</h2><div class="content" data-ose-module="topbar_html" data-ose-html></div></section>
+    <hr class="divider"/>
+    <section id="body" class="reveal"><h2>Controls</h2><div class="content" data-ose-module="body_controls_html" data-ose-html></div></section>
+    <hr class="divider"/>
+    <section id="settings" class="reveal"><h2>Settings</h2><div class="content" data-ose-module="settings_html" data-ose-html></div></section>
+    <hr class="divider"/>
+    <section id="tips" class="reveal"><h2>Tips</h2><div class="content" data-ose-module="tips_html" data-ose-html></div></section>
+
+    <hr class="divider"/>
+    <div class="cols-3 reveal" style="margin-top: 36px;">
+      <a class="hub-card" href="meters.html"><h3>Meters →</h3><p>Measure &amp; verify.</p></a>
+      <a class="hub-card" href="tuner.html"><h3>Tuner →</h3><p>Intonation.</p></a>
+      <a class="hub-card" href="audio.html"><h3>Audio Module →</h3><p>Record, edit, master.</p></a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><div class="foot-mark"><img src="../assets/img/ose-logo.svg" alt="" /><span class="nav-wordmark">OSE</span></div><p class="foot-tag" data-ose="footer.tagline"></p></div>
+    <div data-ose-foot-cols style="display: contents;"></div>
+  </div>
+  <div class="foot-bottom"><span>© <span data-year>2026</span> Outhentic Foundation</span><span><a href="https://outhentic.eu/">outhentic.eu</a> · <a href="mailto:info@outhentic.eu">info@outhentic.eu</a></span></div>
+</div></footer>
+
+<script src="../assets/data/ose-content.js" defer></script>
+<script src="../assets/js/ose-renderer.js" defer></script>
+<script src="../assets/js/ose-main.js" defer></script>
+</body>
+</html>

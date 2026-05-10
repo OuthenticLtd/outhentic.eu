@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>404 — Page not found | OSE</title>
+<meta name="theme-color" content="#050507" />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/ose-styles.css" />
+<link rel="icon" type="image/svg+xml" href="assets/img/ose-logo.svg" />
+<link rel="alternate icon" href="assets/img/ose-logo.png" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><img src="assets/img/ose-logo.svg" alt="" /><span class="nav-wordmark">OSE</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="manual.html">Manual</a>
+      <a href="tutorials.html">Tutorials</a>
+      <a href="help.html">Help</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section" style="min-height: 70vh; display: flex; align-items: center;">
+  <div class="wrap" style="text-align: center;">
+    <span class="eyebrow eyebrow--grad">Error 404</span>
+    <h1 style="font-size: clamp(3rem, 8vw, 6rem);">Page not found.</h1>
+    <p class="lead" style="max-width: 540px; margin: 0 auto 36px;">The link you followed doesn't lead anywhere on outhentic.eu/ose. Try the manual, the tutorials, or head home.</p>
+    <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+      <a class="btn btn--accent" href="index.html">← Home</a>
+      <a class="btn btn--ghost" href="manual.html">Read the manual</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot-bottom">
+    <span>© <span data-year>2026</span> Outhentic Foundation</span>
+    <span><a href="https://outhentic.eu/">outhentic.eu</a> · <a href="mailto:info@outhentic.eu">info@outhentic.eu</a></span>
+  </div>
+</div></footer>
+
+<script>document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });</script>
+</body>
+</html>

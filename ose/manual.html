@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Manual — OSE | Module-by-module reference</title>
+<meta name="description" content="The OSE manual — complete reference for every module: Play, Audio, MIDI, Practice, Metronome, Tuner, Signal Generator and Meters." />
+<meta name="theme-color" content="#050507" />
+<meta name="robots" content="index,follow" />
+<meta property="og:title" content="OSE Manual" />
+<meta property="og:description" content="Module-by-module reference for the Outhentic Sound Engine." />
+<meta property="og:url" content="https://outhentic.eu/ose/manual.html" />
+<meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-logo.svg" />
+<link rel="canonical" href="https://outhentic.eu/ose/manual.html" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/ose-styles.css" />
+<link rel="icon" type="image/svg+xml" href="assets/img/ose-logo.svg" />
+<link rel="alternate icon" href="assets/img/ose-logo.png" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><img src="assets/img/ose-logo.svg" alt="" /><span class="nav-wordmark">OSE</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links" data-ose-nav></nav>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="reveal" style="max-width: 820px; margin-bottom: 56px;">
+      <span class="eyebrow eyebrow--grad">Reference</span>
+      <h1>The OSE Manual.</h1>
+      <p class="lead">A control-by-control reference for everything the app exposes. Pick a module to read its full page, or scroll for the cross-cutting concepts that show up in every module.</p>
+    </div>
+
+    <h2 class="reveal">Modules</h2>
+    <div class="cols-2 reveal" data-ose-manual-modules style="margin-top: 24px;"></div>
+
+    <hr class="divider"/>
+
+    <h2 class="reveal">Cross-cutting concepts</h2>
+    <p class="reveal" style="max-width: 720px;">A few ideas show up in every module. Once you understand them, the whole app feels smaller.</p>
+
+    <div class="cols-2 reveal" style="margin-top: 24px;">
+      <div class="hub-card">
+        <h3>The home grid</h3>
+        <p>OSE always opens on the same 8-tile grid. The Play tile is emphasised; the rest sit at uniform weight, two to a row. This is the only navigation level you ever need.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Modules &amp; Hubs</h3>
+        <p>A <em>module</em> is what you reach from a home tile. A <em>Hub</em> is a draggable dialog that opens over a module — the Play Hub, MetronomeHub, InstrumentHub, MidiHub, Piano Roll Editor, Audio Editor and DSP Hub.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Settings sheets</h3>
+        <p>Every module's gear icon opens a sheet with the same structure: SYSTEM (foldable, default expanded; holds Auto-Rotate and Always-On Screen) → AUDIO (input device picker, USB channel chooser) → module-specific.</p>
+      </div>
+      <div class="hub-card">
+        <h3>MIDI Learn</h3>
+        <p>Long-press any knob, slider or toggle to enter MIDI Learn — the system-wide gesture for binding hardware controllers. Bindings are global and channel-aware. The Settings sheet shows everything currently bound.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Centred playhead, scrolling timeline</h3>
+        <p>The Audio Editor, Piano Roll and MIDI Hub mini-visualisers all use the same model: the playhead stays at horizontal centre and the timeline slides under it. Zoom anchors on the playhead, not the screen edge.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Non-destructive edits</h3>
+        <p>Audio clip handles, virtual edits in the Audio Editor and clip handles on the Piano Roll all preserve material instead of deleting it. Bake when you're sure; revert when you change your mind.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Input device picker</h3>
+        <p>Tuner, Audio and Meters share one input picker via the Settings sheet. Built-in microphones collapse to a single 'Internal device' row; USB interfaces expose every channel for explicit selection.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Card spec</h3>
+        <p>Every surface in OSE follows the same card chrome — 12 dp outer padding, 16 dp gap, thin accent border, 14 dp corner radius — so the whole app feels like one object instead of eight.</p>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+
+    <h2 class="reveal">Common gestures</h2>
+    <dl class="spec-list reveal">
+      <div class="spec-row"><dt>Tap</dt>           <dd>Activate, toggle, open. Standard.</dd></div>
+      <div class="spec-row"><dt>Long-press</dt>    <dd>Reserved for MIDI Learn. Hold any control to bind it to a hardware controller.</dd></div>
+      <div class="spec-row"><dt>Drag (knob)</dt>   <dd>Adjust value. Distance-scaled fine mode kicks in past a threshold for precise tweaks.</dd></div>
+      <div class="spec-row"><dt>Tap label</dt>     <dd>Open the unified numpad &amp; MIDI strip sheet for direct numeric entry.</dd></div>
+      <div class="spec-row"><dt>Pinch (canvas)</dt><dd>Zoom on the playhead in editors that have one. Two-finger zoom at canvas centre otherwise.</dd></div>
+      <div class="spec-row"><dt>Swipe (lens)</dt>  <dd>Some modules with lenses (e.g. Audio) accept a swipe between RECORD and LIBRARY, in addition to tapping the chip.</dd></div>
+    </dl>
+
+    <hr class="divider"/>
+
+    <div class="reveal" style="text-align: center; padding-top: 24px;">
+      <h2>Need a step-by-step?</h2>
+      <p class="lead" style="max-width: 540px; margin: 0 auto 28px;">The Tutorials section walks through the most common tasks in 2–5 minutes each.</p>
+      <a class="btn btn--accent" href="tutorials.html">Read the tutorials <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><div class="foot-mark"><img src="assets/img/ose-logo.svg" alt="" /><span class="nav-wordmark">OSE</span></div><p class="foot-tag" data-ose="footer.tagline"></p></div>
+    <div data-ose-foot-cols style="display: contents;"></div>
+  </div>
+  <div class="foot-bottom"><span>© <span data-year>2026</span> Outhentic Foundation</span><span><a href="https://outhentic.eu/">outhentic.eu</a> · <a href="mailto:info@outhentic.eu">info@outhentic.eu</a></span></div>
+</div></footer>
+
+<script src="assets/data/ose-content.js" defer></script>
+<script src="assets/js/ose-renderer.js" defer></script>
+<script src="assets/js/ose-main.js" defer></script>
+</body>
+</html>

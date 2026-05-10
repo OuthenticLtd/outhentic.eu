@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OSE — Outhentic Sound Engine | Mobile music studio for Android</title>
+<meta name="description" content="OSE is a complete mobile music studio for Android: synth, recorder, MIDI editor, audio editor, metronome, tuner, signal generator and meters — eight studio-grade modules in one app." />
+<meta name="theme-color" content="#050507" />
+<meta name="robots" content="index,follow" />
+<meta name="author" content="Outhentic Foundation" />
+<meta name="keywords" content="OSE, Outhentic Sound Engine, Android music app, mobile DAW, mobile synthesiser, Android audio recorder, Android piano roll, mobile audio editor, Android metronome, Android tuner, mobile signal generator, mobile audio meters" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="OSE — Outhentic Sound Engine" />
+<meta property="og:description" content="The mobile music studio that fits in your pocket. Eight studio-grade modules in one Android app." />
+<meta property="og:url" content="https://outhentic.eu/ose/" />
+<meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-logo.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="OSE — Outhentic Sound Engine" />
+<meta name="twitter:description" content="The mobile music studio that fits in your pocket." />
+
+<link rel="canonical" href="https://outhentic.eu/ose/" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="assets/css/ose-styles.css" />
+
+<link rel="icon" type="image/svg+xml" href="assets/img/ose-logo.svg" />
+<link rel="alternate icon" href="assets/img/ose-logo.png" />
+<link rel="apple-touch-icon" href="assets/img/ose-logo.png" />
+
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"Outhentic Sound Engine",
+  "alternateName":"OSE",
+  "operatingSystem":"Android",
+  "applicationCategory":"MultimediaApplication",
+  "description":"A mobile music studio with eight modules: synth, audio recorder/editor, MIDI piano roll, practice, metronome, tuner, signal generator and meters.",
+  "url":"https://outhentic.eu/ose/",
+  "publisher":{
+    "@type":"Organization",
+    "name":"Outhentic Foundation",
+    "url":"https://outhentic.eu/"
+  },
+  "offers":{ "@type":"Offer", "price":"0", "priceCurrency":"EUR" }
+}</script>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html" aria-label="OSE — Outhentic Sound Engine">
+      <img src="assets/img/ose-logo.svg" alt="" />
+      <span class="nav-wordmark">OSE</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links" data-ose-nav></nav>
+  </div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal">
+        <span class="eyebrow eyebrow--grad" data-ose="hero.eyebrow">Outhentic Sound Engine · Android</span>
+        <h1>
+          <span data-ose="hero.title_a">Eight studios.</span>
+          <span class="grad-word" data-ose="hero.title_b">One pocket.</span>
+        </h1>
+        <p class="lead" data-ose="hero.lead"></p>
+        <div class="hero-cta">
+          <a class="store-badge" data-ose-href="hero.ctaPrimaryHref" href="#">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.4.3-.6.7-.6 1.3v17c0 .5.2 1 .6 1.3l9.6-9.6L3.6 2.3zm10.7 8.6L17 13.6l3.4-1.9c.5-.3.5-1 0-1.3L17 8.5l-2.7 2.7zM4.7 2 14.6 12 4.7 22l9.3-5.3-9.3-5.3z"/></svg>
+            <span class="store-line">
+              <span class="store-pre">Get it on</span>
+              <strong data-ose="hero.ctaPrimaryLabel">Google Play</strong>
+            </span>
+          </a>
+          <a class="btn btn--ghost" data-ose-href="hero.ctaSecondaryHref" href="manual.html">
+            <span data-ose="hero.ctaSecondaryLabel">Read the manual</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Phone-frame mockup with the 8-module grid -->
+      <div class="reveal">
+        <div class="phone-frame" aria-hidden="true">
+          <svg viewBox="0 0 360 780" preserveAspectRatio="xMidYMid meet">
+            <!-- Background -->
+            <rect width="360" height="780" fill="#050507"/>
+            <!-- Status bar -->
+            <text x="22" y="50" fill="#7A7A82" font-family="Inter, sans-serif" font-size="12" font-weight="600">9:41</text>
+            <circle cx="320" cy="46" r="3" fill="#7A7A82"/>
+            <rect x="296" y="42" width="14" height="8" rx="1.5" fill="none" stroke="#7A7A82"/>
+            <!-- Top label -->
+            <text x="22" y="92" fill="#ECECEE" font-family="Inter, sans-serif" font-size="22" font-weight="700">OSE</text>
+            <text x="22" y="112" fill="#7A7A82" font-family="Inter, sans-serif" font-size="11" font-weight="500" letter-spacing="2">OUTHENTIC SOUND ENGINE</text>
+            <!-- 8-tile grid 4 wide x 2 rows; emphasised PLAY -->
+            <!-- Row 1 -->
+            <rect x="22"  y="138" width="74" height="74" rx="14" fill="url(#playGrad)"/>
+            <rect x="100" y="138" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
+            <rect x="178" y="138" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
+            <rect x="256" y="138" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
+            <!-- Row 2 -->
+            <rect x="22"  y="216" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
+            <rect x="100" y="216" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
+            <rect x="178" y="216" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
+            <rect x="256" y="216" width="74" height="74" rx="14" fill="#15151a" stroke="rgba(255,255,255,0.08)"/>
+            <defs>
+              <linearGradient id="playGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#4FA8FF" stop-opacity="0.30"/>
+                <stop offset="1" stop-color="#FF8B3D" stop-opacity="0.40"/>
+              </linearGradient>
+              <linearGradient id="ringGrad" x1="0" y1="0.5" x2="1" y2="0.5">
+                <stop offset="0" stop-color="#4FA8FF"/>
+                <stop offset="1" stop-color="#FF8B3D"/>
+              </linearGradient>
+            </defs>
+            <!-- Tile labels -->
+            <text x="32" y="200" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">PLAY</text>
+            <text x="110" y="200" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">AUDIO</text>
+            <text x="188" y="200" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">MIDI</text>
+            <text x="266" y="200" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">PRACTICE</text>
+            <text x="32"  y="278" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">METRO</text>
+            <text x="110" y="278" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">TUNER</text>
+            <text x="188" y="278" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">SIG GEN</text>
+            <text x="266" y="278" fill="#ECECEE" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6">METERS</text>
+            <!-- Mock-area: a wave display -->
+            <rect x="22" y="320" width="316" height="200" rx="14" fill="#0a0a0d" stroke="rgba(255,255,255,0.08)"/>
+            <path d="M30 420 Q60 360 90 420 T150 420 T210 420 T270 420 T330 420" fill="none" stroke="url(#ringGrad)" stroke-width="2" opacity="0.85"/>
+            <path d="M30 420 Q60 480 90 420 T150 420 T210 420 T270 420 T330 420" fill="none" stroke="url(#ringGrad)" stroke-width="2" opacity="0.45"/>
+            <text x="40" y="350" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">VISUALIZER · LIVE</text>
+            <!-- Tools dock -->
+            <rect x="22" y="540" width="316" height="80" rx="14" fill="#0a0a0d" stroke="rgba(255,255,255,0.08)"/>
+            <circle cx="60"  cy="580" r="20" fill="#15151a" stroke="rgba(255,255,255,0.14)"/>
+            <circle cx="120" cy="580" r="20" fill="#15151a" stroke="rgba(255,255,255,0.14)"/>
+            <circle cx="180" cy="580" r="22" fill="url(#ringGrad)"/>
+            <circle cx="240" cy="580" r="20" fill="#15151a" stroke="rgba(255,255,255,0.14)"/>
+            <circle cx="300" cy="580" r="20" fill="#15151a" stroke="rgba(255,255,255,0.14)"/>
+            <!-- REC pill -->
+            <rect x="22" y="640" width="316" height="56" rx="14" fill="#0a0a0d" stroke="#FF8B3D" stroke-opacity="0.6"/>
+            <text x="180" y="675" fill="#FF8B3D" font-family="Inter, sans-serif" font-size="18" font-weight="700" letter-spacing="6" text-anchor="middle">REC</text>
+            <!-- Bottom hint bar -->
+            <rect x="120" y="730" width="120" height="4" rx="2" fill="#1c1c22"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PITCH ============== -->
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section-title reveal">
+      <span class="eyebrow" data-ose="pitch.eyebrow">Why OSE</span>
+      <h2 data-ose="pitch.title">A studio is no longer a place. It is a phone.</h2>
+    </div>
+    <div class="content reveal" style="max-width: 780px;" data-ose="pitch.body_html" data-ose-html></div>
+  </div>
+</section>
+
+<!-- ============== HOME GRID ============== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-title reveal">
+      <span class="eyebrow" data-ose="homeGrid.eyebrow">Eight modules</span>
+      <h2 data-ose="homeGrid.title">The home screen IS the studio.</h2>
+      <div class="content" style="max-width: 720px; margin-top: 18px;" data-ose="homeGrid.body_html" data-ose-html></div>
+    </div>
+
+    <div class="module-grid reveal" data-ose-module-grid></div>
+  </div>
+</section>
+
+<!-- ============== HIGHLIGHTS ============== -->
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section-title reveal">
+      <h2>What makes it different</h2>
+    </div>
+    <div class="cols-2 reveal" data-ose-highlights></div>
+  </div>
+</section>
+
+<!-- ============== CTA ============== -->
+<section class="section">
+  <div class="wrap" style="text-align: center; max-width: 720px;">
+    <h2>Get OSE on your phone.</h2>
+    <p class="lead" style="margin: 0 auto 32px;">Free to install. No account needed. Your recordings stay on your device.</p>
+    <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+      <a class="store-badge" data-ose-href="hero.ctaPrimaryHref" href="#">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.4.3-.6.7-.6 1.3v17c0 .5.2 1 .6 1.3l9.6-9.6L3.6 2.3z"/></svg>
+        <span class="store-line">
+          <span class="store-pre">Get it on</span>
+          <strong>Google Play</strong>
+        </span>
+      </a>
+      <a class="btn btn--ghost" href="tutorials.html">Tutorials <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-mark">
+          <img src="assets/img/ose-logo.svg" alt="" />
+          <span class="nav-wordmark">OSE</span>
+        </div>
+        <p class="foot-tag" data-ose="footer.tagline">Outhentic Sound Engine. Built in Sofia, Bulgaria.</p>
+      </div>
+      <div data-ose-foot-cols style="display: contents;"></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span data-year>2026</span> Outhentic Foundation</span>
+      <span><a href="https://outhentic.eu/">outhentic.eu</a> · <a href="mailto:info@outhentic.eu">info@outhentic.eu</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/data/ose-content.js" defer></script>
+<script src="assets/js/ose-renderer.js" defer></script>
+<script src="assets/js/ose-main.js" defer></script>
+</body>
+</html>
