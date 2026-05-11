@@ -626,47 +626,93 @@
   }
 
   // ============================================================
-  // SIGNAL GENERATOR MODULE — 7 waveforms + typed freq + scope/spectrum
+  // SIGNAL GENERATOR MODULE — 7 waveforms + typed freq + scope / FFT
   //
-  // Adds two parity-with-the-app features:
-  //   • Typed frequency entry (number input + preset chips) so you can
-  //     dial in 432 / 1000 / 4400 / any value 20-20 000 Hz.
-  //   • Live SCOPE / SPECTRUM visualizer driven by an AnalyserNode.
-  //     SCOPE = getFloatTimeDomainData (waveform shape).
-  //     SPECTRUM = getByteFrequencyData (harmonic content), drawn as
-  //     log-frequency bars to match the app's Spectrum Bench view.
+  // The visualiser is a one-for-one port of LiveSpectrumVisualizer
+  // from SignalGenModule.kt:
+  //   • AnalyserNode runs the FFT in native code (fftSize 8192 for
+  //     fine bin resolution; smoothing 0 because we do our own
+  //     attack/release in JS).
+  //   • getFloatFrequencyData returns dBFS values directly.
+  //   • 80 log-spaced display bands (30 Hz → 20 kHz), MAX-magnitude
+  //     per band (keeps harmonic peaks crisp, no smearing).
+  //   • Normalised across [SPEC_DB_FLOOR, SPEC_DB_CEIL] = [−72, 0] dB.
+  //   • Fast-attack / slow-release smoother: instant up, EMA α=0.45
+  //     down so the bars settle without flicker.
+  //   • Renders as a smooth Path: gradient fill below an outline.
+  //   • SCOPE tab keeps a higher-res time-domain trace driven by
+  //     getFloatTimeDomainData on the same analyser.
   // ============================================================
+  var SPEC_BANDS = 80;
+  var SPEC_MIN = 30, SPEC_MAX = 20000;
+  var SPEC_DB_FLOOR = -72, SPEC_DB_CEIL = 0;
+  var SPEC_RELEASE_ALPHA = 0.45;
+  var SPEC_VIEW_W = 700, SPEC_VIEW_H = 220;
+
+  // Pre-compute band centre frequencies + edge frequencies. These are
+  // static for the lifetime of the page so we cache them outside the
+  // hot loop.
+  var SPEC_TLO = Math.log10(SPEC_MIN);
+  var SPEC_THI = Math.log10(SPEC_MAX);
+  var SPEC_BAND_EDGES_HZ = [];
+  for (var b = 0; b <= SPEC_BANDS; b++) {
+    SPEC_BAND_EDGES_HZ.push(Math.pow(10, SPEC_TLO + (SPEC_THI - SPEC_TLO) * (b / SPEC_BANDS)));
+  }
+  function freqToLogX(f) {
+    var c = Math.max(SPEC_MIN, Math.min(SPEC_MAX, f));
+    return ((Math.log10(c) - SPEC_TLO) / (SPEC_THI - SPEC_TLO)) * SPEC_VIEW_W;
+  }
+  function bandCentreFreq(i) {
+    return Math.pow(10, SPEC_TLO + (SPEC_THI - SPEC_TLO) * ((i + 0.5) / SPEC_BANDS));
+  }
+
   function buildSignalGen() {
     var demo = document.querySelector('[data-module-demo="signal-gen"]');
     if (!demo) return;
-    var pathStatic    = demo.querySelector('[data-sg-path-static]');
-    var pathScope     = demo.querySelector('[data-sg-path-scope]');
-    var pathSpectrum  = demo.querySelector('[data-sg-path-spectrum]');
-    var chips         = demo.querySelectorAll('[data-sg-wave]');
-    var freqIn        = demo.querySelector('[data-sg-freq]');
-    var freqVal       = demo.querySelector('[data-sg-freq-value]');
-    var freqBig       = demo.querySelector('[data-sg-freq-display]');
-    var freqInput     = demo.querySelector('[data-sg-freq-input]');
-    var ampIn         = demo.querySelector('[data-sg-amp]');
-    var ampVal        = demo.querySelector('[data-sg-amp-value]');
-    var playBtn       = demo.querySelector('[data-sg-play]');
-    var statusEl      = demo.querySelector('[data-sg-status]');
-    var presets       = demo.querySelectorAll('[data-sg-preset]');
-    var vizTabs       = demo.querySelectorAll('[data-sg-viz]');
+    var pathStatic   = demo.querySelector('[data-sg-path-static]');
+    var pathScope    = demo.querySelector('[data-sg-path-scope]');
+    var spectrumFill    = demo.querySelector('[data-sg-spectrum-fill]');
+    var spectrumOutline = demo.querySelector('[data-sg-spectrum-outline]');
+    var axis        = demo.querySelector('[data-sg-axis]');
+    var grid100     = demo.querySelector('[data-sg-grid-100]');
+    var grid1k      = demo.querySelector('[data-sg-grid-1k]');
+    var grid10k     = demo.querySelector('[data-sg-grid-10k]');
+    var chips       = demo.querySelectorAll('[data-sg-wave]');
+    var freqIn      = demo.querySelector('[data-sg-freq]');
+    var freqVal     = demo.querySelector('[data-sg-freq-value]');
+    var freqBig     = demo.querySelector('[data-sg-freq-display]');
+    var freqInput   = demo.querySelector('[data-sg-freq-input]');
+    var ampIn       = demo.querySelector('[data-sg-amp]');
+    var ampVal      = demo.querySelector('[data-sg-amp-value]');
+    var playBtn     = demo.querySelector('[data-sg-play]');
+    var statusEl    = demo.querySelector('[data-sg-status]');
+    var presets     = demo.querySelectorAll('[data-sg-preset]');
+    var vizTabs     = demo.querySelectorAll('[data-sg-viz]');
     if (!playBtn || !pathStatic) return;
 
-    var ctxL = null, analyser = null, scopeBuf = null, spectrumBuf = null;
+    // Place the decade vertical grid lines at their log-x positions.
+    if (grid100) { var x100 = freqToLogX(100); grid100.setAttribute('x1', x100); grid100.setAttribute('x2', x100); }
+    if (grid1k)  { var x1k  = freqToLogX(1000); grid1k.setAttribute('x1', x1k); grid1k.setAttribute('x2', x1k); }
+    if (grid10k) { var x10k = freqToLogX(10000); grid10k.setAttribute('x1', x10k); grid10k.setAttribute('x2', x10k); }
+
+    var ctxL = null, analyser = null, scopeBuf = null, freqDbBuf = null;
     function ensure() {
       if (!ctxL) ctxL = new (window.AudioContext || window.webkitAudioContext)();
       if (ctxL.state === 'suspended') ctxL.resume();
       if (!analyser) {
+        // 8192-point FFT gives 4096 bins at 44.1 kHz sample rate, so
+        // bin width ≈ 5.4 Hz. Native FFT — fast and detailed.
         analyser = ctxL.createAnalyser();
-        analyser.fftSize = 2048;
-        analyser.smoothingTimeConstant = 0.78;
+        analyser.fftSize = 8192;
+        analyser.smoothingTimeConstant = 0;   // we smooth ourselves
         scopeBuf = new Float32Array(analyser.fftSize);
-        spectrumBuf = new Uint8Array(analyser.frequencyBinCount);
+        freqDbBuf = new Float32Array(analyser.frequencyBinCount);
       }
     }
+
+    // Smoothed band magnitudes — preserved between frames so the
+    // fast-attack / slow-release smoother has memory.
+    var smoothBands = new Float32Array(SPEC_BANDS);
 
     var waveType = 'sine';
     var freq = 440;
@@ -743,52 +789,86 @@
     function ampToGain(db) { return Math.pow(10, db / 20); }
 
     // ── Live visualizer loop ──
+    // SCOPE: high-res time-domain trace (one SVG path point per
+    // ~2.5 sample slice, drawn at 60 fps).
     function drawScope() {
       analyser.getFloatTimeDomainData(scopeBuf);
-      var d = '';
-      var W = VIZ_W, H = VIZ_H, mid = H * 0.5, scale = H * 0.42;
+      var W = SPEC_VIEW_W, H = SPEC_VIEW_H;
+      var mid = H * 0.5, scale = H * 0.46;
       var n = scopeBuf.length;
-      var stride = Math.max(1, Math.floor(n / 280));
+      // Show ~2 full cycles for typical mid-band tones so the wave
+      // doesn't blur. Cycle samples = sampleRate / freq, take ×2 if
+      // it fits in the buffer, otherwise show the whole buffer.
+      var sr = ctxL ? ctxL.sampleRate : 48000;
+      var perCycle = (freq > 0) ? sr / freq : n;
+      var showSamples = Math.min(n, Math.max(64, Math.round(perCycle * 2)));
+      // Sub-pixel resolution: 1 sample per pixel ceiling.
+      var stride = Math.max(1, Math.floor(showSamples / W));
+      var d = '';
       var first = true;
-      for (var i = 0; i < n; i += stride) {
-        var x = (i / n) * W;
+      for (var i = 0; i < showSamples; i += stride) {
+        var x = (i / showSamples) * W;
         var y = mid - scopeBuf[i] * scale;
         d += (first ? 'M ' : ' L ') + x.toFixed(1) + ' ' + y.toFixed(2);
         first = false;
       }
       pathScope.setAttribute('d', d);
     }
+    // SPECTRUM: native FFT → 80 log-spaced bands (max-magnitude per
+    // band) → dBFS-normalised → fast-attack / slow-release smoother →
+    // outline + gradient-fill path. Mirrors LiveSpectrumVisualizer
+    // line-for-line.
     function drawSpectrum() {
-      analyser.getByteFrequencyData(spectrumBuf);
-      // Render as a fixed grid of N=64 log-spaced bars so the bass
-      // doesn't dominate the linear bin distribution and the visual
-      // matches the app's log-frequency Spectrum Bench.
-      var bars = 64;
-      var W = VIZ_W, H = VIZ_H;
-      var binN = spectrumBuf.length;
+      analyser.getFloatFrequencyData(freqDbBuf);   // dBFS per bin
+      var W = SPEC_VIEW_W, H = SPEC_VIEW_H;
       var sr = ctxL.sampleRate;
-      var nyquist = sr / 2;
-      var fMin = 20, fMax = Math.min(20000, nyquist);
-      var logMin = Math.log(fMin), logMax = Math.log(fMax);
-      var html = '';
-      var gap = 2;
-      var bw = (W - (bars - 1) * gap) / bars;
-      for (var i = 0; i < bars; i++) {
-        var f0 = Math.exp(logMin + (logMax - logMin) * (i / bars));
-        var f1 = Math.exp(logMin + (logMax - logMin) * ((i + 1) / bars));
-        var b0 = Math.max(0, Math.floor(f0 / nyquist * binN));
-        var b1 = Math.min(binN - 1, Math.ceil(f1 / nyquist * binN));
-        var peak = 0;
-        for (var b = b0; b <= b1; b++) if (spectrumBuf[b] > peak) peak = spectrumBuf[b];
-        var v = peak / 255;
-        var bh = Math.max(2, v * H * 0.90);
-        var x = i * (bw + gap);
-        var y = H - bh;
-        html += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) +
-                '" width="' + bw.toFixed(1) + '" height="' + bh.toFixed(1) +
-                '" rx="1" fill="currentColor" fill-opacity="' + (0.32 + v * 0.55).toFixed(2) + '"/>';
+      var nBins = freqDbBuf.length;
+      var fftSize = analyser.fftSize;
+      // Range scale — map dB → [0,1] across SPEC_DB_FLOOR..SPEC_DB_CEIL.
+      var dbRange = SPEC_DB_CEIL - SPEC_DB_FLOOR;
+      // Two-pass: 1) compute raw band magnitudes (max-magnitude per
+      // band). 2) apply attack/release smoother into smoothBands.
+      // 3) build the SVG path.
+      var raw = new Float32Array(SPEC_BANDS);
+      for (var bi = 0; bi < SPEC_BANDS; bi++) {
+        var fLo = SPEC_BAND_EDGES_HZ[bi];
+        var fHi = SPEC_BAND_EDGES_HZ[bi + 1];
+        var kLo = Math.max(0, Math.floor(fLo * fftSize / sr));
+        var kHi = Math.min(nBins - 1, Math.ceil(fHi * fftSize / sr));
+        if (kHi < kLo) kHi = kLo;
+        // Max magnitude (in dB) across the band — preserves peaks.
+        var peakDb = -200;
+        for (var k = kLo; k <= kHi; k++) {
+          var v = freqDbBuf[k];
+          if (v > peakDb) peakDb = v;
+        }
+        // Floor at SPEC_DB_FLOOR — anything quieter clamps to silence.
+        if (peakDb < SPEC_DB_FLOOR) peakDb = SPEC_DB_FLOOR;
+        if (peakDb > SPEC_DB_CEIL)  peakDb = SPEC_DB_CEIL;
+        raw[bi] = (peakDb - SPEC_DB_FLOOR) / dbRange;   // → [0,1]
       }
-      pathSpectrum.innerHTML = html;
+      // Fast-attack / slow-release: instant up, EMA α down.
+      for (var i = 0; i < SPEC_BANDS; i++) {
+        var prev = smoothBands[i];
+        var cur = raw[i];
+        smoothBands[i] = (cur >= prev) ? cur : prev + SPEC_RELEASE_ALPHA * (cur - prev);
+      }
+      // Build outline + fill paths from the smoothed bands.
+      var outlineD = '';
+      var fillD = 'M 0 ' + H.toFixed(1);
+      for (var j = 0; j < SPEC_BANDS; j++) {
+        var x = freqToLogX(bandCentreFreq(j));
+        var mag = smoothBands[j];
+        if (mag < 0) mag = 0; else if (mag > 1) mag = 1;
+        var y = H - (mag * H * 0.92);
+        outlineD += (j === 0 ? 'M ' : ' L ') + x.toFixed(2) + ' ' + y.toFixed(2);
+        fillD    += ' L ' + x.toFixed(2) + ' ' + y.toFixed(2);
+      }
+      // Close fill down to baseline.
+      var lastX = freqToLogX(bandCentreFreq(SPEC_BANDS - 1));
+      fillD += ' L ' + lastX.toFixed(2) + ' ' + H.toFixed(1) + ' L 0 ' + H.toFixed(1) + ' Z';
+      spectrumOutline.setAttribute('d', outlineD);
+      spectrumFill.setAttribute('d', fillD);
     }
     function vizLoop() {
       if (!running) { rafId = null; return; }
@@ -877,9 +957,11 @@
       playBtn.setAttribute('data-running', 'false');
       playBtn.textContent = 'START';
       if (statusEl) statusEl.textContent = 'READY';
-      // Clear live traces, restore static preview.
+      // Clear live traces, restore static preview, drain smoothed bands.
       pathScope.setAttribute('d', '');
-      pathSpectrum.innerHTML = '';
+      spectrumOutline.setAttribute('d', '');
+      spectrumFill.setAttribute('d', '');
+      for (var i = 0; i < SPEC_BANDS; i++) smoothBands[i] = 0;
       pathStatic.setAttribute('stroke-opacity', '0.18');
     }
 
@@ -944,25 +1026,35 @@
       updateSliderFill(ampIn);
     }
     // Visualizer mode tabs
-    vizTabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        vizMode = tab.getAttribute('data-sg-viz');
-        vizTabs.forEach(function (t) { t.classList.remove('is-active'); });
-        tab.classList.add('is-active');
-        // Toggle the corresponding SVG node visibility.
-        if (vizMode === 'scope') {
-          pathScope.style.display = '';
-          pathSpectrum.style.display = 'none';
-          pathSpectrum.innerHTML = '';
-        } else {
-          pathScope.style.display = 'none';
-          pathSpectrum.style.display = '';
-          pathScope.setAttribute('d', '');
-        }
+    function setVizMode(mode) {
+      vizMode = mode;
+      vizTabs.forEach(function (t) {
+        t.classList.toggle('is-active', t.getAttribute('data-sg-viz') === mode);
       });
+      if (mode === 'scope') {
+        pathScope.style.display = '';
+        spectrumOutline.style.display = 'none';
+        spectrumFill.style.display = 'none';
+        spectrumOutline.setAttribute('d', '');
+        spectrumFill.setAttribute('d', '');
+        pathStatic.style.display = '';
+        if (axis) axis.style.display = 'none';
+      } else {
+        pathScope.style.display = 'none';
+        pathScope.setAttribute('d', '');
+        spectrumOutline.style.display = '';
+        spectrumFill.style.display = '';
+        // Spectrum view doesn't show the waveform shape underneath.
+        pathStatic.style.display = 'none';
+        if (axis) axis.style.display = '';
+      }
+    }
+    vizTabs.forEach(function (tab) {
+      tab.addEventListener('click', function () { setVizMode(tab.getAttribute('data-sg-viz')); });
     });
     playBtn.addEventListener('click', function () { if (running) stop(); else start(); });
     refreshPath();
+    setVizMode('scope');
   }
 
   function init() {

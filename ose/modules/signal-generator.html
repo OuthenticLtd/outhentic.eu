@@ -176,27 +176,65 @@
 
       <div class="sg-grid">
         <div class="sg-display">
-          <!-- Live visualizer — toggles between SCOPE (Web Audio
-               getFloatTimeDomainData) and SPECTRUM (getByteFrequencyData)
-               so you can see the waveform's shape AND its harmonic
-               content. Matches the app's "Spectrum Bench" view. -->
+          <!-- Live visualizer — one-for-one with the app's
+               "Spectrum Bench" (LiveSpectrumVisualizer in
+               SignalGenModule.kt):
+                 • SCOPE  → time-domain trace (Web Audio
+                   getFloatTimeDomainData on a high-res buffer).
+                 • SPECTRUM → real FFT (AnalyserNode fftSize 8192),
+                   80 log-spaced bands 30 Hz → 20 kHz, max-magnitude
+                   per band, dBFS-normalised with −72 dB floor, then
+                   smoothed (instant attack, slow release).
+                 • Outline path + gradient fill, dB + freq grid, axis
+                   labels — exact same chrome the app paints. -->
           <div class="sg-viz-tabs">
             <button class="sg-viz-tab is-active" data-sg-viz="scope">SCOPE</button>
             <button class="sg-viz-tab" data-sg-viz="spectrum">SPECTRUM</button>
           </div>
-          <svg class="sg-svg" viewBox="0 0 700 220" preserveAspectRatio="none">
-            <!-- Static waveform preview that fades out once playing
-                 (gives an idea of shape even when stopped). -->
-            <path data-sg-path-static d="" fill="none" stroke="currentColor" stroke-opacity="0.18" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- Live scope path -->
-            <path data-sg-path-scope d="" fill="none" stroke="currentColor" stroke-width="2.4"
-                  stroke-linecap="round" stroke-linejoin="round" style="display:none"/>
-            <!-- Live spectrum bars -->
-            <g data-sg-path-spectrum style="display:none"></g>
-            <!-- Centre line + frequency grid -->
-            <line x1="0" y1="110" x2="700" y2="110" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-          </svg>
+          <div class="sg-viz">
+            <svg class="sg-svg" viewBox="0 0 700 220" preserveAspectRatio="none">
+              <!-- Grid: 4 horizontal dB lines (-60/-40/-20/0) + 3
+                   vertical decade lines (100 Hz / 1 kHz / 10 kHz).
+                   Y formula: y = H − (t · H · 0.92), where
+                   t = (db − dbFloor) / (dbCeil − dbFloor) and the
+                   0.92 headroom matches the JS render. So at H=220:
+                     −60 dB → y = 186.3
+                     −40 dB → y = 130.0
+                     −20 dB → y =  73.7
+                       0 dB → y =  17.6  (brighter ceiling line) -->
+              <g data-sg-grid>
+                <line x1="0" y1="186.3" x2="700" y2="186.3" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+                <line x1="0" y1="130.0" x2="700" y2="130.0" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+                <line x1="0" y1="73.7"  x2="700" y2="73.7"  stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+                <line x1="0" y1="17.6"  x2="700" y2="17.6"  stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+                <!-- Decade verticals (100, 1k, 10k) — positions set in JS to match the log axis. -->
+                <line data-sg-grid-100 x1="0" y1="0" x2="0" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+                <line data-sg-grid-1k  x1="0" y1="0" x2="0" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+                <line data-sg-grid-10k x1="0" y1="0" x2="0" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+              </g>
+              <!-- Static waveform preview (fades when playing) -->
+              <path data-sg-path-static d="" fill="none" stroke="currentColor" stroke-opacity="0.18" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Spectrum: gradient fill below outline (drawn first) -->
+              <defs>
+                <linearGradient id="sgSpectrumFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0"   stop-color="currentColor" stop-opacity="0.32"/>
+                  <stop offset="1"   stop-color="currentColor" stop-opacity="0.04"/>
+                </linearGradient>
+              </defs>
+              <path data-sg-spectrum-fill     d="" fill="url(#sgSpectrumFill)" stroke="none" style="display:none"/>
+              <path data-sg-spectrum-outline  d="" fill="none" stroke="currentColor" stroke-opacity="0.85" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" style="display:none"/>
+              <!-- Live scope path -->
+              <path data-sg-path-scope d="" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round" style="display:none"/>
+            </svg>
+            <!-- Frequency axis labels — 30 / 100 / 1k / 10k / 20k.
+                 Visible only on the SPECTRUM tab. -->
+            <div class="sg-axis" data-sg-axis style="display:none">
+              <span>30</span><span>100</span><span>1k</span><span>10k</span><span>20k</span>
+            </div>
+          </div>
           <div class="sg-readout">
             <span class="sg-readout-freq" data-sg-freq-display>440 Hz</span>
             <span class="sg-readout-status" data-sg-status>READY</span>

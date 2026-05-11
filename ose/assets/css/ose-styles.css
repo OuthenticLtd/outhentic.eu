@@ -1351,7 +1351,39 @@ a.hub-card { display: block; color: inherit; }
   color: var(--demo-accent);
   border-color: color-mix(in srgb, var(--demo-accent) 70%, transparent);
 }
+.sg-viz {
+  position: relative;
+}
 .sg-svg { width: 100%; height: 200px; display: block; }
+/* Frequency axis labels — absolute-positioned at log-spaced positions
+   to match the spectrum's log x-axis exactly.
+   Log positions across [30, 20000] Hz:
+     30 →   0.00%
+     100 →  18.51%
+     1k →  53.91%
+     10k → 89.31%
+     20k → 100.00% */
+.sg-axis {
+  position: relative;
+  height: 12px;
+  padding: 4px 0 0;
+  font-family: var(--mono-font);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #5A5F68;
+}
+.sg-axis span {
+  position: absolute;
+  top: 4px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.sg-axis span:nth-child(1) { left: 0;       transform: none; }
+.sg-axis span:nth-child(2) { left: 18.5%; }
+.sg-axis span:nth-child(3) { left: 53.9%; }
+.sg-axis span:nth-child(4) { left: 89.3%; }
+.sg-axis span:nth-child(5) { left: 100%;    transform: translateX(-100%); }
 
 /* Typed frequency entry */
 .sg-freq-entry {
