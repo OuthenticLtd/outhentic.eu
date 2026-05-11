@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  OSE primary logo — canonical brand mark. Identical to the in-app
-  GlowingO and the Android splash icon. Source of truth lives in the
-  OSE app repo at branding/ose_logo.svg — keep this file in sync.
+  OSE primary logo — canonical brand mark. Identical geometry to the
+  in-app GlowingO at branding/ose_logo.svg, but cropped to the bounding
+  box of the visible content (no transparent padding) so the favicon
+  and nav-bar img render at full strength.
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108" role="img" aria-label="OSE — Outhentic Sound Engine">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 18 72 72" role="img" aria-label="OSE — Outhentic Sound Engine">
     <defs>
         <linearGradient id="oseRingGradient" x1="24" y1="54" x2="84" y2="54" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#4AA3FF"/>
@@ -13,8 +14,10 @@
         </linearGradient>
     </defs>
 
+    <!-- Inner black disc -->
     <circle cx="54" cy="54" r="30" fill="#0A0A0A"/>
 
+    <!-- Gradient ring (split into two arcs to allow round caps at the seam) -->
     <path d="M 24,54 A 30,30 0 0 1 84,54"
           fill="none"
           stroke="url(#oseRingGradient)"
@@ -27,6 +30,7 @@
           stroke-width="5.5"
           stroke-linecap="round"/>
 
+    <!-- White waveform across the middle -->
     <path d="M 29,54 L 35.25,54 L 39,46.5 L 42.75,61.5 L 46.5,41.5 L 50.25,66.5 L 54,36.5 L 57.75,71.5 L 61.5,41.5 L 65.25,61.5 L 69,46.5 L 72.75,54 L 79,54"
           fill="none"
           stroke="#FFFFFF"

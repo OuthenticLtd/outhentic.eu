@@ -120,11 +120,14 @@ code, kbd { font-family: var(--mono-font); font-size: .9em; background: var(--bg
   max-width: var(--max); margin: 0 auto;
   padding: 14px var(--gutter);
 }
-.nav-logo { display: flex; align-items: center; gap: 10px; }
-.nav-logo img, .nav-logo svg { height: 28px; width: 28px; }
+.nav-logo { display: flex; align-items: center; gap: 12px; }
+.nav-logo img, .nav-logo svg { height: 48px; width: 48px; }
+@media (max-width: 720px) {
+  .nav-logo img, .nav-logo svg { height: 40px; width: 40px; }
+}
 .nav-logo .nav-wordmark {
   font-family: var(--sans-font);
-  font-weight: 700; letter-spacing: .12em; font-size: .92rem;
+  font-weight: 700; letter-spacing: .14em; font-size: 1.15rem;
   text-transform: uppercase;
   background: var(--accent-grad);
   -webkit-background-clip: text;
@@ -503,8 +506,8 @@ a.hub-card { display: block; color: inherit; }
 .foot h4 { color: var(--ink); margin-bottom: 14px; font-size: .76rem; }
 .foot a { display: block; padding: 5px 0; color: var(--muted); font-size: .9rem; }
 .foot a:hover { color: var(--ink); }
-.foot-mark { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-.foot-mark svg { width: 28px; height: 28px; }
+.foot-mark { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.foot-mark img, .foot-mark svg { width: 44px; height: 44px; }
 .foot-tag { color: var(--muted); font-size: .88rem; max-width: 32ch; }
 .foot-bottom {
   margin-top: 40px; padding-top: 24px;
