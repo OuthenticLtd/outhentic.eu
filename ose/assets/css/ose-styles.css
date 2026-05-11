@@ -579,31 +579,34 @@ a.hub-card { display: block; color: inherit; }
   text-transform: uppercase;
   color: var(--muted);
 }
-.pm-voices { display: flex; gap: 6px; }
+.pm-voices { display: flex; gap: 6px; flex-wrap: wrap; }
 .pm-voice {
-  padding: 8px 16px;
+  padding: 10px 18px;
   font-family: var(--mono-font);
-  font-size: .76rem;
-  font-weight: 700;
+  font-size: .78rem;
+  font-weight: 800;
   letter-spacing: .14em;
-  background: var(--bg-2);
-  color: var(--muted);
-  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--demo-accent) 5%, var(--bg-2));
+  color: color-mix(in srgb, var(--demo-accent) 85%, var(--ink-soft));
+  border: 1px solid color-mix(in srgb, var(--demo-accent) 30%, transparent);
   border-radius: 8px;
   cursor: pointer;
   transition: all .15s;
 }
-.pm-voice:hover { background: var(--surface-2); color: var(--ink); }
+.pm-voice:hover {
+  background: color-mix(in srgb, var(--demo-accent) 12%, var(--bg-2));
+  border-color: color-mix(in srgb, var(--demo-accent) 55%, transparent);
+}
 .pm-voice.is-active {
-  background: color-mix(in srgb, currentColor 18%, transparent);
-  color: currentColor;
-  border-color: color-mix(in srgb, currentColor 50%, transparent);
+  background: color-mix(in srgb, var(--demo-accent) 24%, transparent);
+  color: var(--demo-accent);
+  border-color: color-mix(in srgb, var(--demo-accent) 75%, transparent);
 }
 .pm-sustain {
-  padding: 8px 18px;
+  padding: 10px 22px;
   font-family: var(--mono-font);
-  font-size: .76rem;
-  font-weight: 700;
+  font-size: .78rem;
+  font-weight: 800;
   letter-spacing: .14em;
   background: var(--bg-2);
   color: var(--muted);
@@ -612,10 +615,11 @@ a.hub-card { display: block; color: inherit; }
   cursor: pointer;
   transition: all .15s;
 }
+.pm-sustain:hover { background: var(--surface-2); color: var(--ink); }
 .pm-sustain.is-active {
-  background: color-mix(in srgb, currentColor 18%, transparent);
-  color: currentColor;
-  border-color: color-mix(in srgb, currentColor 50%, transparent);
+  background: color-mix(in srgb, var(--demo-accent) 24%, transparent);
+  color: var(--demo-accent);
+  border-color: color-mix(in srgb, var(--demo-accent) 75%, transparent);
 }
 .pm-piano-wrap {
   background: #000;
@@ -748,37 +752,56 @@ a.hub-card { display: block; color: inherit; }
   text-transform: uppercase; color: var(--muted);
   min-width: 60px;
 }
-.mm-slider {
+.mm-slider, .sg-slider {
   -webkit-appearance: none; appearance: none;
-  flex: 1; height: 6px; border-radius: 3px;
-  background: var(--bg-2); outline: none;
+  flex: 1; height: 8px; border-radius: 4px;
+  background: linear-gradient(to right,
+    var(--demo-accent) 0%,
+    var(--demo-accent) var(--fill, 50%),
+    rgba(255,255,255,0.10) var(--fill, 50%),
+    rgba(255,255,255,0.10) 100%);
+  outline: none;
+  cursor: pointer;
 }
-.mm-slider::-webkit-slider-thumb {
+.mm-slider::-webkit-slider-thumb,
+.sg-slider::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none;
   width: 22px; height: 22px; border-radius: 50%;
-  background: currentColor; cursor: pointer;
-  margin-top: -8px; box-shadow: 0 2px 8px rgba(0,0,0,0.45);
+  background: var(--demo-accent); cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.55);
+  border: 2px solid #000;
 }
-.mm-slider::-moz-range-thumb {
+.mm-slider::-moz-range-thumb,
+.sg-slider::-moz-range-thumb {
   width: 22px; height: 22px; border-radius: 50%;
-  background: currentColor; border: 0; cursor: pointer;
+  background: var(--demo-accent); border: 2px solid #000;
+  cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.55);
 }
+.mm-slider:disabled, .sg-slider:disabled { opacity: 0.45; cursor: not-allowed; }
+.mm-slider:disabled::-webkit-slider-thumb,
+.sg-slider:disabled::-webkit-slider-thumb { background: var(--muted); }
+.mm-slider:disabled::-moz-range-thumb,
+.sg-slider:disabled::-moz-range-thumb { background: var(--muted); }
+
 .mm-slider-value {
-  font-family: var(--mono-font); font-size: .9rem;
-  color: var(--ink); font-weight: 600;
+  font-family: var(--mono-font); font-size: .92rem;
+  color: var(--ink); font-weight: 700;
   min-width: 70px; text-align: right;
+  letter-spacing: -.01em;
 }
 .mm-start {
   margin-top: 6px;
-  padding: 14px 28px;
+  padding: 16px 28px;
   font-family: var(--sans-font);
-  font-size: .9rem; font-weight: 800;
+  font-size: .9rem; font-weight: 900;
   letter-spacing: .22em; text-transform: uppercase;
-  background: currentColor; color: #000;
+  background: var(--demo-accent); color: #000;
   border: 0; border-radius: 999px;
-  cursor: pointer; transition: filter .15s;
+  cursor: pointer; transition: all .15s;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--demo-accent) 35%, transparent);
 }
-.mm-start:hover { filter: brightness(1.1); }
+.mm-start:hover { filter: brightness(1.10); transform: translateY(-1px); }
+.mm-start[data-running="true"] { background: var(--c-rec-red); color: #FFFFFF; box-shadow: 0 4px 14px rgba(239,75,75,0.35); }
 
 /* ---- Signal Generator module demo ---- */
 .sg-grid {
@@ -818,28 +841,33 @@ a.hub-card { display: block; color: inherit; }
 .sg-chips {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-  margin-bottom: 22px;
+  gap: 8px;
+  margin-bottom: 14px;
 }
+.sg-chips-row-2 { grid-template-columns: repeat(3, 1fr); margin-bottom: 22px; }
 .sg-chip {
-  padding: 12px 0;
+  padding: 14px 0;
   font-family: var(--mono-font);
-  font-size: .72rem; font-weight: 700;
-  letter-spacing: .14em;
-  background: var(--bg-2);
-  color: var(--muted);
-  border: 1px solid var(--line);
+  font-size: .76rem; font-weight: 800;
+  letter-spacing: .16em;
+  background: color-mix(in srgb, var(--demo-accent) 5%, var(--bg-2));
+  color: color-mix(in srgb, var(--demo-accent) 80%, var(--ink-soft));
+  border: 1px solid color-mix(in srgb, var(--demo-accent) 30%, transparent);
   border-radius: 8px;
   cursor: pointer;
   transition: all .12s;
 }
-.sg-chip:hover { background: var(--surface-2); color: var(--ink); }
-.sg-chip.is-active {
-  background: color-mix(in srgb, currentColor 22%, transparent);
-  color: currentColor;
-  border-color: color-mix(in srgb, currentColor 55%, transparent);
+.sg-chip:hover {
+  background: color-mix(in srgb, var(--demo-accent) 12%, var(--bg-2));
+  border-color: color-mix(in srgb, var(--demo-accent) 55%, transparent);
+  color: var(--demo-accent);
 }
-.sg-chips-row-2 { grid-template-columns: repeat(3, 1fr); }
+.sg-chip.is-active {
+  background: color-mix(in srgb, var(--demo-accent) 24%, transparent);
+  color: var(--demo-accent);
+  border-color: color-mix(in srgb, var(--demo-accent) 80%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--demo-accent) 60%, transparent) inset;
+}
 .sg-control { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
 .sg-control label {
   font-family: var(--mono-font);
@@ -847,46 +875,35 @@ a.hub-card { display: block; color: inherit; }
   text-transform: uppercase; color: var(--muted);
   min-width: 60px;
 }
-.sg-slider {
-  -webkit-appearance: none; appearance: none;
-  flex: 1; height: 6px; border-radius: 3px;
-  background: var(--bg-2); outline: none;
-}
-.sg-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; appearance: none;
-  width: 22px; height: 22px; border-radius: 50%;
-  background: currentColor; cursor: pointer;
-  margin-top: -8px;
-}
-.sg-slider::-moz-range-thumb {
-  width: 22px; height: 22px; border-radius: 50%;
-  background: currentColor; border: 0;
-}
-.sg-slider:disabled::-webkit-slider-thumb { background: var(--muted); cursor: not-allowed; }
 .sg-slider-value {
   font-family: var(--mono-font);
-  font-size: .9rem; color: var(--ink);
-  font-weight: 600;
+  font-size: .92rem; color: var(--ink);
+  font-weight: 700;
   min-width: 80px; text-align: right;
+  letter-spacing: -.01em;
 }
 .sg-play {
-  margin-top: 12px;
+  margin-top: 14px;
   width: 100%;
-  padding: 14px;
+  padding: 16px;
   font-family: var(--sans-font);
-  font-size: .9rem; font-weight: 800;
+  font-size: .9rem; font-weight: 900;
   letter-spacing: .22em; text-transform: uppercase;
-  background: currentColor; color: #000;
+  background: var(--demo-accent); color: #000;
   border: 0; border-radius: 12px;
-  cursor: pointer; transition: filter .15s;
+  cursor: pointer; transition: all .15s;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--demo-accent) 35%, transparent);
 }
-.sg-play:hover { filter: brightness(1.1); }
+.sg-play:hover { filter: brightness(1.10); transform: translateY(-1px); }
+.sg-play[data-running="true"] { background: var(--c-rec-red); color: #FFFFFF; box-shadow: 0 4px 14px rgba(239,75,75,0.35); }
 
-/* Accent color applied to the demo from the surrounding tutorial.mc--X
-   classes. Use the same color tokens. */
-.module-demo.mc--play       { color: var(--c-play); }
-.module-demo.mc--metronome  { color: var(--c-metronome); }
-.module-demo.mc--signalgen  { color: var(--c-signalgen); }
+/* Accent color applied to the demo + a separate --demo-accent custom
+   property. We need both because some children (buttons, chips) set
+   color: #000 locally, which would make `currentColor` resolve to
+   black for their background. The custom property survives. */
+.module-demo.mc--play       { color: var(--c-play);      --demo-accent: var(--c-play); }
+.module-demo.mc--metronome  { color: var(--c-metronome); --demo-accent: var(--c-metronome); }
+.module-demo.mc--signalgen  { color: var(--c-signalgen); --demo-accent: var(--c-signalgen); }
 
 /* =========================================================
    Animations — match the actual app's motion language

@@ -12,6 +12,23 @@
     if (audioCtx.state === 'suspended') audioCtx.resume();
   }
 
+  // Set the CSS --fill custom property on a range slider so the
+  // linear-gradient track visualizes the current value position.
+  function updateSliderFill(slider) {
+    if (!slider) return;
+    var min = parseFloat(slider.min);
+    var max = parseFloat(slider.max);
+    var val = parseFloat(slider.value);
+    if (isNaN(min) || isNaN(max) || isNaN(val) || max <= min) return;
+    var pct = ((val - min) / (max - min)) * 100;
+    slider.style.setProperty('--fill', pct.toFixed(2) + '%');
+  }
+  function wireSliderFill(slider) {
+    if (!slider) return;
+    updateSliderFill(slider);
+    slider.addEventListener('input', function () { updateSliderFill(slider); });
+  }
+
   // ============================================================
   // PLAY MODULE — full piano (2 octaves) with voice selector
   // ============================================================
@@ -330,11 +347,13 @@
       rebuildPolygon();
       rebuildBeatStrip();
     }
-    bpmSlider.addEventListener('input', updateBpm);
-    sigSlider.addEventListener('input', updateSig);
+    bpmSlider.addEventListener('input', function () { updateBpm(); updateSliderFill(bpmSlider); });
+    sigSlider.addEventListener('input', function () { updateSig(); updateSliderFill(sigSlider); });
     startBtn.addEventListener('click', function () { if (schedulerId) stop(); else start(); });
     updateBpm();
     updateSig();
+    updateSliderFill(bpmSlider);
+    updateSliderFill(sigSlider);
   }
 
   // ============================================================
@@ -526,14 +545,18 @@
         freqVal.textContent = freq + ' Hz';
         if (freqBig) freqBig.textContent = (freq >= 1000 ? (freq / 1000).toFixed(2) + ' kHz' : freq + ' Hz');
         if (osc) osc.frequency.setValueAtTime(freq, ctxL.currentTime);
+        updateSliderFill(freqIn);
       });
+      updateSliderFill(freqIn);
     }
     if (ampIn) {
       ampIn.addEventListener('input', function () {
         amp = parseInt(ampIn.value, 10);
         ampVal.textContent = amp + ' dB';
         if (gainNode) gainNode.gain.setValueAtTime(ampToGain(amp), ctxL.currentTime);
+        updateSliderFill(ampIn);
       });
+      updateSliderFill(ampIn);
     }
     playBtn.addEventListener('click', function () { if (running) stop(); else start(); });
     refreshPath();
