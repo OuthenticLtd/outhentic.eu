@@ -1249,7 +1249,7 @@ a.hub-card { display: block; color: inherit; }
   text-transform: uppercase; color: var(--muted);
   min-width: 60px;
 }
-.mm-slider, .sg-slider {
+.mm-slider, .sg-slider, .mm-vol-slider {
   -webkit-appearance: none; appearance: none;
   flex: 1; height: 8px; border-radius: 4px;
   background: linear-gradient(to right,
@@ -1261,7 +1261,8 @@ a.hub-card { display: block; color: inherit; }
   cursor: pointer;
 }
 .mm-slider::-webkit-slider-thumb,
-.sg-slider::-webkit-slider-thumb {
+.sg-slider::-webkit-slider-thumb,
+.mm-vol-slider::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none;
   width: 22px; height: 22px; border-radius: 50%;
   background: var(--demo-accent); cursor: pointer;
@@ -1269,16 +1270,47 @@ a.hub-card { display: block; color: inherit; }
   border: 2px solid #000;
 }
 .mm-slider::-moz-range-thumb,
-.sg-slider::-moz-range-thumb {
+.sg-slider::-moz-range-thumb,
+.mm-vol-slider::-moz-range-thumb {
   width: 22px; height: 22px; border-radius: 50%;
   background: var(--demo-accent); border: 2px solid #000;
   cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.55);
 }
-.mm-slider:disabled, .sg-slider:disabled { opacity: 0.45; cursor: not-allowed; }
+.mm-slider:disabled, .sg-slider:disabled, .mm-vol-slider:disabled { opacity: 0.45; cursor: not-allowed; }
 .mm-slider:disabled::-webkit-slider-thumb,
-.sg-slider:disabled::-webkit-slider-thumb { background: var(--muted); }
+.sg-slider:disabled::-webkit-slider-thumb,
+.mm-vol-slider:disabled::-webkit-slider-thumb { background: var(--muted); }
 .mm-slider:disabled::-moz-range-thumb,
-.sg-slider:disabled::-moz-range-thumb { background: var(--muted); }
+.sg-slider:disabled::-moz-range-thumb,
+.mm-vol-slider:disabled::-moz-range-thumb { background: var(--muted); }
+
+/* Volume row inside the metronome controls card */
+.mm-vol-row {
+  display: flex; align-items: center;
+  gap: 14px;
+  min-height: 28px;
+}
+.mm-vol-label {
+  font-family: var(--mono-font);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: rgba(255,255,255,0.55);
+  min-width: 96px;
+  cursor: pointer;
+  user-select: none;
+  transition: color .12s;
+}
+.mm-vol-label:hover { color: var(--demo-accent); }
+.mm-vol-value {
+  font-family: var(--mono-font);
+  font-size: 13px;
+  font-weight: 800;
+  color: #FFFFFF;
+  min-width: 48px;
+  text-align: right;
+  letter-spacing: -.01em;
+}
 
 .mm-slider-value {
   font-family: var(--mono-font); font-size: .92rem;

@@ -239,6 +239,9 @@
     var sheetClose  = demo.querySelector('[data-mm-sheet-close]');
     var beatsWheel  = demo.querySelector('[data-mm-beats-wheel]');
     var noteWheel   = demo.querySelector('[data-mm-note-wheel]');
+    var volSlider   = demo.querySelector('[data-mm-vol]');
+    var volValue    = demo.querySelector('[data-mm-vol-value]');
+    var volReset    = demo.querySelector('[data-mm-vol-reset]');
     if (!startBtn || !polySvg || !strip) return;
 
     var audioCtxLocal = null;
@@ -248,6 +251,7 @@
     }
 
     var MIN_BPM = 30, MAX_BPM = 300;
+    var DEFAULT_VOL = 0.8;        // matches app default
     var schedulerId = null;
     var nextNoteTime = 0;
     var currentBeat = 0;
@@ -255,6 +259,7 @@
     var bpm = 120;
     var beats = 4;
     var noteValue = 4;
+    var volume = DEFAULT_VOL;    // 0..1, multiplies the click peak gain
     var tapTimes = [];
 
     function tempoMarking(v) {
@@ -354,6 +359,8 @@
     // ── Click synthesis — one-for-one with AudioEngine.cpp ──
     // 50 ms duration, 1500 Hz (accent) / 1000 Hz (normal) sine,
     // linear decay, ±0.95 clip. Skip muted beats entirely.
+    // Peak gain is `volume × HEADROOM` — HEADROOM (0.85) keeps us
+    // safely below the engine's ±0.95 hidden brick-wall even at 100%.
     function tickClick(t, accentType) {
       if (accentType === 2) return; // muted
       var freq = accentType === 1 ? 1500 : 1000;
@@ -361,9 +368,8 @@
       var gain = audioCtxLocal.createGain();
       osc.type = 'sine';
       osc.frequency.value = freq;
-      // Linear decay over 50 ms: amp(t) = volPeak * (1 - t/dur).
       var dur = 0.05;
-      var volPeak = 0.45; // matches the 0.5 volume default × 0.95 cap headroom
+      var volPeak = volume * 0.85;
       gain.gain.setValueAtTime(volPeak, t);
       gain.gain.linearRampToValueAtTime(0, t + dur);
       osc.connect(gain).connect(audioCtxLocal.destination);
@@ -446,6 +452,17 @@
         c.classList.toggle('is-active', parseInt(c.getAttribute('data-mm-note'), 10) === d);
       });
     }
+    function setVolume(v, source) {
+      // v is 0..1; the slider holds 0..100, so we normalise both ways.
+      var clamped = Math.max(0, Math.min(1, v));
+      volume = clamped;
+      var pct = Math.round(clamped * 100);
+      if (source !== 'slider' && volSlider) {
+        volSlider.value = pct;
+      }
+      if (volValue) volValue.textContent = pct + '%';
+      if (volSlider) updateSliderFill(volSlider);
+    }
 
     // ── BPM scrubber ──
     // Two interactions, like the app:
@@ -517,6 +534,19 @@
         setNoteValue(parseInt(chip.getAttribute('data-mm-note'), 10));
       });
     });
+
+    // Volume slider — drag updates volume in real time, the new value
+    // takes effect on the next click (each beat creates a fresh gain
+    // node, so no per-beat ramp is needed). Double-tap the label to
+    // reset to the app default (80 %).
+    if (volSlider) {
+      volSlider.addEventListener('input', function () {
+        setVolume(parseInt(volSlider.value, 10) / 100, 'slider');
+      });
+    }
+    if (volReset) {
+      volReset.addEventListener('dblclick', function () { setVolume(DEFAULT_VOL); });
+    }
 
     // ── Meter picker sheet ──
     // Mirrors MeterBottomSheet from the app: two vertically-scrolling
@@ -623,6 +653,7 @@
     rebuildBeatStrip();
     numLabel.textContent = beats;
     tsNum.textContent = beats;
+    setVolume(DEFAULT_VOL);   // paints %, slider position + fill bar
   }
 
   // ============================================================

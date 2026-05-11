@@ -247,6 +247,18 @@
             <button class="mm-note-chip" data-mm-note="16">/16</button>
           </div>
         </div>
+
+        <div class="mm-divider"></div>
+
+        <!-- Click volume — mirrors the portrait CombinedControls layout
+             from the app's MetronomeModule (label · slider · % readout).
+             Double-tap the label to reset to 80 %, matching the app's
+             MetronomeSliderGeneric doubleTapReset behaviour. -->
+        <div class="mm-vol-row">
+          <span class="mm-vol-label" data-mm-vol-reset title="Double-tap to reset">CLICK VOLUME</span>
+          <input type="range" class="mm-vol-slider" data-mm-vol min="0" max="100" value="80" step="1" aria-label="Click volume" />
+          <span class="mm-vol-value" data-mm-vol-value>80%</span>
+        </div>
       </div>
 
       <!-- ========== Transport row ========== -->
