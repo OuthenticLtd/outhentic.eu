@@ -1284,6 +1284,32 @@ a.hub-card { display: block; color: inherit; }
 .sg-slider:disabled::-moz-range-thumb,
 .mm-vol-slider:disabled::-moz-range-thumb { background: var(--muted); }
 
+/* "Free in your browser" callout — small badge that sits above the
+   interactive tool demos. Reinforces the messaging that search
+   engines pick up from the JSON-LD WebApplication entries. */
+.free-badge {
+  display: inline-flex; align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 8px 14px;
+  background: color-mix(in srgb, var(--demo-accent) 14%, transparent);
+  color: var(--demo-accent);
+  border: 0.5px solid color-mix(in srgb, var(--demo-accent) 50%, transparent);
+  border-radius: 999px;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+.free-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--demo-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--demo-accent) 25%, transparent);
+}
+
 /* Volume row inside the metronome controls card */
 .mm-vol-row {
   display: flex; align-items: center;

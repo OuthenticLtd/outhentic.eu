@@ -3,24 +3,29 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>OSE — Outhentic Sound Engine | Android instrument and music tools for people who play</title>
-<meta name="description" content="OSE is an Android instrument and toolkit for people who play — synth, recorder, MIDI editor, metronome, tuner. Eight focused music tools designed to travel with the player and complement the desktop DAW you already use." />
+<title>OSE — Free Online Metronome, Tuner, Tone Generator + Android Music App</title>
+<meta name="description" content="OSE — free in-browser metronome, tone generator and piano you can use right now, plus an Android instrument & toolkit for people who play. No sign-up, no install, no ads. Synth, recorder, MIDI editor, tuner and meters in one place." />
 <meta name="theme-color" content="#050507" />
-<meta name="robots" content="index,follow" />
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
 <meta name="author" content="Outhentic Ltd." />
-<meta name="keywords" content="OSE, Outhentic Sound Engine, Android synth, Android music app, OseSynth, SoundFont player Android, Android piano roll, Android metronome, Android tuner, MIDI Learn, microtonal synth, Bluetooth MIDI keyboard, mobile instrument, music tools that work" />
+<meta name="keywords" content="free online metronome, online metronome, browser metronome, free online tone generator, online signal generator, free online piano, online synthesizer, online tuner, chromatic tuner, OSE, Outhentic Sound Engine, Android music app, Android synth, MIDI piano roll, mobile DAW companion, music tools that work" />
 
 <meta property="og:type" content="website" />
-<meta property="og:title" content="OSE — Not a toy. Music tools that work." />
-<meta property="og:description" content="An Android instrument and toolkit for people who play. Synth, recorder, piano roll, metronome, tuner — eight focused tools that travel with the player and complement, never replace, your desktop DAW." />
+<meta property="og:site_name" content="OSE — Outhentic Sound Engine" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="OSE — Free online music tools + Android instrument" />
+<meta property="og:description" content="A free in-browser metronome, tone generator and piano — plus an Android instrument & toolkit for people who play. No sign-up, no install." />
 <meta property="og:url" content="https://outhentic.eu/ose/" />
 <meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
+<meta property="og:image:alt" content="OSE — Outhentic Sound Engine logo" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="OSE — Not a toy. Music tools that work." />
-<meta name="twitter:description" content="Android instrument and toolkit for people who play. Synth, recorder, piano roll, metronome, tuner — eight focused tools that complement your desktop DAW." />
+<meta name="twitter:title" content="OSE — Free online music tools + Android instrument" />
+<meta name="twitter:description" content="Free in-browser metronome, tone generator and piano — plus an Android instrument for people who play. No sign-up, no install." />
 <meta name="twitter:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
 
 <link rel="canonical" href="https://outhentic.eu/ose/" />
+<link rel="alternate" hreflang="en" href="https://outhentic.eu/ose/" />
+<link rel="alternate" hreflang="x-default" href="https://outhentic.eu/ose/" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,28 +38,109 @@
 <link rel="apple-touch-icon" href="assets/img/ose-logo.png" />
 
 <script type="application/ld+json">{
-  "@context":"https://schema.org",
-  "@type":"SoftwareApplication",
-  "name":"Outhentic Sound Engine",
-  "alternateName":"OSE",
-  "operatingSystem":"Android",
-  "applicationCategory":"MultimediaApplication",
-  "description":"An Android instrument and toolkit for people who play: synth, recorder, MIDI piano roll, practice, metronome, tuner, signal generator and meters. Designed to travel with the player and complement the desktop DAW you already use.",
-  "url":"https://outhentic.eu/ose/",
-  "publisher":{
-    "@type":"Organization",
-    "name":"Outhentic Ltd.",
-    "url":"https://outhentic.eu/ose/",
-    "address":{
-      "@type":"PostalAddress",
-      "streetAddress":"Druzhba 72, vh.D, ap.95",
-      "addressLocality":"Sofia",
-      "postalCode":"1592",
-      "addressCountry":"BG"
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://outhentic.eu/ose/#organization",
+      "name": "Outhentic Ltd.",
+      "alternateName": "Outhentic",
+      "url": "https://outhentic.eu/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://outhentic.eu/ose/assets/img/ose-logo.svg",
+        "width": 512,
+        "height": 512
+      },
+      "email": "ose@outhentic.eu",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Druzhba 72, vh.D, ap.95",
+        "addressLocality": "Sofia",
+        "postalCode": "1592",
+        "addressCountry": "BG"
+      },
+      "vatID": "BG204923841",
+      "taxID": "204923841"
     },
-    "vatID":"BG204923841"
-  },
-  "offers":{ "@type":"Offer", "price":"0", "priceCurrency":"EUR" }
+    {
+      "@type": "WebSite",
+      "@id": "https://outhentic.eu/ose/#website",
+      "url": "https://outhentic.eu/ose/",
+      "name": "OSE — Outhentic Sound Engine",
+      "description": "Free online music tools and the Outhentic Sound Engine for Android.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://outhentic.eu/ose/#organization" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://outhentic.eu/ose/#android-app",
+      "name": "Outhentic Sound Engine",
+      "alternateName": "OSE",
+      "operatingSystem": "Android",
+      "applicationCategory": "MultimediaApplication",
+      "description": "An Android instrument and toolkit for people who play: synth, recorder, MIDI piano roll, practice, metronome, tuner, signal generator and meters. Designed to travel with the player and complement the desktop DAW you already use.",
+      "url": "https://outhentic.eu/ose/",
+      "image": "https://outhentic.eu/ose/assets/img/ose-logo.svg",
+      "publisher": { "@id": "https://outhentic.eu/ose/#organization" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "softwareVersion": "1.0"
+    },
+    {
+      "@type": "ItemList",
+      "name": "Free in-browser music tools by OSE",
+      "description": "Working music tools you can use right now in any modern browser. No sign-up, no install, no ads.",
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "numberOfItems": 3,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "WebApplication",
+            "name": "Free Online Metronome",
+            "description": "30–300 BPM, 1–16 beats per bar, accent / muted beats, tap-tempo, time signature picker. Works in any browser. No sign-up.",
+            "url": "https://outhentic.eu/ose/modules/metronome.html",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Any (web browser)",
+            "browserRequirements": "Requires JavaScript and the Web Audio API",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+            "publisher": { "@id": "https://outhentic.eu/ose/#organization" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "WebApplication",
+            "name": "Free Online Tone Generator",
+            "description": "Sine, square, triangle and sawtooth waveforms plus white / pink / brown noise. Type the exact frequency (20 Hz – 20 kHz). Live FFT spectrum + oscilloscope. No sign-up.",
+            "url": "https://outhentic.eu/ose/modules/signal-generator.html",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Any (web browser)",
+            "browserRequirements": "Requires JavaScript and the Web Audio API",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+            "publisher": { "@id": "https://outhentic.eu/ose/#organization" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "WebApplication",
+            "name": "Free Online Piano / Synth",
+            "description": "Two-octave keyboard with four voices: synth lead, piano, bass and pad. Sustain toggle. Plays in any browser. No sign-up.",
+            "url": "https://outhentic.eu/ose/modules/play.html",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Any (web browser)",
+            "browserRequirements": "Requires JavaScript and the Web Audio API",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+            "publisher": { "@id": "https://outhentic.eu/ose/#organization" }
+          }
+        }
+      ]
+    }
+  ]
 }</script>
 </head>
 <body>

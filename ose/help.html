@@ -3,14 +3,67 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Help &amp; FAQ — OSE | Troubleshooting and answers</title>
-<meta name="description" content="Common questions about the Outhentic Sound Engine: input devices, monitoring vs printing, USB audio, non-destructive editing, MIDI Learn and bug reports." />
+<title>Help &amp; FAQ — Troubleshooting the Outhentic Sound Engine | OSE</title>
+<meta name="description" content="Common questions about OSE: is it a DAW, who it's for, input devices, monitor vs print, non-destructive editing, MIDI Learn, stylus support, bug reports — quick troubleshooting for the Outhentic Sound Engine." />
 <meta name="theme-color" content="#050507" />
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="OSE — Outhentic Sound Engine" />
+<meta property="og:locale" content="en_US" />
 <meta property="og:title" content="OSE Help &amp; FAQ" />
 <meta property="og:description" content="Common questions and quick troubleshooting for the Outhentic Sound Engine." />
 <meta property="og:url" content="https://outhentic.eu/ose/help.html" />
-<meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-logo.svg" />
+<meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="OSE Help &amp; FAQ" />
+<meta name="twitter:description" content="Common questions and quick troubleshooting for the Outhentic Sound Engine." />
+<meta name="twitter:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
+
 <link rel="canonical" href="https://outhentic.eu/ose/help.html" />
+<link rel="alternate" hreflang="en" href="https://outhentic.eu/ose/help.html" />
+<link rel="alternate" hreflang="x-default" href="https://outhentic.eu/ose/help.html" />
+
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "url": "https://outhentic.eu/ose/help.html",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is OSE a DAW?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. OSE is an Android instrument and toolkit for people who play. There is no multitrack arranger, no mixing console, no mastering chain — and that's intentional. OSE is built to complement the desktop DAW you already use, not replace it." } },
+        { "@type": "Question", "name": "Who is OSE for?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Gigging keyboard players, songwriters who play piano or keyboard, music students past the absolute-beginner stage, producers who keep a phone in their pocket for the moments a desktop DAW can't reach, cover-band members learning new songs, hobbyists who collect SoundFont files. The unifier: you actually play, you care about how it sounds." } },
+        { "@type": "Question", "name": "What does OSE do that the apps I already use don't?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Three things: a real synth (OseSynth, a native C++ engine — not a sample-pack toy) with multi-instrument layering and any-SoundFont import; a metronome built to be the best on Android; and a phone-first piano roll designed around stylus input for pixel-precise note editing. Plus a tuner, a recorder, a slow-down practice tool, a signal generator and meters — all on one home grid." } },
+        { "@type": "Question", "name": "Why are some of my microphones missing from the input list?",
+          "acceptedAnswer": { "@type": "Answer", "text": "OSE collapses every built-in microphone into a single 'Internal device' row to keep the list short. Phantom inputs (telephony, remote submix) are filtered out — they're never useful for music. Plug in a USB interface and every real channel will appear." } },
+        { "@type": "Question", "name": "What's the difference between MONITOR and PRINT?",
+          "acceptedAnswer": { "@type": "Answer", "text": "MONITOR opens an audible loopback so you hear yourself through the DSP chain in real time. PRINT controls whether the offline DSP bake fires when you leave the recorder lens. They're independent toggles — you can have one without the other, both, or neither." } },
+        { "@type": "Question", "name": "I trimmed a take and now I want it back. Did I lose audio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. The Audio Editor is non-destructive by default. Clip handles write to a sidecar; nothing rewrites the source file until you Bounce. Drag the handle back out to recover the trimmed audio. Even after a Bounce, Revert restores the stashed original." } },
+        { "@type": "Question", "name": "Why is my recording silent when I'm sure I plugged something in?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Open Settings → Audio and check that the input device matches your physical input. If it's a USB interface, the channel chooser inside Settings has to point to the right channel. The Tuner and Meters modules can confirm signal arrival in seconds." } },
+        { "@type": "Question", "name": "Does OSE work on a tablet or in Android desktop mode?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Piano Roll Editor was built stylus-first — stylus tilt, pressure and side-button axes are read where MotionEvent exposes them — so phone, tablet and Android desktop mode share one codebase. Layout adapts to landscape and portrait independently rather than scaling a phone view." } },
+        { "@type": "Question", "name": "Can I bind hardware controllers?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — long-press any knob, slider or toggle to enter MIDI Learn. Bindings are global and channel-aware. The Settings sheet shows all current bindings." } },
+        { "@type": "Question", "name": "How do I import an audio file from my device?",
+          "acceptedAnswer": { "@type": "Answer", "text": "All file imports use the system's single-file picker." } },
+        { "@type": "Question", "name": "Where can I report a bug or request a feature?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Email ose@outhentic.eu with a short description and, if possible, a screen recording. The Outhentic team reads everything." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "OSE", "item": "https://outhentic.eu/ose/" },
+        { "@type": "ListItem", "position": 2, "name": "Help & FAQ", "item": "https://outhentic.eu/ose/help.html" }
+      ]
+    }
+  ]
+}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />

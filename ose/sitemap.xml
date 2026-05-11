@@ -1,17 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://outhentic.eu/ose/</loc><priority>1.00</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/manual.html</loc><priority>0.90</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/tutorials.html</loc><priority>0.90</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/help.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/modules/play.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/modules/audio.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/modules/midi.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/modules/practice.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/modules/metronome.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/modules/tuner.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/modules/signal-generator.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/modules/meters.html</loc><priority>0.80</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/privacy.html</loc><priority>0.40</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://outhentic.eu/ose/terms.html</loc><priority>0.40</priority><changefreq>yearly</changefreq></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Home: highest priority. Linked from every page. -->
+  <url>
+    <loc>https://outhentic.eu/ose/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.00</priority>
+    <image:image>
+      <image:loc>https://outhentic.eu/ose/assets/img/ose-og.svg</image:loc>
+      <image:title>OSE — Outhentic Sound Engine</image:title>
+      <image:caption>Not a toy. Music tools that work.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Module pages with WORKING in-browser tools — high SEO priority
+       since these are the pages that convert "free online metronome"
+       / "free online tuner" / "online tone generator" searches. -->
+  <url>
+    <loc>https://outhentic.eu/ose/modules/metronome.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/modules/signal-generator.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/modules/play.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Module reference pages (no in-browser demo yet but rich docs). -->
+  <url>
+    <loc>https://outhentic.eu/ose/modules/tuner.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/modules/audio.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/modules/midi.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/modules/meters.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/modules/practice.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Documentation hubs. -->
+  <url>
+    <loc>https://outhentic.eu/ose/manual.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/tutorials.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/help.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Legal. Indexed but low priority. -->
+  <url>
+    <loc>https://outhentic.eu/ose/privacy.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/terms.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
 </urlset>
