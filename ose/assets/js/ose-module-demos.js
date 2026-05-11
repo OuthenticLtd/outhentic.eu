@@ -233,6 +233,12 @@
     var tsUpBtn    = demo.querySelector('[data-mm-ts-step="1"]');
     var tsNum      = demo.querySelector('[data-mm-ts-num]');
     var noteChips  = demo.querySelectorAll('[data-mm-note]');
+    var meterToggle = demo.querySelector('[data-mm-meter-toggle]');
+    var sheet       = demo.querySelector('[data-mm-sheet]');
+    var sheetScrim  = demo.querySelector('[data-mm-sheet-scrim]');
+    var sheetClose  = demo.querySelector('[data-mm-sheet-close]');
+    var beatsWheel  = demo.querySelector('[data-mm-beats-wheel]');
+    var noteWheel   = demo.querySelector('[data-mm-note-wheel]');
     if (!startBtn || !polySvg || !strip) return;
 
     var audioCtxLocal = null;
@@ -327,7 +333,10 @@
     }
     function applyBeatState(col, state) {
       // State drives both height fraction and the visual data-state.
-      var frac = state === 1 ? 0.78 : state === 2 ? 0.22 : 0.46;
+      // App uses 0.78/0.46/0.22 but the web demo benefits from a more
+      // dramatic contrast — accent column now towers at 96 %, normal
+      // sits at 50 %, muted at 22 %. The downbeat reads instantly.
+      var frac = state === 1 ? 0.96 : state === 2 ? 0.22 : 0.50;
       var stateName = state === 1 ? 'accent' : state === 2 ? 'muted' : 'normal';
       col.setAttribute('data-state', stateName);
       var bar = col.querySelector('.mm-col-bar');
@@ -438,26 +447,61 @@
       });
     }
 
-    // ── BPM scrubber: horizontal drag = 1 BPM per 6 px ──
+    // ── BPM scrubber ──
+    // Two interactions, like the app:
+    //   • Horizontal drag → 1 BPM per 6 px (the wheel scrub feel).
+    //   • Click without dragging → tap-to-edit numeric input.
+    // We disambiguate by tracking how far the pointer moved before
+    // release; <4 px counts as a tap, otherwise it's a scrub gesture
+    // and the click handler is suppressed.
     var scrubStart = null;
     var scrubBaseBpm = 120;
+    var scrubMaxDelta = 0;
     bpmScrub.addEventListener('pointerdown', function (e) {
-      scrubStart = e.clientX; scrubBaseBpm = bpm;
+      scrubStart = e.clientX; scrubBaseBpm = bpm; scrubMaxDelta = 0;
       bpmScrub.setPointerCapture(e.pointerId);
     });
     bpmScrub.addEventListener('pointermove', function (e) {
       if (scrubStart == null) return;
       var dx = e.clientX - scrubStart;
-      setBpm(scrubBaseBpm + Math.round(dx / 6));
+      if (Math.abs(dx) > scrubMaxDelta) scrubMaxDelta = Math.abs(dx);
+      if (Math.abs(dx) >= 4) setBpm(scrubBaseBpm + Math.round(dx / 6));
     });
     function endScrub(e) {
+      var wasTap = scrubStart != null && scrubMaxDelta < 4;
       if (scrubStart != null && bpmScrub.hasPointerCapture && bpmScrub.hasPointerCapture(e.pointerId)) {
         bpmScrub.releasePointerCapture(e.pointerId);
       }
       scrubStart = null;
+      if (wasTap) openBpmScrubberEditor();
     }
     bpmScrub.addEventListener('pointerup', endScrub);
     bpmScrub.addEventListener('pointercancel', endScrub);
+
+    function openBpmScrubberEditor() {
+      // Swap the value span for a numeric input, restore on commit.
+      if (bpmScrub.querySelector('.mm-bpm-scrubber-edit')) return;
+      var input = document.createElement('input');
+      input.type = 'text';
+      input.inputMode = 'numeric';
+      input.className = 'mm-bpm-scrubber-edit';
+      input.value = String(bpm);
+      input.setAttribute('aria-label', 'Set BPM');
+      bpmScrubV.style.display = 'none';
+      bpmScrub.insertBefore(input, bpmScrubV);
+      input.focus(); input.select();
+      function commit() {
+        var v = parseInt(input.value, 10);
+        if (!isNaN(v)) setBpm(v);
+        if (input.parentNode) input.parentNode.removeChild(input);
+        bpmScrubV.style.display = '';
+      }
+      input.addEventListener('blur', commit);
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); commit(); }
+        else if (e.key === 'Escape') { e.preventDefault(); input.value = bpm; commit(); }
+      });
+    }
 
     // BPM ± buttons
     bpmDownBtn.addEventListener('click', function () { setBpm(bpm - 1); });
@@ -472,6 +516,57 @@
       chip.addEventListener('click', function () {
         setNoteValue(parseInt(chip.getAttribute('data-mm-note'), 10));
       });
+    });
+
+    // ── Meter picker sheet ──
+    // Mirrors MeterBottomSheet from the app: two vertically-scrolling
+    // wheels for BEATS (1-16) and NOTE (4/8/16). Selecting a value
+    // commits immediately so closing the sheet has no "OK / Cancel"
+    // semantics — the only button is "Done" for tap-target convenience.
+    function buildWheel(wheelEl, values, selected, onSelect) {
+      wheelEl.innerHTML = '';
+      values.forEach(function (v) {
+        var item = document.createElement('div');
+        item.className = 'mm-wheel-item' + (v === selected ? ' is-selected' : '');
+        item.textContent = v;
+        item.addEventListener('click', function () {
+          // Visually update selection.
+          wheelEl.querySelectorAll('.mm-wheel-item').forEach(function (i) {
+            i.classList.toggle('is-selected', i === item);
+          });
+          // Smooth-scroll the tapped item into the centre band.
+          item.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          onSelect(v);
+        });
+        wheelEl.appendChild(item);
+      });
+      // Centre the selected item AFTER the wheel is in the DOM
+      // (defer one tick because the wheel is inside a hidden sheet
+      // on first build).
+      setTimeout(function () {
+        var sel = wheelEl.querySelector('.is-selected');
+        if (sel) sel.scrollIntoView({ block: 'center' });
+      }, 0);
+    }
+
+    function openSheet() {
+      sheet.hidden = false;
+      // Rebuild wheels so they always reflect current state.
+      var beatsValues = [];
+      for (var i = 1; i <= 16; i++) beatsValues.push(i);
+      buildWheel(beatsWheel, beatsValues, beats, function (v) {
+        setBeats(v);
+      });
+      buildWheel(noteWheel, [4, 8, 16], noteValue, function (v) {
+        setNoteValue(v);
+      });
+    }
+    function closeSheet() { sheet.hidden = true; }
+    if (meterToggle) meterToggle.addEventListener('click', openSheet);
+    if (sheetScrim) sheetScrim.addEventListener('click', closeSheet);
+    if (sheetClose) sheetClose.addEventListener('click', closeSheet);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !sheet.hidden) closeSheet();
     });
 
     // TAP-tempo: collect timestamps, average last N=4 intervals.

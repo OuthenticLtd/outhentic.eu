@@ -512,8 +512,33 @@ a.hub-card { display: block; color: inherit; }
 .foot-bottom {
   margin-top: 40px; padding-top: 24px;
   border-top: 1px solid var(--line);
-  display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between;
-  font-size: .8rem; color: var(--muted);
+  display: flex; align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;          /* wraps cleanly on phones; on desktop sits in one line */
+  font-size: .82rem; color: var(--muted);
+}
+.fb-item {
+  display: inline-flex; align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.fb-item svg {
+  width: 14px; height: 14px;
+  flex: 0 0 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.fb-item a { color: inherit; }
+.fb-item a:hover { color: var(--ink); }
+/* The middle and last items push right on wide screens so the row
+   reads "copyright · site · email" left/centre/right. On narrow
+   screens the wrap kicks in and they stack with even gaps. */
+@media (min-width: 720px) {
+  .foot-bottom { flex-wrap: nowrap; justify-content: flex-start; }
+  .fb-item--site { margin-left: auto; }
 }
 
 /* =========================================================
@@ -823,8 +848,21 @@ a.hub-card { display: block; color: inherit; }
   display: flex; flex-direction: column;
   align-items: flex-end;
   font-family: var(--mono-font);
-  padding-right: 2px;
-  cursor: default;
+  padding: 6px 4px 6px 12px;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  color: inherit;
+  transition: background .12s;
+  text-align: right;
+}
+.mm-meter:hover {
+  background: color-mix(in srgb, var(--demo-accent) 8%, transparent);
+}
+.mm-meter:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--demo-accent) 70%, transparent);
+  outline-offset: 2px;
 }
 .mm-meter-row { display: flex; align-items: baseline; }
 .mm-meter-row span:nth-child(1),
@@ -840,8 +878,12 @@ a.hub-card { display: block; color: inherit; }
   display: flex; gap: 6px;
   background: rgba(0,0,0,0.34);
   border-radius: 8px;
-  padding: 6px 6px 6px 6px;
-  min-height: 100px;
+  padding: 8px 6px 8px 6px;
+  /* Use a real height (not min-height) so % heights on .mm-col-bar
+     have a definite reference. The accent column (78% of column =
+     ~98 px) needs to clearly tower over the normal column (46% =
+     ~58 px) and dwarf the muted column (22% = ~28 px). */
+  height: 126px;
   border: 0.5px solid color-mix(in srgb, var(--demo-accent) 30%, transparent);
   overflow-x: auto;
   align-items: flex-end;
@@ -850,9 +892,9 @@ a.hub-card { display: block; color: inherit; }
 .mm-strip::-webkit-scrollbar { height: 4px; }
 .mm-strip::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--demo-accent) 40%, transparent); border-radius: 2px; }
 .mm-col {
-  flex: 1 0 30px;
-  min-width: 28px;
-  max-width: 48px;
+  flex: 1 0 36px;
+  min-width: 34px;
+  max-width: 56px;
   height: 100%;
   position: relative;
   background: transparent;
@@ -862,41 +904,55 @@ a.hub-card { display: block; color: inherit; }
   display: flex; align-items: flex-end;
   outline: none;
 }
+/* Normal beat — moderate height, subtle accent tint */
 .mm-col-bar {
   width: 100%;
   background: linear-gradient(180deg,
-    color-mix(in srgb, var(--demo-accent) 62%, transparent),
-    color-mix(in srgb, var(--demo-accent) 18%, transparent));
-  border: 1px solid color-mix(in srgb, var(--demo-accent) 50%, transparent);
+    color-mix(in srgb, var(--demo-accent) 55%, transparent),
+    color-mix(in srgb, var(--demo-accent) 16%, transparent));
+  border: 1px solid color-mix(in srgb, var(--demo-accent) 45%, transparent);
   border-radius: 5px;
-  transition: height .16s ease-out, background .16s, border-color .16s, transform .12s;
+  transition: height .16s ease-out, background .16s, border-color .16s, transform .12s, box-shadow .16s;
   display: flex; justify-content: center; align-items: flex-end;
   padding-bottom: 4px;
   color: rgba(255,255,255,0.85);
   font-family: var(--mono-font);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
 }
+/* Accent beat — saturated solid fill, dark numeral, lifted glow.
+   Visually has to dominate so the downbeat reads at a glance. */
 .mm-col[data-state="accent"] .mm-col-bar {
   background: linear-gradient(180deg,
     var(--demo-accent),
-    color-mix(in srgb, var(--demo-accent) 45%, transparent));
+    color-mix(in srgb, var(--demo-accent) 60%, transparent));
   border-color: var(--demo-accent);
+  border-width: 1.5px;
   color: #1C1814;
   font-weight: 900;
+  font-size: 15px;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #FFFFFF 30%, transparent),
+    0 2px 10px color-mix(in srgb, var(--demo-accent) 35%, transparent);
 }
+/* Muted beat — barely there, dashed feel */
 .mm-col[data-state="muted"] .mm-col-bar {
   background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
   border-color: rgba(255,255,255,0.18);
   color: rgba(255,255,255,0.30);
   font-weight: 600;
+  font-size: 11px;
 }
+/* Live (playing) beat — white border + brighter color, brief flash */
 .mm-col.is-live .mm-col-bar {
   background: var(--demo-accent) !important;
   border-color: #FFFFFF !important;
   border-width: 1.5px;
   color: #1C1814 !important;
   font-weight: 900;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.40),
+    0 0 14px color-mix(in srgb, var(--demo-accent) 55%, transparent);
 }
 
 /* Controls card */
@@ -954,6 +1010,21 @@ a.hub-card { display: block; color: inherit; }
   color: #FFFFFF;
   letter-spacing: -1px;
   line-height: 1;
+}
+.mm-bpm-scrubber-edit {
+  font-family: var(--mono-font);
+  font-size: 32px;
+  font-weight: 300;
+  color: #FFFFFF;
+  letter-spacing: -1px;
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  outline: none;
+  text-align: center;
+  width: 5ch;
+  padding: 0;
+  caret-color: var(--demo-accent);
 }
 .mm-bpm-scrubber-hint {
   font-family: var(--mono-font);
@@ -1029,6 +1100,148 @@ a.hub-card { display: block; color: inherit; }
 .mm-tap:hover { background: color-mix(in srgb, var(--demo-accent) 10%, transparent); }
 .mm-tap:active { transform: scale(0.98); }
 .mm-tap.is-pulsing { background: color-mix(in srgb, var(--demo-accent) 35%, transparent); }
+
+/* Meter picker sheet — mirrors MeterBottomSheet from the app */
+.mm-sheet {
+  position: fixed; inset: 0;
+  z-index: 90;
+  display: flex; align-items: flex-end; justify-content: center;
+  pointer-events: none;
+}
+.mm-sheet[hidden] { display: none; }
+.mm-sheet-scrim {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.55);
+  pointer-events: auto;
+  animation: mm-sheet-fade .18s ease both;
+}
+@keyframes mm-sheet-fade { from { opacity: 0; } to { opacity: 1; } }
+.mm-sheet-card {
+  position: relative;
+  background: #15131A;
+  border: 0.5px solid color-mix(in srgb, var(--c-metronome) 35%, transparent);
+  border-radius: 18px 18px 0 0;
+  width: 100%;
+  max-width: 480px;
+  padding: 10px 20px 28px;
+  pointer-events: auto;
+  box-shadow: 0 -16px 60px rgba(0,0,0,0.55);
+  animation: mm-sheet-rise .22s ease-out both;
+}
+@media (min-width: 720px) {
+  .mm-sheet { align-items: center; }
+  .mm-sheet-card { border-radius: 18px; margin: 0 24px; }
+}
+@keyframes mm-sheet-rise {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.mm-sheet-handle {
+  width: 40px; height: 4px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 2px;
+  margin: 4px auto 14px;
+}
+.mm-sheet-title {
+  font-family: var(--mono-font);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--c-metronome);
+  margin: 0 0 6px;
+}
+.mm-sheet-sub {
+  font-family: var(--sans-font);
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  margin: 0 0 16px;
+}
+.mm-sheet-grid {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.mm-sheet-col {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px;
+}
+.mm-sheet-label {
+  font-family: var(--mono-font);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.6px;
+  color: var(--c-metronome);
+}
+.mm-sheet-slash {
+  font-family: var(--mono-font);
+  font-size: 28px;
+  color: rgba(255,255,255,0.45);
+  padding: 0 12px;
+}
+.mm-wheel {
+  width: 90px;
+  height: 170px;
+  background: rgba(0,0,0,0.40);
+  border-radius: 12px;
+  border: 0.5px solid rgba(255,255,255,0.10);
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  position: relative;
+  scrollbar-width: none;
+}
+.mm-wheel::-webkit-scrollbar { display: none; }
+.mm-wheel::before,
+.mm-wheel::after {
+  content: '';
+  position: absolute; left: 0; right: 0;
+  height: 70px;
+  pointer-events: none;
+  z-index: 2;
+}
+.mm-wheel::before {
+  top: 0;
+  background: linear-gradient(180deg, #15131A 0%, rgba(21,19,26,0) 100%);
+}
+.mm-wheel::after {
+  bottom: 0;
+  background: linear-gradient(0deg, #15131A 0%, rgba(21,19,26,0) 100%);
+}
+.mm-wheel-item {
+  height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.45);
+  scroll-snap-align: center;
+  cursor: pointer;
+  transition: color .12s;
+}
+.mm-wheel-item:first-child { margin-top: 64px; }
+.mm-wheel-item:last-child { margin-bottom: 64px; }
+.mm-wheel-item.is-selected {
+  color: var(--c-metronome);
+  font-weight: 900;
+  font-size: 26px;
+}
+.mm-wheel-item:hover { color: #FFFFFF; }
+.mm-sheet-close {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: var(--c-metronome);
+  color: #1C1814;
+  border: 0; border-radius: 12px;
+  font-family: var(--sans-font);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2.4px;
+  cursor: pointer;
+  transition: filter .12s, transform .08s;
+}
+.mm-sheet-close:hover { filter: brightness(1.08); }
+.mm-sheet-close:active { transform: scale(0.98); }
+
 .mm-control-row { display: none; }
 .mm-control-row label {
   font-family: var(--mono-font);
