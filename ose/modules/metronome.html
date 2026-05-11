@@ -153,6 +153,52 @@
 
     <div class="content reveal" style="max-width: 820px;"><p class="lead" data-ose-module="summary"></p></div>
 
+    <!-- ============== INTERACTIVE METRONOME DEMO ============== -->
+    <section class="module-demo mc--metronome reveal" data-module-demo="metronome">
+      <div class="module-demo-label">Try it · Real metronome</div>
+      <h2>Tap START. Hear the click. See the polygon.</h2>
+      <p>40–220 BPM, 2–9 beats per bar. Drag the BEATS slider and the polygon morphs in real time — triangle for 3, square for 4, pentagon for 5, hexagon for 6. Tap any beat numeral to cycle its accent state: <strong>silent → normal → accent</strong>.</p>
+
+      <div class="mm-grid">
+        <div class="mm-ctf">
+          <div class="mm-ctf-head">
+            <div>
+              <div class="mm-bpm" data-mm-bpm-digit>120</div>
+              <div class="mm-tempo" data-mm-tempo>BPM · MODERATO</div>
+            </div>
+            <div>
+              <svg class="mm-poly" viewBox="-60 -60 120 120" data-mm-poly>
+                <polygon data-mm-poly-outline points="0,-50 50,0 0,50 -50,0" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <polygon data-mm-poly-fill    points="0,-35 35,0 0,35 -35,0" fill="currentColor" opacity="0.18"/>
+                <circle data-mm-dot r="5" fill="#FFFFFF" cx="0" cy="-50"/>
+              </svg>
+            </div>
+            <div class="mm-meter">
+              <div class="mm-meter-row">
+                <span data-mm-num>4</span><span>/</span><span data-mm-den>4</span>
+              </div>
+              <div class="mm-meter-label">METER</div>
+            </div>
+          </div>
+          <div class="mm-beats" data-mm-beats></div>
+        </div>
+
+        <div class="mm-controls">
+          <div class="mm-control-row">
+            <label>BPM</label>
+            <input type="range" class="mm-slider" min="40" max="220" value="120" data-mm-bpm />
+            <span class="mm-slider-value" data-mm-bpm-value>120</span>
+          </div>
+          <div class="mm-control-row">
+            <label>Beats</label>
+            <input type="range" class="mm-slider" min="2" max="9" step="1" value="4" data-mm-sig />
+            <span class="mm-slider-value" data-mm-sig-value>4 / 4</span>
+          </div>
+          <button class="mm-start" data-mm-start>START</button>
+        </div>
+      </div>
+    </section>
+
     <hr class="divider"/>
     <nav class="sub-nav">
       <a href="#topbar">Top bar</a>
@@ -188,5 +234,6 @@
 <script src="../assets/data/ose-content.js" defer></script>
 <script src="../assets/js/ose-renderer.js" defer></script>
 <script src="../assets/js/ose-main.js" defer></script>
+<script src="../assets/js/ose-module-demos.js" defer></script>
 </body>
 </html>

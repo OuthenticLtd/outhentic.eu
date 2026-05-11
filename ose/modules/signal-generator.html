@@ -168,6 +168,52 @@
 
     <div class="content reveal" style="max-width: 820px;"><p class="lead" data-ose-module="summary"></p></div>
 
+    <!-- ============== INTERACTIVE SIGNAL GEN DEMO ============== -->
+    <section class="module-demo mc--signalgen reveal" data-module-demo="signal-gen">
+      <div class="module-demo-label">Try it · Real oscillator</div>
+      <h2>Pick a waveform. Set a frequency. Press START.</h2>
+      <p>Seven waveforms — four shapes plus three colours of noise. Real Web Audio under the hood, so the tone, the spectrum and the loudness behave exactly the way they do in the app. Be careful with the volume.</p>
+
+      <div class="sg-grid">
+        <div class="sg-display">
+          <svg class="sg-svg" viewBox="0 0 700 200" preserveAspectRatio="none">
+            <path data-sg-path d="" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+            <path data-sg-path-fg d="" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="sg-readout">
+            <span class="sg-readout-freq" data-sg-freq-display>440 Hz</span>
+            <span class="sg-readout-status" data-sg-status>READY</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="sg-chips">
+            <button class="sg-chip is-active" data-sg-wave="sine">SINE</button>
+            <button class="sg-chip" data-sg-wave="square">SQR</button>
+            <button class="sg-chip" data-sg-wave="sawtooth">SAW</button>
+            <button class="sg-chip" data-sg-wave="triangle">TRI</button>
+          </div>
+          <div class="sg-chips sg-chips-row-2">
+            <button class="sg-chip" data-sg-wave="white">WHITE</button>
+            <button class="sg-chip" data-sg-wave="pink">PINK</button>
+            <button class="sg-chip" data-sg-wave="brown">BROWN</button>
+          </div>
+
+          <div class="sg-control">
+            <label>Freq</label>
+            <input type="range" class="sg-slider" min="20" max="20000" value="440" step="1" data-sg-freq />
+            <span class="sg-slider-value" data-sg-freq-value>440 Hz</span>
+          </div>
+          <div class="sg-control">
+            <label>Amp</label>
+            <input type="range" class="sg-slider" min="-60" max="-3" value="-12" step="1" data-sg-amp />
+            <span class="sg-slider-value" data-sg-amp-value>-12 dB</span>
+          </div>
+          <button class="sg-play" data-sg-play>START</button>
+        </div>
+      </div>
+    </section>
+
     <hr class="divider"/>
     <nav class="sub-nav">
       <a href="#topbar">Top bar</a>
@@ -203,5 +249,6 @@
 <script src="../assets/data/ose-content.js" defer></script>
 <script src="../assets/js/ose-renderer.js" defer></script>
 <script src="../assets/js/ose-main.js" defer></script>
+<script src="../assets/js/ose-module-demos.js" defer></script>
 </body>
 </html>

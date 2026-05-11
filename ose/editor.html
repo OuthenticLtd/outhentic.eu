@@ -91,7 +91,7 @@
     <button class="btn btn--primary" type="submit">Unlock</button>
   </form>
   <p style="font-size: .76rem; color: var(--muted); margin-top: 22px;">
-    Default password matches the main outhentic.eu editor. Change it by replacing PASSWORD_HASH in this file with a new SHA-256 hash.
+    To change the password, search this file for <code>EDITOR_PASSWORD</code> and replace the value with your new one. Plain text, no hash to compute.
   </p>
 </div>
 
@@ -210,14 +210,11 @@
    Edits ose-content.js. Dual save: download or commit to GitHub.
    ===================================================================== */
 (function () {
-  // SHA-256 of the same password used on outhentic.eu/editor.html ("outhentic")
-  var PASSWORD_HASH = "eb4d5cd77d5621734c946630c6690809d458181770e2b3f5e9b5c5578de523dc";
-
-  async function sha256(s) {
-    var buf = new TextEncoder().encode(s);
-    var hash = await crypto.subtle.digest('SHA-256', buf);
-    return Array.from(new Uint8Array(hash)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
-  }
+  // ────────────────────────────────────────────────────────────────────
+  // EDITOR_PASSWORD — plain text, just change the string below to set a
+  // new password. No hashing required.
+  // ────────────────────────────────────────────────────────────────────
+  var EDITOR_PASSWORD = "Doremifasollasido";
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) { return Array.from((root || document).querySelectorAll(sel)); };
@@ -229,11 +226,10 @@
   function markClean() { dirty = false; var s = $('.site-dirty'); if (s) { s.textContent = 'saved'; s.style.color = '#42E07A'; } }
 
   // ---------- Gate ----------
-  $('#gate-form').addEventListener('submit', async function (e) {
+  $('#gate-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var pw = $('#gate-pw').value;
-    var hash = await sha256(pw);
-    if (hash === PASSWORD_HASH) {
+    if (pw === EDITOR_PASSWORD) {
       $('#gate').classList.add('hidden');
       $('#editor').classList.remove('hidden');
       init();
@@ -275,6 +271,28 @@
     var lab = document.createElement('label');
     lab.textContent = label;
     var ctl;
+    if (opts.toggle) {
+      // Boolean toggle — checkbox styled as a pill switch.
+      ctl = document.createElement('label');
+      ctl.style.cssText = 'display:inline-flex;align-items:center;gap:10px;cursor:pointer;padding-top:8px;';
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = !!value;
+      cb.style.cssText = 'width:18px;height:18px;accent-color:var(--accent-orange);cursor:pointer;';
+      var hint = document.createElement('span');
+      hint.style.cssText = 'font-size:.86rem;color:var(--ink-soft);';
+      hint.textContent = cb.checked ? 'ON' : 'OFF';
+      cb.addEventListener('change', function () {
+        hint.textContent = cb.checked ? 'ON' : 'OFF';
+        onChange(cb.checked);
+        markDirty();
+      });
+      ctl.appendChild(cb);
+      ctl.appendChild(hint);
+      wrap.appendChild(lab);
+      wrap.appendChild(ctl);
+      return wrap;
+    }
     if (opts.tall) {
       ctl = document.createElement('textarea');
       ctl.style.minHeight = (opts.minHeight || 70) + 'px';
@@ -324,20 +342,34 @@
   function renderMeta() {
     var host = $('#meta-form'); host.innerHTML = '';
     var m = data.meta || (data.meta = {});
+
+    // Release / CTA block — sits at the top so it's the first thing the
+    // user sees in the Site tab.
+    var releaseHelp = document.createElement('p');
+    releaseHelp.style.cssText = 'margin:0 0 18px;padding:14px 16px;background:var(--bg-1);border-left:3px solid var(--accent-orange);border-radius:6px;font-size:.86rem;color:var(--ink-soft);';
+    releaseHelp.innerHTML = 'Flip <strong>Released</strong> ON when the app is on Google Play. ' +
+      'While OFF, the big "Get it on Google Play" button on the site shows ' +
+      '<strong>Coming soon · Join the waitlist</strong> and links to the Waitlist URL below. ' +
+      'When ON, it switches to <strong>Get it on · Google Play</strong> and links to the Play Store URL.';
+    host.appendChild(releaseHelp);
+
     [
-      ['Site name', 'siteName'],
-      ['Full name', 'fullName'],
-      ['Tagline', 'tagline'],
+      ['Released',        'released',       { toggle: true }],
+      ['Waitlist URL',    'waitlistUrl',    { placeholder: 'https://outhentic.eu/ose/' }],
+      ['Play Store URL',  'playStoreUrl',   { placeholder: 'https://play.google.com/store/apps/details?id=...' }],
+      ['Site name',       'siteName'],
+      ['Full name',       'fullName'],
+      ['Tagline',         'tagline'],
       ['Short description', 'shortDescription'],
-      ['Play Store URL', 'playStoreUrl'],
-      ['Contact email', 'contactEmail'],
-      ['Address line', 'addressLine'],
-      ['Twitter handle', 'twitterHandle'],
-      ['OG image path', 'ogImage'],
-      ['Version', 'version'],
-      ['Last updated', 'lastUpdated']
+      ['Contact email',   'contactEmail'],
+      ['Address line',    'addressLine'],
+      ['Twitter handle',  'twitterHandle'],
+      ['OG image path',   'ogImage'],
+      ['Version',         'version'],
+      ['Last updated',    'lastUpdated']
     ].forEach(function (f) {
-      host.appendChild(inputField(f[0], m[f[1]], function (v) { m[f[1]] = v; }));
+      var key = f[1];
+      host.appendChild(inputField(f[0], m[key], function (v) { m[key] = v; }, f[2] || {}));
     });
   }
 

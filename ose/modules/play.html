@@ -214,6 +214,26 @@
       <p class="lead" data-ose-module="summary"></p>
     </div>
 
+    <!-- ============== INTERACTIVE PLAY DEMO ============== -->
+    <section class="module-demo mc--play reveal" data-module-demo="play">
+      <div class="module-demo-label">Try it · Real synth, right here</div>
+      <h2>Tap the keys. Hear the voice.</h2>
+      <p>Two octaves, four voices. No download, no sign-up. The same OseSynth-style C++ engine that ships in the app — sketched here in Web Audio so you can see what it actually sounds like.</p>
+
+      <div class="pm-controls">
+        <span class="pm-controls-label">Voice</span>
+        <div class="pm-voices">
+          <button class="pm-voice is-active" data-pm-voice="synth">SYNTH</button>
+          <button class="pm-voice" data-pm-voice="piano">PIANO</button>
+          <button class="pm-voice" data-pm-voice="bass">BASS</button>
+          <button class="pm-voice" data-pm-voice="pad">PAD</button>
+        </div>
+        <button class="pm-sustain" data-pm-sustain>SUSTAIN · OFF</button>
+      </div>
+
+      <div class="pm-piano-wrap" data-pm-piano></div>
+    </section>
+
     <hr class="divider"/>
 
     <nav class="sub-nav">
@@ -289,5 +309,6 @@
 <script src="../assets/data/ose-content.js" defer></script>
 <script src="../assets/js/ose-renderer.js" defer></script>
 <script src="../assets/js/ose-main.js" defer></script>
+<script src="../assets/js/ose-module-demos.js" defer></script>
 </body>
 </html>

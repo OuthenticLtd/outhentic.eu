@@ -11,6 +11,27 @@
   }
   var C = window.OSE_CONTENT;
 
+  // ────────────────────────────────────────────────────────────────────
+  // CTA resolution — pick the effective primary-CTA URL and label based
+  // on the meta.released flag. When NOT released (default), the CTA
+  // points at meta.waitlistUrl with label "Join the waitlist". When
+  // released, it switches to meta.playStoreUrl with "Get it on Google
+  // Play". The user toggles this from the editor without having to edit
+  // any HTML.
+  // ────────────────────────────────────────────────────────────────────
+  if (C.meta && C.hero) {
+    var isReleased = C.meta.released === true;
+    if (isReleased) {
+      C.hero.ctaPrimaryHref  = C.meta.playStoreUrl || '#';
+      C.hero.ctaPrimaryPre   = 'Get it on';
+      C.hero.ctaPrimaryLabel = 'Google Play';
+    } else {
+      C.hero.ctaPrimaryHref  = C.meta.waitlistUrl || '#';
+      C.hero.ctaPrimaryPre   = 'Coming soon';
+      C.hero.ctaPrimaryLabel = 'Join the waitlist';
+    }
+  }
+
   // Resolve a dotted path like "hero.title_a" or "modules.0.name"
   function get(path) {
     var parts = path.split('.');
@@ -105,26 +126,19 @@
   var gridHost = document.querySelector('[data-ose-module-grid]');
   if (gridHost && Array.isArray(C.modules)) {
     // ---- PlayKeysWide: 7 white keys + 5 sharps, accent tint cycles L→R ----
-    // Interactive: each key is tappable. The home-demo JS attaches Web-Audio
-    // tone playback on pointerdown.
     function vizPlay() {
-      // 7 white keys C..B (semitones 0,2,4,5,7,9,11); 5 black sharps at the
-      // proper seams (after 0,1,3,4,5 — no E# or B#) with semitones
-      // 1,3,6,8,10.
-      var whiteNotes = [0, 2, 4, 5, 7, 9, 11];
       var whites = '';
       var tints = '';
       for (var i = 0; i < 7; i++) {
         var x = i * 100 + 3;
-        whites += '<rect class="mcw-play-key mcw-play-w" data-note="' + whiteNotes[i] + '" x="' + x + '" y="0" width="94" height="200" rx="10" fill="#E8E8EC"/>';
-        tints  += '<rect x="' + x + '" y="0" width="94" height="200" rx="10" fill="currentColor" class="mcw-play-tint mcw-play-tint-' + i + '" opacity="0" pointer-events="none"/>';
+        whites += '<rect x="' + x + '" y="0" width="94" height="200" rx="10" fill="#E8E8EC"/>';
+        tints  += '<rect x="' + x + '" y="0" width="94" height="200" rx="10" fill="currentColor" class="mcw-play-tint mcw-play-tint-' + i + '" opacity="0"/>';
       }
       var sharpAfter = [0, 1, 3, 4, 5];
-      var sharpNotes = [1, 3, 6, 8, 10];
       var sharps = '';
-      sharpAfter.forEach(function (idx, j) {
+      sharpAfter.forEach(function (idx) {
         var cx = (idx + 1) * 100;
-        sharps += '<rect class="mcw-play-key mcw-play-b" data-note="' + sharpNotes[j] + '" x="' + (cx - 27) + '" y="0" width="55" height="124" rx="8" fill="#0A0A0E"/>';
+        sharps += '<rect x="' + (cx - 27) + '" y="0" width="55" height="124" rx="8" fill="#0A0A0E"/>';
       });
       return '<svg viewBox="0 0 700 200" preserveAspectRatio="none">' +
              '<g>' + whites + '</g>' +
@@ -195,10 +209,7 @@
         '</g>' +
         '</svg>';
     }
-    // ---- Metronome: 4 beat pillars (matches MetronomeWide in source).
-    //      Tap the card to start/stop the real Web-Audio metronome.
-    //      When stopped: the CSS ambient cycle plays. When running: JS
-    //      drives the pillars in sync with the audio clicks.
+    // ---- MetronomeWide: 4 pillars with one active at a time ----
     function vizMetronome() {
       var W = 700, H = 200;
       var slot = W / 4;
@@ -208,17 +219,9 @@
       for (var i = 0; i < 4; i++) {
         var x = i * slot + (slot - barW) / 2;
         var y = H - barH;
-        bars += '<rect data-met-bar="' + i + '" class="mcw-met-' + (i + 1) + '" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" rx="' + (barW * 0.45).toFixed(1) + '" fill="currentColor"/>';
+        bars += '<rect class="mcw-met-' + (i + 1) + '" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" rx="' + (barW * 0.45).toFixed(1) + '" fill="currentColor"/>';
       }
-      // Centred play glyph — visible only when stopped (CSS-controlled
-      // via .is-running on the parent card).
-      var glyph = '<g data-met-glyph transform="translate(' + (W / 2) + ',' + (H / 2 - 30) + ')">' +
-                  '<polygon points="-18,-22 -18,22 22,0" fill="currentColor" opacity="0.55"/>' +
-                  '</g>';
-      // Transparent rect over the entire SVG = tap target.
-      var tap = '<rect data-met-tap x="0" y="0" width="' + W + '" height="' + H + '" fill="transparent" cursor="pointer"/>';
-      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' + bars + glyph + tap + '</svg>' +
-             '<div class="mcw-met-status" data-met-status>120 BPM · TAP</div>';
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' + bars + '</svg>';
     }
     // ---- TunerWide: pitch ribbon, 5 cent ticks, drifting needle ----
     function vizTuner() {
@@ -249,27 +252,25 @@
         '</g>' +
         '</svg>';
     }
-    // ---- SignalGen: interactive — pick a waveform, tap to play/stop ----
+    // ---- SignalGenWide: scrolling sine wave with halo ----
     function vizSignalGen() {
-      // Layout: large waveform area on top (tappable), 4 chips at the bottom.
-      // The waveform path is generated by the home-demo JS on init so it
-      // matches the active waveform.
-      return '<div class="mcw-sig-wrap" data-home-sig-wrap>' +
-        '<svg viewBox="0 0 700 140" preserveAspectRatio="none" class="mcw-sig-svg" data-home-sig-tap>' +
-          '<path data-home-sig-wave-path d="" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>' +
-          '<path data-home-sig-wave-path-fg d="" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>' +
-          '<g data-home-sig-glyph transform="translate(630,70)">' +
-            '<polygon points="-12,-16 -12,16 16,0" fill="currentColor"/>' +
-          '</g>' +
-        '</svg>' +
-        '<div class="mcw-sig-chips">' +
-          '<button class="mcw-sig-chip is-active" data-home-sig-wave="sine">SIN</button>' +
-          '<button class="mcw-sig-chip" data-home-sig-wave="square">SQR</button>' +
-          '<button class="mcw-sig-chip" data-home-sig-wave="sawtooth">SAW</button>' +
-          '<button class="mcw-sig-chip" data-home-sig-wave="triangle">TRI</button>' +
-        '</div>' +
-        '<div class="mcw-sig-status" data-home-sig-status>440 Hz · TAP</div>' +
-        '</div>';
+      var W = 700, H = 200;
+      var midY = H * 0.5;
+      var amp  = H * 0.40;
+      var d = 'M 0 ' + midY;
+      var steps = 80;
+      for (var i = 1; i <= steps; i++) {
+        var t = i / steps;
+        var x = t * (W + 100);
+        var y = midY + Math.sin(t * 4 * Math.PI) * amp;
+        d += ' L ' + x.toFixed(1) + ' ' + y.toFixed(2);
+      }
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" style="overflow:hidden;">' +
+        '<g class="mcw-sine">' +
+          '<path d="' + d + '" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="' + (H * 0.14) + '" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '<path d="' + d + '" fill="none" stroke="currentColor" stroke-width="' + (H * 0.06) + '" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '</g>' +
+        '</svg>';
     }
     // ---- MetersWide: 8 vertical FFT bars ----
     function vizMeters() {
@@ -306,27 +307,11 @@
       'signal-generator': 'mc--signalgen',
       'meters': 'mc--meters'
     };
-    // Interactive cards (play / metronome / signal-generator) use a <div>
-    // wrapper with an inner <a class="mc-head"> for navigation, so the viz
-    // area can receive pointer events without triggering navigation.
-    var interactive = { 'play': true, 'metronome': true, 'signal-generator': true };
     gridHost.innerHTML = C.modules.map(function (m) {
       var emph = m.id === 'play' ? ' is-emphasized' : '';
       var cls  = classMap[m.id] || '';
       var href = fixHref('modules/' + m.id + '.html');
       var viz  = (vizFns[m.id] || function () { return ''; })();
-      var isInteractive = !!interactive[m.id];
-      if (isInteractive) {
-        return (
-          '<div class="module-card is-interactive ' + cls + emph + '" data-home-demo="' + m.id + '">' +
-          '<a class="mc-head" href="' + href + '">' +
-            '<div class="mc-name">' + (m.shortName || m.name) + '</div>' +
-            '<div class="mc-sub">' + (m.tile_role || '') + '</div>' +
-          '</a>' +
-          '<div class="mc-viz">' + viz + '</div>' +
-          '</div>'
-        );
-      }
       return (
         '<a class="module-card ' + cls + emph + '" href="' + href + '">' +
         '<div class="mc-head">' +
