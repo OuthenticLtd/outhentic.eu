@@ -13,7 +13,7 @@ window.OSE_CONTENT = {
     "tagline": "Not a toy. Music tools that work.",
     "shortDescription": "OSE is an Android instrument and toolkit for people who play — synth, recorder, MIDI editor, metronome, tuner and more. Eight focused music tools, designed to travel with the player and complement the desktop DAW you already use.",
     "released": false,
-    "waitlistUrl": "https://outhentic.eu/ose/",
+    "waitlistUrl": "https://waitlister.me/p/ose",
     "playStoreUrl": "",
     "contactEmail": "ose@outhentic.eu",
     "addressLine": "Sofia 1592, Bulgaria",
