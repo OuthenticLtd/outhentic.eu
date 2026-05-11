@@ -1469,6 +1469,269 @@ a.hub-card { display: block; color: inherit; }
   font-style: italic;
 }
 
+/* =========================================================
+   VintageMeterFace (Tuner demo)
+   Real ClickTrackFace/VintageMeterFace nesting — rim, glass,
+   warm amber tint, half-arc with pivot far below canvas.
+   ========================================================= */
+.vmf-rim {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 5px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #1F1F1F 0%, #050505 100%);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(0,0,0,0.40);
+}
+.vmf-glass {
+  position: relative;
+  border-radius: 8px;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--tut-accent, #85B7EB) 55%, transparent) 0%,
+    color-mix(in srgb, var(--tut-accent, #85B7EB) 32%, transparent) 55%,
+    color-mix(in srgb, var(--tut-accent, #85B7EB) 18%, transparent) 100%);
+  border: 0.5px solid rgba(0,0,0,0.70);
+  aspect-ratio: 14 / 13;
+  overflow: hidden;
+}
+.vmf-svg { width: 100%; height: 100%; display: block; }
+
+/* Cents readout row below the rim — same idiom as in the app */
+.vmf-readout-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  max-width: 320px;
+  margin: 14px auto 0;
+  padding: 10px 6px;
+}
+.vmf-cents {
+  font-family: var(--mono-font);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--tut-accent, #85B7EB);
+  letter-spacing: -.02em;
+  min-width: 70px;
+}
+.vmf-leds { display: flex; gap: 8px; }
+.vmf-hz {
+  font-family: var(--mono-font);
+  font-size: .9rem;
+  color: var(--ink-soft);
+  min-width: 70px;
+  text-align: right;
+}
+
+/* =========================================================
+   ClickTrackFace (Metronome demo)
+   Real layout: BPM digit left, polygon centre, 4/4 right, on
+   amber-glass panel with vertical gradient and accent border.
+   Beat strip fills below.
+   ========================================================= */
+.ctf-face {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  border-radius: 14px;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--tut-accent, #FAC775) 20%, transparent) 0%,
+    color-mix(in srgb, var(--tut-accent, #FAC775) 5%, transparent) 50%,
+    rgba(28,24,20,0.50) 100%);
+  border: 0.5px solid color-mix(in srgb, var(--tut-accent, #FAC775) 55%, transparent);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ctf-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  gap: 12px;
+}
+.ctf-bpm-col {
+  display: flex; flex-direction: column;
+  align-items: flex-start;
+}
+.ctf-bpm-digit {
+  font-family: var(--mono-font);
+  font-size: 50px;
+  font-weight: 300;
+  color: #FFFFFF;
+  letter-spacing: -2.5px;
+  line-height: 1;
+}
+.ctf-bpm-label {
+  font-family: var(--mono-font);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2.4px;
+  color: rgba(255,255,255,0.85);
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+.ctf-poly-col {
+  align-self: center;
+  padding: 0 8px;
+}
+.ctf-meter-col {
+  display: flex; flex-direction: column;
+  align-items: flex-end;
+}
+.ctf-meter-row {
+  display: flex; align-items: baseline;
+  font-family: var(--mono-font);
+}
+.ctf-num {
+  font-size: 26px;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+.ctf-slash {
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  margin: 0 4px;
+}
+.ctf-meter-label {
+  font-family: var(--mono-font);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2.4px;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+.ctf-strip {
+  display: flex;
+  gap: 4px;
+  background: rgba(0,0,0,0.50);
+  border-radius: 8px;
+  padding: 8px;
+  min-height: 70px;
+  border: 0.5px solid color-mix(in srgb, var(--tut-accent, #FAC775) 30%, transparent);
+}
+.ctf-strip .ctf-beat-col {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  position: relative;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  padding: 6px 4px 8px;
+  transition: background .12s;
+}
+.ctf-strip .ctf-beat-col:hover { background: rgba(255,255,255,0.08); }
+.ctf-strip .ctf-beat-col[data-state="accent"] {
+  background: color-mix(in srgb, var(--tut-accent, #FAC775) 35%, transparent);
+}
+.ctf-strip .ctf-beat-col[data-state="silent"] {
+  background: transparent;
+  border: 1px dashed rgba(255,255,255,0.10);
+}
+.ctf-strip .ctf-beat-col.is-playing {
+  background: var(--tut-accent, #FAC775) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--tut-accent, #FAC775) 45%, transparent);
+}
+.ctf-strip .ctf-beat-col.is-playing .ctf-beat-num { color: #0a0a0d; }
+.ctf-beat-num {
+  font-family: var(--mono-font);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--tut-accent, #FAC775);
+  user-select: none;
+}
+.ctf-strip .ctf-beat-col[data-state="silent"] .ctf-beat-num { color: rgba(255,255,255,0.20); }
+
+/* =========================================================
+   Real piano layout (Layered keyboard demo)
+   White keys laid out as flex, black keys absolutely positioned
+   in the seams that have a sharp (C-D, D-E, F-G, G-A, A-B).
+   ========================================================= */
+.tut-piano {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  user-select: none;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.tut-piano-whites {
+  display: flex;
+  height: 100%;
+}
+.tut-piano-whites .tut-w-key {
+  flex: 1;
+  background: #FFFFF0;
+  border-right: 1px solid #0a0a0d;
+  position: relative;
+  cursor: pointer;
+  transition: filter .1s, background-color .12s;
+}
+.tut-piano-whites .tut-w-key:last-child { border-right: 0; }
+.tut-piano-whites .tut-w-key.is-playing { filter: brightness(0.78) saturate(1.3); }
+.tut-piano-whites .tut-w-label {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono-font);
+  font-size: .58rem;
+  color: rgba(0,0,0,0.55);
+  pointer-events: none;
+  letter-spacing: .05em;
+}
+.tut-piano-blacks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.tut-piano-blacks .tut-b-key {
+  position: absolute;
+  top: 0;
+  width: 7%;
+  height: 62%;
+  background: #1a1a1f;
+  border-radius: 0 0 3px 3px;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: filter .1s, background-color .12s;
+  box-shadow: 0 2px 0 #0a0a0d, inset 0 -2px 4px rgba(255,255,255,0.06);
+}
+.tut-piano-blacks .tut-b-key.is-playing { filter: brightness(1.4); }
+.tut-piano-split {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(255,255,255,0.85);
+  pointer-events: none;
+  transition: left .15s ease-out;
+  box-shadow: 0 0 6px rgba(255,255,255,0.45);
+}
+
+/* Long-press demo pad — make the ring more visible */
+.tut-longpress-pad[data-pressing="true"] .tut-longpress-ring {
+  opacity: 0.95;
+  border-width: 3px;
+}
+
+/* Tighten the MIDI Learn sheet's grab handle */
+.tut-midi-sheet::before {
+  content: "";
+  display: block;
+  width: 40px; height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.25);
+  margin: 0 auto 14px;
+}
+
 .tut-tips {
   margin-top: 48px;
   padding: 28px 32px;

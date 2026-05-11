@@ -95,27 +95,42 @@
         </div>
       </div>
 
-      <!-- WORKING METRONOME DEMO -->
+      <!-- WORKING METRONOME DEMO — actual ClickTrackFace -->
       <section class="tut-demo" data-demo="metronome">
-        <div class="tut-demo-label">Try it · Working demo</div>
+        <div class="tut-demo-label">Try it · Working ClickTrackFace</div>
         <h3>Tap START. The polygon and the click are real.</h3>
         <div class="tut-demo-body">
-          <div class="tut-demo-canvas">
-            <svg viewBox="-80 -80 160 160" width="200" height="200" data-met-poly>
-              <polygon points="0,-50 50,0 0,50 -50,0" fill="none" stroke="#FAC775" stroke-width="2" stroke-linejoin="round"/>
-              <polygon points="0,-36 36,0 0,36 -36,0" fill="#FAC775" opacity="0.18"/>
-              <circle r="6" fill="#FFFFFF" data-met-dot cx="0" cy="-50">
-                <animate attributeName="opacity" values="0.6;1;0.6" dur="0.4s" repeatCount="indefinite"/>
-              </circle>
-            </svg>
-            <div class="tut-beat-strip" data-met-beats></div>
-            <div class="tut-demo-caption">Tap any beat dot to cycle silent → normal → accent.</div>
+          <div class="tut-demo-canvas" style="padding:0;background:transparent;border:0;">
+            <!-- The actual ClickTrackFace layout: amber-glass panel with header row (BPM | polygon | meter) + beat strip -->
+            <div class="ctf-face">
+              <div class="ctf-header">
+                <div class="ctf-bpm-col">
+                  <div class="ctf-bpm-digit" data-met-bpm-digit>120</div>
+                  <div class="ctf-bpm-label" data-met-tempo-marking>BPM · MODERATO</div>
+                </div>
+                <div class="ctf-poly-col">
+                  <svg viewBox="-32 -32 64 64" width="64" height="64" data-met-poly>
+                    <polygon points="0,-26 26,0 0,26 -26,0" fill="none" stroke="#FAC775" stroke-width="1.6" stroke-linejoin="round"/>
+                    <polygon points="0,-18 18,0 0,18 -18,0" fill="#FAC775" opacity="0.20"/>
+                    <circle r="4" fill="#FFFFFF" data-met-dot cx="0" cy="-26"/>
+                  </svg>
+                </div>
+                <div class="ctf-meter-col">
+                  <div class="ctf-meter-row">
+                    <span class="ctf-num" data-met-num>4</span><span class="ctf-slash">/</span><span class="ctf-num" data-met-den>4</span>
+                  </div>
+                  <div class="ctf-meter-label">METER</div>
+                </div>
+              </div>
+              <div class="ctf-strip" data-met-beats></div>
+            </div>
+            <div class="tut-demo-caption">Tap any beat column to cycle silent → normal → accent.</div>
           </div>
           <div class="tut-demo-controls">
             <div class="tut-demo-row">
               <label>BPM</label>
               <input type="range" class="tut-slider" min="40" max="220" value="120" data-met-bpm />
-              <span class="tut-slider-value" data-met-bpm-value>120 BPM</span>
+              <span class="tut-slider-value" data-met-bpm-value>120</span>
             </div>
             <div class="tut-demo-row">
               <label>Beats</label>
@@ -123,7 +138,7 @@
               <span class="tut-slider-value" data-met-sig-value>4 / 4</span>
             </div>
             <button class="tut-demo-btn" data-met-start>START</button>
-            <p style="font-size:.85rem;color:var(--muted);margin:0;">The polygon morphs as you change the time signature. Drag BEATS up to 5 — pentagon. Up to 6 — hexagon.</p>
+            <p style="font-size:.85rem;color:var(--muted);margin:0;">The polygon's number of sides matches your time-signature numerator. Square = 4. Pentagon = 5. Hexagon = 6.</p>
           </div>
         </div>
       </section>
@@ -394,42 +409,81 @@
         </div>
       </div>
 
-      <!-- WORKING TUNER DEMO -->
+      <!-- WORKING TUNER DEMO — VintageMeterFace -->
       <section class="tut-demo" data-demo="tuner">
         <div class="tut-demo-label">Try it · Tuner snap-in-tune</div>
-        <h3>Drag the slider. Watch the needle snap when you're close.</h3>
+        <h3>Drag the slider. The needle snaps when you're inside ±3¢.</h3>
         <div class="tut-demo-body">
-          <div class="tut-demo-canvas">
-            <svg viewBox="-110 -110 220 130" width="280" height="160" style="margin-bottom:10px;">
-              <!-- Halo (only visible when snapped) -->
-              <circle cx="0" cy="0" r="100" fill="none" stroke="#3CCB69" stroke-width="3" data-tn-halo opacity="0">
-                <animate attributeName="opacity" values="0.4;0.8;0.4" dur="1.4s" repeatCount="indefinite"/>
-              </circle>
-              <!-- Arc background -->
-              <path d="M -90 0 A 90 90 0 0 1 90 0" fill="none" stroke="#0F0F0F" stroke-width="16"/>
-              <!-- Green zone -->
-              <path d="M -10 -89 A 90 90 0 0 1 10 -89" fill="none" stroke="#3CCB69" stroke-width="16" opacity="0.18"/>
-              <!-- Tick marks -->
-              <line x1="-90" y1="0" x2="-78" y2="-3" stroke="#7A7A82" stroke-width="1"/>
-              <line x1="-45" y1="-78" x2="-39" y2="-68" stroke="#7A7A82" stroke-width="1"/>
-              <line x1="0"   y1="-90" x2="0"   y2="-78" stroke="#3CCB69" stroke-width="1.5"/>
-              <line x1="45"  y1="-78" x2="39"  y2="-68" stroke="#7A7A82" stroke-width="1"/>
-              <line x1="90"  y1="0" x2="78"  y2="-3" stroke="#7A7A82" stroke-width="1"/>
-              <!-- Needle -->
-              <g data-tn-needle transform="rotate(0 0 0)" style="transition: transform 0.2s ease-out;">
-                <line x1="0" y1="0" x2="0" y2="-82" stroke="#ECECEE" stroke-width="2"/>
-                <circle r="6" fill="#1F1F1F" stroke="#3A3A3A"/>
-                <circle r="2" fill="#85B7EB"/>
-              </g>
-            </svg>
-            <div style="display:flex;align-items:center;gap:14px;">
-              <div class="tut-demo-stat" style="font-size:2.2rem;" data-tn-note>A4</div>
-              <div class="tut-demo-stat" style="font-size:1.8rem;font-weight:600;" data-tn-cents>+0¢</div>
+          <div class="tut-demo-canvas" style="padding:0;background:transparent;border:0;">
+            <!-- Vintage rim casing — exact ClickTrackFace/VintageMeterFace nesting -->
+            <div class="vmf-rim">
+              <div class="vmf-glass" data-tn-glass>
+                <!-- Inner Canvas-equivalent SVG drawn at 280×260 viewBox -->
+                <svg viewBox="0 0 280 260" preserveAspectRatio="xMidYMid meet" class="vmf-svg">
+                  <defs>
+                    <!-- Top cast shadow gradient -->
+                    <linearGradient id="vmfShadow" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0"    stop-color="#000" stop-opacity="0.62"/>
+                      <stop offset="0.04" stop-color="#000" stop-opacity="0.45"/>
+                      <stop offset="0.10" stop-color="#000" stop-opacity="0.27"/>
+                      <stop offset="0.20" stop-color="#000" stop-opacity="0.13"/>
+                      <stop offset="0.35" stop-color="#000" stop-opacity="0.05"/>
+                      <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+                    </linearGradient>
+                    <!-- Radial AO -->
+                    <radialGradient id="vmfAO" cx="50%" cy="55%" r="85%">
+                      <stop offset="0"    stop-color="#000" stop-opacity="0"/>
+                      <stop offset="0.60" stop-color="#000" stop-opacity="0"/>
+                      <stop offset="0.78" stop-color="#000" stop-opacity="0.05"/>
+                      <stop offset="0.92" stop-color="#000" stop-opacity="0.14"/>
+                      <stop offset="1"    stop-color="#000" stop-opacity="0.22"/>
+                    </radialGradient>
+                  </defs>
+                  <!-- Glass overlays -->
+                  <rect width="280" height="260" fill="url(#vmfShadow)"/>
+                  <rect width="280" height="260" fill="url(#vmfAO)"/>
+                  <!-- Top edge sheen -->
+                  <line x1="14" y1="2" x2="266" y2="2" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="0.6"/>
+
+                  <!-- Ghost NOTE in upper portion — letter 40% of h, subscripts -->
+                  <text x="125" y="115" fill="#FFFFFF" fill-opacity="0.95"
+                        font-family="Inter, sans-serif" font-size="104" font-weight="700"
+                        text-anchor="middle" letter-spacing="-2" data-tn-note>A</text>
+                  <text x="170" y="115" fill="#FFFFFF" fill-opacity="0.85"
+                        font-family="Inter, sans-serif" font-size="38" font-weight="700"
+                        data-tn-octave>4</text>
+
+                  <!-- Half-arc dial — pivot at y=512 (far below canvas) for nearly-straight rail -->
+                  <!-- Sweep half-angle 22°, radius ≈ 460 so arc fits in viewBox -->
+                  <g transform="translate(140, 512)">
+                    <!-- Faint arc baseline -->
+                    <path d="M -185 -422 A 460 460 0 0 1 185 -422"
+                          fill="none" stroke="#FFFFFF" stroke-opacity="0.30" stroke-width="1"/>
+                    <!-- Tick marks every cent with hierarchy (rendered as <line>s in JS via data-tn-ticks) -->
+                    <g data-tn-ticks></g>
+                    <!-- Needle — pivots from (0,0) which is below canvas -->
+                    <g data-tn-needle transform="rotate(0 0 0)" style="transition: transform 0.25s ease-out;">
+                      <!-- Soft black shadow under needle -->
+                      <line x1="0" y1="0" x2="0" y2="-455" stroke="#000" stroke-opacity="0.35" stroke-width="2.5" transform="translate(1,1)"/>
+                      <!-- Green halo (only visible when snapped) -->
+                      <line x1="0" y1="0" x2="0" y2="-455" stroke="#3CCB69" stroke-width="6" data-tn-halo opacity="0"/>
+                      <!-- The needle itself -->
+                      <line x1="0" y1="-50" x2="0" y2="-455" stroke="#FFFFFF" stroke-width="2" data-tn-needle-line/>
+                    </g>
+                  </g>
+                </svg>
+              </div>
             </div>
-            <div style="display:flex;gap:8px;margin-top:14px;">
-              <span class="tut-tuner-led" data-tn-led-flat data-color="red" data-on="false"><span class="tut-tuner-led-bulb"></span></span>
-              <span class="tut-tuner-led" data-tn-led-in   data-color="green" data-on="true"><span class="tut-tuner-led-bulb"></span></span>
-              <span class="tut-tuner-led" data-tn-led-sharp data-color="red" data-on="false"><span class="tut-tuner-led-bulb"></span></span>
+
+            <!-- Cents readout + LED strip in a "control row" below the rim, same as in the app -->
+            <div class="vmf-readout-row">
+              <div class="vmf-cents" data-tn-cents>+0¢</div>
+              <div class="vmf-leds">
+                <span class="tut-tuner-led" data-tn-led-flat data-color="red" data-on="false"><span class="tut-tuner-led-bulb"></span></span>
+                <span class="tut-tuner-led" data-tn-led-in   data-color="green" data-on="true"><span class="tut-tuner-led-bulb"></span></span>
+                <span class="tut-tuner-led" data-tn-led-sharp data-color="red" data-on="false"><span class="tut-tuner-led-bulb"></span></span>
+              </div>
+              <div class="vmf-hz" data-tn-hz>440.0 Hz</div>
             </div>
           </div>
           <div class="tut-demo-controls">
@@ -504,20 +558,25 @@
         </div>
       </div>
 
-      <!-- WORKING LAYERED KEYBOARD DEMO -->
+      <!-- WORKING LAYERED KEYBOARD DEMO — proper piano layout -->
       <section class="tut-demo" data-demo="layer-keys">
         <div class="tut-demo-label">Try it · Tap the keyboard</div>
         <h3>Drag the split point. Tap a key to hear which voice.</h3>
         <div class="tut-demo-body">
           <div class="tut-demo-canvas">
-            <div class="tut-keys" data-lk-keys></div>
+            <div class="tut-piano" data-lk-piano>
+              <div class="tut-piano-whites" data-lk-whites></div>
+              <div class="tut-piano-blacks" data-lk-blacks></div>
+              <!-- Split marker line -->
+              <div class="tut-piano-split" data-lk-split-line></div>
+            </div>
             <div style="display:flex;justify-content:space-between;width:100%;margin-top:18px;">
               <div class="tut-demo-metric">
-                <span class="tut-demo-metric-value" style="color:#FF8A2A;">Piano</span>
+                <span class="tut-demo-metric-value" style="color:#FF8A2A;font-size:1.4rem;">Piano</span>
                 <span class="tut-demo-metric-label" data-lk-piano-label>C4 — F4</span>
               </div>
               <div class="tut-demo-metric" style="align-items:flex-end;">
-                <span class="tut-demo-metric-value" style="color:#4AA3FF;">Strings</span>
+                <span class="tut-demo-metric-value" style="color:#4AA3FF;font-size:1.4rem;">Strings</span>
                 <span class="tut-demo-metric-label" data-lk-strings-label>G4 — B5</span>
               </div>
             </div>
