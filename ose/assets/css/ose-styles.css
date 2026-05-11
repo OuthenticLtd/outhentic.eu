@@ -671,6 +671,126 @@ a.hub-card { display: block; color: inherit; }
   100% { transform: scaleY(0.4); }
 }
 
+/* =========================================================
+   Interactive home-grid cards (Play / Metronome / Signal Gen)
+   ========================================================= */
+.module-card.is-interactive {
+  /* Same flex column as the navigable cards; the head is now a child link
+     and the viz hosts pointer events. */
+}
+.module-card.is-interactive .mc-head {
+  display: block;
+  padding: 0;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.module-card.is-interactive .mc-head:hover .mc-name {
+  filter: brightness(1.15);
+}
+.module-card.is-interactive .mc-viz {
+  cursor: default;
+  position: relative;
+}
+
+/* Play card — clickable piano keys */
+.mcw-play-key { cursor: pointer; transition: filter .12s, opacity .12s; pointer-events: auto; }
+.mcw-play-w:hover { filter: brightness(0.92); }
+.mcw-play-b:hover { filter: brightness(1.4); }
+.mcw-play-w.is-down { filter: brightness(0.70) saturate(1.5); }
+.mcw-play-b.is-down { filter: brightness(1.7); }
+
+/* Metronome card — 4 bars + play glyph + status below */
+.module-card.mc--metronome .mc-viz {
+  flex-direction: column;
+  height: auto;
+  flex: 1;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+.module-card.mc--metronome .mc-viz svg {
+  width: 100%;
+  flex: 1;
+  min-height: 60px;
+  max-height: 90px;
+}
+.module-card.mc--metronome [data-met-glyph] {
+  transition: opacity .15s;
+  pointer-events: none;
+}
+.module-card.mc--metronome.is-running [data-met-glyph] { opacity: 0; }
+.mcw-met-status {
+  font-family: var(--mono-font);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: currentColor;
+  text-align: center;
+  opacity: 0.85;
+  margin-top: 8px;
+}
+
+/* Signal Gen card — waveform + chip row layout */
+.mcw-sig-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+}
+.mcw-sig-svg {
+  width: 100%;
+  flex: 1;
+  min-height: 60px;
+  max-height: 90px;
+  cursor: pointer;
+  display: block;
+}
+.mcw-sig-svg [data-home-sig-glyph] { transition: opacity .15s; }
+.mcw-sig-chips {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+}
+.mcw-sig-chip {
+  flex: 1;
+  padding: 4px 0;
+  font-family: var(--mono-font);
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  background: rgba(255,255,255,0.04);
+  color: var(--muted);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .12s;
+}
+.mcw-sig-chip:hover { background: rgba(255,255,255,0.08); color: var(--ink); }
+.mcw-sig-chip.is-active {
+  background: color-mix(in srgb, currentColor 18%, transparent);
+  color: currentColor;
+  border-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+.mcw-sig-status {
+  font-family: var(--mono-font);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: currentColor;
+  text-align: center;
+  opacity: 0.85;
+}
+
+/* The signal-gen card uses a vertical layout in its viz — disable the
+   default max-height so the chips and status row fit. */
+.module-card.mc--signalgen .mc-viz {
+  height: auto;
+  flex: 1;
+  align-items: stretch;
+}
+.module-card.mc--signalgen .mc-viz svg { max-height: 90px; }
+
 /* TempoPolygon spin — slow rotation matching BPM */
 @keyframes tempo-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 .anim-tempo-spin { animation: tempo-spin 8s linear infinite; transform-origin: 50% 50%; transform-box: fill-box; }
