@@ -120,6 +120,7 @@
     <button class="tab" data-tab="tutorials">Tutorials</button>
     <button class="tab" data-tab="faq">FAQ</button>
     <button class="tab" data-tab="footer">Footer</button>
+    <button class="tab" data-tab="newsletter">Newsletter</button>
     <button class="tab" data-tab="legal">Legal</button>
   </div>
 
@@ -191,6 +192,19 @@
     <div id="footer-form" class="ed-card"></div>
   </div>
 
+  <div class="panel hidden" data-panel="newsletter">
+    <div class="help">
+      <h3>Newsletter signup</h3>
+      <p>The signup form in the footer collects emails for your newsletter. Two delivery modes:</p>
+      <ul>
+        <li><strong>Mailto (default)</strong> — leave <em>Endpoint URL</em> empty. When a visitor submits, their email client opens pre-filled to your contact email. They click send. Each signup arrives in your inbox; search your inbox later and copy/paste into a CSV for Mailchimp import.</li>
+        <li><strong>Endpoint URL</strong> — paste a Formspree, Cloudflare Worker, or self-hosted URL. Submissions POST as JSON like <code>{"email": "...", "name": "...", "page": "...", "ts": "..."}</code>. Mailto fallback fires automatically if the endpoint errors.</li>
+      </ul>
+      <p>Spam protection is local: a hidden honeypot field, a 3-second minimum fill time, and basic email validation. No captcha.</p>
+    </div>
+    <div id="newsletter-form" class="ed-card"></div>
+  </div>
+
   <div class="panel hidden" data-panel="legal">
     <div class="help">
       <h3>Privacy &amp; Terms</h3>
@@ -259,6 +273,7 @@
     renderTutorials();
     renderFaq();
     renderFooter();
+    renderNewsletter();
     renderLegal();
     bindToolbar();
   }
@@ -593,6 +608,40 @@
       });
       sec.appendChild(addLink);
       host.appendChild(sec);
+    });
+  }
+
+  // ---------- Newsletter ----------
+  function renderNewsletter() {
+    var host = $('#newsletter-form'); host.innerHTML = '';
+    var n = data.newsletter || (data.newsletter = {
+      enabled: true,
+      headline: 'Stay in the loop',
+      subline: 'One short email when we ship.',
+      emailLabel: 'Your email',
+      emailPlaceholder: 'you@yourband.com',
+      namePlaceholder: 'Name (optional)',
+      submitLabel: 'Subscribe',
+      successMailto: 'Thanks! Your email client just opened — hit send to confirm.',
+      successEndpoint: 'Thanks — you\'re on the list.',
+      errorMessage: 'That email doesn\'t look right.',
+      endpointUrl: ''
+    });
+    [
+      ['Show signup form',     'enabled',          { toggle: true }],
+      ['Endpoint URL (optional)', 'endpointUrl',   { placeholder: 'https://formspree.io/f/XXXX or https://your-worker.workers.dev/signup' }],
+      ['Headline',             'headline'],
+      ['Subline',              'subline',          { tall: true }],
+      ['Email field label',    'emailLabel'],
+      ['Email placeholder',    'emailPlaceholder'],
+      ['Name placeholder',     'namePlaceholder'],
+      ['Submit button label',  'submitLabel'],
+      ['Mailto success message',   'successMailto',   { tall: true }],
+      ['Endpoint success message', 'successEndpoint', { tall: true }],
+      ['Validation error',     'errorMessage']
+    ].forEach(function (f) {
+      var key = f[1];
+      host.appendChild(inputField(f[0], n[key], function (v) { n[key] = v; }, f[2] || {}));
     });
   }
 

@@ -299,6 +299,20 @@ window.OSE_CONTENT = {
     }
   ],
 
+  "newsletter": {
+    "enabled": true,
+    "headline": "Stay in the loop",
+    "subline": "One short email when we ship — new modules, new sound packs, the OSE 1.0 release. No spam, no resale, you can leave any time.",
+    "emailLabel": "Your email",
+    "emailPlaceholder": "you@yourband.com",
+    "namePlaceholder": "Name (optional)",
+    "submitLabel": "Subscribe",
+    "successMailto": "Thanks! Your email client just opened with a pre-filled message — hit send to confirm and we'll add you to the list.",
+    "successEndpoint": "Thanks — you're on the list. We'll write only when something real ships.",
+    "errorMessage": "That email doesn't look right. Mind double-checking?",
+    "endpointUrl": ""
+  },
+
   "footer": {
     "tagline": "Outhentic Sound Engine. By Outhentic Ltd. — Sofia, Bulgaria.",
     "columns": [

@@ -517,6 +517,103 @@ a.hub-card { display: block; color: inherit; }
 }
 
 /* =========================================================
+   Newsletter signup (footer)
+   Static-site friendly — mailto fallback by default, optional
+   endpoint URL for any HTTP receiver (Formspree / Cloudflare /
+   self-hosted). See ose-newsletter.js for the spam-protection
+   details (honeypot + time-check + email regex).
+   ========================================================= */
+.nl {
+  margin-top: 48px; padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.nl-card {
+  display: grid; gap: 14px;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 820px) {
+  .nl-card { grid-template-columns: 1fr 1.4fr; gap: 32px; }
+}
+.nl-head { padding-top: 4px; }
+.nl-headline {
+  font-family: var(--sans-font);
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+.nl-subline {
+  margin: 0;
+  color: var(--muted);
+  font-size: .88rem;
+  line-height: 1.55;
+  max-width: 48ch;
+}
+.nl-form { display: flex; flex-direction: column; gap: 10px; }
+.nl-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+@media (min-width: 560px) {
+  .nl-row { grid-template-columns: 1fr 1.4fr auto; }
+}
+.nl-name, .nl-email {
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--ink);
+  font-family: var(--sans-font);
+  font-size: .95rem;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.nl-name::placeholder, .nl-email::placeholder { color: rgba(255,255,255,0.35); }
+.nl-name:focus, .nl-email:focus {
+  border-color: var(--c-play);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c-play) 45%, transparent);
+}
+.nl-submit {
+  background: var(--ink); color: #000;
+  border: 0; border-radius: 10px;
+  padding: 0 22px;
+  min-height: 44px;
+  font-family: var(--sans-font);
+  font-size: .86rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: filter .12s, transform .08s;
+}
+.nl-submit:hover:not(:disabled) { filter: brightness(0.92); }
+.nl-submit:active:not(:disabled) { transform: scale(0.98); }
+.nl-submit:disabled { opacity: 0.55; cursor: progress; }
+/* Honeypot — visually hidden but still in DOM so spam bots see it. */
+.nl-trap {
+  position: absolute !important;
+  left: -10000px !important;
+  top: auto;
+  width: 1px; height: 1px;
+  overflow: hidden;
+}
+.nl-feedback {
+  font-size: .86rem;
+  min-height: 1.2em;
+  padding: 4px 0;
+}
+.nl-feedback[data-state="ok"] { color: #5DCAA5; }
+.nl-feedback[data-state="error"] { color: #E05A6B; }
+.nl-fineprint {
+  color: var(--muted);
+  font-size: .74rem;
+  line-height: 1.55;
+  max-width: 60ch;
+}
+
+/* =========================================================
    Reveals (animate-on-scroll)
    ========================================================= */
 @media (prefers-reduced-motion: no-preference) {
