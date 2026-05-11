@@ -244,10 +244,21 @@
     var volReset    = demo.querySelector('[data-mm-vol-reset]');
     if (!startBtn || !polySvg || !strip) return;
 
+    // Persistent audio graph:
+    //   osc → clickGain (per-beat envelope) → masterGain (volume) → out
+    // masterGain is created once and lives for the page; the volume
+    // slider writes directly to masterGain.gain.value, so the change
+    // is heard on the *very next sample*, not the next scheduled click.
     var audioCtxLocal = null;
+    var masterGain = null;
     function ensure() {
       if (!audioCtxLocal) audioCtxLocal = new (window.AudioContext || window.webkitAudioContext)();
       if (audioCtxLocal.state === 'suspended') audioCtxLocal.resume();
+      if (!masterGain) {
+        masterGain = audioCtxLocal.createGain();
+        masterGain.gain.value = volume;
+        masterGain.connect(audioCtxLocal.destination);
+      }
     }
 
     var MIN_BPM = 30, MAX_BPM = 300;
@@ -359,8 +370,11 @@
     // ── Click synthesis — one-for-one with AudioEngine.cpp ──
     // 50 ms duration, 1500 Hz (accent) / 1000 Hz (normal) sine,
     // linear decay, ±0.95 clip. Skip muted beats entirely.
-    // Peak gain is `volume × HEADROOM` — HEADROOM (0.85) keeps us
-    // safely below the engine's ±0.95 hidden brick-wall even at 100%.
+    // The per-click envelope peaks at HEADROOM (0.85) so we stay
+    // under the engine's ±0.95 hidden brick-wall. Volume scaling
+    // happens AFTER this stage via the masterGain node — the slider
+    // writes to masterGain.gain directly, so volume changes are
+    // audible on the very next sample, not the next click.
     function tickClick(t, accentType) {
       if (accentType === 2) return; // muted
       var freq = accentType === 1 ? 1500 : 1000;
@@ -369,10 +383,11 @@
       osc.type = 'sine';
       osc.frequency.value = freq;
       var dur = 0.05;
-      var volPeak = volume * 0.85;
-      gain.gain.setValueAtTime(volPeak, t);
+      var HEADROOM = 0.85;
+      gain.gain.setValueAtTime(HEADROOM, t);
       gain.gain.linearRampToValueAtTime(0, t + dur);
-      osc.connect(gain).connect(audioCtxLocal.destination);
+      // Route through masterGain so the slider's value applies live.
+      osc.connect(gain).connect(masterGain);
       osc.start(t);
       osc.stop(t + dur + 0.005);
     }
@@ -455,7 +470,19 @@
     function setVolume(v, source) {
       // v is 0..1; the slider holds 0..100, so we normalise both ways.
       var clamped = Math.max(0, Math.min(1, v));
+      if (isNaN(clamped)) clamped = DEFAULT_VOL;
       volume = clamped;
+      // Push the new value into the live audio graph IMMEDIATELY.
+      // masterGain might not exist yet (created lazily in ensure());
+      // setTargetAtTime gives a 6 ms exponential smoother so big
+      // jumps don't click.
+      if (masterGain && audioCtxLocal) {
+        try {
+          masterGain.gain.setTargetAtTime(clamped, audioCtxLocal.currentTime, 0.006);
+        } catch (e) {
+          masterGain.gain.value = clamped;
+        }
+      }
       var pct = Math.round(clamped * 100);
       if (source !== 'slider' && volSlider) {
         volSlider.value = pct;
