@@ -171,14 +171,31 @@
     <!-- ============== INTERACTIVE SIGNAL GEN DEMO ============== -->
     <section class="module-demo mc--signalgen reveal" data-module-demo="signal-gen">
       <div class="module-demo-label">Try it · Real oscillator</div>
-      <h2>Pick a waveform. Set a frequency. Press START.</h2>
-      <p>Seven waveforms — four shapes plus three colours of noise. Real Web Audio under the hood, so the tone, the spectrum and the loudness behave exactly the way they do in the app. Be careful with the volume.</p>
+      <h2>Pick a waveform. Type a frequency. Press START.</h2>
+      <p>Seven waveforms — four shapes plus three colours of noise. Type any frequency between 20 Hz and 20 000 Hz, or grab the slider for a sweep. The live spectrum + scope visualizer renders the actual output of the oscillator, exactly like the app's view. Be careful with the volume.</p>
 
       <div class="sg-grid">
         <div class="sg-display">
-          <svg class="sg-svg" viewBox="0 0 700 200" preserveAspectRatio="none">
-            <path data-sg-path d="" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
-            <path data-sg-path-fg d="" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Live visualizer — toggles between SCOPE (Web Audio
+               getFloatTimeDomainData) and SPECTRUM (getByteFrequencyData)
+               so you can see the waveform's shape AND its harmonic
+               content. Matches the app's "Spectrum Bench" view. -->
+          <div class="sg-viz-tabs">
+            <button class="sg-viz-tab is-active" data-sg-viz="scope">SCOPE</button>
+            <button class="sg-viz-tab" data-sg-viz="spectrum">SPECTRUM</button>
+          </div>
+          <svg class="sg-svg" viewBox="0 0 700 220" preserveAspectRatio="none">
+            <!-- Static waveform preview that fades out once playing
+                 (gives an idea of shape even when stopped). -->
+            <path data-sg-path-static d="" fill="none" stroke="currentColor" stroke-opacity="0.18" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Live scope path -->
+            <path data-sg-path-scope d="" fill="none" stroke="currentColor" stroke-width="2.4"
+                  stroke-linecap="round" stroke-linejoin="round" style="display:none"/>
+            <!-- Live spectrum bars -->
+            <g data-sg-path-spectrum style="display:none"></g>
+            <!-- Centre line + frequency grid -->
+            <line x1="0" y1="110" x2="700" y2="110" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
           </svg>
           <div class="sg-readout">
             <span class="sg-readout-freq" data-sg-freq-display>440 Hz</span>
@@ -197,6 +214,22 @@
             <button class="sg-chip" data-sg-wave="white">WHITE</button>
             <button class="sg-chip" data-sg-wave="pink">PINK</button>
             <button class="sg-chip" data-sg-wave="brown">BROWN</button>
+          </div>
+
+          <!-- Typed frequency entry — numeric input, accepts Hz directly
+               so you can dial in 432, 1000, 4400, anything within the
+               20-20000 Hz audible range. -->
+          <div class="sg-freq-entry">
+            <label class="sg-freq-entry-label">FREQ</label>
+            <input type="number" class="sg-freq-input" data-sg-freq-input
+                   min="20" max="20000" step="1" value="440" inputmode="numeric" />
+            <span class="sg-freq-entry-unit">Hz</span>
+            <div class="sg-freq-presets">
+              <button class="sg-preset" data-sg-preset="100">100</button>
+              <button class="sg-preset" data-sg-preset="440">440</button>
+              <button class="sg-preset" data-sg-preset="1000">1k</button>
+              <button class="sg-preset" data-sg-preset="10000">10k</button>
+            </div>
           </div>
 
           <div class="sg-control">

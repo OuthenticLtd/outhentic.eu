@@ -154,48 +154,86 @@
     <div class="content reveal" style="max-width: 820px;"><p class="lead" data-ose-module="summary"></p></div>
 
     <!-- ============== INTERACTIVE METRONOME DEMO ============== -->
+    <!-- One-for-one rebuild of the app's MetronomeModule:
+         ClickTrackFace hero (BPM digit + tempo · polygon · meter, with
+         tappable beat column strip below), BPM ± scrubber, time-signature
+         row with ± stepper + /4 /8 /16 chips, big green/red START button.
+         The click sound matches AudioEngine.cpp exactly: 50 ms sine, 1500 Hz
+         for accent, 1000 Hz for normal, linear decay, clipped to ±0.95. -->
     <section class="module-demo mc--metronome reveal" data-module-demo="metronome">
-      <div class="module-demo-label">Try it · Real metronome</div>
-      <h2>Tap START. Hear the click. See the polygon.</h2>
-      <p>40–220 BPM, 2–9 beats per bar. Drag the BEATS slider and the polygon morphs in real time — triangle for 3, square for 4, pentagon for 5, hexagon for 6. Tap any beat numeral to cycle its accent state: <strong>silent → normal → accent</strong>.</p>
+      <div class="module-demo-label">Try it · The real metronome</div>
+      <h2>Tap START. Hear the click. See the polygon morph.</h2>
+      <p>30–300 BPM, 1–16 beats per bar, /4 /8 /16 note values. Tap any beat in the strip to cycle <strong>normal → accent → muted → normal</strong>. The polygon morphs to match the beat count: triangle (3), square (4), pentagon (5), hexagon (6) — all the way through hexadecagon (16). The click is generated with the same 1500/1000 Hz sine + 50 ms linear decay envelope the app uses.</p>
 
-      <div class="mm-grid">
-        <div class="mm-ctf">
-          <div class="mm-ctf-head">
-            <div>
-              <div class="mm-bpm" data-mm-bpm-digit>120</div>
-              <div class="mm-tempo" data-mm-tempo>BPM · MODERATO</div>
-            </div>
-            <div>
-              <svg class="mm-poly" viewBox="-60 -60 120 120" data-mm-poly>
-                <polygon data-mm-poly-outline points="0,-50 50,0 0,50 -50,0" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <polygon data-mm-poly-fill    points="0,-35 35,0 0,35 -35,0" fill="currentColor" opacity="0.18"/>
-                <circle data-mm-dot r="5" fill="#FFFFFF" cx="0" cy="-50"/>
-              </svg>
-            </div>
-            <div class="mm-meter">
-              <div class="mm-meter-row">
-                <span data-mm-num>4</span><span>/</span><span data-mm-den>4</span>
-              </div>
-              <div class="mm-meter-label">METER</div>
-            </div>
+      <!-- ========== Hero face (ClickTrackFace) ========== -->
+      <div class="mm-face" data-mm-face>
+        <div class="mm-face-head">
+          <!-- Left: BPM (tap to edit) + tempo marking -->
+          <div class="mm-bpm-block">
+            <div class="mm-bpm" data-mm-bpm-digit>120</div>
+            <div class="mm-tempo" data-mm-tempo>BPM · MODERATO</div>
           </div>
-          <div class="mm-beats" data-mm-beats></div>
+          <!-- Center: TempoPolygonIcon -->
+          <div class="mm-poly-host">
+            <svg class="mm-poly" viewBox="-60 -60 120 120" data-mm-poly>
+              <polygon data-mm-poly-outline points="" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <polygon data-mm-poly-fill points="" fill="currentColor" opacity="0.20"/>
+              <circle data-mm-dot r="5" fill="#FFFFFF" cx="0" cy="-50"/>
+            </svg>
+          </div>
+          <!-- Right: meter (tap to open picker) -->
+          <div class="mm-meter">
+            <div class="mm-meter-row">
+              <span data-mm-num>4</span><span class="mm-meter-slash">/</span><span data-mm-den>4</span>
+            </div>
+            <div class="mm-meter-label">METER</div>
+          </div>
         </div>
+        <!-- Beat strip — one column per beat, tap to cycle accent state -->
+        <div class="mm-strip" data-mm-strip></div>
+      </div>
 
-        <div class="mm-controls">
-          <div class="mm-control-row">
-            <label>BPM</label>
-            <input type="range" class="mm-slider" min="40" max="220" value="120" data-mm-bpm />
-            <span class="mm-slider-value" data-mm-bpm-value>120</span>
+      <!-- ========== Controls card ========== -->
+      <div class="mm-card">
+        <!-- BPM row: − pill | scrubber + big mono digit | + pill -->
+        <div class="mm-bpm-row">
+          <button class="mm-step" data-mm-bpm-step="-1" aria-label="BPM down">−</button>
+          <div class="mm-bpm-scrubber" data-mm-bpm-scrubber>
+            <span class="mm-bpm-scrubber-value" data-mm-bpm-scrubber-value>120</span>
+            <span class="mm-bpm-scrubber-hint">Drag horizontally to scrub</span>
           </div>
-          <div class="mm-control-row">
-            <label>Beats</label>
-            <input type="range" class="mm-slider" min="2" max="9" step="1" value="4" data-mm-sig />
-            <span class="mm-slider-value" data-mm-sig-value>4 / 4</span>
-          </div>
-          <button class="mm-start" data-mm-start>START</button>
+          <button class="mm-step" data-mm-bpm-step="1" aria-label="BPM up">+</button>
         </div>
+        <div class="mm-divider"></div>
+        <!-- Time signature row -->
+        <div class="mm-ts-row">
+          <div class="mm-ts-stepper">
+            <button class="mm-step" data-mm-ts-step="-1" aria-label="Beats down">−</button>
+            <div class="mm-ts-num" data-mm-ts-num>4</div>
+            <button class="mm-step" data-mm-ts-step="1" aria-label="Beats up">+</button>
+          </div>
+          <div class="mm-ts-labels">
+            <span>BEATS</span><span class="mm-ts-dot">·</span><span>NOTE</span>
+          </div>
+          <div class="mm-ts-chips">
+            <button class="mm-note-chip is-active" data-mm-note="4">/4</button>
+            <button class="mm-note-chip" data-mm-note="8">/8</button>
+            <button class="mm-note-chip" data-mm-note="16">/16</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Transport row ========== -->
+      <div class="mm-transport">
+        <button class="mm-tap" data-mm-tap>TAP</button>
+        <button class="mm-start" data-mm-start>
+          <span class="mm-start-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18.4 6.6 A 9 9 0 1 1 5.6 6.6"/><line x1="12" y1="2" x2="12" y2="12"/>
+            </svg>
+          </span>
+          <span class="mm-start-label" data-mm-start-label>START</span>
+        </button>
       </div>
     </section>
 
