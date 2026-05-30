@@ -13,7 +13,7 @@ Status key: `[x]` done · `[~]` done with a follow-up note · `[ ]` TODO.
 - [x] **Privacy policy URL is live and standalone.** `https://outhentic.eu/ose/privacy.html` — referenced in `AndroidManifest.xml` (`meta-data ose.privacy_policy_url`) and to be set in the Play Console store listing. Now a full GDPR policy (controller, no-collection statement, per-permission purposes, rights, CPDP complaint route, fonts disclosure, future-billing clause).
 - [x] **Data Safety form answers prepared (see section 2).** Consistent with the policy: **No data collected, No data shared.**
 - [x] **Permissions justified.** Every manifest permission maps to an on-device purpose and is documented in the privacy policy section 3 and in the app memory memo. No INTERNET permission is declared (verified in manifest — none present).
-- [~] **Target API level.** Google Play requires **new apps and updates to target Android 15 (API 35)** as of 2026; **from 31 Aug 2026, API 36 (Android 16)** is required for new submissions/updates. TODO: confirm `targetSdkVersion` in the app's `build.gradle` is ≥ 35 (≥ 36 if submitting after 31 Aug 2026). Not verifiable from this repo.
+- [x] **Target API level.** Confirmed `targetSdk = 35` in `app/build.gradle.kts` — meets the current Google Play requirement (new apps/updates must target Android 15 / API 35). NOTE: from **31 Aug 2026**, new submissions/updates must target **API 36 (Android 16)** — bump `targetSdk` to 36 before submitting after that date.
 - [ ] **Content rating / IARC questionnaire.** Must be completed in Play Console. Expected outcome: suitable for everyone / PEGI 3 / ESRB Everyone — a music utility with no user-generated public content, no ads, no purchases (today), no objectionable content. Answer the questionnaire honestly; no in-app social features.
 - [x] **Account deletion requirement: N/A.** Google's account-deletion policy applies only to apps that let users create an account. OSE has no accounts and collects no data, so no in-app or web account-deletion flow is required. State this in the Data Safety / policy as "no account".
 - [~] **Foreground service declaration.** Manifest declares `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_MEDIA_PLAYBACK`, and two services with `foregroundServiceType="mediaPlayback"`. Play requires a **foreground-service-use declaration** in the Play Console (describe the media-playback use: Signal Generator + media playback notification). TODO: complete that declaration form in the Console at submission. A short screen recording showing the playback notification helps approval.
@@ -62,10 +62,7 @@ EU case law (LG München, 20 Jan 2022, **3 O 17493/20**) holds that loading Goog
 - [x] **Self-hosted font files added** under `assets/fonts/` (4 woff2: Inter + JetBrains Mono, variable, latin + latin-ext subsets — SIL OFL 1.1, free to self-host).
 - [x] **`assets/css/ose-fonts.css` created** with `@font-face` rules (family names unchanged, so `ose-styles.css` needs no edit).
 - [x] **`cookies.html` already uses the self-hosted setup** (no Google `<link>`).
-- [ ] **TODO (main session — page `<head>` edits, not done here by request):** on every other HTML page (`index.html`, `manual.html`, `tutorials.html`, `help.html`, `privacy.html`, `terms.html`, and all `modules/*.html`):
-  1. Remove the two `preconnect` links and the `fonts.googleapis.com/css2?...` stylesheet `<link>`.
-  2. Add `<link rel="stylesheet" href="assets/css/ose-fonts.css" />` (root pages) or `href="../assets/css/ose-fonts.css"` (module pages), placed **before** `ose-styles.css`.
-  3. Step-by-step detail is in the header comment of `assets/css/ose-fonts.css`.
+- [x] **DONE — page `<head>` font wiring.** Every HTML page (`index`, `manual`, `tutorials`, `help`, `404`, `terms`, `privacy`, `editor`, all `modules/*.html`, `cookies`) now links `ose-fonts.css` and the Google Fonts `preconnect` + CSS `<link>`s have been removed. Verified: zero references to `fonts.googleapis.com` / `fonts.gstatic.com` remain. No visitor IP is sent to Google.
 
 ## 6. Bulgaria — supervisory authority
 
@@ -81,8 +78,8 @@ Published in the privacy policy (section 11) as the Art. 77 complaint route.
 Pricing is dynamic and must not appear anywhere user-facing.
 
 - [x] **`ose-content.js`** — "paid sound packs" copy neutralised to "additional sound packs" (highlights block).
-- [ ] **TODO (main session) — `"price":"0","priceCurrency":"EUR"` in structured data (`application/ld+json` `Offer` blocks):** present in `index.html` (lines ~86, 107, 122, 137) and in `modules/play.html`, `modules/metronome.html`, `modules/signal-generator.html` (each ~line 43). These were **not** edited because `index.html` and `modules/*` are owned by the main session. Recommend removing the `offers` object entirely (a `SoftwareApplication` is valid without it) rather than asserting a zero price, since price is dynamic and a stated price can become inaccurate and is a (minor) consumer-information risk.
-- [ ] **TODO (main session) — "Free to install" copy** in `index.html` (~line 349): "Free to install. No account needed. No data collection. Your music stays on your device." Recommend dropping "Free to install." and keeping the privacy-positive sentences ("No account needed. No data collection. Your music stays on your device."). Flagged, not edited (off-limits file).
+- [x] **DONE — structured-data `Offer`/price removed.** All `"price":"0","priceCurrency":"EUR"` `Offer` blocks were stripped from `index.html` and `modules/{play,metronome,signal-generator}.html`. Verified: no `"price"` remains in any page; JSON-LD still parses.
+- [x] **DONE — "Free to install" copy removed** from `index.html`; the privacy-positive sentences ("No account needed. No data collection. Your music stays on your device.") were kept.
 
 ## 8. Follow-ups for when licensing / billing lands (PLANNED, not built)
 
