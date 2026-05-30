@@ -156,6 +156,14 @@
     document.querySelectorAll('.phone-frame[data-interactive] .mk-toggle').forEach(wireToggle);
     document.querySelectorAll('.phone-frame[data-interactive] .mk-press').forEach(wirePress);
     document.querySelectorAll('.phone-frame[data-interactive] .mk-step').forEach(wireStep);
+    // Home-grid tiles navigate to their module page (app-like tap-to-open).
+    document.querySelectorAll('.phone-frame[data-interactive] .mk-nav').forEach(function (el) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function () {
+        var href = el.getAttribute('data-href');
+        if (href) window.location.href = href;
+      });
+    });
   }
 
   if (document.readyState === 'loading')

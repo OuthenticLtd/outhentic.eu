@@ -364,7 +364,7 @@ a.hub-card { display: block; color: inherit; }
 .phone-frame {
   /* Android phone (Samsung S26 Ultra style): thin uniform bezel, gently
      squared corners, centre punch-hole camera (see ::before). */
-  width: 100%; max-width: 320px; aspect-ratio: 9 / 19.5;
+  width: 100%; max-width: 320px; aspect-ratio: 380 / 800;
   margin: 0 auto;
   background: #000;
   border-radius: 30px;
