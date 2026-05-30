@@ -313,6 +313,11 @@
   // only capture taps on the painted glyph, so small tabs are near-untappable).
   function addHit(el, pad) {
     try {
+      // Anchors (home-grid tiles) navigate natively and already wrap a full
+      // tile-sized rect; a synthetic padded hit-rect would overshoot the tile
+      // (content like the audio ribbon / signal-gen sine extends past the
+      // tile box) and overlap the neighbour, hijacking its click.
+      if (el.tagName && String(el.tagName).toLowerCase() === 'a') return;
       var bb = el.getBBox(); if (bb.width < 0.5 || bb.height < 0.5) return;
       if (el.querySelector(':scope > .mk-hit')) return;
       var ns = 'http://www.w3.org/2000/svg', r = document.createElementNS(ns, 'rect');
