@@ -71,162 +71,109 @@
         <div class="phone-frame" aria-hidden="true">
           <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet">
             <defs>
-              <linearGradient id="audioPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0a0d"/><stop offset="1" stop-color="#0e0a0c"/></linearGradient>
-              <linearGradient id="audioRing" x1="0" y1="0.5" x2="1" y2="0.5">
-                <stop offset="0" stop-color="#4AA3FF"/><stop offset="0.5" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FF8A2A"/>
-              </linearGradient>
-              <linearGradient id="audRibbon" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0"   stop-color="#E05A6B" stop-opacity="0.30"/>
-                <stop offset="0.5" stop-color="#E05A6B" stop-opacity="1.0"/>
-                <stop offset="1"   stop-color="#E05A6B" stop-opacity="0.30"/>
-              </linearGradient>
+              <linearGradient id="auPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0809"/><stop offset="1" stop-color="#140d0f"/></linearGradient>
             </defs>
-            <rect width="380" height="800" fill="url(#audioPlate)"/>
+            <rect width="380" height="800" fill="url(#auPlate)"/>
 
-            <!-- TopBar with LensChip -->
-            <g transform="translate(20,42)">
-              <circle cx="14" cy="14" r="13" fill="none" stroke="url(#audioRing)" stroke-width="2"/>
-              <circle cx="14" cy="14" r="10" fill="#000"/>
-              <g class="anim-glowo-wave">
-                <path d="M 6.25,14 L 8.19,14 L 9.35,11.68 L 10.51,16.33 L 11.68,10.13 L 12.84,17.88 L 14,8.58 L 15.16,19.43 L 16.32,10.13 L 17.49,16.33 L 18.65,11.68 L 19.81,14 L 21.75,14"
-                      fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              <text x="46" y="20" fill="#E05A6B" font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3">AUDIO</text>
-              <!-- LensChip 30dp tall, 2 tabs -->
-              <rect x="160" y="2" width="120" height="22" rx="6" fill="none" stroke="rgba(224,90,107,0.45)" stroke-width="0.5"/>
-              <line x1="220" y1="3" x2="220" y2="23" stroke="rgba(224,90,107,0.30)" stroke-width="0.5"/>
-              <rect x="161" y="3" width="58" height="20" rx="5" fill="#E05A6B" fill-opacity="0.18"/>
-              <text x="190" y="17" fill="#E05A6B" font-family="Inter, sans-serif" font-size="10" font-weight="900" letter-spacing="1.4" text-anchor="middle">RECORD</text>
-              <text x="250" y="17" fill="#E05A6B" font-opacity="0.5" fill-opacity="0.5" fill="#E05A6B" font-family="Inter, sans-serif" font-size="10" font-weight="900" letter-spacing="1.4" text-anchor="middle">LIBRARY</text>
-              <g transform="translate(298,4)" stroke="#ECECEE" stroke-opacity="0.78" stroke-width="1.6" fill="none" stroke-linecap="round">
-                <circle cx="12" cy="14" r="3.4"/>
-                <path d="M12 6 L12 8 M12 20 L12 22 M4 14 L6 14 M18 14 L20 14 M6.4 8.4 L7.8 9.8 M16.2 18.2 L17.6 19.6 M6.4 19.6 L7.8 18.2 M16.2 9.8 L17.6 8.4"/>
-              </g>
+            <!-- TOP BAR -->
+            <g transform="translate(18,40)">
+              <circle cx="14" cy="14" r="13" fill="none" stroke="#E05A6B" stroke-width="2"/>
+              <path d="M18 8 L11 14 L18 20" fill="none" stroke="#E05A6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="40" y="20" fill="#FBE9EC" font-family="Inter, sans-serif" font-size="15" font-weight="700" letter-spacing="1">AUDIO</text>
+              <!-- RECORD / LIBRARY segmented -->
+              <rect x="150" y="2" width="78" height="24" rx="12" fill="#1a1012" stroke="rgba(255,255,255,0.06)"/>
+              <rect x="150" y="2" width="39" height="24" rx="12" fill="#E05A6B" fill-opacity="0.20" stroke="#E05A6B" stroke-opacity="0.5"/>
+              <circle cx="169" cy="14" r="4" fill="#E05A6B"/>
+              <path d="M203 9 h6 l1.6 2.4 h8.4 v9 h-16 z" fill="none" stroke="#9a8488" stroke-width="1.3" stroke-linejoin="round"/>
+              <g transform="translate(296,3)" stroke="#9a8488" stroke-width="1.6" fill="none" stroke-linecap="round"><circle cx="11" cy="11" r="3.4"/><path d="M11 3 L11 5 M11 17 L11 19 M3 11 L5 11 M17 11 L19 11 M5.3 5.3 L6.7 6.7 M15.3 15.3 L16.7 16.7 M5.3 16.7 L6.7 15.3 M15.3 6.7 L16.7 5.3"/></g>
+              <rect x="322" y="3" width="22" height="22" rx="6" fill="#E05A6B" fill-opacity="0.85" stroke="#FFFFFF" stroke-opacity="0.3"/>
             </g>
 
-            <!-- Visualizer card (live waveform — bars with moving brightness) -->
-            <rect x="14" y="100" width="352" height="92" rx="14" fill="#141318" stroke="rgba(224,90,107,0.30)" stroke-width="0.7"/>
-            <text x="28" y="118" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">LIVE WAVEFORM · RECORDING</text>
-            <g transform="translate(20,184)">
-              <g fill="#E05A6B" opacity="0.5">
-                <rect x="0"   y="-44" width="3" height="44" rx="1"/><rect x="6"   y="-30" width="3" height="30" rx="1"/>
-                <rect x="12"  y="-38" width="3" height="38" rx="1"/><rect x="18"  y="-22" width="3" height="22" rx="1"/>
-                <rect x="24"  y="-44" width="3" height="44" rx="1"/><rect x="30"  y="-32" width="3" height="32" rx="1"/>
-                <rect x="36"  y="-26" width="3" height="26" rx="1"/><rect x="42"  y="-40" width="3" height="40" rx="1"/>
-                <rect x="48"  y="-30" width="3" height="30" rx="1"/><rect x="54"  y="-46" width="3" height="46" rx="1"/>
-                <rect x="60"  y="-34" width="3" height="34" rx="1"/><rect x="66"  y="-20" width="3" height="20" rx="1"/>
-                <rect x="72"  y="-38" width="3" height="38" rx="1"/><rect x="78"  y="-30" width="3" height="30" rx="1"/>
-                <rect x="84"  y="-44" width="3" height="44" rx="1"/><rect x="90"  y="-32" width="3" height="32" rx="1"/>
-                <rect x="96"  y="-24" width="3" height="24" rx="1"/><rect x="102" y="-36" width="3" height="36" rx="1"/>
-                <rect x="108" y="-30" width="3" height="30" rx="1"/><rect x="114" y="-38" width="3" height="38" rx="1"/>
-                <rect x="120" y="-32" width="3" height="32" rx="1"/><rect x="126" y="-26" width="3" height="26" rx="1"/>
-                <rect x="132" y="-44" width="3" height="44" rx="1"/><rect x="138" y="-30" width="3" height="30" rx="1"/>
-                <rect x="144" y="-38" width="3" height="38" rx="1"/><rect x="150" y="-24" width="3" height="24" rx="1"/>
-                <rect x="156" y="-44" width="3" height="44" rx="1"/><rect x="162" y="-32" width="3" height="32" rx="1"/>
-                <rect x="168" y="-28" width="3" height="28" rx="1"/><rect x="174" y="-36" width="3" height="36" rx="1"/>
-                <rect x="180" y="-44" width="3" height="44" rx="1"/><rect x="186" y="-30" width="3" height="30" rx="1"/>
-                <rect x="192" y="-38" width="3" height="38" rx="1"/><rect x="198" y="-22" width="3" height="22" rx="1"/>
-                <rect x="204" y="-40" width="3" height="40" rx="1"/><rect x="210" y="-30" width="3" height="30" rx="1"/>
-                <rect x="216" y="-46" width="3" height="46" rx="1"/><rect x="222" y="-32" width="3" height="32" rx="1"/>
-                <rect x="228" y="-26" width="3" height="26" rx="1"/><rect x="234" y="-40" width="3" height="40" rx="1"/>
-                <rect x="240" y="-28" width="3" height="28" rx="1"/><rect x="246" y="-44" width="3" height="44" rx="1"/>
-                <rect x="252" y="-30" width="3" height="30" rx="1"/><rect x="258" y="-38" width="3" height="38" rx="1"/>
-                <rect x="264" y="-22" width="3" height="22" rx="1"/><rect x="270" y="-44" width="3" height="44" rx="1"/>
-                <rect x="276" y="-32" width="3" height="32" rx="1"/><rect x="282" y="-26" width="3" height="26" rx="1"/>
-                <rect x="288" y="-40" width="3" height="40" rx="1"/><rect x="294" y="-30" width="3" height="30" rx="1"/>
-                <rect x="300" y="-44" width="3" height="44" rx="1"/><rect x="306" y="-30" width="3" height="30" rx="1"/>
-                <rect x="312" y="-38" width="3" height="38" rx="1"/><rect x="318" y="-26" width="3" height="26" rx="1"/>
-                <rect x="324" y="-44" width="3" height="44" rx="1"/><rect x="330" y="-32" width="3" height="32" rx="1"/>
-              </g>
-              <!-- moving brightness ribbon (centred playhead) -->
-              <line x1="170" y1="-50" x2="170" y2="2" stroke="#E05A6B" stroke-width="1.5"/>
+            <!-- WAVEFORM PREVIEW -->
+            <rect x="14" y="80" width="352" height="56" rx="12" fill="#0c0809" stroke="rgba(224,90,107,0.4)"/>
+            <rect x="24" y="88" width="50" height="18" rx="9" fill="none" stroke="#E05A6B" stroke-opacity="0.6"/>
+            <path d="M33 97 l8 -8 3 3 -8 8 -3 0 z" fill="none" stroke="#E05A6B" stroke-width="1" stroke-linejoin="round"/>
+            <text x="48" y="101" fill="#E05A6B" font-family="Inter, sans-serif" font-size="8" font-weight="700">EDIT</text>
+            <line x1="208" y1="80" x2="208" y2="136" stroke="#E05A6B" stroke-opacity="0.7" stroke-width="1.2"/>
+
+            <!-- TRANSPORT TOOLBAR -->
+            <g transform="translate(14,146)">
+              <rect x="0" y="0" width="36" height="34" rx="8" fill="#1a1012" stroke="rgba(255,255,255,0.05)"/><rect x="44" y="0" width="36" height="34" rx="8" fill="#1a1012" stroke="rgba(255,255,255,0.05)"/><rect x="88" y="0" width="36" height="34" rx="8" fill="#1a1012" stroke="rgba(255,255,255,0.05)"/><rect x="132" y="0" width="36" height="34" rx="8" fill="#1a1012" stroke="rgba(255,255,255,0.05)"/><rect x="176" y="0" width="36" height="34" rx="8" fill="#1a1012" stroke="rgba(255,255,255,0.05)"/>
+              <rect x="220" y="0" width="36" height="34" rx="8" fill="#E05A6B" fill-opacity="0.22" stroke="#E05A6B" stroke-width="0.7"/>
+              <rect x="264" y="0" width="36" height="34" rx="8" fill="#E05A6B" fill-opacity="0.22" stroke="#E05A6B" stroke-width="0.7"/>
+              <rect x="308" y="0" width="36" height="34" rx="8" fill="#1a1012" stroke="rgba(255,255,255,0.05)"/>
+              <path d="M18 8 l2.4 5 5.4 .6 -4 3.6 1.2 5.3 -5 -2.8 -5 2.8 1.2 -5.3 -4 -3.6 5.4 -.6 z" fill="none" stroke="#9a8488" stroke-width="1.3" stroke-linejoin="round"/>
+              <path d="M52 11 h7 l2 3 h11 v11 h-20 z" fill="none" stroke="#9a8488" stroke-width="1.3" stroke-linejoin="round"/>
+              <path d="M106 9 v11 m0 0 l-4 -4 m4 4 l4 -4 M98 24 h16" fill="none" stroke="#9a8488" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <g transform="translate(140,9)" stroke="#9a8488" stroke-width="1.3" fill="none"><circle cx="7" cy="7" r="6"/><line x1="11.5" y1="11.5" x2="16" y2="16"/></g>
+              <path d="M188 10 a7 7 0 1 1 -2 5 M188 10 l-3 0 0 3" fill="none" stroke="#9a8488" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <polygon points="232,9 232,25 245,17" fill="#E05A6B"/>
+              <rect x="276" y="10" width="12" height="14" rx="1.5" fill="#E05A6B"/>
+              <path d="M314 10 a7 7 0 1 0 2 5 M322 10 l3 0 0 3" fill="none" stroke="#9a8488" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
 
-            <!-- LibraryChromeBar (7 cells: Folder · Search · -5 · Play · Stop · +5 · Import) -->
-            <rect x="14" y="200" width="352" height="42" rx="10" fill="#141318" stroke="rgba(255,255,255,0.06)"/>
-            <g stroke="#7A7A82" stroke-width="1.4" fill="none" stroke-linecap="round">
-              <path d="M40 213 L36 217 L36 229 L60 229 L60 217 L48 217 L46 213 Z"/>
-              <circle cx="92" cy="221" r="5"/><line x1="96" y1="225" x2="100" y2="229"/>
-              <line x1="138" y1="221" x2="148" y2="221"/><polyline points="138,221 142,217 142,225"/>
-              <polygon points="186,215 198,221 186,227" fill="#E05A6B" stroke="none"/>
-              <rect x="226" y="215" width="12" height="12" rx="1" fill="#7A7A82" stroke="none"/>
-              <line x1="284" y1="221" x2="294" y2="221"/><polyline points="294,221 290,217 290,225"/>
-              <path d="M334 217 L334 229 L350 229 L350 217 M338 213 L342 217 L346 213"/>
+            <!-- DEVICE PICKERS -->
+            <g font-family="Inter, sans-serif">
+              <rect x="14" y="194" width="172" height="44" rx="10" fill="#150d0f" stroke="rgba(255,255,255,0.06)"/>
+              <circle cx="30" cy="213" r="0"/>
+              <path d="M30 206 a3 3 0 0 1 6 0 v6 a3 3 0 0 1 -6 0 z M27 212 a6 6 0 0 0 12 0 M33 218 v4" fill="none" stroke="#E05A6B" stroke-width="1.3" stroke-linecap="round"/>
+              <text x="46" y="210" fill="#E05A6B" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1">INPUT</text>
+              <text x="46" y="226" fill="#e9dde0" font-size="11" font-weight="600">Internal dev…</text>
+              <path d="M172 217 l4 4 4 -4" fill="none" stroke="#9a8488" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <rect x="194" y="194" width="172" height="44" rx="10" fill="#150d0f" stroke="rgba(255,255,255,0.06)"/>
+              <polygon points="208,207 208,219 217,213" fill="#E05A6B"/>
+              <text x="226" y="210" fill="#E05A6B" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1">OUTPUT</text>
+              <text x="226" y="226" fill="#e9dde0" font-size="11" font-weight="600">Device spe…</text>
+              <path d="M352 217 l4 4 4 -4" fill="none" stroke="#9a8488" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <rect x="14" y="246" width="172" height="44" rx="10" fill="#120b0d" stroke="rgba(255,255,255,0.05)"/>
+              <text x="30" y="262" fill="#8a777b" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1">CHANNEL</text>
+              <text x="30" y="278" fill="#9a8488" font-size="11" font-weight="600">—</text>
+              <path d="M172 269 l4 4 4 -4" fill="none" stroke="#9a8488" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <rect x="194" y="246" width="172" height="44" rx="10" fill="#150d0f" stroke="rgba(255,255,255,0.06)"/>
+              <g transform="translate(208,260)" fill="#E05A6B"><rect x="0" y="4" width="2.4" height="6"/><rect x="4" y="1" width="2.4" height="12"/><rect x="8" y="6" width="2.4" height="4"/></g>
+              <text x="226" y="262" fill="#E05A6B" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1">MODE</text>
+              <text x="226" y="278" fill="#e9dde0" font-size="11" font-weight="600">MONO</text>
+              <path d="M352 269 l4 4 4 -4" fill="none" stroke="#9a8488" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
 
-            <!-- Source row 2x2 -->
-            <rect x="14" y="252" width="172" height="56" rx="10" fill="#141318" stroke="rgba(224,90,107,0.30)" stroke-width="0.7"/>
-            <g transform="translate(28,268)" stroke="#E05A6B" stroke-width="1.5" fill="none" stroke-linecap="round">
-              <path d="M0 6 L0 16 M-4 16 L-4 22 M4 16 L4 22 M-4 16 L4 16"/>
-              <circle cx="0" cy="3" r="3" fill="#E05A6B"/>
+            <!-- DSP TABS + GAIN CARD -->
+            <rect x="14" y="300" width="352" height="180" rx="14" fill="#120b0d" stroke="rgba(255,255,255,0.05)"/>
+            <g font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">
+              <text x="44" y="324" fill="#E05A6B" text-anchor="middle">IN</text>
+              <rect x="28" y="332" width="34" height="2.5" rx="1" fill="#E05A6B"/>
+              <text x="118" y="324" fill="#7d6e72" text-anchor="middle">EQ</text>
+              <text x="190" y="324" fill="#7d6e72" text-anchor="middle">AMP</text>
+              <text x="262" y="324" fill="#7d6e72" text-anchor="middle">FX</text>
+              <text x="336" y="324" fill="#7d6e72" text-anchor="middle">OUT</text>
             </g>
-            <text x="48" y="270" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2">INPUT</text>
-            <text x="48" y="284" fill="#ECECEE" font-family="Inter, sans-serif" font-size="12" font-weight="600">Internal device</text>
-            <text x="48" y="298" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8">48 000 Hz</text>
-            <text x="172" y="284" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="end">›</text>
+            <text x="28" y="356" fill="#8a777b" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1">INPUT GAIN</text>
+            <text x="352" y="356" fill="#cfc2c5" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="end">+0.0 dB</text>
+            <rect x="28" y="366" width="324" height="5" rx="2.5" fill="#2a1d20"/>
+            <rect x="28" y="366" width="190" height="5" rx="2.5" fill="#E05A6B"/>
+            <circle cx="218" cy="368.5" r="9" fill="#E05A6B"/>
+            <!-- meter ticks -->
+            <g stroke="#3a2c2f" stroke-width="1"><line x1="30" y1="388" x2="30" y2="394"/><line x1="38" y1="388" x2="38" y2="394"/><line x1="46" y1="388" x2="46" y2="394"/><line x1="54" y1="388" x2="54" y2="394"/><line x1="62" y1="388" x2="62" y2="394"/><line x1="70" y1="388" x2="70" y2="394"/><line x1="78" y1="388" x2="78" y2="394"/><line x1="86" y1="388" x2="86" y2="394"/><line x1="94" y1="388" x2="94" y2="394"/><line x1="102" y1="388" x2="102" y2="394"/><line x1="110" y1="388" x2="110" y2="394"/><line x1="118" y1="388" x2="118" y2="394"/><line x1="126" y1="388" x2="126" y2="394"/><line x1="134" y1="388" x2="134" y2="394"/><line x1="142" y1="388" x2="142" y2="394"/><line x1="150" y1="388" x2="150" y2="394"/><line x1="158" y1="388" x2="158" y2="394"/><line x1="166" y1="388" x2="166" y2="394"/><line x1="174" y1="388" x2="174" y2="394"/><line x1="182" y1="388" x2="182" y2="394"/><line x1="190" y1="388" x2="190" y2="394"/><line x1="198" y1="388" x2="198" y2="394"/><line x1="206" y1="388" x2="206" y2="394"/><line x1="214" y1="388" x2="214" y2="394"/><line x1="222" y1="388" x2="222" y2="394"/><line x1="230" y1="388" x2="230" y2="394"/><line x1="238" y1="388" x2="238" y2="394"/><line x1="246" y1="388" x2="246" y2="394"/><line x1="254" y1="388" x2="254" y2="394"/><line x1="262" y1="388" x2="262" y2="394"/><line x1="270" y1="388" x2="270" y2="394"/><line x1="278" y1="388" x2="278" y2="394"/><line x1="286" y1="388" x2="286" y2="394"/><line x1="294" y1="388" x2="294" y2="394"/><line x1="302" y1="388" x2="302" y2="394"/><line x1="310" y1="388" x2="310" y2="394"/><line x1="318" y1="388" x2="318" y2="394"/><line x1="326" y1="388" x2="326" y2="394"/><line x1="334" y1="388" x2="334" y2="394"/><line x1="342" y1="388" x2="342" y2="394"/></g>
+            <text x="352" y="392" fill="#8a777b" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="end">dB</text>
+            <line x1="14" y1="408" x2="366" y2="408" stroke="rgba(255,255,255,0.05)"/>
+            <text x="28" y="428" fill="#8a777b" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1">LEVEL ASSIST</text>
+            <!-- Auto Gain -->
+            <text x="28" y="448" fill="#E05A6B" font-family="Inter, sans-serif" font-size="11" font-weight="600">Auto Gain</text>
+            <text x="28" y="462" fill="#7d6e72" font-family="Inter, sans-serif" font-size="8">Raises the gain when input is soft.</text>
+            <rect x="326" y="442" width="30" height="16" rx="8" fill="#E05A6B"/>
+            <circle cx="348" cy="450" r="6" fill="#fff"/>
+            <!-- Rec Soft Clip -->
+            <text x="28" y="478" fill="#E05A6B" font-family="Inter, sans-serif" font-size="11" font-weight="600">Rec Soft Clip</text>
+            <rect x="326" y="471" width="30" height="16" rx="8" fill="#E05A6B"/>
+            <circle cx="348" cy="479" r="6" fill="#fff"/>
 
-            <rect x="194" y="252" width="172" height="56" rx="10" fill="#141318" stroke="rgba(255,255,255,0.10)"/>
-            <text x="208" y="270" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2">CHANNEL</text>
-            <rect x="208" y="280" width="32" height="20" rx="4" fill="#E05A6B" fill-opacity="0.22"/>
-            <text x="224" y="294" fill="#E05A6B" font-family="Inter, sans-serif" font-size="9" font-weight="800" text-anchor="middle">AUTO</text>
-            <text x="262" y="294" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" font-weight="600">MONO</text>
-            <text x="304" y="294" fill="#7A7A82" font-family="Inter, sans-serif" font-size="9" font-weight="600">STEREO</text>
+            <!-- REC BUTTON -->
+            <rect x="14" y="700" width="352" height="56" rx="14" fill="#E05A6B"/>
+            <text x="190" y="734" fill="#2a0a0e" font-family="Inter, sans-serif" font-size="15" font-weight="800" letter-spacing="4" text-anchor="middle">REC</text>
 
-            <!-- Pre-roll countdown / Timer in red while recording -->
-            <text x="190" y="356" fill="#EF4B4B" font-family="JetBrains Mono, monospace" font-size="44" font-weight="900" text-anchor="middle" letter-spacing="-1" class="anim-rec">0:42.108</text>
-            <text x="190" y="376" fill="#EF4B4B" font-family="Inter, sans-serif" font-size="10" font-weight="900" letter-spacing="2" text-anchor="middle">RECORDING</text>
-
-            <!-- Level meters L/R -->
-            <rect x="40"  y="392" width="300" height="6" rx="3" fill="#1c1c22"/>
-            <rect x="40"  y="392" width="190" height="6" rx="3" fill="url(#audRibbon)"/>
-            <text x="22"  y="398" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">L</text>
-            <rect x="40"  y="404" width="300" height="6" rx="3" fill="#1c1c22"/>
-            <rect x="40"  y="404" width="172" height="6" rx="3" fill="url(#audRibbon)"/>
-            <text x="22"  y="410" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9">R</text>
-
-            <!-- DSP chain — IN | EQ | AMP | FX | OUT -->
-            <rect x="14" y="424" width="352" height="120" rx="14" fill="#141318" stroke="rgba(255,255,255,0.08)"/>
-            <g font-family="Inter, sans-serif" font-size="9" font-weight="900" letter-spacing="1.5">
-              <text x="48"  y="446" fill="#E05A6B" text-anchor="middle">IN</text>
-              <text x="120" y="446" fill="#7A7A82" text-anchor="middle">EQ</text>
-              <text x="190" y="446" fill="#7A7A82" text-anchor="middle">AMP</text>
-              <text x="260" y="446" fill="#7A7A82" text-anchor="middle">FX</text>
-              <text x="332" y="446" fill="#7A7A82" text-anchor="middle">OUT</text>
-            </g>
-            <line x1="34" y1="452" x2="62" y2="452" stroke="#E05A6B" stroke-width="2"/>
-            <!-- 4 knobs -->
-            <g>
-              <circle cx="60"  cy="500" r="22" fill="none" stroke="#E05A6B" stroke-width="2"/>
-              <line x1="60" y1="478" x2="60" y2="488" stroke="#E05A6B" stroke-width="2" stroke-linecap="round"/>
-              <text x="60" y="538" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">GAIN</text>
-
-              <circle cx="135" cy="500" r="22" fill="none" stroke="#E05A6B" stroke-width="2"/>
-              <line x1="135" y1="482" x2="145" y2="495" stroke="#E05A6B" stroke-width="2" stroke-linecap="round"/>
-              <text x="135" y="538" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">HP</text>
-
-              <circle cx="210" cy="500" r="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-              <line x1="210" y1="500" x2="221" y2="510" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
-              <text x="210" y="538" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">LP</text>
-
-              <circle cx="285" cy="500" r="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-              <line x1="285" y1="500" x2="273" y2="510" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
-              <text x="285" y="538" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">NR</text>
-            </g>
-
-            <!-- MONITOR + PRINT pills -->
-            <rect x="14"  y="560" width="172" height="44" rx="10" fill="#141318" stroke="rgba(255,255,255,0.10)"/>
-            <text x="100" y="588" fill="#7A7A82" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2" text-anchor="middle">MONITOR</text>
-            <rect x="194" y="560" width="172" height="44" rx="10" fill="#E05A6B" fill-opacity="0.18" stroke="#E05A6B"/>
-            <text x="280" y="588" fill="#E05A6B" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2" text-anchor="middle">PRINT</text>
-
-            <!-- Big REC red circle (FAB-style 64dp) -->
-            <g transform="translate(190,680)" class="anim-rec-glow">
-              <circle r="38" fill="#EF4B4B" stroke="rgba(255,139,61,0.45)" stroke-width="1"/>
-              <text x="0" y="6" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="14" font-weight="900" letter-spacing="1.6" text-anchor="middle">REC</text>
-            </g>
-
-            <!-- Bottom hint -->
-            <rect x="130" y="770" width="120" height="4" rx="2" fill="#1c1c22"/>
+            <rect x="130" y="772" width="120" height="4" rx="2" fill="#1c1416"/>
           </svg>
         </div>
       </div>

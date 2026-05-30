@@ -69,268 +69,83 @@
         <div class="phone-frame" aria-hidden="true">
           <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet">
             <defs>
-              <linearGradient id="tunerPlate" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#0a0a0d"/>
-                <stop offset="1" stop-color="#0e0c10"/>
-              </linearGradient>
-              <linearGradient id="ringGrad" x1="0" y1="0.5" x2="1" y2="0.5">
-                <stop offset="0" stop-color="#4AA3FF"/><stop offset="0.5" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FF8A2A"/>
-              </linearGradient>
-              <!-- VintageMeterFace bezel: vertical gradient #1F1F1F → #050505 -->
-              <linearGradient id="vmfBezel" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#1F1F1F"/>
-                <stop offset="1" stop-color="#050505"/>
-              </linearGradient>
-              <!-- Inner display: vertical accent (sky-blue) gradient 55% → 32% → 18% alpha -->
-              <linearGradient id="vmfGlass" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0"    stop-color="#85B7EB" stop-opacity="0.55"/>
-                <stop offset="0.55" stop-color="#85B7EB" stop-opacity="0.32"/>
-                <stop offset="1"    stop-color="#85B7EB" stop-opacity="0.18"/>
-              </linearGradient>
-              <!-- Top cast shadow over inner display (5-stop) -->
-              <linearGradient id="vmfShadow" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0"    stop-color="#000" stop-opacity="0.62"/>
-                <stop offset="0.04" stop-color="#000" stop-opacity="0.45"/>
-                <stop offset="0.10" stop-color="#000" stop-opacity="0.27"/>
-                <stop offset="0.20" stop-color="#000" stop-opacity="0.13"/>
-                <stop offset="0.35" stop-color="#000" stop-opacity="0.05"/>
-                <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
-              </linearGradient>
-              <!-- Ambient occlusion in corners -->
-              <radialGradient id="vmfAO" cx="50%" cy="55%" r="85%">
-                <stop offset="0"    stop-color="#000" stop-opacity="0"/>
-                <stop offset="0.60" stop-color="#000" stop-opacity="0"/>
-                <stop offset="0.78" stop-color="#000" stop-opacity="0.05"/>
-                <stop offset="0.92" stop-color="#000" stop-opacity="0.14"/>
-                <stop offset="1"    stop-color="#000" stop-opacity="0.22"/>
-              </radialGradient>
+              <linearGradient id="tuPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#090b0e"/><stop offset="1" stop-color="#0d1118"/></linearGradient>
+              <linearGradient id="tuGauge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a2230"/><stop offset="1" stop-color="#0d1219"/></linearGradient>
             </defs>
-            <rect width="380" height="800" fill="url(#tunerPlate)"/>
+            <rect width="380" height="800" fill="url(#tuPlate)"/>
 
-            <!-- OseScreenStrip TopBar: GlowingO + "Tuner" + gear -->
-            <g transform="translate(20,42)">
-              <circle cx="14" cy="14" r="13" fill="none" stroke="url(#ringGrad)" stroke-width="2"/>
-              <circle cx="14" cy="14" r="10" fill="#000"/>
-              <g class="anim-glowo-wave">
-                <path d="M 6.25,14 L 8.19,14 L 9.35,11.68 L 10.51,16.33 L 11.68,10.13 L 12.84,17.88 L 14,8.58 L 15.16,19.43 L 16.32,10.13 L 17.49,16.33 L 18.65,11.68 L 19.81,14 L 21.75,14"
-                      fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              <text x="42" y="20" fill="#85B7EB" font-family="Inter, sans-serif" font-size="14" font-weight="700" letter-spacing="3">Tuner</text>
-              <g transform="translate(290,4)" stroke="#ECECEE" stroke-opacity="0.78" stroke-width="1.6" fill="none" stroke-linecap="round">
-                <circle cx="12" cy="14" r="3.4"/>
-                <path d="M12 6 L12 8 M12 20 L12 22 M4 14 L6 14 M18 14 L20 14 M6.4 8.4 L7.8 9.8 M16.2 18.2 L17.6 19.6 M6.4 19.6 L7.8 18.2 M16.2 9.8 L17.6 8.4"/>
-              </g>
+            <!-- TOP BAR -->
+            <g transform="translate(18,40)">
+              <circle cx="14" cy="14" r="13" fill="none" stroke="#85B7EB" stroke-width="2"/>
+              <path d="M18 8 L11 14 L18 20" fill="none" stroke="#85B7EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="40" y="20" fill="#EAF1FA" font-family="Inter, sans-serif" font-size="15" font-weight="700" letter-spacing="1">Tuner</text>
+              <g transform="translate(296,3)" stroke="#7f8ea0" stroke-width="1.6" fill="none" stroke-linecap="round"><circle cx="11" cy="11" r="3.4"/><path d="M11 3 L11 5 M11 17 L11 19 M3 11 L5 11 M17 11 L19 11 M5.3 5.3 L6.7 6.7 M15.3 15.3 L16.7 16.7 M5.3 16.7 L6.7 15.3 M15.3 6.7 L16.7 5.3"/></g>
+              <rect x="322" y="3" width="22" height="22" rx="6" fill="#85B7EB" fill-opacity="0.85" stroke="#FFFFFF" stroke-opacity="0.3"/>
             </g>
 
-            <!-- ============== VintageMeterCard ============== -->
-            <!-- Outer rim: dark bezel + faint top hairline + 5dp inner padding -->
-            <rect x="14" y="100" width="352" height="438" rx="12" fill="url(#vmfBezel)" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="0.5"/>
-
-            <!-- Top strip inside the rim: MicStatus left, "PTU · OSE" right -->
-            <g transform="translate(28,118)">
-              <!-- Mic icon -->
-              <g stroke="#85B7EB" stroke-width="1.3" fill="none" stroke-linecap="round">
-                <rect x="0" y="0" width="6" height="10" rx="3"/>
-                <path d="M -2 8 A 5 5 0 0 0 8 8"/>
-                <line x1="3" y1="13" x2="3" y2="16"/>
-              </g>
-              <text x="14" y="11" fill="#85B7EB" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5">LISTENING · −12 dB</text>
-              <!-- Mic level bar -->
-              <rect x="120" y="6" width="60" height="3" rx="1.5" fill="#1c1c22"/>
-              <rect x="120" y="6" width="38" height="3" rx="1.5" fill="#85B7EB"/>
+            <!-- GAUGE CARD -->
+            <rect x="14" y="84" width="352" height="184" rx="16" fill="url(#tuGauge)" stroke="rgba(133,183,235,0.25)" stroke-width="1"/>
+            <text x="30" y="104" fill="#6f8094" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1">MIC ·····</text>
+            <text x="350" y="104" fill="#6f8094" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1" text-anchor="end">PTU · OSE</text>
+            <!-- arc scale -->
+            <path d="M70 232 A 120 120 0 0 1 310 232" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+            <!-- ticks -->
+            <g stroke="#5f7186" stroke-width="1.5">
+              <line x1="70" y1="232" x2="80" y2="228"/>
+              <line x1="120" y1="172" x2="127" y2="180"/>
+              <line x1="190" y1="150" x2="190" y2="160"/>
+              <line x1="260" y1="172" x2="253" y2="180"/>
+              <line x1="310" y1="232" x2="300" y2="228"/>
             </g>
-            <text x="352" y="129" fill="#85B7EB" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" letter-spacing="2.5" text-anchor="end">PTU · OSE</text>
+            <text x="64" y="248" fill="#6f8094" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">-50</text>
+            <text x="190" y="142" fill="#9fb4cc" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">0</text>
+            <text x="324" y="190" fill="#6f8094" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">CENT</text>
+            <text x="316" y="248" fill="#6f8094" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">+50</text>
+            <!-- big note -->
+            <text x="190" y="210" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="62" font-weight="300" text-anchor="middle">A<tspan font-size="26" dy="6">4</tspan></text>
+            <!-- needle (in tune, vertical) -->
+            <line x1="190" y1="232" x2="190" y2="158" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="190" cy="232" r="5" fill="#85B7EB"/>
+            <text x="190" y="252" fill="#7f93a8" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle">440.0 Hz</text>
 
-            <!-- ============== VintageMeterFace (inner recessed display) ============== -->
-            <!-- 5dp inset from the rim — at x=19, y=140, w=342, h=240 -->
-            <g>
-              <!-- Glass base: warm accent gradient -->
-              <rect x="19" y="140" width="342" height="240" rx="8" fill="url(#vmfGlass)" stroke="#000" stroke-opacity="0.70" stroke-width="0.5"/>
-              <!-- Top cast shadow -->
-              <rect x="19" y="140" width="342" height="240" rx="8" fill="url(#vmfShadow)"/>
-              <!-- Radial AO -->
-              <rect x="19" y="140" width="342" height="240" rx="8" fill="url(#vmfAO)"/>
-              <!-- Top edge sheen -->
-              <line x1="33" y1="143" x2="347" y2="143" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="0.6"/>
+            <!-- LISTENING strip -->
+            <text x="190" y="292" fill="#9fb4cc" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="3" text-anchor="middle">LISTENING</text>
+            <rect x="140" y="302" width="100" height="26" rx="13" fill="#0c1016" stroke="rgba(255,255,255,0.06)"/>
+            <circle cx="160" cy="315" r="4" fill="#E0556A" opacity="0.5"/>
+            <circle cx="178" cy="315" r="4" fill="#E0556A" opacity="0.5"/>
+            <circle cx="196" cy="315" r="5.5" fill="#5DCAA5"/>
+            <circle cx="216" cy="315" r="4" fill="#E0556A" opacity="0.5"/>
+            <circle cx="234" cy="315" r="4" fill="#E0556A" opacity="0.5"/>
 
-              <!-- ============== Half-arc dial ==============
-                   Pivot at (190, 612) — well below the visible canvas (y > 380).
-                   Half-sweep 22° from vertical, radius ≈ 376 so the visible arc fits inside.
-                   The visible portion of the arc looks almost flat (PiaScore layout).
-              -->
-              <g transform="translate(190, 612)">
-                <!-- Faint baseline arc — only the visible upper portion (from -140 to -250 in our y) -->
-                <path d="M -141 -348 A 376 376 0 0 1 141 -348"
-                      fill="none" stroke="#FFFFFF" stroke-opacity="0.30" stroke-width="1"/>
+            <!-- REFERENCE & CALIBRATION -->
+            <text x="22" y="360" fill="#6f8094" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.5">REFERENCE &amp; CALIBRATION</text>
+            <!-- tuning fork -->
+            <rect x="14" y="372" width="58" height="80" rx="12" fill="#11151c" stroke="rgba(255,255,255,0.05)"/>
+            <path d="M37 392 v18 m6 -18 v18 a3 3 0 0 1 -6 0 m-6 -18 v18 a3 3 0 0 0 6 0 M40 410 v22" fill="none" stroke="#9fb4cc" stroke-width="1.6" stroke-linecap="round"/>
+            <!-- minus -->
+            <rect x="78" y="372" width="46" height="80" rx="12" fill="#11151c" stroke="rgba(255,255,255,0.05)"/>
+            <line x1="92" y1="412" x2="110" y2="412" stroke="#cdd8e4" stroke-width="2" stroke-linecap="round"/>
+            <!-- 440 Hz box -->
+            <rect x="130" y="372" width="120" height="80" rx="12" fill="#85B7EB" fill-opacity="0.14" stroke="#85B7EB" stroke-width="1.2"/>
+            <text x="184" y="418" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="26" font-weight="500" text-anchor="middle">440</text>
+            <text x="226" y="418" fill="#85B7EB" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">Hz</text>
+            <!-- plus -->
+            <rect x="256" y="372" width="46" height="80" rx="12" fill="#11151c" stroke="rgba(255,255,255,0.05)"/>
+            <line x1="270" y1="412" x2="288" y2="412" stroke="#cdd8e4" stroke-width="2" stroke-linecap="round"/>
+            <line x1="279" y1="403" x2="279" y2="421" stroke="#cdd8e4" stroke-width="2" stroke-linecap="round"/>
+            <!-- speaker -->
+            <rect x="308" y="372" width="58" height="80" rx="12" fill="#11151c" stroke="rgba(255,255,255,0.05)"/>
+            <path d="M328 405 h6 l8 -7 v28 l-8 -7 h-6 z M348 405 a8 8 0 0 1 0 12 M352 401 a13 13 0 0 1 0 20" fill="none" stroke="#9fb4cc" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
 
-                <!-- Tick marks every 1¢ with hierarchy. Generated via SVG <line>s.
-                     Hierarchy: 0¢ tallest+brightest; ±50 and ±25 next; every 10¢ medium;
-                     every 5¢ short; every 1¢ tiny.
-                -->
-                <!-- 0 ¢ -->
-                <line x1="0" y1="-358" x2="0" y2="-376" stroke="#FFFFFF" stroke-opacity="1" stroke-width="2.2"/>
-                <!-- ±50 ¢ at angle ±22° -->
-                <line x1="-140.85" y1="-348.66" x2="-146.55" y2="-365.43" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.8"/>
-                <line x1=" 140.85" y1="-348.66" x2=" 146.55" y2="-365.43" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.8"/>
-                <!-- ±25 ¢ at angle ±11° -->
-                <line x1=" -71.74" y1="-369.10" x2=" -74.30" y2="-382.21" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.6"/>
-                <line x1="  71.74" y1="-369.10" x2="  74.30" y2="-382.21" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.6"/>
-                <!-- Every 10 ¢ (±10, ±20, ±30, ±40) at smaller intervals -->
-                <line x1=" -28.91" y1="-374.89" x2=" -29.69" y2="-385.05" stroke="#FFFFFF" stroke-opacity="0.70" stroke-width="1.2"/>
-                <line x1="  28.91" y1="-374.89" x2="  29.69" y2="-385.05" stroke="#FFFFFF" stroke-opacity="0.70" stroke-width="1.2"/>
-                <line x1=" -57.61" y1="-371.55" x2=" -59.16" y2="-381.62" stroke="#FFFFFF" stroke-opacity="0.70" stroke-width="1.2"/>
-                <line x1="  57.61" y1="-371.55" x2="  59.16" y2="-381.62" stroke="#FFFFFF" stroke-opacity="0.70" stroke-width="1.2"/>
-                <line x1=" -86.13" y1="-365.99" x2=" -88.51" y2="-376.06" stroke="#FFFFFF" stroke-opacity="0.70" stroke-width="1.2"/>
-                <line x1="  86.13" y1="-365.99" x2="  88.51" y2="-376.06" stroke="#FFFFFF" stroke-opacity="0.70" stroke-width="1.2"/>
-                <line x1="-114.36" y1="-358.27" x2="-117.49" y2="-368.21" stroke="#FFFFFF" stroke-opacity="0.70" stroke-width="1.2"/>
-                <line x1=" 114.36" y1="-358.27" x2=" 117.49" y2="-368.21" stroke="#FFFFFF" stroke-opacity="0.70" stroke-width="1.2"/>
-                <!-- Every 5 ¢ (more numerous, short) -->
-                <line x1=" -14.46" y1="-375.72" x2=" -14.69" y2="-381.85" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
-                <line x1="  14.46" y1="-375.72" x2="  14.69" y2="-381.85" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
-                <line x1=" -43.26" y1="-373.50" x2=" -43.97" y2="-379.65" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
-                <line x1="  43.26" y1="-373.50" x2="  43.97" y2="-379.65" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
-                <line x1=" -72.05" y1="-369.07" x2=" -73.27" y2="-375.18" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
-                <line x1="  72.05" y1="-369.07" x2="  73.27" y2="-375.18" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
-                <line x1="-100.71" y1="-362.51" x2="-102.41" y2="-368.52" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
-                <line x1=" 100.71" y1="-362.51" x2=" 102.41" y2="-368.52" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
-                <line x1="-128.10" y1="-353.85" x2="-130.27" y2="-359.74" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
-                <line x1=" 128.10" y1="-353.85" x2=" 130.27" y2="-359.74" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
+            <!-- SENSITIVITY -->
+            <text x="22" y="488" fill="#6f8094" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.5">SENSITIVITY</text>
+            <rect x="14" y="500" width="352" height="40" rx="10" fill="#85B7EB" fill-opacity="0.14" stroke="#85B7EB" stroke-width="1.1"/>
+            <g transform="translate(150,514)" fill="#85B7EB"><rect x="0" y="6" width="3" height="6"/><rect x="5" y="3" width="3" height="9"/><rect x="10" y="0" width="3" height="12"/></g>
+            <text x="190" y="525" fill="#85B7EB" font-family="Inter, sans-serif" font-size="12" font-weight="700" letter-spacing="2" text-anchor="middle">MEDIUM</text>
+            <!-- 2x2 grid -->
+            <rect x="14" y="552" width="172" height="40" rx="10" fill="#11151c" stroke="rgba(255,255,255,0.05)"/><text x="100" y="577" fill="#9fb4cc" font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" text-anchor="middle">VERY SENSITIVE</text><rect x="194" y="552" width="172" height="40" rx="10" fill="#11151c" stroke="rgba(255,255,255,0.05)"/><text x="280" y="577" fill="#9fb4cc" font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" text-anchor="middle">SENSITIVE</text><rect x="14" y="600" width="172" height="40" rx="10" fill="#11151c" stroke="rgba(255,255,255,0.05)"/><text x="100" y="625" fill="#9fb4cc" font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" text-anchor="middle">DULL</text><rect x="194" y="600" width="172" height="40" rx="10" fill="#11151c" stroke="rgba(255,255,255,0.05)"/><text x="280" y="625" fill="#9fb4cc" font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" text-anchor="middle">VERY DULL</text>
 
-                <!-- Every 1 ¢ — tiny faint marks. Generated for representative cents in between -->
-                <g stroke="#FFFFFF" stroke-opacity="0.30" stroke-width="0.7">
-                  <!-- A handful of representative 1¢ ticks (every other) -->
-                  <line x1="-7.23"  y1="-376.30" x2="-7.29"  y2="-379.36"/>
-                  <line x1=" 7.23"  y1="-376.30" x2=" 7.29"  y2="-379.36"/>
-                  <line x1="-21.69" y1="-375.37" x2="-21.86" y2="-378.42"/>
-                  <line x1=" 21.69" y1="-375.37" x2=" 21.86" y2="-378.42"/>
-                  <line x1="-36.13" y1="-373.83" x2="-36.42" y2="-376.87"/>
-                  <line x1=" 36.13" y1="-373.83" x2=" 36.42" y2="-376.87"/>
-                  <line x1="-50.53" y1="-371.68" x2="-50.94" y2="-374.71"/>
-                  <line x1=" 50.53" y1="-371.68" x2=" 50.94" y2="-374.71"/>
-                  <line x1="-64.84" y1="-368.93" x2="-65.36" y2="-371.94"/>
-                  <line x1=" 64.84" y1="-368.93" x2=" 65.36" y2="-371.94"/>
-                  <line x1="-79.04" y1="-365.59" x2="-79.69" y2="-368.57"/>
-                  <line x1=" 79.04" y1="-365.59" x2=" 79.69" y2="-368.57"/>
-                  <line x1="-93.10" y1="-361.66" x2="-93.87" y2="-364.60"/>
-                  <line x1=" 93.10" y1="-361.66" x2=" 93.87" y2="-364.60"/>
-                  <line x1="-107.00" y1="-357.14" x2="-107.88" y2="-360.04"/>
-                  <line x1=" 107.00" y1="-357.14" x2=" 107.88" y2="-360.04"/>
-                  <line x1="-120.71" y1="-352.04" x2="-121.70" y2="-354.90"/>
-                  <line x1=" 120.71" y1="-352.04" x2=" 121.70" y2="-354.90"/>
-                  <line x1="-134.21" y1="-346.37" x2="-135.31" y2="-349.18"/>
-                  <line x1=" 134.21" y1="-346.37" x2=" 135.31" y2="-349.18"/>
-                </g>
-              </g>
-
-              <!-- Ghost note "A4" — drawn AFTER the scale ticks so the
-                   letter dominates the upper face (matches the photo
-                   reference: A4 sits on TOP of the scale, not buried
-                   under it). PiaScore-style anchor: letter centred,
-                   octave subscript tucked at the bottom-right. -->
-              <g class="anim-tuner-ghost-note">
-                <text x="174" y="246" fill="#FFFFFF" fill-opacity="0.95"
-                      font-family="Inter, sans-serif" font-size="110" font-weight="700"
-                      text-anchor="middle" letter-spacing="-3">A</text>
-                <text x="234" y="252" fill="#FFFFFF" fill-opacity="0.85"
-                      font-family="Inter, sans-serif" font-size="40" font-weight="700">4</text>
-              </g>
-
-              <!-- Snap halo + needle — back in the dial's pivot frame.
-                   These stay on top of EVERYTHING so the needle reads
-                   as a real foreground object even where it crosses the
-                   A4 letter, matching the screenshot. -->
-              <g transform="translate(190, 612)">
-                <line class="anim-tuner-snap" x1="0" y1="0" x2="0" y2="-376" stroke="#3CCB69" stroke-width="6" opacity="0"/>
-                <g class="anim-tuner-needle">
-                  <line x1="1" y1="1" x2="1" y2="-372" stroke="#000" stroke-opacity="0.35" stroke-width="2.5"/>
-                  <line x1="0" y1="-100" x2="0" y2="-374" stroke="#FFFFFF" stroke-width="2"/>
-                </g>
-              </g>
-            </g>
-
-            <!-- Top edge highlight on the bezel (subtle gleam) -->
-            <line x1="28" y1="106" x2="352" y2="106" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="0.5"/>
-
-            <!-- ============== Cents readout + 3-LED LedTuningStrip ============== -->
-            <text x="60" y="416" fill="#3CCB69" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">+0¢</text>
-            <text x="60" y="436" fill="#3CCB69" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.5">440.0 Hz</text>
-            <g transform="translate(150,402)">
-              <!-- FLAT LED -->
-              <rect x="0" y="0" width="34" height="20" rx="3" fill="#080808" stroke="#1A1A1A"/>
-              <circle cx="17" cy="10" r="4.5" fill="rgba(226,80,58,0.30)"/>
-              <text x="17" y="34" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="7" text-anchor="middle">FLAT</text>
-              <!-- IN TUNE LED (lit) -->
-              <rect x="46" y="0" width="34" height="20" rx="3" fill="#080808" stroke="#3CCB69"/>
-              <circle cx="63" cy="10" r="4.5" fill="#3CCB69">
-                <animate attributeName="opacity" values="0.7;1;0.7" dur="1.6s" repeatCount="indefinite"/>
-              </circle>
-              <text x="63" y="34" fill="#3CCB69" font-family="JetBrains Mono, monospace" font-size="7" text-anchor="middle">IN TUNE</text>
-              <!-- SHARP LED -->
-              <rect x="92" y="0" width="34" height="20" rx="3" fill="#080808" stroke="#1A1A1A"/>
-              <circle cx="109" cy="10" r="4.5" fill="rgba(226,80,58,0.30)"/>
-              <text x="109" y="34" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="7" text-anchor="middle">SHARP</text>
-            </g>
-            <!-- Note + Hz target on the right -->
-            <text x="352" y="416" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700" text-anchor="end">A4</text>
-            <text x="352" y="436" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">target 440</text>
-
-            <!-- ============== Reference tone row inside the rim ============== -->
-            <line x1="28" y1="456" x2="352" y2="456" stroke="#FFFFFF" stroke-opacity="0.05"/>
-            <!-- Tuning fork button (left) -->
-            <g transform="translate(40,488)" stroke="#85B7EB" stroke-width="1.6" fill="none" stroke-linecap="round">
-              <line x1="-4" y1="-10" x2="-4" y2="4"/>
-              <line x1="4"  y1="-10" x2="4"  y2="4"/>
-              <line x1="-4" y1="4"  x2="4"  y2="4"/>
-              <line x1="0"  y1="4"  x2="0"  y2="22"/>
-            </g>
-            <!-- CALIB − -->
-            <circle cx="124" cy="488" r="14" fill="#0a0a0d" stroke="rgba(133,183,235,0.30)"/>
-            <line x1="116" y1="488" x2="132" y2="488" stroke="#85B7EB" stroke-width="1.5"/>
-            <!-- CALIB readout -->
-            <text x="190" y="481" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700" text-anchor="middle">A4 · 440</text>
-            <text x="190" y="498" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing="1.5" text-anchor="middle">CALIB</text>
-            <!-- CALIB + -->
-            <circle cx="256" cy="488" r="14" fill="#0a0a0d" stroke="rgba(133,183,235,0.30)"/>
-            <line x1="248" y1="488" x2="264" y2="488" stroke="#85B7EB" stroke-width="1.5"/>
-            <line x1="256" y1="480" x2="256" y2="496" stroke="#85B7EB" stroke-width="1.5"/>
-            <!-- Speaker -->
-            <g transform="translate(330,488)" stroke="#85B7EB" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M-8 -3 L-3 -3 L3 -8 L3 8 L-3 3 L-8 3 Z" fill="#85B7EB" fill-opacity="0.20"/>
-              <path d="M8 -4 A 6 6 0 0 1 8 4"/>
-              <path d="M12 -7 A 9 9 0 0 1 12 7"/>
-            </g>
-
-            <!-- ============== SensitivityCard ============== -->
-            <rect x="14" y="552" width="352" height="68" rx="14" fill="#141318" stroke="rgba(133,183,235,0.20)" stroke-width="0.7"/>
-            <text x="28" y="572" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">SENSITIVITY</text>
-            <!-- LOW chip -->
-            <rect x="28" y="582" width="100" height="24" rx="6" fill="#0a0a0d" stroke="rgba(255,255,255,0.10)"/>
-            <text x="78" y="599" fill="#7A7A82" font-family="Inter, sans-serif" font-size="10" font-weight="900" letter-spacing="2" text-anchor="middle">LOW</text>
-            <!-- MEDIUM chip — active -->
-            <rect x="138" y="582" width="100" height="24" rx="6" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="0.6"/>
-            <text x="188" y="599" fill="#85B7EB" font-family="Inter, sans-serif" font-size="10" font-weight="900" letter-spacing="2" text-anchor="middle">MEDIUM</text>
-            <!-- HIGH chip -->
-            <rect x="248" y="582" width="100" height="24" rx="6" fill="#0a0a0d" stroke="rgba(255,255,255,0.10)"/>
-            <text x="298" y="599" fill="#7A7A82" font-family="Inter, sans-serif" font-size="10" font-weight="900" letter-spacing="2" text-anchor="middle">HIGH</text>
-
-            <!-- ============== ReadoutsCard ============== -->
-            <rect x="14" y="634" width="352" height="116" rx="14" fill="#141318" stroke="rgba(133,183,235,0.20)" stroke-width="0.7"/>
-            <text x="28" y="654" fill="#7A7A82" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">READOUTS</text>
-            <!-- Detected -->
-            <text x="28" y="678" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5">DETECTED</text>
-            <text x="28" y="704" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="600">440.0</text>
-            <text x="28" y="722" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="9">Hz</text>
-            <!-- Target -->
-            <text x="190" y="678" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5" text-anchor="middle">TARGET</text>
-            <text x="190" y="704" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="600" text-anchor="middle">A4</text>
-            <text x="190" y="722" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">440 Hz</text>
-            <!-- Deviation -->
-            <text x="352" y="678" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5" text-anchor="end">DEVIATION</text>
-            <text x="352" y="704" fill="#3CCB69" font-family="JetBrains Mono, monospace" font-size="22" font-weight="600" text-anchor="end">+0</text>
-            <text x="352" y="722" fill="#3CCB69" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">cents</text>
-
-            <!-- Bottom hint bar -->
-            <rect x="130" y="770" width="120" height="4" rx="2" fill="#1c1c22"/>
+            <rect x="130" y="772" width="120" height="4" rx="2" fill="#161b22"/>
           </svg>
         </div>
       </div>

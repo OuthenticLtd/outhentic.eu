@@ -298,7 +298,7 @@ a.hub-card { display: block; color: inherit; }
 .module-card.mc--audio      { color: var(--c-audio);      border-color: rgba(224,90,107,0.45); }
 .module-card.mc--midi       { color: var(--c-midi);       border-color: rgba(177,139,255,0.45); }
 .module-card.mc--practice   { color: var(--c-practice);   border-color: rgba(93,202,165,0.45); }
-.module-card.mc--metronome  { color: var(--c-metronome);  border-color: rgba(250,199,117,0.45); }
+.module-card.mc--metronome  { color: var(--c-metronome);  border-color: rgba(80,200,120,0.45); }
 .module-card.mc--tuner      { color: var(--c-tuner);      border-color: rgba(133,183,235,0.45); }
 .module-card.mc--signalgen  { color: var(--c-signalgen);  border-color: rgba(79,209,197,0.45); }
 .module-card.mc--meters     { color: var(--c-meters);     border-color: rgba(243,139,160,0.45); }
@@ -1606,7 +1606,7 @@ a.hub-card { display: block; color: inherit; }
   --c-audio:       #E05A6B;   /* muted red */
   --c-midi:        #B18BFF;   /* lavender */
   --c-practice:    #5DCAA5;   /* mint */
-  --c-metronome:   #FAC775;   /* amber */
+  --c-metronome:   #50C878;   /* green — matches the app's real metronome accent */
   --c-tuner:       #85B7EB;   /* sky blue */
   --c-signalgen:   #4FD1C5;   /* teal */
   --c-meters:      #F38BA0;   /* coral */
