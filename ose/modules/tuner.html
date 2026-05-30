@@ -69,9 +69,11 @@
             <defs>
               <linearGradient id="tnPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070a0e"/><stop offset="1" stop-color="#0b0f15"/></linearGradient>
               <linearGradient id="tnRim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f1f1f"/><stop offset="1" stop-color="#050505"/></linearGradient>
-              <linearGradient id="tnFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f5e7d"/><stop offset="0.55" stop-color="#2b425a"/><stop offset="1" stop-color="#22384d"/></linearGradient>
-              <radialGradient id="tnVig" cx="0.5" cy="0.5" r="0.75"><stop offset="0.6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.30"/></radialGradient>
+              <linearGradient id="tnFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5478a0"/><stop offset="0.55" stop-color="#3e5b78"/><stop offset="1" stop-color="#32485f"/></linearGradient>
+              <radialGradient id="tnVig" cx="0.5" cy="0.55" r="0.85"><stop offset="0.6" stop-color="#000" stop-opacity="0"/><stop offset="0.92" stop-color="#000" stop-opacity="0.14"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></radialGradient>
+              <linearGradient id="tnTopShadow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.55"/><stop offset="0.1" stop-color="#000" stop-opacity="0.25"/><stop offset="0.4" stop-color="#000" stop-opacity="0.04"/><stop offset="0.55" stop-color="#000" stop-opacity="0"/></linearGradient>
               <linearGradient id="tnLed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#080808"/><stop offset="1" stop-color="#1a1a1a"/></linearGradient>
+              <linearGradient id="tnCalib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c4258" stop-opacity="0.55"/><stop offset="0.5" stop-color="#1a2330" stop-opacity="0.5"/><stop offset="1" stop-color="#1c1814" stop-opacity="0.55"/></linearGradient>
               <style>
                 @keyframes tnSway { 0%,100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.2deg); } }
                 .tn-needle { transform-box: fill-box; transform-origin: 50% 100%; animation: tnSway 4.4s ease-in-out infinite; }
@@ -82,10 +84,11 @@
 
             <!-- ── TOP BAR ─────────────────────────────────────────────────── -->
             <g transform="translate(18,40)">
-              <g class="mk-nav" data-href="../index.html"><circle cx="14" cy="14" r="13" fill="none" stroke="#85B7EB" stroke-width="2"/><path d="M18 8 L11 14 L18 20" fill="none" stroke="#85B7EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+              <!-- back: ArrowBack (Material) in accent ring -->
+              <g class="mk-nav" data-href="../index.html"><circle cx="14" cy="14" r="13" fill="none" stroke="#85B7EB" stroke-width="2"/><g transform="translate(2,2)" fill="#85B7EB"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></g></g>
               <text x="40" y="20" fill="#F2F4F8" font-family="Inter, sans-serif" font-size="15" font-weight="700" letter-spacing="3">TUNER</text>
-              <!-- gear -->
-              <g class="mk-press" transform="translate(296,2)" stroke="#85B7EB" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="13" r="4"/><path d="M13 3 L13 6 M13 20 L13 23 M3 13 L6 13 M20 13 L23 13 M6 6 L8 8 M18 18 L20 20 M6 20 L8 18 M18 8 L20 6"/></g>
+              <!-- Settings cog (Material, FILLED) -->
+              <g class="mk-press" transform="translate(296,2)" fill="#85B7EB"><path fill-rule="evenodd" d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></g>
               <!-- skin swatch -->
               <rect class="mk-press" x="330" y="2" width="24" height="24" rx="6" fill="#85B7EB" fill-opacity="0.9" stroke="#FFFFFF" stroke-opacity="0.3"/>
             </g>
@@ -93,132 +96,169 @@
             <!-- ════════════ METER CARD ════════════ -->
             <rect x="14" y="78" width="352" height="290" rx="14" fill="#121821" stroke="rgba(133,183,235,0.30)" stroke-width="0.8"/>
 
-            <!-- MIC ···· + PTU · OSE strip -->
-            <g transform="translate(30,98)" stroke="#85B7EB" stroke-width="1.4" fill="none" stroke-linecap="round"><line x1="0" y1="9" x2="0" y2="3"/><line x1="3" y1="9" x2="3" y2="0"/><line x1="6" y1="9" x2="6" y2="5"/></g>
-            <text x="44" y="106" fill="#7d8da0" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" letter-spacing="2">MIC · · · ·</text>
-            <text x="350" y="106" fill="#5a6678" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" letter-spacing="2.5" text-anchor="end">PTU · OSE</text>
+            <!-- MIC + five dots (MicStatus) + PTU · OSE strip -->
+            <text x="30" y="106" fill="#7d8da0" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="1">MIC</text>
+            <g fill="#85B7EB" fill-opacity="0.30"><circle cx="56" cy="102.5" r="1.5"/><circle cx="62" cy="102.5" r="1.5"/><circle cx="68" cy="102.5" r="1.5"/><circle cx="74" cy="102.5" r="1.5"/><circle cx="80" cy="102.5" r="1.5"/></g>
+            <text x="350" y="106" fill="#5a6678" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="2.5" text-anchor="end">PTU · OSE</text>
 
-            <!-- meter face (bezelled screen) -->
-            <rect x="28" y="114" width="324" height="178" rx="12" fill="url(#tnRim)" stroke="rgba(255,255,255,0.12)" stroke-width="0.6"/>
-            <rect x="33" y="119" width="314" height="168" rx="8" fill="url(#tnFace)" stroke="rgba(0,0,0,0.7)" stroke-width="0.6"/>
-            <rect x="33" y="119" width="314" height="168" rx="8" fill="url(#tnVig)"/>
-            <line x1="47" y1="122" x2="333" y2="122" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="0.6"/>
+            <!-- meter face (bezelled screen): outer rim lip + accent-tinted recess -->
+            <rect x="28" y="114" width="324" height="148" rx="12" fill="url(#tnRim)" stroke="rgba(255,255,255,0.12)" stroke-width="0.6"/>
+            <rect x="33" y="119" width="314" height="138" rx="8" fill="url(#tnFace)" stroke="rgba(0,0,0,0.7)" stroke-width="0.6"/>
+            <rect x="33" y="119" width="314" height="138" rx="8" fill="url(#tnTopShadow)"/>
+            <rect x="33" y="119" width="314" height="138" rx="8" fill="url(#tnVig)"/>
+            <line x1="47" y1="121.5" x2="333" y2="121.5" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="0.6"/>
 
             <!-- ghost note A4 -->
-            <text x="183" y="190" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="66" font-weight="700" text-anchor="middle" letter-spacing="-2">A</text>
-            <text x="214" y="190" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="26" font-weight="700">4</text>
+            <text x="184" y="178" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="56" font-weight="700" text-anchor="middle" letter-spacing="-1">A</text>
+            <text x="213" y="178" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="22" font-weight="700">4</text>
 
-            <!-- "0" label above centre tick · CENT label right -->
-            <text x="205" y="222" fill="#FFFFFF" fill-opacity="0.92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">0</text>
-            <text x="332" y="225" fill="#FFFFFF" fill-opacity="0.62" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.5" text-anchor="end">CENT</text>
+            <!-- "0" label above centre tick · CENT label hugged right level with 0 -->
+            <text x="190" y="202" fill="#FFFFFF" fill-opacity="0.92" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">0</text>
+            <text x="341" y="210" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="8.5" font-weight="700" letter-spacing="1" text-anchor="end">CENT</text>
 
-            <!-- flat scale arc + ticks. pivot far below (cx=190, cy=560), radius~330, half-sweep 22°.
-                 Visible arc top sits at y~230. Ticks drawn pre-computed. -->
-            <g stroke-linecap="round">
-              <!-- baseline arc -->
-              <path d="M66 252 A 330 330 0 0 1 314 252" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1"/>
-              <!-- minor ticks (every ~5¢) -->
-              <g stroke="#FFFFFF" stroke-opacity="0.30" stroke-width="0.8">
-                <line x1="79" y1="247" x2="79.6" y2="251"/><line x1="91" y1="243" x2="91.5" y2="247"/><line x1="103" y1="240" x2="103.4" y2="244"/><line x1="116" y1="237" x2="116.3" y2="241"/>
-                <line x1="141" y1="233" x2="141.1" y2="237"/><line x1="153" y1="231" x2="153.1" y2="235"/><line x1="165" y1="231" x2="165" y2="235"/><line x1="178" y1="230" x2="178" y2="234"/>
-                <line x1="202" y1="230" x2="202" y2="234"/><line x1="215" y1="231" x2="215" y2="235"/><line x1="227" y1="231" x2="226.9" y2="235"/><line x1="239" y1="233" x2="238.9" y2="237"/>
-                <line x1="264" y1="237" x2="263.7" y2="241"/><line x1="277" y1="240" x2="276.6" y2="244"/><line x1="289" y1="243" x2="288.5" y2="247"/><line x1="301" y1="247" x2="300.4" y2="251"/>
+            <!-- flat scale arc + ticks. Pivot far below face (cx=190), half-sweep 22°.
+                 Centre "0" tick at y≈207 (≈60% of face). Ticks pre-computed to match
+                 the app's per-1¢ hierarchy: 0/±50/±25 = primary, %10 = secondary,
+                 %5 = tertiary, else faint. Triangle markers at ±25. -->
+            <g stroke-linecap="square">
+              <!-- faint arc baseline (the rail the ticks sit on) -->
+              <path d="M62 235 A 330 330 0 0 1 318 235" fill="none" stroke="#FFFFFF" stroke-opacity="0.62" stroke-width="1"/>
+
+              <!-- faint 1¢ ticks (else branch, alpha 0.18) -->
+              <g stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="0.8">
+                <line x1="70.5" y1="231.8" x2="70.7" y2="235.3"/><line x1="75.2" y1="229.9" x2="75.4" y2="233.4"/><line x1="80.1" y1="228.2" x2="80.3" y2="231.7"/>
+                <line x1="89.9" y1="225.0" x2="90.1" y2="228.5"/><line x1="95.0" y1="223.6" x2="95.1" y2="227.1"/><line x1="100.1" y1="222.3" x2="100.2" y2="225.8"/>
+                <line x1="110.6" y1="219.9" x2="110.7" y2="223.4"/><line x1="115.9" y1="218.9" x2="116.0" y2="222.4"/><line x1="121.3" y1="217.9" x2="121.4" y2="221.4"/>
+                <line x1="132.2" y1="216.3" x2="132.3" y2="219.8"/><line x1="137.8" y1="215.6" x2="137.8" y2="219.1"/><line x1="143.3" y1="215.0" x2="143.4" y2="218.5"/>
+                <line x1="154.5" y1="214.0" x2="154.5" y2="217.5"/><line x1="160.1" y1="213.6" x2="160.2" y2="217.1"/><line x1="165.8" y1="213.3" x2="165.8" y2="216.8"/>
+                <line x1="177.1" y1="212.8" x2="177.1" y2="216.3"/><line x1="182.8" y1="212.7" x2="182.8" y2="216.2"/>
+                <line x1="197.2" y1="212.7" x2="197.2" y2="216.2"/><line x1="202.9" y1="212.8" x2="202.9" y2="216.3"/>
+                <line x1="214.2" y1="213.3" x2="214.2" y2="216.8"/><line x1="219.8" y1="213.6" x2="219.9" y2="217.1"/><line x1="225.5" y1="214.0" x2="225.5" y2="217.5"/>
+                <line x1="236.6" y1="215.0" x2="236.7" y2="218.5"/><line x1="242.2" y1="215.6" x2="242.2" y2="219.1"/><line x1="247.7" y1="216.3" x2="247.8" y2="219.8"/>
+                <line x1="258.6" y1="217.9" x2="258.7" y2="221.4"/><line x1="264.0" y1="218.9" x2="264.1" y2="222.4"/><line x1="269.3" y1="219.9" x2="269.4" y2="223.4"/>
+                <line x1="279.8" y1="222.3" x2="279.9" y2="225.8"/><line x1="284.9" y1="223.6" x2="285.0" y2="227.1"/><line x1="289.9" y1="225.0" x2="290.1" y2="228.5"/>
+                <line x1="299.7" y1="228.2" x2="299.9" y2="231.7"/><line x1="304.6" y1="229.9" x2="304.8" y2="233.4"/><line x1="309.3" y1="231.8" x2="309.5" y2="235.3"/>
               </g>
-              <!-- major ticks (every 10¢) -->
-              <g stroke="#FFFFFF" stroke-opacity="0.62" stroke-width="1.2">
-                <line x1="103" y1="240" x2="105" y2="247"/><line x1="153" y1="231" x2="153.5" y2="239"/><line x1="227" y1="231" x2="226.5" y2="239"/><line x1="277" y1="240" x2="275" y2="247"/>
+
+              <!-- %5 ticks (tertiary, alpha 0.36) -->
+              <g stroke="#FFFFFF" stroke-opacity="0.36" stroke-width="1">
+                <line x1="85.0" y1="226.5" x2="85.3" y2="231.6"/><line x1="105.4" y1="220.9" x2="105.6" y2="226.0"/>
+                <line x1="126.8" y1="216.8" x2="126.9" y2="221.9"/><line x1="148.9" y1="214.2" x2="149.0" y2="219.3"/>
+                <line x1="171.4" y1="212.9" x2="171.5" y2="218.0"/><line x1="208.6" y1="212.9" x2="208.5" y2="218.0"/>
+                <line x1="231.1" y1="214.2" x2="231.0" y2="219.3"/><line x1="253.2" y1="216.8" x2="253.1" y2="221.9"/>
+                <line x1="274.6" y1="220.9" x2="274.4" y2="226.0"/><line x1="295.0" y1="226.5" x2="294.7" y2="231.6"/>
               </g>
-              <!-- ±25 ticks + triangle markers -->
-              <line x1="128" y1="235" x2="130" y2="245" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
-              <line x1="252" y1="235" x2="250" y2="245" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
-              <path d="M128 232 L132 226 L124 227 Z" fill="#FFFFFF" fill-opacity="0.92"/>
-              <path d="M252 232 L248 227 L256 226 Z" fill="#FFFFFF" fill-opacity="0.92"/>
-              <!-- centre "0" tick -->
-              <line x1="190" y1="228" x2="190" y2="247" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.8"/>
-              <!-- ±50 end ticks -->
-              <line x1="66" y1="252" x2="69" y2="260" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
-              <line x1="314" y1="252" x2="311" y2="260" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
+
+              <!-- %10 ticks (secondary, alpha 0.62) -->
+              <g stroke="#FFFFFF" stroke-opacity="0.62" stroke-width="1">
+                <line x1="116.0" y1="218.0" x2="116.3" y2="224.8"/><line x1="137.6" y1="214.8" x2="137.7" y2="221.6"/>
+                <line x1="160.0" y1="212.9" x2="160.1" y2="219.7"/><line x1="220.0" y1="212.9" x2="219.9" y2="219.7"/>
+                <line x1="242.4" y1="214.8" x2="242.3" y2="221.6"/><line x1="264.0" y1="218.0" x2="263.7" y2="224.8"/>
+              </g>
+
+              <!-- ±25 ticks (primary) + triangle markers -->
+              <line x1="106.5" y1="219.2" x2="107.0" y2="229.4" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
+              <line x1="273.5" y1="219.2" x2="273.0" y2="229.4" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
+              <path d="M105.8 217.6 L102.2 213.2 L110.1 213.6 Z" fill="#FFFFFF" fill-opacity="0.92"/>
+              <path d="M274.2 217.6 L269.9 213.6 L277.8 213.2 Z" fill="#FFFFFF" fill-opacity="0.92"/>
+
+              <!-- ±50 end ticks (primary) -->
+              <line x1="62.0" y1="232.5" x2="64.4" y2="245.4" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
+              <line x1="318.0" y1="232.5" x2="315.6" y2="245.4" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
+
+              <!-- centre "0" tick (primary, longest, widest) -->
+              <line x1="190" y1="207" x2="190" y2="223" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.8"/>
             </g>
+
+            <!-- dashed centerline rail from "0" tick down through the face -->
+            <line x1="190" y1="207" x2="190" y2="253" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="0.7" stroke-dasharray="2 2"/>
 
             <!-- needle (near-vertical = in tune); subtle idle sway via CSS -->
             <g class="tn-needle">
-              <line x1="190" y1="252" x2="190" y2="135" stroke="#0c0c0c" stroke-width="2.4" stroke-linecap="round"/>
-              <circle cx="190" cy="252" r="4.5" fill="#0c0c0c"/>
+              <line x1="191" y1="240" x2="191" y2="125" stroke="#000000" stroke-opacity="0.35" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="190" y1="240" x2="190" y2="124" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.8" stroke-linecap="round"/>
             </g>
 
             <!-- end labels + Hz readout -->
-            <text x="46" y="270" fill="#FFFFFF" fill-opacity="0.62" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="0.5">-50</text>
-            <text x="334" y="270" fill="#FFFFFF" fill-opacity="0.62" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="0.5" text-anchor="end">+50</text>
-            <text x="190" y="274" fill="#FFFFFF" fill-opacity="0.78" font-family="JetBrains Mono, monospace" font-size="17" font-weight="500" text-anchor="middle">440.0 Hz</text>
+            <text x="64" y="248" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5">-50</text>
+            <text x="316" y="248" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5" text-anchor="end">+50</text>
+            <text x="190" y="250" fill="#FFFFFF" fill-opacity="0.92" font-family="Inter, sans-serif" font-size="15" font-weight="700" letter-spacing="0.5" text-anchor="middle">440.0 Hz</text>
 
-            <!-- LISTENING + LED strip -->
-            <text x="190" y="320" fill="#8b99ab" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">LISTENING</text>
-            <rect x="130" y="332" width="120" height="28" rx="10" fill="url(#tnLed)" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="0.6"/>
-            <text x="146" y="350" fill="#E2503A" fill-opacity="0.3" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">♭</text>
-            <circle cx="166" cy="346" r="5" fill="#E2503A" fill-opacity="0.25"/>
-            <circle cx="190" cy="346" r="7" fill="#3CCB69"/><circle cx="188" cy="344" r="1.6" fill="#FFFFFF" fill-opacity="0.55"/>
-            <circle cx="214" cy="346" r="5" fill="#E2503A" fill-opacity="0.25"/>
-            <text x="234" y="350" fill="#E2503A" fill-opacity="0.3" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">♯</text>
+            <!-- black recessed display gap (under the meter face, above LISTENING) -->
+            <rect x="28" y="268" width="324" height="26" rx="6" fill="#080808" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="0.6"/>
+
+            <!-- LISTENING + 3-LED strip -->
+            <text x="190" y="318" fill="#8b99ab" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">LISTENING</text>
+            <rect x="130" y="330" width="120" height="30" rx="10" fill="url(#tnLed)" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="0.6"/>
+            <text x="146" y="349" fill="#E2503A" fill-opacity="0.3" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">♭</text>
+            <circle cx="166" cy="345" r="5" fill="#E2503A" fill-opacity="0.20"/><circle cx="166" cy="345" r="5" fill="none" stroke="#000000" stroke-opacity="0.45" stroke-width="0.5"/>
+            <circle cx="190" cy="345" r="7" fill="#3CCB69"/><circle cx="190" cy="345" r="7" fill="none" stroke="#000000" stroke-opacity="0.45" stroke-width="0.5"/><circle cx="188" cy="343" r="1.6" fill="#FFFFFF" fill-opacity="0.55"/>
+            <circle cx="214" cy="345" r="5" fill="#E2503A" fill-opacity="0.20"/><circle cx="214" cy="345" r="5" fill="none" stroke="#000000" stroke-opacity="0.45" stroke-width="0.5"/>
+            <text x="234" y="349" fill="#E2503A" fill-opacity="0.3" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">♯</text>
 
             <!-- ════════════ REFERENCE & CALIBRATION ════════════ -->
             <rect x="14" y="380" width="352" height="118" rx="14" fill="#121821" stroke="rgba(133,183,235,0.30)" stroke-width="0.8"/>
             <text x="30" y="402" fill="#8b99ab" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="2">REFERENCE &amp; CALIBRATION</text>
 
-            <!-- FORK pill -->
+            <!-- FORK pill (TuningForkIcon, 24×24 app glyph) -->
             <g class="mk-press"><rect x="28" y="414" width="58" height="68" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(52,432)" fill="#c3cedb" stroke="#c3cedb"><path d="M0 0 L3 0 L3 11 Q3 13 5 13 Q7 13 7 11 L7 0 L10 0 L10 11 Q10 17 6 17 L6 21 L4 21 L4 17 Q0 17 0 11 Z"/></g>
+              <g transform="translate(45,436)" fill="#7d8da0"><path d="M7 2 L10 2 L10 13 Q10 15 12 15 Q14 15 14 13 L14 2 L17 2 L17 13 Q17 19 13 19 L13 23 L11 23 L11 19 Q7 19 7 13 Z"/></g>
             </g>
-            <!-- minus stepper -->
-            <g class="mk-step" data-step-target="tunerRef" data-step="-1"><rect x="92" y="414" width="50" height="68" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/><line x1="105" y1="448" x2="129" y2="448" stroke="#d3dbe6" stroke-width="2.2" stroke-linecap="round"/></g>
-            <!-- calibration value (boxed) -->
-            <rect x="148" y="414" width="84" height="68" rx="11" fill="#0f1620" stroke="rgba(133,183,235,0.45)" stroke-width="1"/>
-            <text id="tunerRef" data-val="440" data-suffix=" Hz" x="190" y="454" fill="#eef2f7" font-family="Inter, sans-serif" font-size="22" font-weight="700" text-anchor="middle">440<tspan font-size="11" fill="#8b99ab" font-weight="500" dx="3"> Hz</tspan></text>
-            <!-- plus stepper -->
-            <g class="mk-step" data-step-target="tunerRef" data-step="1"><rect x="238" y="414" width="50" height="68" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/><line x1="251" y1="448" x2="275" y2="448" stroke="#d3dbe6" stroke-width="2.2" stroke-linecap="round"/><line x1="263" y1="436" x2="263" y2="460" stroke="#d3dbe6" stroke-width="2.2" stroke-linecap="round"/></g>
-            <!-- SPEAKER pill -->
+            <!-- minus stepper (Remove, Material) -->
+            <g class="mk-step" data-step-target="tunerRef" data-step="-1"><rect x="92" y="414" width="50" height="68" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+              <g transform="translate(105,436)" fill="#d3dbe6"><path d="M19 13H5v-2h14v2z"/></g>
+            </g>
+            <!-- calibration value (boxed, mono light) -->
+            <rect x="148" y="414" width="84" height="68" rx="8" fill="url(#tnCalib)" stroke="rgba(133,183,235,0.55)" stroke-width="0.8"/>
+            <text id="tunerRef" data-val="440" data-suffix=" Hz" x="187" y="455" fill="#FFFFFF" font-family="'JetBrains Mono', monospace" font-size="24" font-weight="300" text-anchor="middle" letter-spacing="-1">440<tspan font-size="9" fill="#FFFFFF" fill-opacity="0.78" font-weight="800" dx="4" dy="-1" letter-spacing="1"> Hz</tspan></text>
+            <!-- plus stepper (Add, Material) -->
+            <g class="mk-step" data-step-target="tunerRef" data-step="1"><rect x="238" y="414" width="50" height="68" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+              <g transform="translate(251,436)" fill="#d3dbe6"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></g>
+            </g>
+            <!-- SPEAKER pill (VolumeUp, Material) -->
             <g class="mk-press"><rect x="294" y="414" width="58" height="68" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(312,436)" stroke="#c3cedb" stroke-width="1.8" fill="#c3cedb" stroke-linejoin="round"><path d="M0 6 L5 6 L11 0 L11 24 L5 18 L0 18 Z"/><path d="M16 6 Q20 12 16 18" fill="none" stroke-linecap="round"/><path d="M19 2 Q26 12 19 22" fill="none" stroke-linecap="round"/></g>
+              <g transform="translate(311,436)" fill="#7d8da0"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></g>
             </g>
 
             <!-- ════════════ SENSITIVITY ════════════ -->
             <rect x="14" y="510" width="352" height="252" rx="14" fill="#121821" stroke="rgba(133,183,235,0.30)" stroke-width="0.8"/>
             <text x="30" y="534" fill="#8b99ab" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="2">SENSITIVITY</text>
 
-            <!-- MEDIUM (selected, full-width) -->
+            <!-- MEDIUM (selected, full-width) — SignalCellularAlt2Bar -->
             <g class="mk-pick" data-pick="sens">
-              <rect class="mk-fill" x="28" y="544" width="324" height="56" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1"/>
-              <g transform="translate(150,562)" stroke="#85B7EB" stroke-width="2" stroke-linecap="round"><line x1="0" y1="20" x2="0" y2="14"/><line x1="6" y1="20" x2="6" y2="9"/><line x1="12" y1="20" x2="12" y2="4"/></g>
-              <text x="200" y="578" fill="#85B7EB" font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" text-anchor="middle">MEDIUM</text>
+              <rect class="mk-fill" x="28" y="544" width="324" height="56" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1.5"/>
+              <g transform="translate(132,560)" fill="#85B7EB"><path d="M5 14h3v6H5zm6-5h3v11h-3z"/></g>
+              <text x="200" y="578" fill="#85B7EB" font-family="Inter, sans-serif" font-size="13" font-weight="900" letter-spacing="1.5" text-anchor="middle">MEDIUM</text>
             </g>
 
             <!-- 2×2 grid -->
-            <!-- VERY SENSITIVE -->
+            <!-- VERY SENSITIVE — SignalCellular4Bar (filled triangle) -->
             <g class="mk-pick" data-pick="sens">
-              <rect class="mk-fill" x="28" y="608" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1" style="display:none"/>
+              <rect class="mk-fill" x="28" y="608" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1.5" style="display:none"/>
               <rect x="28" y="608" width="158" height="64" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(50,630)" stroke="#9aa6b6" stroke-width="2" stroke-linecap="round"><line x1="0" y1="18" x2="0" y2="13"/><line x1="5" y1="18" x2="5" y2="9"/><line x1="10" y1="18" x2="10" y2="5"/><line x1="15" y1="18" x2="15" y2="0"/></g>
-              <text x="118" y="645" fill="#aebccd" font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5" text-anchor="middle">VERY SENSITIVE</text>
+              <g transform="translate(40,628)" fill="#9aa6b6"><path d="M2 22h20V2z"/></g>
+              <text x="118" y="645" fill="#9aa6b6" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="0.5" text-anchor="middle">VERY SENSITIVE</text>
             </g>
-            <!-- SENSITIVE -->
+            <!-- SENSITIVE — SignalCellularAlt (3 bars) -->
             <g class="mk-pick" data-pick="sens">
-              <rect class="mk-fill" x="194" y="608" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1" style="display:none"/>
+              <rect class="mk-fill" x="194" y="608" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1.5" style="display:none"/>
               <rect x="194" y="608" width="158" height="64" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(222,630)" stroke="#9aa6b6" stroke-width="2" stroke-linecap="round"><line x1="0" y1="18" x2="0" y2="13"/><line x1="5" y1="18" x2="5" y2="8"/><line x1="10" y1="18" x2="10" y2="3"/></g>
-              <text x="282" y="645" fill="#aebccd" font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5" text-anchor="middle">SENSITIVE</text>
+              <g transform="translate(214,628)" fill="#9aa6b6"><path d="M17 4h3v16h-3zM5 14h3v6H5zm6-5h3v11h-3z"/></g>
+              <text x="282" y="645" fill="#9aa6b6" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="0.5" text-anchor="middle">SENSITIVE</text>
             </g>
-            <!-- DULL -->
+            <!-- DULL — SignalCellularAlt1Bar (1 bar) -->
             <g class="mk-pick" data-pick="sens">
-              <rect class="mk-fill" x="28" y="682" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1" style="display:none"/>
+              <rect class="mk-fill" x="28" y="682" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1.5" style="display:none"/>
               <rect x="28" y="682" width="158" height="64" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(62,704)" stroke="#9aa6b6" stroke-width="2" stroke-linecap="round"><line x1="0" y1="18" x2="0" y2="13"/><line x1="5" y1="18" x2="5" y2="9"/></g>
-              <text x="118" y="719" fill="#aebccd" font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5" text-anchor="middle">DULL</text>
+              <g transform="translate(58,702)" fill="#9aa6b6"><path d="M5 14h3v6H5z"/></g>
+              <text x="118" y="719" fill="#9aa6b6" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="0.5" text-anchor="middle">DULL</text>
             </g>
-            <!-- VERY DULL -->
+            <!-- VERY DULL — SignalCellular0Bar (outlined empty triangle) -->
             <g class="mk-pick" data-pick="sens">
-              <rect class="mk-fill" x="194" y="682" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1" style="display:none"/>
+              <rect class="mk-fill" x="194" y="682" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1.5" style="display:none"/>
               <rect x="194" y="682" width="158" height="64" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(228,704)" stroke="#9aa6b6" stroke-width="2" stroke-linecap="round"><line x1="0" y1="18" x2="0" y2="13"/></g>
-              <text x="282" y="719" fill="#aebccd" font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5" text-anchor="middle">VERY DULL</text>
+              <g transform="translate(218,702)" fill="#9aa6b6"><path d="M2 22h20V2L2 22zm18-4.83L20 20H6.83L20 6.83z"/></g>
+              <text x="282" y="719" fill="#9aa6b6" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="0.5" text-anchor="middle">VERY DULL</text>
             </g>
 
             <!-- home indicator -->

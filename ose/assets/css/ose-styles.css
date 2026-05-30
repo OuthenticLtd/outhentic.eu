@@ -1640,12 +1640,10 @@ a.hub-card { display: block; color: inherit; }
   --c-card-line:   rgba(255,255,255,0.06);
 }
 
-/* GlowingO logo — inner wave breathes at ~120 BPM */
-@keyframes glowo-breathe {
-  0%, 100% { opacity: 0.55; transform: scaleY(1); }
-  50%      { opacity: 1.00; transform: scaleY(1.08); }
-}
-.anim-glowo-wave { animation: glowo-breathe 1s ease-in-out infinite; transform-origin: 50% 50%; transform-box: fill-box; }
+/* GlowingO logo — the inner wave runs a traveling sine ripple driven by JS
+   (assets/js/ose-main.js), matching the app's GlowingO exactly. No CSS
+   transform here: a scale pulse would distort the JS-rebuilt path. */
+.anim-glowo-wave { animation: none; }
 
 /* REC red pulse */
 @keyframes rec-pulse {
