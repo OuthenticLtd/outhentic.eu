@@ -114,62 +114,59 @@
             </g>
 
             <!-- CLICK-TRACK FACE HERO CARD -->
-            <rect x="14" y="86" width="352" height="138" rx="16" fill="url(#mtCard)" stroke="rgba(80,200,120,0.22)" stroke-width="0.9"/>
-            <text x="34" y="124" fill="#EAF4EE" font-family="Inter, sans-serif" font-size="44" font-weight="300" letter-spacing="-1">120</text>
-            <text x="35" y="146" fill="#6f8a78" font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing="1.5">BPM · ALLEGRO</text>
-            <!-- tempo polygon (diamond for 4/4) -->
-            <g transform="translate(190,118)"><path d="M0 -22 L22 0 L0 22 L-22 0 Z" fill="none" stroke="#50C878" stroke-opacity="0.55" stroke-width="1.6"/><path d="M0 -11 L11 0 L0 11 L-11 0 Z" fill="#50C878" fill-opacity="0.16" stroke="#50C878" stroke-opacity="0.4" stroke-width="1"/></g>
-            <!-- meter readout -->
-            <text x="346" y="120" text-anchor="end" font-family="Inter, sans-serif" font-weight="600"><tspan fill="#EAF4EE" font-size="26">4</tspan><tspan fill="#4f6358" font-size="20"> / </tspan><tspan fill="#EAF4EE" font-size="26">4</tspan></text>
-            <text x="346" y="140" text-anchor="end" fill="#6f8a78" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">METER</text>
-
+            <rect x="14" y="84" width="352" height="156" rx="16" fill="url(#mtCard)" stroke="rgba(80,200,120,0.22)" stroke-width="0.9"/>
+            <text x="34" y="126" fill="#EAF4EE" font-family="Inter, sans-serif" font-size="44" font-weight="300" letter-spacing="-1">120</text>
+            <text x="35" y="148" fill="#6f8a78" font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing="1.5">BPM · ALLEGRO</text>
+            <g transform="translate(190,120)"><path d="M0 -22 L22 0 L0 22 L-22 0 Z" fill="none" stroke="#50C878" stroke-opacity="0.55" stroke-width="1.6"/><path d="M0 -11 L11 0 L0 11 L-11 0 Z" fill="#50C878" fill-opacity="0.16" stroke="#50C878" stroke-opacity="0.4" stroke-width="1"/></g>
+            <text x="346" y="122" text-anchor="end" font-family="Inter, sans-serif" font-weight="600"><tspan fill="#EAF4EE" font-size="26">4</tspan><tspan fill="#4f6358" font-size="20"> / </tspan><tspan fill="#EAF4EE" font-size="26">4</tspan></text>
+            <text x="346" y="142" text-anchor="end" fill="#6f8a78" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">METER</text>
             <!-- beat strip -->
-            <rect x="30" y="156" width="320" height="56" rx="10" fill="#0c1611" stroke="rgba(255,255,255,0.05)"/>
-            <rect class="mk-beat" x="44" y="164" width="68" height="40" rx="8" fill="url(#mtBeat)"/>
-            <rect class="mk-beat" x="120" y="170" width="68" height="34" rx="8" fill="rgba(255,255,255,0.10)"/>
-            <rect class="mk-beat" x="196" y="170" width="68" height="34" rx="8" fill="rgba(255,255,255,0.10)"/>
-            <rect class="mk-beat" x="272" y="170" width="68" height="34" rx="8" fill="rgba(255,255,255,0.10)"/>
-            <g font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle" pointer-events="none"><text x="78" y="198" fill="#0c1611" font-weight="700">1</text><text x="154" y="195" fill="#7c8a80">2</text><text x="230" y="195" fill="#7c8a80">3</text><text x="306" y="195" fill="#7c8a80">4</text></g>
+            <rect x="30" y="166" width="320" height="60" rx="10" fill="#0c1611" stroke="rgba(255,255,255,0.05)"/>
+            <rect class="mk-beat" x="44" y="174" width="68" height="44" rx="8" fill="url(#mtBeat)"/>
+            <rect class="mk-beat" x="120" y="180" width="68" height="38" rx="8" fill="rgba(255,255,255,0.10)"/>
+            <rect class="mk-beat" x="196" y="180" width="68" height="38" rx="8" fill="rgba(255,255,255,0.10)"/>
+            <rect class="mk-beat" x="272" y="180" width="68" height="38" rx="8" fill="rgba(255,255,255,0.10)"/>
+            <g font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle" pointer-events="none"><text x="78" y="201" fill="#0c1611" font-weight="700">1</text><text x="154" y="203" fill="#7c8a80">2</text><text x="230" y="203" fill="#7c8a80">3</text><text x="306" y="203" fill="#7c8a80">4</text></g>
 
             <!-- BPM STEPPER ROW -->
-            <rect x="14" y="240" width="352" height="60" rx="16" fill="url(#mtCard)" stroke="rgba(80,200,120,0.18)" stroke-width="0.9"/>
-            <g class="mk-press mk-step" data-step-target="metroBpm" data-step="-1"><rect x="28" y="252" width="44" height="36" rx="11" fill="#16271d" stroke="rgba(80,200,120,0.45)"/><line x1="42" y1="270" x2="58" y2="270" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/></g>
-            <rect x="86" y="250" width="208" height="40" rx="12" fill="#0c1611" stroke="rgba(80,200,120,0.30)"/>
-            <text x="118" y="277" fill="#3b4d43" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle">19</text>
-            <text id="metroBpm" data-metro-bpm data-val="120" x="190" y="280" fill="#EAF4EE" font-family="Inter, sans-serif" font-size="26" font-weight="700" text-anchor="middle">120</text>
-            <text x="262" y="277" fill="#3b4d43" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle">12</text>
-            <g class="mk-press mk-step" data-step-target="metroBpm" data-step="1"><rect x="308" y="252" width="44" height="36" rx="11" fill="#16271d" stroke="rgba(80,200,120,0.45)"/><line x1="322" y1="270" x2="338" y2="270" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/><line x1="330" y1="262" x2="330" y2="278" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/></g>
+            <rect x="14" y="256" width="352" height="64" rx="16" fill="url(#mtCard)" stroke="rgba(80,200,120,0.18)" stroke-width="0.9"/>
+            <g class="mk-press mk-step" data-step-target="metroBpm" data-step="-1"><rect x="28" y="270" width="44" height="36" rx="11" fill="#16271d" stroke="rgba(80,200,120,0.45)"/><line x1="42" y1="288" x2="58" y2="288" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/></g>
+            <rect x="86" y="268" width="208" height="40" rx="12" fill="#0c1611" stroke="rgba(80,200,120,0.30)"/>
+            <text x="118" y="295" fill="#3b4d43" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle">19</text>
+            <text id="metroBpm" data-metro-bpm data-val="120" x="190" y="298" fill="#EAF4EE" font-family="Inter, sans-serif" font-size="26" font-weight="700" text-anchor="middle">120</text>
+            <text x="262" y="295" fill="#3b4d43" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle">12</text>
+            <g class="mk-press mk-step" data-step-target="metroBpm" data-step="1"><rect x="308" y="270" width="44" height="36" rx="11" fill="#16271d" stroke="rgba(80,200,120,0.45)"/><line x1="322" y1="288" x2="338" y2="288" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/><line x1="330" y1="280" x2="330" y2="296" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/></g>
 
             <!-- BEATS / NOTE ROW -->
-            <rect x="14" y="312" width="352" height="60" rx="16" fill="url(#mtCard)" stroke="rgba(80,200,120,0.18)" stroke-width="0.9"/>
-            <g class="mk-press"><rect x="28" y="324" width="40" height="36" rx="11" fill="#16271d" stroke="rgba(80,200,120,0.45)"/><line x1="40" y1="342" x2="56" y2="342" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/></g>
-            <text x="86" y="351" fill="#EAF4EE" font-family="Inter, sans-serif" font-size="24" font-weight="700" text-anchor="middle">4</text>
-            <g class="mk-press"><rect x="106" y="324" width="40" height="36" rx="11" fill="#16271d" stroke="rgba(80,200,120,0.45)"/><line x1="118" y1="342" x2="134" y2="342" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/><line x1="126" y1="334" x2="126" y2="350" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/></g>
-            <text x="166" y="346" fill="#6f8a78" font-family="JetBrains Mono, monospace" font-size="8.5" letter-spacing="1">BEATS</text>
-            <text x="206" y="346" fill="#6f8a78" font-family="JetBrains Mono, monospace" font-size="8.5" letter-spacing="1">NOTE</text>
-            <g class="mk-pick" data-pick="note"><rect class="mk-fill" x="246" y="324" width="34" height="36" rx="10" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.8"/><text x="263" y="347" fill="#50C878" font-family="Inter, sans-serif" font-size="14" font-weight="700" text-anchor="middle" pointer-events="none">4</text></g>
-            <g class="mk-pick" data-pick="note"><rect class="mk-fill" x="284" y="324" width="34" height="36" rx="10" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.8" style="display:none"/><text x="301" y="347" fill="#9aa89f" font-family="Inter, sans-serif" font-size="14" font-weight="700" text-anchor="middle" pointer-events="none">8</text></g>
-            <g class="mk-pick" data-pick="note"><rect class="mk-fill" x="322" y="324" width="34" height="36" rx="10" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.8" style="display:none"/><text x="339" y="347" fill="#9aa89f" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle" pointer-events="none">16</text></g>
+            <rect x="14" y="334" width="352" height="64" rx="16" fill="url(#mtCard)" stroke="rgba(80,200,120,0.18)" stroke-width="0.9"/>
+            <g class="mk-press"><rect x="28" y="348" width="40" height="36" rx="11" fill="#16271d" stroke="rgba(80,200,120,0.45)"/><line x1="40" y1="366" x2="56" y2="366" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/></g>
+            <text x="86" y="375" fill="#EAF4EE" font-family="Inter, sans-serif" font-size="24" font-weight="700" text-anchor="middle">4</text>
+            <g class="mk-press"><rect x="106" y="348" width="40" height="36" rx="11" fill="#16271d" stroke="rgba(80,200,120,0.45)"/><line x1="118" y1="366" x2="134" y2="366" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/><line x1="126" y1="358" x2="126" y2="374" stroke="#9fd9b4" stroke-width="2.2" stroke-linecap="round"/></g>
+            <text x="166" y="370" fill="#6f8a78" font-family="JetBrains Mono, monospace" font-size="8.5" letter-spacing="1">BEATS</text>
+            <text x="206" y="370" fill="#6f8a78" font-family="JetBrains Mono, monospace" font-size="8.5" letter-spacing="1">NOTE</text>
+            <g class="mk-pick" data-pick="note"><rect class="mk-fill" x="246" y="348" width="34" height="36" rx="10" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.8"/><text x="263" y="371" fill="#50C878" font-family="Inter, sans-serif" font-size="14" font-weight="700" text-anchor="middle" pointer-events="none">4</text></g>
+            <g class="mk-pick" data-pick="note"><rect class="mk-fill" x="284" y="348" width="34" height="36" rx="10" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.8" style="display:none"/><text x="301" y="371" fill="#9aa89f" font-family="Inter, sans-serif" font-size="14" font-weight="700" text-anchor="middle" pointer-events="none">8</text></g>
+            <g class="mk-pick" data-pick="note"><rect class="mk-fill" x="322" y="348" width="34" height="36" rx="10" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.8" style="display:none"/><text x="339" y="371" fill="#9aa89f" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle" pointer-events="none">16</text></g>
 
             <!-- CLICK VOLUME SLIDER -->
-            <rect x="14" y="384" width="352" height="58" rx="16" fill="url(#mtCard)" stroke="rgba(80,200,120,0.18)" stroke-width="0.9"/>
-            <text x="32" y="406" fill="#6f8a78" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.5">CLICK VOLUME</text>
-            <text data-knob-val="metroVol" data-fmt="pct" x="348" y="406" text-anchor="end" fill="#50C878" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">80%</text>
+            <rect x="14" y="412" width="352" height="64" rx="16" fill="url(#mtCard)" stroke="rgba(80,200,120,0.18)" stroke-width="0.9"/>
+            <text x="32" y="436" fill="#6f8a78" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.5">CLICK VOLUME</text>
+            <text data-knob-val="metroVol" data-fmt="pct" x="348" y="436" text-anchor="end" fill="#50C878" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">80%</text>
             <g class="mk-slider" data-param="metroVol" data-fmt="pct" data-min="0" data-max="1" data-val="0.8" data-x0="32" data-x1="348">
-              <rect x="32" y="421" width="316" height="6" rx="3" fill="rgba(255,255,255,0.12)"/>
-              <rect class="mk-sfill" x="32" y="421" width="252.8" height="6" rx="3" fill="#50C878"/>
-              <circle class="mk-sthumb" cx="284.8" cy="424" r="9" fill="#6fe39a" stroke="#0d1610" stroke-width="2"/>
+              <rect x="32" y="454" width="316" height="6" rx="3" fill="rgba(255,255,255,0.12)"/>
+              <rect class="mk-sfill" x="32" y="454" width="252.8" height="6" rx="3" fill="#50C878"/>
+              <circle class="mk-sthumb" cx="284.8" cy="457" r="9" fill="#6fe39a" stroke="#0d1610" stroke-width="2"/>
             </g>
 
             <!-- TAP / PRESETS ROW -->
-            <g class="mk-press"><rect x="14" y="454" width="166" height="46" rx="13" fill="#11201a" stroke="rgba(80,200,120,0.45)" stroke-width="1.2"/><text x="97" y="483" fill="#50C878" font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3" text-anchor="middle" pointer-events="none">TAP</text></g>
-            <g class="mk-press"><rect x="190" y="454" width="176" height="46" rx="13" fill="#11201a" stroke="rgba(80,200,120,0.30)" stroke-width="1"/><text x="278" y="483" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" pointer-events="none"><tspan fill="#50C878" letter-spacing="1.5">PRESETS · </tspan><tspan fill="#EAF4EE" letter-spacing="1">DEFAULT</tspan></text></g>
+            <g class="mk-press"><rect x="14" y="492" width="166" height="48" rx="13" fill="#11201a" stroke="rgba(80,200,120,0.45)" stroke-width="1.2"/><text x="97" y="522" fill="#50C878" font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3" text-anchor="middle" pointer-events="none">TAP</text></g>
+            <g class="mk-press"><rect x="190" y="492" width="176" height="48" rx="13" fill="#11201a" stroke="rgba(80,200,120,0.30)" stroke-width="1"/><text x="278" y="522" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" pointer-events="none"><tspan fill="#50C878" letter-spacing="1.5">PRESETS · </tspan><tspan fill="#EAF4EE" letter-spacing="1">DEFAULT</tspan></text></g>
 
-            <!-- BIG START BUTTON -->
+            <!-- START BUTTON -->
             <g class="mk-press mk-metro">
-              <rect x="14" y="516" width="352" height="232" rx="22" fill="url(#mtStart)"/>
-              <g transform="translate(150,620)" stroke="#0c2014" stroke-width="4.2" fill="none" stroke-linecap="round"><path d="M14 6 A18 18 0 1 1 4 9"/><line x1="14" y1="2" x2="14" y2="20"/></g>
-              <text data-metro-label x="206" y="644" fill="#0c2014" font-family="Inter, sans-serif" font-size="30" font-weight="800" letter-spacing="3" pointer-events="none">START</text>
+              <rect x="14" y="566" width="352" height="120" rx="20" fill="url(#mtStart)"/>
+              <g transform="translate(120,612)" stroke="#0c2014" stroke-width="3.4" fill="none" stroke-linecap="round"><path d="M11 5 A14 14 0 1 1 3 7"/><line x1="11" y1="1" x2="11" y2="16"/></g>
+              <text data-metro-label x="158" y="635" fill="#0c2014" font-family="Inter, sans-serif" font-size="24" font-weight="800" letter-spacing="3" pointer-events="none">START</text>
             </g>
 
             <!-- gesture bar -->

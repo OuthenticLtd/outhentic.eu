@@ -386,6 +386,11 @@ a.hub-card { display: block; color: inherit; }
 .phone-frame svg { width: 100%; height: 100%; display: block; }
 .phone-frame--landscape { aspect-ratio: 19.5 / 9; max-width: 600px; }
 
+/* Home hero phone mockup: keep it calm/static like the app home grid — no
+   looping tile animations (cycling keys, wobbling needles, sweeping ribbons).
+   Scoped to the hero so the module demo pages keep their intended motion. */
+.hero .phone-frame * { animation: none !important; }
+
 /* Interactive ("clickable") mockups — see ose-mockups.js */
 .phone-frame[data-interactive] { cursor: default; }
 .phone-frame[data-interactive]::before { pointer-events: none; }
