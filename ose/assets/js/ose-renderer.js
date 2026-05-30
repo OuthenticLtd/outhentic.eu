@@ -400,6 +400,10 @@
   if (ter) ter.innerHTML = C.terms_html || '';
   var coo = document.querySelector('[data-ose-cookies]');
   if (coo) coo.innerHTML = C.cookies_html || '';
+  var leg = document.querySelector('[data-ose-legal-notice]');
+  if (leg) leg.innerHTML = C.legal_notice_html || '';
+  var acc = document.querySelector('[data-ose-accessibility]');
+  if (acc) acc.innerHTML = C.accessibility_html || '';
 
   // -------- year auto-fill in footer --------
   document.querySelectorAll('[data-year]').forEach(function (el) {

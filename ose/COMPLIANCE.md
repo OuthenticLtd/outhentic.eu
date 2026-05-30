@@ -101,3 +101,47 @@ The planned trial/licensing system (Google Play Billing, Play Integrity, Firebas
 - `assets/css/ose-fonts.css` — new self-hosted @font-face sheet.
 - `assets/fonts/*.woff2` — 4 new self-hosted variable font files.
 - `COMPLIANCE.md` — this file.
+
+---
+
+## 9. Legal hardening pass — 2026-05-30 (cookie notice, imprint, accessibility, audit)
+
+### 9.1 Third-party / cookie / tracking re-audit — RESULT: CLEAN
+Grepped every page + JS for `<iframe>`, `<embed>`, `gtag`, `google-analytics`, `googletagmanager`, `fbq`, `facebook`, `hotjar`, `clarity`, `plausible`, `matomo`, `youtube`, `vimeo`, `maps.google`, `document.cookie`, `localStorage`, `sessionStorage`, external `<script src>` / `<link href=http…>`.
+
+- **No analytics, no ad/tracking pixels, no social embeds, no third-party iframes/embeds, no `document.cookie`, no `sessionStorage`** anywhere in production pages or JS.
+- **Only external resource in production HTML:** `editor.html` loads Quill (`cdn.jsdelivr.net`). This is the **admin-only**, password-gated content editor — not a visitor page — and is intentionally left as-is and **not** given the consent script. Acceptable: no visitor is ever served third-party requests.
+- **`localStorage` usage:** (a) `editor-github.js` — admin GitHub token, gated by `#editor`, never set for visitors; (b) `ose-consent.js` — a single strictly-necessary dismissal flag (`ose-cookie-notice-dismissed`). Both are strictly necessary and exempt from consent under ePrivacy Art. 5(3). No visitor-tracking storage exists.
+- **Google Fonts:** confirmed still self-hosted; the only `fonts.googleapis.com` references are in `_tmp_shots/` dev-scratch files that are **not deployed pages** (screenshot harnesses). No production page sends a visitor IP to Google.
+- **No price/Offer JSON-LD** reintroduced (per section 7).
+
+### 9.2 Cookie / storage notice banner — `assets/js/ose-consent.js` (NEW)
+Self-contained, honest, dismissible bottom banner injected on `DOMContentLoaded`. Text: "No tracking here. We use no advertising or tracking cookies — only storage that is strictly necessary for the site to work. Learn more." + "Got it" button + link to `cookies.html` (path auto-resolves `../` on module pages via `data-module-id`). Dismissal remembered in one strictly-necessary `localStorage` flag — **not a consent gate** (there is nothing non-essential to consent to). Injects its own scoped styles using the site's dark theme + accent gradient + Inter; honours `prefers-reduced-motion`; storage wrapped in try/catch. Added as `<script … defer>` before `</body>` on **all 17 production pages** (9 root + 8 modules); `editor.html` intentionally excluded.
+
+### 9.3 Legal Notice / Imprint — `legal-notice.html` (NEW)
+Per EU e-Commerce Directive 2000/31/EC Art. 5 + Bulgarian Electronic Commerce Act. Content block `legal_notice_html` in `ose-content.js`, rendered via new `data-ose-legal-notice` binding. Contains: legal name (Outhentic Ltd. / ЕООД), registered address, **UIC/ЕИК 204923841**, **VAT BG204923841**, statement of registration in the Commercial Register (Търговски регистър, Registry Agency) with public-lookup link, representation by manager(s), email contact, CPDP as data supervisory authority, EU ODR platform note, hosting (GitHub Pages / GitHub, Inc. — Microsoft, US), Google Play distribution note, liability-for-links and copyright clauses.
+
+### 9.4 Accessibility Statement — `accessibility.html` (NEW)
+Per European Accessibility Act (Directive (EU) 2019/882, applicable 28 Jun 2025). Content block `accessibility_html`, rendered via new `data-ose-accessibility` binding. Targets **WCAG 2.1 AA** (the level referenced by EN 301 549; WCAG 2.2 not yet in the harmonised standard — verified via web). Honest, non-overclaiming: states "partially conformant", lists what's done, **known limitations** (decorative mockups, reduced-motion review, un-audited long pages), feedback/contact = **ose@outhentic.eu** (one-month response), enforcement signposting, preparation date 30 May 2026.
+
+### 9.5 Privacy / Terms / Cookies strengthened (no regressions)
+- **Privacy** (`privacy_html`): added **§9 Data retention** (newsletter email kept until unsubscribe; no other personal data; logs under host's policy), **§10 Security** (HTTPS, no data stores), **§11 No automated decision-making** (Art. 22); strengthened hosting/transfer disclosure with **GitHub = Microsoft/US + SCCs + EU–US DPF**; clarified how to **exercise rights / withdraw consent** (free, one month, reply-to-unsubscribe); cross-link to Legal notice. Sections renumbered 9→17. Kept CPDP route, future-billing clause, minors clause, effective/last-updated dates.
+- **Cookies** (`cookies_html`): now documents **both** strictly-necessary `localStorage` items (visitor dismissal flag + admin editor token), reiterates no cookies at all, self-hosted fonts, GitHub hosting.
+- **Terms**: already covered governing law (Bulgaria/EU), EU-consumer liability limits, IP ownership, acceptable use, "as is", Google Play distribution — left intact.
+
+### 9.6 Footer Legal column
+`ose-content.js` footer "Legal" column now links: Privacy, Terms, Cookies, **Legal notice**, **Accessibility**. (Replaced the prior "Outhentic.eu" external link with the two new statutory pages; outhentic.eu still reachable via the footer-bottom site link.)
+
+### Files created/changed in THIS pass
+- `assets/data/ose-content.js` — added `legal_notice_html`, `accessibility_html`; strengthened `privacy_html` (retention/security/Art.22/transfer/rights) & `cookies_html`; updated footer Legal column.
+- `assets/js/ose-renderer.js` — added `data-ose-legal-notice` + `data-ose-accessibility` bindings.
+- `assets/js/ose-consent.js` — NEW cookie/storage notice banner.
+- `legal-notice.html`, `accessibility.html` — NEW pages (mirror `privacy.html` structure, self-hosted fonts, consent script).
+- All 17 production HTML pages — added `ose-consent.js` include before `</body>`.
+- `COMPLIANCE.md` — this section.
+
+### Residual recommendations (not blocking)
+- The EAA enforcement paragraph signposts "the competent Bulgarian authority" generically; once the specific Bulgarian EAA market-surveillance body is officially designated/published, name it explicitly in `accessibility_html`.
+- Verify the Bulgarian-language requirement: if the site/app is offered to Bulgarian consumers, consider a BG translation of the legal notice, privacy and accessibility statements (EAA statements need only cover languages of service; e-commerce/consumer law may expect BG).
+- Confirm GitHub's current DPF certification status before relying on the DPF wording long-term (SCCs remain the fallback regardless).
+- `_tmp_shots/` contains dev-scratch HTML that loads Google Fonts from the CDN — harmless (not deployed) but consider deleting the folder before publishing to avoid confusion.
