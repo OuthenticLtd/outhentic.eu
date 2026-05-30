@@ -398,6 +398,8 @@
   if (pri) pri.innerHTML = C.privacy_html || '';
   var ter = document.querySelector('[data-ose-terms]');
   if (ter) ter.innerHTML = C.terms_html || '';
+  var coo = document.querySelector('[data-ose-cookies]');
+  if (coo) coo.innerHTML = C.cookies_html || '';
 
   // -------- year auto-fill in footer --------
   document.querySelectorAll('[data-year]').forEach(function (el) {

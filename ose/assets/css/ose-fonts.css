@@ -1,0 +1,75 @@
+/* =========================================================
+   OSE — self-hosted web fonts (GDPR-safe, no Google CDN).
+
+   Replaces the Google Fonts <link> tags in each page <head>.
+   Loading fonts from fonts.googleapis.com / fonts.gstatic.com
+   transmits every visitor's IP address to Google in the US,
+   which the Munich Regional Court (LG München, 20 Jan 2022,
+   3 O 17493/20) ruled is an unlawful processing of personal
+   data under the GDPR when done without consent. Self-hosting
+   the woff2 files removes that transfer entirely — the browser
+   only ever talks to outhentic.eu.
+
+   Fonts: Inter and JetBrains Mono, both downloaded from the
+   Google Fonts CSS2 API on 2026-05-30. Each is shipped as a
+   single VARIABLE woff2 per Unicode subset (latin, latin-ext):
+   the Google CSS2 API returns one variable file per family and
+   selects the weight via the `font-weight` descriptor, so a
+   single physical file covers the 400/500/600/700 range the
+   site uses. Licences: both fonts are SIL Open Font License 1.1
+   (free to self-host and redistribute).
+
+   HOW TO WIRE THIS IN (main session — page <head> edits):
+     1. Remove these three lines from every HTML <head>:
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+     2. Add ONE line (before ose-styles.css so the @font-face
+        rules are known when styles apply), with the correct
+        relative prefix per page depth:
+          root pages (privacy.html, index.html, …):
+            <link rel="stylesheet" href="assets/css/ose-fonts.css" />
+          pages in /ose/modules/:
+            <link rel="stylesheet" href="../assets/css/ose-fonts.css" />
+     3. (Optional, perf) preload the latin Inter file:
+          <link rel="preload" href="assets/fonts/inter-variable-latin.woff2"
+                as="font" type="font/woff2" crossorigin />
+   No changes to ose-styles.css are required — the family names
+   "Inter" and "JetBrains Mono" are unchanged.
+   ========================================================= */
+
+/* ---------------- Inter (variable, 100–900) ---------------- */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(../fonts/inter-variable-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(../fonts/inter-variable-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ------------- JetBrains Mono (variable, 100–800) ------------- */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url(../fonts/jetbrains-mono-variable-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url(../fonts/jetbrains-mono-variable-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
