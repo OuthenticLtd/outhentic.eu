@@ -101,168 +101,104 @@
         </div>
       </div>
       <div class="reveal">
-        <div class="phone-frame" aria-hidden="true">
-          <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet">
+        <div class="phone-frame" data-interactive aria-hidden="true">
+          <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet" data-accent="#E2B85C" data-idle="#837b6b">
             <defs>
               <linearGradient id="plPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0a07"/><stop offset="1" stop-color="#110d08"/></linearGradient>
+              <linearGradient id="plWhite" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf7"/><stop offset="1" stop-color="#e8e2d2"/></linearGradient>
+              <linearGradient id="plBlack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2620"/><stop offset="0.5" stop-color="#0e0c08"/><stop offset="1" stop-color="#000"/></linearGradient>
             </defs>
             <rect width="380" height="800" fill="url(#plPlate)"/>
 
             <!-- ============ TOP BAR ============ -->
             <g transform="translate(18,40)">
-              <circle cx="14" cy="14" r="13" fill="none" stroke="#E2B85C" stroke-width="2"/>
-              <path d="M18 8 L11 14 L18 20" fill="none" stroke="#E2B85C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <g class="mk-press"><circle cx="14" cy="14" r="13" fill="none" stroke="#E2B85C" stroke-width="2"/><path d="M18 8 L11 14 L18 20" fill="none" stroke="#E2B85C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
               <text x="40" y="20" fill="#F2EEE6" font-family="Inter, sans-serif" font-size="15" font-weight="700" letter-spacing="3">PLAY</text>
-              <!-- metronome tempo chip (diamond) -->
-              <g transform="translate(196,2)">
-                <path d="M14 2 L26 14 L14 26 L2 14 Z" fill="none" stroke="#E2B85C" stroke-opacity="0.6" stroke-width="1.2"/>
-                <text x="14" y="18" fill="#E2B85C" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" text-anchor="middle">120</text>
-              </g>
-              <g transform="translate(244,4)" stroke="#b8ad97" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 17 L3 21 L7 21 L18 10 L14 6 L3 17 Z"/><path d="M13 7 L17 11"/>
-              </g>
-              <g transform="translate(280,4)" stroke="#b8ad97" stroke-width="1.5" fill="none" stroke-linecap="round">
-                <line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="12" x2="19" y2="12"/><line x1="3" y1="18" x2="19" y2="18"/>
-                <circle cx="13" cy="6" r="2.4" fill="#0c0a07"/><circle cx="7" cy="12" r="2.4" fill="#0c0a07"/><circle cx="15" cy="18" r="2.4" fill="#0c0a07"/>
-              </g>
-              <circle cx="333" cy="14" r="11" fill="#E2B85C" fill-opacity="0.9" stroke="#FFFFFF" stroke-opacity="0.3"/>
+              <g class="mk-press" transform="translate(196,2)"><path d="M14 2 L26 14 L14 26 L2 14 Z" fill="none" stroke="#E2B85C" stroke-opacity="0.6" stroke-width="1.2"/><text x="14" y="18" fill="#E2B85C" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" text-anchor="middle">120</text></g>
+              <g class="mk-press" transform="translate(244,4)" stroke="#b8ad97" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 L3 21 L7 21 L18 10 L14 6 L3 17 Z"/><path d="M13 7 L17 11"/></g>
+              <g class="mk-press" transform="translate(280,4)" stroke="#b8ad97" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="12" x2="19" y2="12"/><line x1="3" y1="18" x2="19" y2="18"/><circle cx="13" cy="6" r="2.4" fill="#0c0a07"/><circle cx="7" cy="12" r="2.4" fill="#0c0a07"/><circle cx="15" cy="18" r="2.4" fill="#0c0a07"/></g>
+              <circle class="mk-press" cx="333" cy="14" r="11" fill="#E2B85C" fill-opacity="0.9" stroke="#FFFFFF" stroke-opacity="0.3"/>
             </g>
 
             <!-- ============ INSTRUMENT SELECTOR ============ -->
             <rect x="14" y="86" width="352" height="46" rx="12" fill="#15110b" stroke="rgba(226,184,92,0.30)" stroke-width="0.8"/>
-            <path d="M40 109 l-7 -6 7 -6" fill="none" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="mk-press" d="M40 109 l-7 -6 7 -6" fill="none" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             <text x="190" y="114" fill="#F0E9DC" font-family="Inter, sans-serif" font-size="15" font-weight="600" letter-spacing="2" text-anchor="middle">OUTHENTIC SYNTH</text>
-            <path d="M340 97 l7 6 -7 6" fill="none" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="mk-press" d="M340 97 l7 6 -7 6" fill="none" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 
             <!-- ============ DSP CARD ============ -->
             <rect x="14" y="142" width="352" height="232" rx="14" fill="#15110b" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-            <!-- main tabs -->
-            <text x="46"  y="166" fill="#E2B85C" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" text-anchor="middle">SYNTH</text>
-            <rect x="26" y="174" width="40" height="2.5" rx="1" fill="#E2B85C"/>
-            <text x="118" y="166" fill="#837b6b" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" text-anchor="middle">FX</text>
-            <text x="178" y="166" fill="#837b6b" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" text-anchor="middle">PLAY</text>
-            <!-- undo / redo / expand -->
-            <g transform="translate(250,156)" stroke="#837b6b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 4 A6 6 0 1 1 5 13 M6 4 L2 4 M6 4 L6 8"/>
-            </g>
-            <g transform="translate(286,156)" stroke="#837b6b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 4 A6 6 0 1 0 9 14 M2 4 L6 4 M2 4 L2 8"/>
-            </g>
-            <g transform="translate(322,156)" stroke="#837b6b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 6 L2 2 L6 2 M16 2 L20 2 L20 6 M20 12 L20 16 L16 16 M6 16 L2 16 L2 12"/>
-            </g>
+            <!-- main tabs (active = rounded box behind text) -->
+            <g class="mk-tab" data-tabs="main"><rect class="mk-ul" x="22" y="150" width="52" height="22" rx="7" fill="rgba(226,184,92,0.14)" stroke="#E2B85C" stroke-opacity="0.5"/><text x="48" y="165" fill="#E2B85C" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="1.2" text-anchor="middle">SYNTH</text></g>
+            <g class="mk-tab" data-tabs="main"><rect class="mk-ul" x="98" y="150" width="40" height="22" rx="7" fill="rgba(226,184,92,0.14)" stroke="#E2B85C" stroke-opacity="0.5" style="display:none"/><text x="118" y="165" fill="#837b6b" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="1.2" text-anchor="middle">FX</text></g>
+            <g class="mk-tab" data-tabs="main"><rect class="mk-ul" x="156" y="150" width="48" height="22" rx="7" fill="rgba(226,184,92,0.14)" stroke="#E2B85C" stroke-opacity="0.5" style="display:none"/><text x="180" y="165" fill="#837b6b" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="1.2" text-anchor="middle">PLAY</text></g>
+            <g class="mk-press" transform="translate(252,155)" stroke="#837b6b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 A6 6 0 1 1 5 13 M6 4 L2 4 M6 4 L6 8"/></g>
+            <g class="mk-press" transform="translate(288,155)" stroke="#837b6b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4 A6 6 0 1 0 9 14 M2 4 L6 4 M2 4 L2 8"/></g>
+            <g class="mk-press" transform="translate(324,155)" stroke="#837b6b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6 L2 2 L6 2 M16 2 L20 2 L20 6 M20 12 L20 16 L16 16 M6 16 L2 16 L2 12"/></g>
 
-            <!-- sub-tabs -->
-            <text x="44"  y="196" fill="#E2B85C" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle">OSC</text>
-            <rect x="28" y="203" width="32" height="2" rx="1" fill="#E2B85C"/>
-            <text x="112" y="196" fill="#837b6b" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle">FILTER</text>
-            <text x="180" y="196" fill="#837b6b" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle">ENV</text>
-            <text x="244" y="196" fill="#837b6b" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle">MOD</text>
-            <text x="318" y="196" fill="#837b6b" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle">VOICE</text>
-            <line x1="26" y1="210" x2="354" y2="210" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <!-- sub-tabs (underline) -->
+            <g class="mk-tab" data-tabs="sub"><text x="44" y="194" fill="#E2B85C" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle">OSC</text><rect class="mk-ul" x="28" y="200" width="32" height="2" rx="1" fill="#E2B85C"/></g>
+            <g class="mk-tab" data-tabs="sub"><text x="112" y="194" fill="#837b6b" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle">FILTER</text><rect class="mk-ul" x="90" y="200" width="44" height="2" rx="1" fill="#E2B85C" style="display:none"/></g>
+            <g class="mk-tab" data-tabs="sub"><text x="180" y="194" fill="#837b6b" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle">ENV</text><rect class="mk-ul" x="166" y="200" width="28" height="2" rx="1" fill="#E2B85C" style="display:none"/></g>
+            <g class="mk-tab" data-tabs="sub"><text x="244" y="194" fill="#837b6b" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle">MOD</text><rect class="mk-ul" x="228" y="200" width="32" height="2" rx="1" fill="#E2B85C" style="display:none"/></g>
+            <g class="mk-tab" data-tabs="sub"><text x="318" y="194" fill="#837b6b" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle">VOICE</text><rect class="mk-ul" x="298" y="200" width="40" height="2" rx="1" fill="#E2B85C" style="display:none"/></g>
+            <line x1="26" y1="208" x2="354" y2="208" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
 
-            <!-- OSC A panel -->
-            <g>
-              <text x="30" y="230" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5">OSC A</text>
-              <rect x="28" y="236" width="160" height="26" rx="6" fill="#0f0c08" stroke="rgba(255,255,255,0.05)"/>
-              <rect x="30" y="238" width="30" height="22" rx="4" fill="#E2B85C" fill-opacity="0.20" stroke="#E2B85C" stroke-width="0.6"/>
-              <path d="M36 249 q5 -7 9 0 t9 0" fill="none" stroke="#E2B85C" stroke-width="1.4"/>
-              <path d="M68 254 l8 -10 8 10" fill="none" stroke="#b8ad97" stroke-width="1.4"/>
-              <path d="M100 254 l8 -10 0 10 8 -10" fill="none" stroke="#b8ad97" stroke-width="1.4"/>
-              <path d="M132 254 l0 -10 8 0 0 10 8 0 0 -10" fill="none" stroke="#b8ad97" stroke-width="1.4"/>
-              <path d="M166 254 l0 -10 16 10" fill="none" stroke="#b8ad97" stroke-width="1.4"/>
-              <text x="58"  y="280" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1" text-anchor="middle">SEMI</text>
-              <text x="150" y="280" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1" text-anchor="middle">FINE</text>
-              <circle cx="58" cy="306" r="17" fill="#0f0c08" stroke="#E2B85C" stroke-width="1.6"/>
-              <line x1="58" y1="306" x2="58" y2="292" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round"/>
-              <text x="58" y="338" fill="#b8ad97" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">0st</text>
-              <circle cx="150" cy="306" r="17" fill="#0f0c08" stroke="#E2B85C" stroke-width="1.6"/>
-              <line x1="150" y1="306" x2="150" y2="292" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round"/>
-              <text x="150" y="338" fill="#b8ad97" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">0ct</text>
-            </g>
-            <line x1="190" y1="226" x2="190" y2="346" stroke="rgba(255,255,255,0.06)"/>
+            <!-- OSC A panel: 4-waveform selector + SEMI/FINE -->
+            <text x="30" y="228" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5">OSC A</text>
+            <rect x="28" y="234" width="156" height="28" rx="7" fill="#0f0c08" stroke="rgba(255,255,255,0.05)"/>
+            <g class="mk-pick" data-pick="oscA"><rect class="mk-fill" x="30" y="236" width="37" height="24" rx="5" fill="#E2B85C" fill-opacity="0.20" stroke="#E2B85C" stroke-width="0.6" style="display:none"/><g transform="translate(39,236)"><path d="M10 14 q5 -8 10 0 t10 0" fill="none" stroke="#b8ad97" stroke-width="1.5"/></g></g><g class="mk-pick" data-pick="oscA"><rect class="mk-fill" x="69" y="236" width="37" height="24" rx="5" fill="#E2B85C" fill-opacity="0.20" stroke="#E2B85C" stroke-width="0.6" style="display:none"/><g transform="translate(78,236)"><path d="M8 19 l7 -10 7 10" fill="none" stroke="#b8ad97" stroke-width="1.5"/></g></g><g class="mk-pick" data-pick="oscA"><rect class="mk-fill" x="108" y="236" width="37" height="24" rx="5" fill="#E2B85C" fill-opacity="0.20" stroke="#E2B85C" stroke-width="0.6"/><g transform="translate(117,236)"><path d="M8 19 l12 -10 0 10 0 0" fill="none" stroke="#E2B85C" stroke-width="1.5"/></g></g><g class="mk-pick" data-pick="oscA"><rect class="mk-fill" x="147" y="236" width="37" height="24" rx="5" fill="#E2B85C" fill-opacity="0.20" stroke="#E2B85C" stroke-width="0.6" style="display:none"/><g transform="translate(156,236)"><path d="M8 19 l0 -10 7 0 0 10 7 0 0 -10" fill="none" stroke="#b8ad97" stroke-width="1.5"/></g></g>
+            <text x="62"  y="284" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1" text-anchor="middle">SEMI</text>
+            <text x="150" y="284" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1" text-anchor="middle">FINE</text>
+            <circle cx="62" cy="308" r="15" fill="#0f0c08" stroke="#E2B85C" stroke-width="1.5"/><line x1="62" y1="308" x2="62" y2="296" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round"/>
+            <text x="62" y="338" fill="#b8ad97" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">0st</text>
+            <circle cx="150" cy="308" r="15" fill="#0f0c08" stroke="#E2B85C" stroke-width="1.5"/><line x1="150" y1="308" x2="150" y2="296" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round"/>
+            <text x="150" y="338" fill="#b8ad97" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">0ct</text>
+            <line x1="190" y1="222" x2="190" y2="348" stroke="rgba(255,255,255,0.06)"/>
             <!-- OSC B panel -->
-            <g>
-              <text x="206" y="230" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5">OSC B</text>
-              <rect x="204" y="236" width="160" height="26" rx="6" fill="#0f0c08" stroke="rgba(255,255,255,0.05)"/>
-              <rect x="206" y="238" width="30" height="22" rx="4" fill="#0f0c08" stroke="rgba(255,255,255,0.08)"/>
-              <path d="M212 249 q5 -7 9 0 t9 0" fill="none" stroke="#b8ad97" stroke-width="1.4"/>
-              <rect x="270" y="238" width="30" height="22" rx="4" fill="#E2B85C" fill-opacity="0.20" stroke="#E2B85C" stroke-width="0.6"/>
-              <path d="M276 254 l8 -10 0 10 8 -10" fill="none" stroke="#E2B85C" stroke-width="1.4"/>
-              <path d="M308 254 l0 -10 8 0 0 10 8 0 0 -10" fill="none" stroke="#b8ad97" stroke-width="1.4"/>
-              <text x="234" y="280" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1" text-anchor="middle">SEMI</text>
-              <text x="326" y="280" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1" text-anchor="middle">FINE</text>
-              <circle cx="234" cy="306" r="17" fill="#0f0c08" stroke="#E2B85C" stroke-width="1.6"/>
-              <line x1="234" y1="306" x2="234" y2="292" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round"/>
-              <text x="234" y="338" fill="#b8ad97" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">0st</text>
-              <circle cx="326" cy="306" r="17" fill="#0f0c08" stroke="#E2B85C" stroke-width="1.6"/>
-              <line x1="326" y1="306" x2="326" y2="292" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round"/>
-              <text x="326" y="338" fill="#b8ad97" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">0ct</text>
-            </g>
-            <text x="30" y="364" fill="#52493b" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2">MIXER</text>
+            <text x="206" y="228" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5">OSC B</text>
+            <rect x="204" y="234" width="156" height="28" rx="7" fill="#0f0c08" stroke="rgba(255,255,255,0.05)"/>
+            <g class="mk-pick" data-pick="oscB"><rect class="mk-fill" x="206" y="236" width="37" height="24" rx="5" fill="#E2B85C" fill-opacity="0.20" stroke="#E2B85C" stroke-width="0.6"/><g transform="translate(215,236)"><path d="M10 14 q5 -8 10 0 t10 0" fill="none" stroke="#E2B85C" stroke-width="1.5"/></g></g><g class="mk-pick" data-pick="oscB"><rect class="mk-fill" x="245" y="236" width="37" height="24" rx="5" fill="#E2B85C" fill-opacity="0.20" stroke="#E2B85C" stroke-width="0.6" style="display:none"/><g transform="translate(254,236)"><path d="M8 19 l7 -10 7 10" fill="none" stroke="#b8ad97" stroke-width="1.5"/></g></g><g class="mk-pick" data-pick="oscB"><rect class="mk-fill" x="284" y="236" width="37" height="24" rx="5" fill="#E2B85C" fill-opacity="0.20" stroke="#E2B85C" stroke-width="0.6" style="display:none"/><g transform="translate(293,236)"><path d="M8 19 l12 -10 0 10 0 0" fill="none" stroke="#b8ad97" stroke-width="1.5"/></g></g><g class="mk-pick" data-pick="oscB"><rect class="mk-fill" x="323" y="236" width="37" height="24" rx="5" fill="#E2B85C" fill-opacity="0.20" stroke="#E2B85C" stroke-width="0.6" style="display:none"/><g transform="translate(332,236)"><path d="M8 19 l0 -10 7 0 0 10 7 0 0 -10" fill="none" stroke="#b8ad97" stroke-width="1.5"/></g></g>
+            <text x="238" y="284" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1" text-anchor="middle">SEMI</text>
+            <text x="326" y="284" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1" text-anchor="middle">FINE</text>
+            <circle cx="238" cy="308" r="15" fill="#0f0c08" stroke="#E2B85C" stroke-width="1.5"/><line x1="238" y1="308" x2="238" y2="296" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round"/>
+            <text x="238" y="338" fill="#b8ad97" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">0st</text>
+            <circle cx="326" cy="308" r="15" fill="#0f0c08" stroke="#E2B85C" stroke-width="1.5"/><line x1="326" y1="308" x2="326" y2="296" stroke="#E2B85C" stroke-width="1.8" stroke-linecap="round"/>
+            <text x="326" y="338" fill="#b8ad97" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">0ct</text>
 
             <!-- ============ NAVIGATOR / WHEEL ROW ============ -->
             <rect x="14" y="384" width="352" height="64" rx="14" fill="#15110b" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-            <rect x="28" y="396" width="14" height="40" rx="7" fill="#0f0c08" stroke="rgba(255,255,255,0.08)"/>
-            <circle cx="35" cy="416" r="6" fill="#E2B85C"/>
+            <rect x="28" y="396" width="14" height="40" rx="7" fill="#0f0c08" stroke="rgba(255,255,255,0.08)"/><circle cx="35" cy="416" r="6" fill="#E2B85C"/>
             <text x="35" y="444" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="6.5" text-anchor="middle">PITCH</text>
-            <circle cx="120" cy="416" r="17" fill="#0f0c08" stroke="rgba(255,255,255,0.14)"/>
-            <line x1="111" y1="416" x2="129" y2="416" stroke="#d8cfc0" stroke-width="2" stroke-linecap="round"/>
-            <rect x="150" y="402" width="80" height="28" rx="14" fill="none" stroke="#E2B85C" stroke-width="1.4"/>
-            <text x="190" y="421" fill="#E2B85C" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2.5" text-anchor="middle">DRAG</text>
-            <circle cx="260" cy="416" r="17" fill="#0f0c08" stroke="rgba(255,255,255,0.14)"/>
-            <line x1="251" y1="416" x2="269" y2="416" stroke="#d8cfc0" stroke-width="2" stroke-linecap="round"/>
-            <line x1="260" y1="407" x2="260" y2="425" stroke="#d8cfc0" stroke-width="2" stroke-linecap="round"/>
-            <rect x="338" y="396" width="14" height="40" rx="7" fill="#0f0c08" stroke="rgba(255,255,255,0.08)"/>
-            <circle cx="345" cy="424" r="6" fill="#E2B85C"/>
+            <g class="mk-press"><circle cx="120" cy="416" r="17" fill="#0f0c08" stroke="rgba(255,255,255,0.14)"/><line x1="111" y1="416" x2="129" y2="416" stroke="#d8cfc0" stroke-width="2" stroke-linecap="round"/></g>
+            <g class="mk-press"><rect x="150" y="402" width="80" height="28" rx="14" fill="none" stroke="#E2B85C" stroke-width="1.4"/><text x="190" y="421" fill="#E2B85C" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2.5" text-anchor="middle">DRAG</text></g>
+            <g class="mk-press"><circle cx="260" cy="416" r="17" fill="#0f0c08" stroke="rgba(255,255,255,0.14)"/><line x1="251" y1="416" x2="269" y2="416" stroke="#d8cfc0" stroke-width="2" stroke-linecap="round"/><line x1="260" y1="407" x2="260" y2="425" stroke="#d8cfc0" stroke-width="2" stroke-linecap="round"/></g>
+            <rect x="338" y="396" width="14" height="40" rx="7" fill="#0f0c08" stroke="rgba(255,255,255,0.08)"/><circle cx="345" cy="424" r="6" fill="#E2B85C"/>
             <text x="345" y="444" fill="#8a8170" font-family="JetBrains Mono, monospace" font-size="6.5" text-anchor="middle">MOD</text>
 
             <!-- ============ KEYBOARD OVERVIEW STRIP ============ -->
-            <rect x="14" y="458" width="352" height="30" rx="6" fill="#0f0c08" stroke="rgba(255,255,255,0.06)"/>
-            <g fill="rgba(255,255,255,0.10)">
-              <rect x="18" y="462" width="2" height="22"/><rect x="24" y="462" width="2" height="22"/><rect x="30" y="462" width="2" height="22"/><rect x="36" y="462" width="2" height="22"/><rect x="42" y="462" width="2" height="22"/><rect x="48" y="462" width="2" height="22"/><rect x="54" y="462" width="2" height="22"/><rect x="60" y="462" width="2" height="22"/><rect x="66" y="462" width="2" height="22"/><rect x="72" y="462" width="2" height="22"/><rect x="78" y="462" width="2" height="22"/><rect x="84" y="462" width="2" height="22"/><rect x="90" y="462" width="2" height="22"/><rect x="96" y="462" width="2" height="22"/><rect x="102" y="462" width="2" height="22"/><rect x="108" y="462" width="2" height="22"/><rect x="114" y="462" width="2" height="22"/><rect x="120" y="462" width="2" height="22"/>
-            </g>
-            <rect x="150" y="461" width="120" height="24" rx="3" fill="#E2B85C" fill-opacity="0.22" stroke="#E2B85C" stroke-width="0.8"/>
-            <g fill="rgba(226,184,92,0.55)">
-              <rect x="156" y="462" width="2" height="22"/><rect x="164" y="462" width="2" height="22"/><rect x="172" y="462" width="2" height="22"/><rect x="180" y="462" width="2" height="22"/><rect x="188" y="462" width="2" height="22"/><rect x="196" y="462" width="2" height="22"/><rect x="204" y="462" width="2" height="22"/><rect x="212" y="462" width="2" height="22"/><rect x="220" y="462" width="2" height="22"/><rect x="228" y="462" width="2" height="22"/><rect x="236" y="462" width="2" height="22"/><rect x="244" y="462" width="2" height="22"/><rect x="252" y="462" width="2" height="22"/><rect x="260" y="462" width="2" height="22"/>
-            </g>
+            <rect x="14" y="458" width="352" height="26" rx="6" fill="#0f0c08" stroke="rgba(255,255,255,0.06)"/>
+            <g fill="rgba(255,255,255,0.10)"><rect x="18" y="462" width="2" height="18"/><rect x="25" y="462" width="2" height="18"/><rect x="32" y="462" width="2" height="18"/><rect x="39" y="462" width="2" height="18"/><rect x="46" y="462" width="2" height="18"/><rect x="53" y="462" width="2" height="18"/><rect x="60" y="462" width="2" height="18"/><rect x="67" y="462" width="2" height="18"/><rect x="74" y="462" width="2" height="18"/><rect x="81" y="462" width="2" height="18"/><rect x="88" y="462" width="2" height="18"/><rect x="95" y="462" width="2" height="18"/><rect x="102" y="462" width="2" height="18"/><rect x="109" y="462" width="2" height="18"/><rect x="116" y="462" width="2" height="18"/><rect x="123" y="462" width="2" height="18"/><rect x="130" y="462" width="2" height="18"/><rect x="137" y="462" width="2" height="18"/><rect x="144" y="462" width="2" height="18"/><rect x="151" y="462" width="2" height="18"/><rect x="158" y="462" width="2" height="18"/><rect x="165" y="462" width="2" height="18"/></g>
+            <rect x="150" y="460" width="116" height="22" rx="3" fill="#E2B85C" fill-opacity="0.22" stroke="#E2B85C" stroke-width="0.8"/>
 
             <!-- ============ MAIN KEYBOARD ============ -->
-            <rect x="14" y="496" width="352" height="166" rx="8" fill="#000"/>
-            <g>
-              <rect class="anim-key-1" x="17"  y="500" width="42" height="158" rx="3" fill="#FFFCF2"/>
-              <rect x="61"  y="500" width="42" height="158" rx="3" fill="#FFFCF2"/>
-              <rect class="anim-key-3" x="105" y="500" width="42" height="158" rx="3" fill="#FFFCF2"/>
-              <rect x="149" y="500" width="42" height="158" rx="3" fill="#FFFCF2"/>
-              <rect x="193" y="500" width="42" height="158" rx="3" fill="#FFFCF2"/>
-              <rect class="anim-key-5" x="237" y="500" width="42" height="158" rx="3" fill="#FFFCF2"/>
-              <rect x="281" y="500" width="42" height="158" rx="3" fill="#FFFCF2"/>
-              <rect x="325" y="500" width="40" height="158" rx="3" fill="#FFFCF2"/>
+            <rect x="14" y="492" width="352" height="170" rx="8" fill="#000"/>
+            <rect class="mk-key" data-note="60" x="14" y="496" width="44" height="162" rx="2" fill="url(#plWhite)" stroke="#bdb6a6" stroke-width="0.6"/><rect class="mk-key" data-note="62" x="58" y="496" width="44" height="162" rx="2" fill="url(#plWhite)" stroke="#bdb6a6" stroke-width="0.6"/><rect class="mk-key" data-note="64" x="102" y="496" width="44" height="162" rx="2" fill="url(#plWhite)" stroke="#bdb6a6" stroke-width="0.6"/><rect class="mk-key" data-note="65" x="146" y="496" width="44" height="162" rx="2" fill="url(#plWhite)" stroke="#bdb6a6" stroke-width="0.6"/><rect class="mk-key" data-note="67" x="190" y="496" width="44" height="162" rx="2" fill="url(#plWhite)" stroke="#bdb6a6" stroke-width="0.6"/><rect class="mk-key" data-note="69" x="234" y="496" width="44" height="162" rx="2" fill="url(#plWhite)" stroke="#bdb6a6" stroke-width="0.6"/><rect class="mk-key" data-note="71" x="278" y="496" width="44" height="162" rx="2" fill="url(#plWhite)" stroke="#bdb6a6" stroke-width="0.6"/><rect class="mk-key" data-note="72" x="322" y="496" width="44" height="162" rx="2" fill="url(#plWhite)" stroke="#bdb6a6" stroke-width="0.6"/>
+            <g fill="#C9A24B" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle" font-weight="600" pointer-events="none">
+              <text x="36" y="650">C4</text><text x="80" y="650">D4</text><text x="124" y="650">E4</text><text x="168" y="650">F4</text><text x="212" y="650">G4</text><text x="256" y="650">A4</text><text x="300" y="650">B4</text><text x="344" y="650">C5</text>
             </g>
-            <g fill="#C9A24B" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle" font-weight="600">
-              <text x="38"  y="648">C4</text><text x="82"  y="648">D4</text><text x="126" y="648">E4</text>
-              <text x="170" y="648">F4</text><text x="214" y="648">G4</text><text x="258" y="648">A4</text>
-              <text x="302" y="648">B4</text><text x="345" y="648">C5</text>
-            </g>
-            <g fill="#0c0a07">
-              <rect x="46"  y="500" width="26" height="98" rx="3"/>
-              <rect x="90"  y="500" width="26" height="98" rx="3"/>
-              <rect x="178" y="500" width="26" height="98" rx="3"/>
-              <rect x="222" y="500" width="26" height="98" rx="3"/>
-              <rect x="266" y="500" width="26" height="98" rx="3"/>
+            <rect class="mk-key" data-note="61" x="45" y="496" width="26" height="104" rx="2" fill="url(#plBlack)" stroke="#000" stroke-width="0.5"/><rect class="mk-key" data-note="63" x="89" y="496" width="26" height="104" rx="2" fill="url(#plBlack)" stroke="#000" stroke-width="0.5"/><rect class="mk-key" data-note="66" x="177" y="496" width="26" height="104" rx="2" fill="url(#plBlack)" stroke="#000" stroke-width="0.5"/><rect class="mk-key" data-note="68" x="221" y="496" width="26" height="104" rx="2" fill="url(#plBlack)" stroke="#000" stroke-width="0.5"/><rect class="mk-key" data-note="70" x="265" y="496" width="26" height="104" rx="2" fill="url(#plBlack)" stroke="#000" stroke-width="0.5"/>
+            <g fill="#c7bfae" font-family="JetBrains Mono, monospace" font-size="6.5" text-anchor="middle" font-weight="500" pointer-events="none">
+              <text x="58" y="592">C#4</text><text x="102" y="592">D#4</text><text x="190" y="592">F#4</text><text x="234" y="592">G#4</text><text x="278" y="592">A#4</text>
             </g>
 
             <!-- ============ BOTTOM BAR ============ -->
-            <g transform="translate(26,706)" stroke="#8a8170" stroke-width="1.8" fill="none" stroke-linecap="round">
-              <circle cx="12" cy="12" r="4"/>
-              <path d="M12 2 L12 5 M12 19 L12 22 M2 12 L5 12 M19 12 L22 12 M5 5 L7 7 M17 17 L19 19 M5 19 L7 17 M17 7 L19 5"/>
+            <g class="mk-press" transform="translate(26,706)" stroke="#8a8170" stroke-width="1.8" fill="none" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2 L12 5 M12 19 L12 22 M2 12 L5 12 M19 12 L22 12 M5 5 L7 7 M17 17 L19 19 M5 19 L7 17 M17 7 L19 5"/></g>
+            <g class="mk-toggle" data-on="1" data-on-fill="#D8B468" data-off-fill="#241d10">
+              <path class="mk-body" d="M118 740 L118 712 Q118 700 130 700 L250 700 Q262 700 262 712 L262 740 Z" fill="#D8B468"/>
+              <text x="190" y="725" fill="#2a1e08" font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3" text-anchor="middle" pointer-events="none">SUSTAIN</text>
             </g>
-            <!-- SUSTAIN pill (pentagon-tabbed, gold) -->
-            <path d="M118 740 L118 712 Q118 700 130 700 L190 700 L250 700 Q262 700 262 712 L262 740 Z" fill="#D8B468"/>
-            <text x="190" y="725" fill="#2a1e08" font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3" text-anchor="middle">SUSTAIN</text>
-            <g transform="translate(332,706)" stroke="#8a8170" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="10" width="16" height="12" rx="2.5"/><path d="M6 10 V7 a5 5 0 0 1 9 -2"/>
-            </g>
+            <g class="mk-press" transform="translate(332,706)" stroke="#8a8170" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="16" height="12" rx="2.5"/><path d="M6 10 V7 a5 5 0 0 1 9 -2"/></g>
 
             <rect x="130" y="772" width="120" height="4" rx="2" fill="#1c160e"/>
           </svg>
@@ -374,5 +310,6 @@
 <script src="../assets/js/ose-main.js" defer></script>
 <script src="../assets/js/ose-newsletter.js" defer></script>
 <script src="../assets/js/ose-module-demos.js" defer></script>
+<script src="../assets/js/ose-mockups.js" defer></script>
 </body>
 </html>

@@ -362,25 +362,46 @@ a.hub-card { display: block; color: inherit; }
 
 /* Phone-frame mockup container */
 .phone-frame {
+  /* Android phone (Samsung S26 Ultra style): thin uniform bezel, gently
+     squared corners, centre punch-hole camera (see ::before). */
   width: 100%; max-width: 320px; aspect-ratio: 9 / 19.5;
   margin: 0 auto;
   background: #000;
-  border-radius: 36px;
-  border: 8px solid #111;
+  border-radius: 30px;
+  border: 5px solid #0a0a0a;
   box-shadow:
     0 30px 60px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(255,255,255,0.06),
-    inset 0 0 0 1px rgba(255,255,255,0.04);
+    0 0 0 1.5px rgba(255,255,255,0.10),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
   overflow: hidden;
   position: relative;
 }
 .phone-frame::before {
-  content: ""; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
-  width: 100px; height: 26px; background: #000; border-radius: 14px;
+  /* Centre punch-hole camera (Android), not an iPhone notch. */
+  content: ""; position: absolute; top: 9px; left: 50%; transform: translateX(-50%);
+  width: 9px; height: 9px; background: #000; border-radius: 50%;
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.10);
   z-index: 3;
 }
 .phone-frame svg { width: 100%; height: 100%; display: block; }
 .phone-frame--landscape { aspect-ratio: 19.5 / 9; max-width: 600px; }
+
+/* Interactive ("clickable") mockups — see ose-mockups.js */
+.phone-frame[data-interactive] { cursor: default; }
+.phone-frame[data-interactive]::before { pointer-events: none; }
+.phone-frame[data-interactive] .mk-key,
+.phone-frame[data-interactive] .mk-pad,
+.phone-frame[data-interactive] .mk-tab,
+.phone-frame[data-interactive] .mk-pick,
+.phone-frame[data-interactive] .mk-toggle,
+.phone-frame[data-interactive] .mk-press,
+.phone-frame[data-interactive] .mk-step { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.phone-frame[data-interactive] .mk-key,
+.phone-frame[data-interactive] .mk-pad { transition: fill .04s linear; }
+.phone-frame[data-interactive] .mk-tab text,
+.phone-frame[data-interactive] .mk-pick text { transition: fill .15s ease; }
+.phone-frame[data-interactive] .mk-trk,
+.phone-frame[data-interactive] .mk-knob { transition: fill .15s ease, cx .15s ease; }
 
 /* =========================================================
    Manual / control reference table
