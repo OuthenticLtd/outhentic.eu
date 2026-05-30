@@ -92,6 +92,18 @@ The planned trial/licensing system (Google Play Billing, Play Integrity, Firebas
 - [ ] Add an **account-deletion path** if user accounts are introduced (Play requirement), or document why entitlement records aren't tied to an account.
 - [ ] Update **Terms** section 7 (Purchases) with concrete terms and EU consumer withdrawal/refund handling.
 
+## 10. Health / measurement claims (SPL meter) — liability + Play health scrutiny
+
+The Meters module shows SPL/dB with **NIOSH/WHO "health zone"** colours and hearing-protection framing. A phone microphone is **not** a calibrated instrument, so presenting it as a hearing-safety tool is both a liability risk and could draw Google Play health-claims scrutiny.
+
+- [x] **Disclaimer added (Terms §5 "Disclaimer of warranty"):** the Tuner / Meters (SPL/FFT) / Signal Generator are for general musical & informational use only; readings (incl. dB/SPL and NIOSH/WHO zones) are approximate/uncalibrated and must not be relied on for hearing protection, occupational/environmental H&S, noise-compliance, medical or legal purposes.
+- [x] **Visible "Reference only" note** added on the Meters module page (coral-bordered callout) repeating the above in plain language.
+- [ ] **App-side (recommended):** add the same one-line "reference only, not a calibrated meter" note inside the Meters module UI, and avoid health/medical claims in the Play store listing description. (App is owned elsewhere — flagged in the app memo.)
+
+## 11. Permissions disclosure placement
+
+- [x] Authoritative permissions disclosure (incl. **microphone**) lives in the **Privacy Policy** §3 (Play requirement). The Help page carries a short "Permissions & the microphone" summary that links to the policy (single source of truth).
+
 ---
 
 ### Files created/changed in this pass (website)

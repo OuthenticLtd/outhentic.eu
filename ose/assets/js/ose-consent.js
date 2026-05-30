@@ -55,7 +55,8 @@
       '.ose-consent__btn:hover{filter:brightness(1.08);}' +
       '.ose-consent__btn:active{transform:translateY(1px);}' +
       '.ose-consent__btn:focus-visible{outline:2px solid #4AA3FF;outline-offset:2px;}' +
-      '@media (max-width:520px){.ose-consent{flex-direction:column;align-items:stretch;text-align:left;}' +
+      '@media (max-width:520px){.ose-consent{flex-direction:column;align-items:stretch;text-align:left;gap:12px;padding:13px 15px;}' +
+      '.ose-consent__text{flex:0 0 auto;}' +   /* in column, flex-basis is height — reset so it hugs content */
       '.ose-consent__btn{width:100%;}}' +
       '@media (prefers-reduced-motion:reduce){.ose-consent{transition:opacity .01ms;}}';
     var style = document.createElement('style');

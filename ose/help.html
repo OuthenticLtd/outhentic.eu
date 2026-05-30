@@ -91,37 +91,8 @@
 
     <hr class="divider"/>
 
-    <h2 class="reveal" id="permissions">App permissions — what OSE asks for, and why</h2>
-    <p class="reveal" style="max-width: 760px;">OSE is an on-device tool. It only asks for a permission when a feature actually needs it, you can decline or revoke any of them at any time in <strong>Android&nbsp;Settings → Apps → OSE → Permissions</strong>, and <strong>nothing you record or play ever leaves your phone</strong> — there is no account, no tracking and no analytics.</p>
-
-    <div class="reveal" style="margin-top: 24px;">
-      <div class="hub-card" style="border-color: rgba(255,138,42,0.35);">
-        <h3>🎙️ Microphone</h3>
-        <p>OSE requests the microphone the first time you open the <strong>Tuner</strong>, or when you record in the <strong>Audio</strong> module. It is used <strong>only</strong> to detect pitch and to capture the audio you choose to record, and that processing happens entirely on your device.</p>
-        <p><strong>OSE never uploads, streams, stores remotely, or shares microphone audio with anyone.</strong> If you deny it, the Tuner simply shows a “Microphone needed” message with a retry button and the rest of the app keeps working — you can grant it later in Android Settings.</p>
-      </div>
-    </div>
-
-    <div class="cols-2 reveal" style="margin-top: 20px;">
-      <div class="hub-card">
-        <h3>Bluetooth</h3>
-        <p>Used to discover and connect Bluetooth-MIDI controllers and to route audio to Bluetooth devices. OSE declares Bluetooth scanning as <em>“never for location,”</em> and never uses it to determine where you are.</p>
-      </div>
-      <div class="hub-card">
-        <h3>Music &amp; audio files (storage)</h3>
-        <p>Lets OSE save your recordings into <strong>Music/OSE</strong> and reopen them later. OSE only touches the audio files it creates — it does not request access to your photos, videos, or other files.</p>
-      </div>
-      <div class="hub-card">
-        <h3>Notifications</h3>
-        <p>Used for the playback notification when the <strong>Signal Generator</strong> keeps a tone running in the background, so you can see and stop it from the notification shade. Decline it and audio still works — you just won’t get the notification.</p>
-      </div>
-      <div class="hub-card">
-        <h3>Location (older Android only)</h3>
-        <p>On <strong>Android 11 and below only</strong>, the system required apps to hold a location permission before they could scan for Bluetooth devices. OSE requests it solely for that legacy Bluetooth-MIDI scan and <strong>never</strong> reads your location. On Android 12+ it isn’t requested at all.</p>
-      </div>
-    </div>
-
-    <p class="reveal" style="max-width: 760px; margin-top: 18px; color: var(--muted, #9aa);">Full detail is in our <a href="privacy.html" style="color: var(--accent-orange); text-decoration: underline;">Privacy Policy</a>, which lists every permission and its purpose.</p>
+    <h2 class="reveal" id="permissions">Permissions &amp; the microphone</h2>
+    <p class="reveal" style="max-width: 760px;">OSE only asks for a permission when a feature needs it, and everything is processed on your device — <strong>nothing you record or play is ever uploaded or shared</strong>, and there's no account or tracking. The <strong>microphone</strong> is used <strong>only</strong> to detect pitch in the Tuner and to record the audio you choose to capture; deny it and the rest of the app still works. For the full list — Bluetooth, media/storage, notifications and the legacy location-for-Bluetooth-scan gate (Android&nbsp;11 and below only) — and the exact purpose of each, see the <a href="privacy.html" style="color: var(--accent-orange); text-decoration: underline;">Privacy Policy</a>.</p>
 
     <hr class="divider"/>
 
