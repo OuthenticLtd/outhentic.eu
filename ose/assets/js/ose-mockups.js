@@ -88,6 +88,36 @@
     o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + 0.55);
   }
 
+  // ── Metronome engine (for the metronome mockup) ─────────────────────
+  function metroState(svg){ if(!svg.__metro) svg.__metro={running:false,timer:null,beat:0}; return svg.__metro; }
+  function metroClick(accent){ var ctx=audio(); if(!ctx)return; var o=ctx.createOscillator(),g=ctx.createGain(),t=ctx.currentTime;
+    o.type='sine'; o.frequency.value=accent?1500:1000;
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.5,t+0.002); g.gain.exponentialRampToValueAtTime(0.0001,t+0.05);
+    o.connect(g).connect(ctx.destination); o.start(t); o.stop(t+0.06); }
+  function metroBpm(svg){ var e=svg.querySelector('[data-knob-val="bpm"]')||svg.querySelector('[data-metro-bpm]');
+    var v=e?parseFloat(e.getAttribute('data-val')||e.textContent):120; return Math.max(20,Math.min(300,v||120)); }
+  function metroTick(svg){ var s=metroState(svg); var beats=svg.querySelectorAll('.mk-beat'); var n=beats.length||4; var i=s.beat%n;
+    metroClick(i===0); var ac=svg.getAttribute('data-accent')||'#50C878';
+    beats.forEach(function(b,k){ if(!b.dataset.of)b.dataset.of=b.getAttribute('fill'); b.setAttribute('fill', k===i?ac:(b.dataset.of||'rgba(255,255,255,0.18)')); });
+    s.beat=(s.beat+1)%n; s.timer=setTimeout(function(){metroTick(svg);},60000/metroBpm(svg)); }
+  function wireMetro(el){ var svg=svgOf(el); el.addEventListener('click',function(){ var s=metroState(svg); var lbl=el.querySelector('[data-metro-label]')||el.querySelector('text');
+    if(s.running){ s.running=false; if(s.timer)clearTimeout(s.timer); svg.querySelectorAll('.mk-beat').forEach(function(b){ if(b.dataset.of)b.setAttribute('fill',b.dataset.of); }); if(lbl)lbl.textContent='START'; }
+    else { audio(); s.running=true; s.beat=0; metroTick(svg); if(lbl)lbl.textContent='STOP'; } }); }
+
+  // ── Signal-generator engine (for the signal-gen mockup) ─────────────
+  function sgState(svg){ if(!svg.__sg) svg.__sg={node:null,gain:null}; return svg.__sg; }
+  function sgFreq(svg){ var e=svg.querySelector('[data-knob-val="sgFreq"]')||svg.querySelector('[data-sg-freq]');
+    var v=e?parseFloat((e.getAttribute('data-val')||e.textContent).replace(/[^0-9.]/g,'')):440; return Math.max(20,Math.min(20000,v||440)); }
+  function sgWave(svg){ var picks=svg.querySelectorAll('.mk-pick[data-pick="sgwave"]');
+    for(var i=0;i<picks.length;i++){ var f=picks[i].querySelector('.mk-fill'); if(f && f.style.display!=='none') return picks[i].getAttribute('data-wave')||'sine'; } return 'sine'; }
+  function startSg(svg){ var ctx=audio(); if(!ctx)return; stopSg(svg); var s=sgState(svg); var w=sgWave(svg); var g=ctx.createGain(); g.gain.value=0.0001; var node;
+    if(['sine','triangle','sawtooth','square'].indexOf(w)>=0){ node=ctx.createOscillator(); node.type=w; node.frequency.value=sgFreq(svg); }
+    else { var buf=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),d=buf.getChannelData(0); for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1; node=ctx.createBufferSource(); node.buffer=buf; node.loop=true; }
+    node.connect(g).connect(ctx.destination); var t=ctx.currentTime; g.gain.exponentialRampToValueAtTime(0.14,t+0.02); node.start(t); s.node=node; s.gain=g; }
+  function stopSg(svg){ var s=sgState(svg); if(s.node){ try{ var ctx=audio(),t=ctx.currentTime; s.gain.gain.cancelScheduledValues(t); s.gain.gain.setValueAtTime(Math.max(0.0001,s.gain.gain.value),t); s.gain.gain.exponentialRampToValueAtTime(0.0001,t+0.04); s.node.stop(t+0.06);}catch(e){} s.node=null; } }
+  function wireSg(el){ var svg=svgOf(el); el.addEventListener('click',function(){ var s=sgState(svg); var lbl=el.querySelector('[data-sg-label]')||el.querySelector('text');
+    if(s.node){ stopSg(svg); if(lbl)lbl.textContent='PLAY'; } else { startSg(svg); if(lbl)lbl.textContent='STOP'; } }); }
+
   function accentOf(el) { var n = el.closest('[data-accent]'); return (n && n.getAttribute('data-accent')) || '#fff'; }
   function idleOf(el) { var n = el.closest('[data-idle]'); return (n && n.getAttribute('data-idle')) || '#7a7a82'; }
   function svgOf(el) { return el.closest('svg'); }
@@ -123,7 +153,10 @@
   }
   function switchPanel(svg, group, name) {
     if (!svg || !name) return;
-    svg.querySelectorAll('[data-panel-group="' + group + '"] [data-panel]').forEach(function (p) {
+    var grp = svg.querySelector('[data-panel-group="' + group + '"]'); if (!grp) return;
+    grp.querySelectorAll('[data-panel]').forEach(function (p) {
+      // Only this group's own panels — skip panels that belong to a nested group.
+      if (p.closest('[data-panel-group]') !== grp) return;
       p.style.display = (p.getAttribute('data-panel') === name) ? '' : 'none';
     });
   }
@@ -172,8 +205,12 @@
     function render() {
       var n = norm(val); var ang = -135 + n * 270;
       if (ind) ind.setAttribute('transform', 'rotate(' + ang.toFixed(1) + ' ' + cx + ' ' + cy + ')');
-      if (valTxt) valTxt.textContent = fmtVal(val, fmt);
+      if (valTxt) { valTxt.textContent = fmtVal(val, fmt); valTxt.setAttribute('data-val', val); }
       if (svg && param) synthState(svg)[param] = val;
+      if (svg && svg.__sg && svg.__sg.node) { try {
+        if (param === 'sgFreq' && svg.__sg.node.frequency) svg.__sg.node.frequency.value = val;
+        if (param === 'sgGain' && svg.__sg.gain) svg.__sg.gain.gain.value = Math.max(0.0001, Math.min(0.4, Math.pow(10, val / 20)));
+      } catch (e) {} }
     }
     render();
     var dragging = false, startY = 0, startVal = 0;
@@ -195,6 +232,41 @@
     var end = function (e) { if (dragging) { dragging = false; try { el.releasePointerCapture(e.pointerId); } catch (x) {} } };
     el.addEventListener('pointerup', end);
     el.addEventListener('pointercancel', end);
+  }
+
+  // ── Horizontal slider (draggable thumb) ─────────────────────────────
+  function wireSlider(el) {
+    var svg = svgOf(el);
+    var min = parseFloat(el.getAttribute('data-min')), max = parseFloat(el.getAttribute('data-max'));
+    var log = el.getAttribute('data-log') === '1', param = el.getAttribute('data-param'), fmt = el.getAttribute('data-fmt');
+    var x0 = parseFloat(el.getAttribute('data-x0')), x1 = parseFloat(el.getAttribute('data-x1'));
+    var thumb = el.querySelector('.mk-sthumb'), fill = el.querySelector('.mk-sfill');
+    var valTxt = svg.querySelector('[data-knob-val="' + param + '"]');
+    var val = parseFloat(el.getAttribute('data-val'));
+    function pos(v) { return log ? (Math.log(v / min) / Math.log(max / min)) : (v - min) / (max - min); }
+    function render() {
+      var p = Math.max(0, Math.min(1, pos(val))); var x = x0 + p * (x1 - x0);
+      if (thumb) thumb.setAttribute('cx', x.toFixed(1));
+      if (fill) fill.setAttribute('width', Math.max(0, x - x0).toFixed(1));
+      if (valTxt) { valTxt.textContent = fmtVal(val, fmt); valTxt.setAttribute('data-val', val); }
+      if (svg && param) synthState(svg)[param] = val;
+      if (svg && svg.__sg && svg.__sg.node) { try {
+        if (param === 'sgFreq' && svg.__sg.node.frequency) svg.__sg.node.frequency.value = val;
+        if (param === 'sgGain' && svg.__sg.gain) svg.__sg.gain.gain.value = Math.max(0.0001, Math.min(0.4, Math.pow(10, val / 20)));
+      } catch (e) {} }
+    }
+    render();
+    function fromX(clientX) {
+      var rect = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal;
+      var sx = (clientX - rect.left) / rect.width * vb.width;
+      var p = Math.max(0, Math.min(1, (sx - x0) / (x1 - x0)));
+      val = log ? min * Math.pow(max / min, p) : min + p * (max - min); render();
+    }
+    var dragging = false;
+    el.addEventListener('pointerdown', function (e) { e.preventDefault(); dragging = true; el.setPointerCapture && el.setPointerCapture(e.pointerId); fromX(e.clientX); });
+    el.addEventListener('pointermove', function (e) { if (dragging) fromX(e.clientX); });
+    var send = function (e) { dragging = false; try { el.releasePointerCapture(e.pointerId); } catch (x) {} };
+    el.addEventListener('pointerup', send); el.addEventListener('pointercancel', send);
   }
 
   // ── Toggle / press / step / nav ─────────────────────────────────────
@@ -237,6 +309,21 @@
     el.addEventListener('click', function () { var h = el.getAttribute('data-href'); if (h) window.location.href = h; });
   }
 
+  // Give a control a generous, invisible hit-area (SVG text/thin strokes
+  // only capture taps on the painted glyph, so small tabs are near-untappable).
+  function addHit(el, pad) {
+    try {
+      var bb = el.getBBox(); if (bb.width < 0.5 || bb.height < 0.5) return;
+      if (el.querySelector(':scope > .mk-hit')) return;
+      var ns = 'http://www.w3.org/2000/svg', r = document.createElementNS(ns, 'rect');
+      r.setAttribute('class', 'mk-hit');
+      r.setAttribute('x', (bb.x - pad).toFixed(1)); r.setAttribute('y', (bb.y - pad).toFixed(1));
+      r.setAttribute('width', (bb.width + 2 * pad).toFixed(1)); r.setAttribute('height', (bb.height + 2 * pad).toFixed(1));
+      r.setAttribute('fill', '#000'); r.setAttribute('opacity', '0'); r.setAttribute('pointer-events', 'all');
+      el.insertBefore(r, el.firstChild);
+    } catch (e) {}
+  }
+
   function init() {
     document.querySelectorAll('.phone-frame[data-interactive]').forEach(function (f) { f.removeAttribute('aria-hidden'); });
     var sel = '.phone-frame[data-interactive] ';
@@ -247,6 +334,14 @@
     document.querySelectorAll(sel + '.mk-press').forEach(wirePress);
     document.querySelectorAll(sel + '.mk-step').forEach(wireStep);
     document.querySelectorAll(sel + '.mk-nav').forEach(wireNav);
+    document.querySelectorAll(sel + '.mk-metro').forEach(wireMetro);
+    document.querySelectorAll(sel + '.mk-sg').forEach(wireSg);
+    // Generous tap targets so small SVG controls are reliably clickable.
+    document.querySelectorAll(sel + '.mk-tab').forEach(function (e) { addHit(e, 8); });
+    document.querySelectorAll(sel + '.mk-step').forEach(function (e) { addHit(e, 7); });
+    document.querySelectorAll(sel + '.mk-pick').forEach(function (e) { addHit(e, 2); });
+    document.querySelectorAll(sel + '.mk-press').forEach(function (e) { addHit(e, 3); });
+    document.querySelectorAll(sel + '.mk-nav').forEach(function (e) { addHit(e, 4); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
