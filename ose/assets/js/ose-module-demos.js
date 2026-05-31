@@ -1,5 +1,5 @@
 /* =========================================================
-   OSE — module-page interactive demos
+   OSE - module-page interactive demos
    Big working demos on the Play, Metronome and Signal Generator
    module pages so visitors can use the tools directly in the
    browser. The other five modules stay as visual mockups.
@@ -30,7 +30,7 @@
   }
 
   // ============================================================
-  // PLAY MODULE — full piano (2 octaves) with voice selector
+  // PLAY MODULE - full piano (2 octaves) with voice selector
   // ============================================================
   function buildPlay() {
     var demo = document.querySelector('[data-module-demo="play"]');
@@ -64,7 +64,7 @@
       var freq = freqOf(semis);
       var release = sustain ? 2.5 : 0.85;
       if (voice === 'synth') {
-        // 2-osc lead — sawtooth + detuned sub
+        // 2-osc lead - sawtooth + detuned sub
         var osc1 = audioCtx.createOscillator();
         var osc2 = audioCtx.createOscillator();
         var lp   = audioCtx.createBiquadFilter();
@@ -198,7 +198,7 @@
   }
 
   // ============================================================
-  // METRONOME MODULE — full ClickTrackFace + working transport demo
+  // METRONOME MODULE - full ClickTrackFace + working transport demo
   //
   // One-for-one with MetronomeModule.kt + ClickTrackFace.kt:
   //   • 30-300 BPM range, 1-16 beats, /4 /8 /16 note values
@@ -290,7 +290,7 @@
       return { x: Math.cos(ang) * r, y: Math.sin(ang) * r };
     }
     function polygonPoints(n, r) {
-      // Single point for n=1 just draws a tiny line — looks weird, so
+      // Single point for n=1 just draws a tiny line - looks weird, so
       // when n=1 we draw a small circle via 6-point polygon at half
       // radius (matches the app's TempoPolygonIcon n=1 fallback feel).
       if (n < 2) {
@@ -350,7 +350,7 @@
     function applyBeatState(col, state) {
       // State drives both height fraction and the visual data-state.
       // App uses 0.78/0.46/0.22 but the web demo benefits from a more
-      // dramatic contrast — accent column now towers at 96 %, normal
+      // dramatic contrast - accent column now towers at 96 %, normal
       // sits at 50 %, muted at 22 %. The downbeat reads instantly.
       var frac = state === 1 ? 0.96 : state === 2 ? 0.22 : 0.50;
       var stateName = state === 1 ? 'accent' : state === 2 ? 'muted' : 'normal';
@@ -363,16 +363,16 @@
       }
       bar.style.height = (frac * 100) + '%';
       // Beat numeral lives inside the bar so it scrolls with the
-      // accent fill — matches the app's BeatColumn layout.
+      // accent fill - matches the app's BeatColumn layout.
       bar.textContent = String(parseInt(col.getAttribute('data-idx'), 10) + 1);
     }
 
-    // ── Click synthesis — one-for-one with AudioEngine.cpp ──
+    // ── Click synthesis - one-for-one with AudioEngine.cpp ──
     // 50 ms duration, 1500 Hz (accent) / 1000 Hz (normal) sine,
     // linear decay, ±0.95 clip. Skip muted beats entirely.
     // The per-click envelope peaks at HEADROOM (0.85) so we stay
     // under the engine's ±0.95 hidden brick-wall. Volume scaling
-    // happens AFTER this stage via the masterGain node — the slider
+    // happens AFTER this stage via the masterGain node - the slider
     // writes to masterGain.gain directly, so volume changes are
     // audible on the very next sample, not the next click.
     function tickClick(t, accentType) {
@@ -562,7 +562,7 @@
       });
     });
 
-    // Volume slider — drag updates volume in real time, the new value
+    // Volume slider - drag updates volume in real time, the new value
     // takes effect on the next click (each beat creates a fresh gain
     // node, so no per-beat ramp is needed). Double-tap the label to
     // reset to the app default (80 %).
@@ -579,7 +579,7 @@
     // Mirrors MeterBottomSheet from the app: two vertically-scrolling
     // wheels for BEATS (1-16) and NOTE (4/8/16). Selecting a value
     // commits immediately so closing the sheet has no "OK / Cancel"
-    // semantics — the only button is "Done" for tap-target convenience.
+    // semantics - the only button is "Done" for tap-target convenience.
     function buildWheel(wheelEl, values, selected, onSelect) {
       wheelEl.innerHTML = '';
       values.forEach(function (v) {
@@ -668,7 +668,7 @@
 
     startBtn.addEventListener('click', function () { if (schedulerId) stop(); else start(); });
 
-    // Initial render — paint everything explicitly so the labels +
+    // Initial render - paint everything explicitly so the labels +
     // polygon + beat strip all match even though the state vars are
     // already at their default values (setBpm/setBeats early-return
     // on identity).
@@ -684,7 +684,7 @@
   }
 
   // ============================================================
-  // SIGNAL GENERATOR MODULE — 7 waveforms + typed freq + scope / FFT
+  // SIGNAL GENERATOR MODULE - 7 waveforms + typed freq + scope / FFT
   //
   // The visualiser is a one-for-one port of LiveSpectrumVisualizer
   // from SignalGenModule.kt:
@@ -694,7 +694,7 @@
   //   • getFloatFrequencyData returns dBFS values directly.
   //   • 80 log-spaced display bands (30 Hz → 20 kHz), MAX-magnitude
   //     per band (keeps harmonic peaks crisp, no smearing).
-  //   • Normalised across [SPEC_DB_FLOOR, SPEC_DB_CEIL] = [−72, 0] dB.
+  //   • Normalised across [SPEC_DB_FLOOR, SPEC_DB_CEIL] = [-72, 0] dB.
   //   • Fast-attack / slow-release smoother: instant up, EMA α=0.45
   //     down so the bars settle without flicker.
   //   • Renders as a smooth Path: gradient fill below an outline.
@@ -759,7 +759,7 @@
       if (ctxL.state === 'suspended') ctxL.resume();
       if (!analyser) {
         // 8192-point FFT gives 4096 bins at 44.1 kHz sample rate, so
-        // bin width ≈ 5.4 Hz. Native FFT — fast and detailed.
+        // bin width ≈ 5.4 Hz. Native FFT - fast and detailed.
         analyser = ctxL.createAnalyser();
         analyser.fftSize = 8192;
         analyser.smoothingTimeConstant = 0;   // we smooth ourselves
@@ -768,7 +768,7 @@
       }
     }
 
-    // Smoothed band magnitudes — preserved between frames so the
+    // Smoothed band magnitudes - preserved between frames so the
     // fast-attack / slow-release smoother has memory.
     var smoothBands = new Float32Array(SPEC_BANDS);
 
@@ -826,7 +826,7 @@
           d += ' L ' + ux1 + ' ' + midY;
         }
       } else {
-        // Noise — jagged random-looking path
+        // Noise - jagged random-looking path
         d = 'M 0 ' + midY;
         var rng = function (seed) { var x = Math.sin(seed) * 10000; return x - Math.floor(x); };
         var seedBase = kind === 'white' ? 1 : kind === 'pink' ? 2 : 3;
@@ -882,7 +882,7 @@
       var sr = ctxL.sampleRate;
       var nBins = freqDbBuf.length;
       var fftSize = analyser.fftSize;
-      // Range scale — map dB → [0,1] across SPEC_DB_FLOOR..SPEC_DB_CEIL.
+      // Range scale - map dB → [0,1] across SPEC_DB_FLOOR..SPEC_DB_CEIL.
       var dbRange = SPEC_DB_CEIL - SPEC_DB_FLOOR;
       // Two-pass: 1) compute raw band magnitudes (max-magnitude per
       // band). 2) apply attack/release smoother into smoothBands.
@@ -894,13 +894,13 @@
         var kLo = Math.max(0, Math.floor(fLo * fftSize / sr));
         var kHi = Math.min(nBins - 1, Math.ceil(fHi * fftSize / sr));
         if (kHi < kLo) kHi = kLo;
-        // Max magnitude (in dB) across the band — preserves peaks.
+        // Max magnitude (in dB) across the band - preserves peaks.
         var peakDb = -200;
         for (var k = kLo; k <= kHi; k++) {
           var v = freqDbBuf[k];
           if (v > peakDb) peakDb = v;
         }
-        // Floor at SPEC_DB_FLOOR — anything quieter clamps to silence.
+        // Floor at SPEC_DB_FLOOR - anything quieter clamps to silence.
         if (peakDb < SPEC_DB_FLOOR) peakDb = SPEC_DB_FLOOR;
         if (peakDb > SPEC_DB_CEIL)  peakDb = SPEC_DB_CEIL;
         raw[bi] = (peakDb - SPEC_DB_FLOOR) / dbRange;   // → [0,1]

@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Free Online Tone Generator | Sine, Square, Saw, Noise + FFT — OSE</title>
-<meta name="description" content="Free online tone generator and signal generator in your browser. Seven waveforms: sine, square, triangle, sawtooth, white / pink / brown noise. Type the exact Hz (20–20 000), see a live FFT spectrum and oscilloscope. No sign-up, no install." />
+<title>Free Online Tone Generator | Sine, Square, Saw, Noise + FFT - OSE</title>
+<meta name="description" content="Free online tone generator and signal generator in your browser. Seven waveforms: sine, square, triangle, sawtooth, white / pink / brown noise. Type the exact Hz (20-20 000), see a live FFT spectrum and oscilloscope. No sign-up, no install." />
 <meta name="theme-color" content="#050507" />
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
 <meta name="keywords" content="free online tone generator, online tone generator, online signal generator, online frequency generator, sine wave generator, white noise generator, pink noise generator, brown noise generator, online oscillator, free FFT analyzer, online spectrum analyzer" />
 
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="OSE — Outhentic Sound Engine" />
+<meta property="og:site_name" content="OSE - Outhentic Sound Engine" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:title" content="Free Online Tone Generator + FFT Spectrum — OSE" />
+<meta property="og:title" content="Free Online Tone Generator + FFT Spectrum - OSE" />
 <meta property="og:description" content="Seven waveforms, typed frequency entry, live FFT spectrum and oscilloscope. No sign-up, no install." />
 <meta property="og:url" content="https://outhentic.eu/ose/modules/signal-generator.html" />
 <meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Free Online Tone Generator + FFT — OSE" />
+<meta name="twitter:title" content="Free Online Tone Generator + FFT - OSE" />
 <meta name="twitter:description" content="Seven waveforms, typed frequency entry, live FFT spectrum and oscilloscope. No sign-up." />
 <meta name="twitter:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
 
@@ -236,21 +236,21 @@
       <div class="free-badge">Free · In-browser · No sign-up</div>
       <div class="module-demo-label">Try it · Real oscillator</div>
       <h2>Free online tone generator. Pick a waveform, type a frequency, press START.</h2>
-      <p>Seven waveforms — four shapes plus three colours of noise. Type any frequency between 20 Hz and 20 000 Hz, or grab the slider for a sweep. The live spectrum + scope visualizer renders the actual output of the oscillator, exactly like the app's view. Be careful with the volume.</p>
+      <p>Seven waveforms - four shapes plus three colours of noise. Type any frequency between 20 Hz and 20 000 Hz, or grab the slider for a sweep. The live spectrum + scope visualizer renders the actual output of the oscillator, exactly like the app's view. Be careful with the volume.</p>
 
       <div class="sg-grid">
         <div class="sg-display">
-          <!-- Live visualizer — one-for-one with the app's
+          <!-- Live visualizer - one-for-one with the app's
                "Spectrum Bench" (LiveSpectrumVisualizer in
                SignalGenModule.kt):
                  • SCOPE  → time-domain trace (Web Audio
                    getFloatTimeDomainData on a high-res buffer).
                  • SPECTRUM → real FFT (AnalyserNode fftSize 8192),
                    80 log-spaced bands 30 Hz → 20 kHz, max-magnitude
-                   per band, dBFS-normalised with −72 dB floor, then
+                   per band, dBFS-normalised with -72 dB floor, then
                    smoothed (instant attack, slow release).
                  • Outline path + gradient fill, dB + freq grid, axis
-                   labels — exact same chrome the app paints. -->
+                   labels - exact same chrome the app paints. -->
           <div class="sg-viz-tabs">
             <button class="sg-viz-tab is-active" data-sg-viz="scope">SCOPE</button>
             <button class="sg-viz-tab" data-sg-viz="spectrum">SPECTRUM</button>
@@ -259,19 +259,19 @@
             <svg class="sg-svg" viewBox="0 0 700 220" preserveAspectRatio="none">
               <!-- Grid: 4 horizontal dB lines (-60/-40/-20/0) + 3
                    vertical decade lines (100 Hz / 1 kHz / 10 kHz).
-                   Y formula: y = H − (t · H · 0.92), where
-                   t = (db − dbFloor) / (dbCeil − dbFloor) and the
+                   Y formula: y = H - (t · H · 0.92), where
+                   t = (db - dbFloor) / (dbCeil - dbFloor) and the
                    0.92 headroom matches the JS render. So at H=220:
-                     −60 dB → y = 186.3
-                     −40 dB → y = 130.0
-                     −20 dB → y =  73.7
+                     -60 dB → y = 186.3
+                     -40 dB → y = 130.0
+                     -20 dB → y =  73.7
                        0 dB → y =  17.6  (brighter ceiling line) -->
               <g data-sg-grid>
                 <line x1="0" y1="186.3" x2="700" y2="186.3" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
                 <line x1="0" y1="130.0" x2="700" y2="130.0" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
                 <line x1="0" y1="73.7"  x2="700" y2="73.7"  stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
                 <line x1="0" y1="17.6"  x2="700" y2="17.6"  stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-                <!-- Decade verticals (100, 1k, 10k) — positions set in JS to match the log axis. -->
+                <!-- Decade verticals (100, 1k, 10k) - positions set in JS to match the log axis. -->
                 <line data-sg-grid-100 x1="0" y1="0" x2="0" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
                 <line data-sg-grid-1k  x1="0" y1="0" x2="0" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
                 <line data-sg-grid-10k x1="0" y1="0" x2="0" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
@@ -293,7 +293,7 @@
               <path data-sg-path-scope d="" fill="none" stroke="currentColor" stroke-width="2.2"
                     stroke-linecap="round" stroke-linejoin="round" style="display:none"/>
             </svg>
-            <!-- Frequency axis labels — 30 / 100 / 1k / 10k / 20k.
+            <!-- Frequency axis labels - 30 / 100 / 1k / 10k / 20k.
                  Visible only on the SPECTRUM tab. -->
             <div class="sg-axis" data-sg-axis style="display:none">
               <span>30</span><span>100</span><span>1k</span><span>10k</span><span>20k</span>
@@ -318,7 +318,7 @@
             <button class="sg-chip" data-sg-wave="brown">BROWN</button>
           </div>
 
-          <!-- Typed frequency entry — numeric input, accepts Hz directly
+          <!-- Typed frequency entry - numeric input, accepts Hz directly
                so you can dial in 432, 1000, 4400, anything within the
                20-20000 Hz audible range. -->
           <div class="sg-freq-entry">

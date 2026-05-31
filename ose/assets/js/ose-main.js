@@ -1,4 +1,4 @@
-/* OSE site — nav, scroll reveals, mobile menu */
+/* OSE site - nav, scroll reveals, mobile menu */
 (function () {
   // Mobile menu
   var toggle = document.querySelector('.nav-toggle');
@@ -47,12 +47,12 @@
 })();
 
 /* =========================================================================
-   OSE brand mark — the GlowingO, matched 1:1 to the in-app launch/home logo.
+   OSE brand mark - the GlowingO, matched 1:1 to the in-app launch/home logo.
 
    The app draws the mark from primitives (branding/GlowingO.kt):
      • a two-arc ring with the canonical blue → white → orange gradient,
      • a 13-point white waveform across the middle that, on the home screen,
-       breathes with a TRAVELING SINE RIPPLE (audioActive = true) — a faint
+       breathes with a TRAVELING SINE RIPPLE (audioActive = true) - a faint
        wave drifts left → right through the rest shape. It is NOT a scale
        pulse. Each point's Y gets `AMP * sin(x * SPATIAL - phase)` added,
        phase advancing at TEMPORAL rad/s.
@@ -61,7 +61,7 @@
      AMP = 0.6, SPATIAL = 0.7, TEMPORAL = 1.8 (full cycle ≈ 3.5 s), and the
      audio intensity ramps 0 → 1 over 450 ms on entry (FastOutSlowIn). The
      wave lives in the app's 30-unit space centred on (15,15); every surface
-     just maps it via local = (app − 15) * scale + centre.
+     just maps it via local = (app - 15) * scale + centre.
    ========================================================================= */
 (function () {
   // Canonical 13-point waveform, app 30-unit space centred on (15,15).

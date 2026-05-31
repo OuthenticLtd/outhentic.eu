@@ -1,12 +1,12 @@
 /* =========================================================
-   OSE — interactive home-grid demos
+   OSE - interactive home-grid demos
    Wires the Play / Metronome / Signal Gen cards on the landing
    page with real Web Audio so visitors can play with them
    without leaving the page or downloading the app.
    ========================================================= */
 (function () {
 
-  // Shared AudioContext — lazily created on first user interaction.
+  // Shared AudioContext - lazily created on first user interaction.
   var audioCtx = null;
   function ensureAudio() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -20,7 +20,7 @@
   }
 
   // ============================================================
-  // PLAY card — tappable keyboard with Web Audio tones
+  // PLAY card - tappable keyboard with Web Audio tones
   // ============================================================
   function buildPlay() {
     var card = document.querySelector('[data-home-demo="play"]');
@@ -65,7 +65,7 @@
   }
 
   // ============================================================
-  // METRONOME card — tap to start/stop. While running, JS drives the 4
+  // METRONOME card - tap to start/stop. While running, JS drives the 4
   // beat pillars in sync with the Web-Audio scheduler. While stopped,
   // the CSS ambient cycle ("mcw-met-1..4") plays.
   // ============================================================
@@ -163,7 +163,7 @@
   }
 
   // ============================================================
-  // SIGNAL GEN card — pick a waveform, tap to play/stop oscillator
+  // SIGNAL GEN card - pick a waveform, tap to play/stop oscillator
   // ============================================================
   function buildSignalGen() {
     var card = document.querySelector('[data-home-demo="signal-generator"]');
@@ -286,7 +286,7 @@
   }
 
   // ============================================================
-  // Init — wait until the renderer has populated the grid.
+  // Init - wait until the renderer has populated the grid.
   // ============================================================
   function init() {
     // Poll briefly because the grid is rendered by ose-renderer.js with

@@ -9,12 +9,12 @@
     <priority>1.00</priority>
     <image:image>
       <image:loc>https://outhentic.eu/ose/assets/img/ose-og.svg</image:loc>
-      <image:title>OSE — Outhentic Sound Engine</image:title>
+      <image:title>OSE - Outhentic Sound Engine</image:title>
       <image:caption>Not a toy. Music tools that work.</image:caption>
     </image:image>
   </url>
 
-  <!-- Module pages with WORKING in-browser tools — high SEO priority
+  <!-- Module pages with WORKING in-browser tools - high SEO priority
        since these are the pages that convert "free online metronome"
        / "free online tuner" / "online tone generator" searches. -->
   <url>

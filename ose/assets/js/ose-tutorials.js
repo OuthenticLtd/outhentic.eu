@@ -1,5 +1,5 @@
 /* =========================================================
-   OSE — interactive tutorial widgets (v2 — matches actual app UI)
+   OSE - interactive tutorial widgets (v2 - matches actual app UI)
    - VintageMeterFace tuner (half-arc with pivot below canvas,
      dense tick hierarchy at every 1¢, ghost note in upper portion)
    - ClickTrackFace metronome (BPM digit + adaptive polygon
@@ -24,7 +24,7 @@
   };
 
   // ============================================================
-  // 1. METRONOME — ClickTrackFace with proper layout
+  // 1. METRONOME - ClickTrackFace with proper layout
   // ============================================================
   function buildMetronome() {
     var demo = document.querySelector('[data-demo="metronome"]');
@@ -171,7 +171,7 @@
   }
 
   // ============================================================
-  // 2. SPEED / PITCH SLIDER — waveform stretches, pitch reads
+  // 2. SPEED / PITCH SLIDER - waveform stretches, pitch reads
   // ============================================================
   function buildSpeedPitch() {
     var demo = document.querySelector('[data-demo="speed-pitch"]');
@@ -209,8 +209,8 @@
   }
 
   // ============================================================
-  // 3. TUNER — VintageMeterFace with proper half-arc
-  //    Pivot is at (140, 512) in the 280×260 viewBox — that's
+  // 3. TUNER - VintageMeterFace with proper half-arc
+  //    Pivot is at (140, 512) in the 280×260 viewBox - that's
   //    well below the canvas, so the visible top of the arc
   //    appears nearly straight (PiaScore layout).
   //    Sweep ±22° from vertical, mapped to ±50 cents.
@@ -301,7 +301,7 @@
   }
 
   // ============================================================
-  // 4. LONG-PRESS DEMO — hold 600ms, sheet slides up, auto-binds
+  // 4. LONG-PRESS DEMO - hold 600ms, sheet slides up, auto-binds
   // ============================================================
   function buildLongPress() {
     var demo = document.querySelector('[data-demo="long-press"]');
@@ -352,8 +352,8 @@
   }
 
   // ============================================================
-  // 5. LAYERED KEYBOARD — real piano with interspersed sharps
-  //    14 white keys (C4–B5), 10 black keys at proper seams.
+  // 5. LAYERED KEYBOARD - real piano with interspersed sharps
+  //    14 white keys (C4-B5), 10 black keys at proper seams.
   //    Tap any key to hear a piano (left of split) or strings
   //    (right of split) tone via Web Audio.
   // ============================================================
@@ -478,13 +478,13 @@
         });
         blacksHost.appendChild(bk);
       });
-      // Split marker line — at the seam between (splitIndex-1) and splitIndex.
+      // Split marker line - at the seam between (splitIndex-1) and splitIndex.
       splitLine.style.left = (splitIndex * whiteW) + '%';
       // Labels
-      splitValue.textContent = whiteKeys[splitIndex] ? whiteKeys[splitIndex].n : '—';
-      pianoLabel.textContent  = whiteKeys[0].n + ' — ' + (splitIndex > 0 ? whiteKeys[splitIndex - 1].n : whiteKeys[0].n);
+      splitValue.textContent = whiteKeys[splitIndex] ? whiteKeys[splitIndex].n : '-';
+      pianoLabel.textContent  = whiteKeys[0].n + ' - ' + (splitIndex > 0 ? whiteKeys[splitIndex - 1].n : whiteKeys[0].n);
       stringsLabel.textContent = (whiteKeys[splitIndex] ? whiteKeys[splitIndex].n : whiteKeys[whiteKeys.length - 1].n)
-                              + ' — ' + whiteKeys[whiteKeys.length - 1].n;
+                              + ' - ' + whiteKeys[whiteKeys.length - 1].n;
     }
     splitSlider.addEventListener('input', function () {
       splitIndex = parseInt(splitSlider.value, 10);

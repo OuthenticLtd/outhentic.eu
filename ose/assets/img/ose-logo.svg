@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  OSE primary logo — canonical brand mark. Identical geometry to the
+  OSE primary logo - canonical brand mark. Identical geometry to the
   in-app GlowingO at branding/ose_logo.svg, but cropped to the bounding
   box of the visible content (no transparent padding) so the favicon
   and nav-bar img render at full strength.
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 18 72 72" role="img" aria-label="OSE — Outhentic Sound Engine">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 18 72 72" role="img" aria-label="OSE - Outhentic Sound Engine">
     <defs>
         <linearGradient id="oseRingGradient" x1="24" y1="54" x2="84" y2="54" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#4AA3FF"/>

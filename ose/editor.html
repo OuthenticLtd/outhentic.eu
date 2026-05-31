@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex,nofollow" />
-<title>Editor — OSE</title>
+<title>Editor - OSE</title>
 <link rel="stylesheet" href="assets/css/ose-fonts.css" />
 
-<!-- Quill 2.0 — WYSIWYG for body fields -->
+<!-- Quill 2.0 - WYSIWYG for body fields -->
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js" defer></script>
 
@@ -81,7 +81,7 @@
 
 <!-- PASSWORD GATE -->
 <div id="gate" class="gate">
-  <h2>OSE — Editor</h2>
+  <h2>OSE - Editor</h2>
   <p>Enter the editor password to continue.</p>
   <form id="gate-form">
     <input id="gate-pw" type="password" autocomplete="off" placeholder="Password" autofocus />
@@ -132,7 +132,7 @@
 
   <div class="panel hidden" data-panel="hero">
     <div class="help">
-      <h3>Hero — landing page</h3>
+      <h3>Hero - landing page</h3>
       <p>The big section at the top of the home page. Eyebrow, two-part title, lead paragraph and the two CTAs.</p>
     </div>
     <div id="hero-form" class="ed-card"></div>
@@ -195,8 +195,8 @@
       <h3>Newsletter signup</h3>
       <p>The signup form in the footer collects emails for your newsletter. Two delivery modes:</p>
       <ul>
-        <li><strong>Mailto (default)</strong> — leave <em>Endpoint URL</em> empty. When a visitor submits, their email client opens pre-filled to your contact email. They click send. Each signup arrives in your inbox; search your inbox later and copy/paste into a CSV for Mailchimp import.</li>
-        <li><strong>Endpoint URL</strong> — paste a Formspree, Cloudflare Worker, or self-hosted URL. Submissions POST as JSON like <code>{"email": "...", "name": "...", "page": "...", "ts": "..."}</code>. Mailto fallback fires automatically if the endpoint errors.</li>
+        <li><strong>Mailto (default)</strong> - leave <em>Endpoint URL</em> empty. When a visitor submits, their email client opens pre-filled to your contact email. They click send. Each signup arrives in your inbox; search your inbox later and copy/paste into a CSV for Mailchimp import.</li>
+        <li><strong>Endpoint URL</strong> - paste a Formspree, Cloudflare Worker, or self-hosted URL. Submissions POST as JSON like <code>{"email": "...", "name": "...", "page": "...", "ts": "..."}</code>. Mailto fallback fires automatically if the endpoint errors.</li>
       </ul>
       <p>Spam protection is local: a hidden honeypot field, a 3-second minimum fill time, and basic email validation. No captcha.</p>
     </div>
@@ -218,12 +218,12 @@
 
 <script>
 /* =====================================================================
-   OSE editor — single-page, password-gated, Quill-driven.
+   OSE editor - single-page, password-gated, Quill-driven.
    Edits ose-content.js. Dual save: download or commit to GitHub.
    ===================================================================== */
 (function () {
   // ────────────────────────────────────────────────────────────────────
-  // EDITOR_PASSWORD — plain text, just change the string below to set a
+  // EDITOR_PASSWORD - plain text, just change the string below to set a
   // new password. No hashing required.
   // ────────────────────────────────────────────────────────────────────
   var EDITOR_PASSWORD = "Doremifasollasido";
@@ -285,7 +285,7 @@
     lab.textContent = label;
     var ctl;
     if (opts.toggle) {
-      // Boolean toggle — checkbox styled as a pill switch.
+      // Boolean toggle - checkbox styled as a pill switch.
       ctl = document.createElement('label');
       ctl.style.cssText = 'display:inline-flex;align-items:center;gap:10px;cursor:pointer;padding-top:8px;';
       var cb = document.createElement('input');
@@ -356,7 +356,7 @@
     var host = $('#meta-form'); host.innerHTML = '';
     var m = data.meta || (data.meta = {});
 
-    // Release / CTA block — sits at the top so it's the first thing the
+    // Release / CTA block - sits at the top so it's the first thing the
     // user sees in the Site tab.
     var releaseHelp = document.createElement('p');
     releaseHelp.style.cssText = 'margin:0 0 18px;padding:14px 16px;background:var(--bg-1);border-left:3px solid var(--accent-orange);border-radius:6px;font-size:.86rem;color:var(--ink-soft);';
@@ -392,9 +392,9 @@
     var h = data.hero || (data.hero = {});
     [
       ['Eyebrow', 'eyebrow'],
-      ['Title — first part', 'title_a'],
-      ['Title — gradient word', 'title_b'],
-      ['Title — third part (optional)', 'title_c'],
+      ['Title - first part', 'title_a'],
+      ['Title - gradient word', 'title_b'],
+      ['Title - third part (optional)', 'title_c'],
       ['Lead paragraph', 'lead', { tall: true }],
       ['Primary CTA label', 'ctaPrimaryLabel'],
       ['Primary CTA href', 'ctaPrimaryHref'],
@@ -468,16 +468,16 @@
       card.appendChild(inputField('Tile role (subtitle)', m.tile_role, function (v) { m.tile_role = v; }));
       card.appendChild(inputField('Tagline (page hero)', m.tagline, function (v) { m.tagline = v; }, { tall: true }));
       card.appendChild(inputField('Summary lead', m.summary, function (v) { m.summary = v; }, { tall: true }));
-      card.appendChild(quillField('Top bar — body HTML', m.topbar_html, function (v) { m.topbar_html = v; }));
-      card.appendChild(quillField('Body / controls — HTML', m.body_controls_html, function (v) { m.body_controls_html = v; }));
+      card.appendChild(quillField('Top bar - body HTML', m.topbar_html, function (v) { m.topbar_html = v; }));
+      card.appendChild(quillField('Body / controls - HTML', m.body_controls_html, function (v) { m.body_controls_html = v; }));
       if (m.id === 'play') {
-        card.appendChild(quillField('Hubs — HTML (Play module only)', m.hubs_html, function (v) { m.hubs_html = v; }));
+        card.appendChild(quillField('Hubs - HTML (Play module only)', m.hubs_html, function (v) { m.hubs_html = v; }));
       }
       if (m.id === 'audio') {
-        card.appendChild(quillField('Audio Editor — HTML (Audio module only)', m.audio_editor_html, function (v) { m.audio_editor_html = v; }));
+        card.appendChild(quillField('Audio Editor - HTML (Audio module only)', m.audio_editor_html, function (v) { m.audio_editor_html = v; }));
       }
-      card.appendChild(quillField('Settings — HTML', m.settings_html, function (v) { m.settings_html = v; }));
-      card.appendChild(quillField('Tips — HTML', m.tips_html, function (v) { m.tips_html = v; }));
+      card.appendChild(quillField('Settings - HTML', m.settings_html, function (v) { m.settings_html = v; }));
+      card.appendChild(quillField('Tips - HTML', m.tips_html, function (v) { m.tips_html = v; }));
       host.appendChild(card);
     });
   }
@@ -504,7 +504,7 @@
       (t.steps || []).forEach(function (s, j) {
         var srow = document.createElement('div');
         srow.style.cssText = 'background:var(--bg-1);padding:14px;border:1px solid var(--line);border-radius:8px;margin-bottom:10px;';
-        srow.appendChild(inputField('Step ' + (j + 1) + ' — title', s.h, function (v) { s.h = v; }));
+        srow.appendChild(inputField('Step ' + (j + 1) + ' - title', s.h, function (v) { s.h = v; }));
         srow.appendChild(inputField('Body', s.p, function (v) { s.p = v; }, { tall: true }));
         var rm = document.createElement('button');
         rm.className = 'btn btn--small btn--danger'; rm.textContent = 'Remove step';
@@ -581,7 +581,7 @@
     (f.columns || []).forEach(function (col, i) {
       var sec = document.createElement('div');
       sec.style.cssText = 'background:var(--bg-1);padding:14px;border:1px solid var(--line);border-radius:8px;margin-bottom:10px;';
-      sec.appendChild(inputField('Column ' + (i + 1) + ' — title', col.title, function (v) { col.title = v; }));
+      sec.appendChild(inputField('Column ' + (i + 1) + ' - title', col.title, function (v) { col.title = v; }));
       (col.links || []).forEach(function (l, j) {
         var lr = document.createElement('div');
         lr.style.cssText = 'display:grid;grid-template-columns:1fr 1fr 80px;gap:8px;margin-bottom:6px;align-items:center;';
@@ -620,8 +620,8 @@
       emailPlaceholder: 'you@yourband.com',
       namePlaceholder: 'Name (optional)',
       submitLabel: 'Subscribe',
-      successMailto: 'Thanks! Your email client just opened — hit send to confirm.',
-      successEndpoint: 'Thanks — you\'re on the list.',
+      successMailto: 'Thanks! Your email client just opened - hit send to confirm.',
+      successEndpoint: 'Thanks - you\'re on the list.',
       errorMessage: 'That email doesn\'t look right.',
       endpointUrl: ''
     });
@@ -681,7 +681,7 @@
     var json = JSON.stringify(data, null, 2);
     return (
       '/* =========================================================\n' +
-      '   OSE — site-wide editable content.\n' +
+      '   OSE - site-wide editable content.\n' +
       '   Auto-generated by /ose/editor.html.\n' +
       '   ========================================================= */\n' +
       'window.OSE_CONTENT = ' + json + ';\n'

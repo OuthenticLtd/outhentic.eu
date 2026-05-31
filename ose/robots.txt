@@ -1,6 +1,6 @@
 # robots.txt for outhentic.eu/ose
 # The canonical robots.txt lives at https://outhentic.eu/robots.txt
-# — this file is a local fallback / hint for tooling that scans
+# - this file is a local fallback / hint for tooling that scans
 # sub-paths. It MUST also be mirrored at the domain root for the
 # directives below to apply site-wide.
 
@@ -11,7 +11,7 @@ Allow: /
 Disallow: /ose/editor.html
 Disallow: /ose/assets/js/editor-github.js
 
-# Be a good citizen for AI crawlers — allow content, no preferential
+# Be a good citizen for AI crawlers - allow content, no preferential
 # treatment. (Add specific blocks here if Outhentic later decides
 # to opt out of any model training.)
 

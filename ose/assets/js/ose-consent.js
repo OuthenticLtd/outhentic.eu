@@ -1,17 +1,17 @@
 /* =========================================================
-   OSE — cookie / storage notice banner.
+   OSE - cookie / storage notice banner.
 
    This site sets NO advertising or tracking cookies. The only
    client-side storage is strictly necessary: this banner's own
    dismissal flag, and (admin only) the editor's GitHub token.
    Strictly-necessary storage is exempt from consent under the
    ePrivacy Directive Art. 5(3), so this is an INFORMATIONAL
-   notice with a single "Got it" dismiss — NOT a consent gate.
+   notice with a single "Got it" dismiss - NOT a consent gate.
 
    Self-contained: injects its own styles + DOM on DOMContentLoaded,
    respects the dismissal flag in localStorage, and links to the
    Cookie statement. Visually consistent with the site (dark,
-   accent, Inter — uses the same CSS variables / self-hosted fonts).
+   accent, Inter - uses the same CSS variables / self-hosted fonts).
    ========================================================= */
 (function () {
   var FLAG = 'ose-cookie-notice-dismissed';
@@ -56,7 +56,7 @@
       '.ose-consent__btn:active{transform:translateY(1px);}' +
       '.ose-consent__btn:focus-visible{outline:2px solid #4AA3FF;outline-offset:2px;}' +
       '@media (max-width:520px){.ose-consent{flex-direction:column;align-items:stretch;text-align:left;gap:12px;padding:13px 15px;}' +
-      '.ose-consent__text{flex:0 0 auto;}' +   /* in column, flex-basis is height — reset so it hugs content */
+      '.ose-consent__text{flex:0 0 auto;}' +   /* in column, flex-basis is height - reset so it hugs content */
       '.ose-consent__btn{width:100%;}}' +
       '@media (prefers-reduced-motion:reduce){.ose-consent{transition:opacity .01ms;}}';
     var style = document.createElement('style');
@@ -79,7 +79,7 @@
     var text = document.createElement('p');
     text.className = 'ose-consent__text';
     text.innerHTML =
-      '<strong>No tracking here.</strong> We use no advertising or tracking cookies — only ' +
+      '<strong>No tracking here.</strong> We use no advertising or tracking cookies - only ' +
       'storage that is strictly necessary for the site to work. ' +
       '<a href="' + cookiesHref() + '">Learn more</a>.';
 

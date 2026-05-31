@@ -1,5 +1,5 @@
 /* =========================================================
-   OSE — Outhentic Sound Engine
+   OSE - Outhentic Sound Engine
    Design language mirrors the app: deep black, hub-card
    surfaces with thin accent borders, blue→orange gradient
    accent (matches logo), 14dp-equivalent rounded corners.
@@ -23,7 +23,7 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
 
 :root {
-  /* Surface palette — pulled from the OseCard hub spec */
+  /* Surface palette - pulled from the OseCard hub spec */
   --bg: #050507;
   --bg-1: #0a0a0d;
   --bg-2: #111115;
@@ -38,7 +38,7 @@ button { font: inherit; cursor: pointer; border: 0; background: none; color: inh
   --muted: #7A7A82;
   --dim: #4F4F56;
 
-  /* Accent — exact OSE brand gradient (from branding/ose_logo.svg) */
+  /* Accent - exact OSE brand gradient (from branding/ose_logo.svg) */
   --accent-blue: #4AA3FF;
   --accent-orange: #FF8A2A;
   --accent: #FF8A2A;            /* primary accent for single-tone use */
@@ -264,7 +264,7 @@ code, kbd { font-family: var(--mono-font); font-size: .9em; background: var(--bg
 a.hub-card { display: block; color: inherit; }
 
 /* =========================================================
-   Home grid — matches MainScreen.kt
+   Home grid - matches MainScreen.kt
    Each card: title (accent) + subtitle on top, wide-icon
    visualization fills the bottom (per *Wide functions in
    MainScreenIconsAnimated.kt). 14dp corners, 0.5dp accent
@@ -387,7 +387,7 @@ a.hub-card { display: block; color: inherit; }
 .phone-frame--landscape { aspect-ratio: 19.5 / 9; max-width: 600px; }
 
 
-/* Interactive ("clickable") mockups — see ose-mockups.js */
+/* Interactive ("clickable") mockups - see ose-mockups.js */
 .phone-frame[data-interactive] { cursor: default; }
 .phone-frame[data-interactive]::before { pointer-events: none; }
 .phone-frame[data-interactive] .mk-key,
@@ -565,7 +565,7 @@ a.hub-card { display: block; color: inherit; }
 
 /* =========================================================
    Newsletter signup (footer)
-   Static-site friendly — mailto fallback by default, optional
+   Static-site friendly - mailto fallback by default, optional
    endpoint URL for any HTTP receiver (Formspree / Cloudflare /
    self-hosted). See ose-newsletter.js for the spam-protection
    details (honeypot + time-check + email regex).
@@ -638,7 +638,7 @@ a.hub-card { display: block; color: inherit; }
 .nl-submit:hover:not(:disabled) { filter: brightness(0.92); }
 .nl-submit:active:not(:disabled) { transform: scale(0.98); }
 .nl-submit:disabled { opacity: 0.55; cursor: progress; }
-/* Honeypot — visually hidden but still in DOM so spam bots see it. */
+/* Honeypot - visually hidden but still in DOM so spam bots see it. */
 .nl-trap {
   position: absolute !important;
   left: -10000px !important;
@@ -926,7 +926,7 @@ a.hub-card { display: block; color: inherit; }
   display: flex; align-items: flex-end;
   outline: none;
 }
-/* Normal beat — moderate height, subtle accent tint */
+/* Normal beat - moderate height, subtle accent tint */
 .mm-col-bar {
   width: 100%;
   background: linear-gradient(180deg,
@@ -942,7 +942,7 @@ a.hub-card { display: block; color: inherit; }
   font-size: 13px;
   font-weight: 700;
 }
-/* Accent beat — saturated solid fill, dark numeral, lifted glow.
+/* Accent beat - saturated solid fill, dark numeral, lifted glow.
    Visually has to dominate so the downbeat reads at a glance. */
 .mm-col[data-state="accent"] .mm-col-bar {
   background: linear-gradient(180deg,
@@ -957,7 +957,7 @@ a.hub-card { display: block; color: inherit; }
     inset 0 1px 0 color-mix(in srgb, #FFFFFF 30%, transparent),
     0 2px 10px color-mix(in srgb, var(--demo-accent) 35%, transparent);
 }
-/* Muted beat — barely there, dashed feel */
+/* Muted beat - barely there, dashed feel */
 .mm-col[data-state="muted"] .mm-col-bar {
   background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
   border-color: rgba(255,255,255,0.18);
@@ -965,7 +965,7 @@ a.hub-card { display: block; color: inherit; }
   font-weight: 600;
   font-size: 11px;
 }
-/* Live (playing) beat — white border + brighter color, brief flash */
+/* Live (playing) beat - white border + brighter color, brief flash */
 .mm-col.is-live .mm-col-bar {
   background: var(--demo-accent) !important;
   border-color: #FFFFFF !important;
@@ -1123,7 +1123,7 @@ a.hub-card { display: block; color: inherit; }
 .mm-tap:active { transform: scale(0.98); }
 .mm-tap.is-pulsing { background: color-mix(in srgb, var(--demo-accent) 35%, transparent); }
 
-/* Meter picker sheet — mirrors MeterBottomSheet from the app */
+/* Meter picker sheet - mirrors MeterBottomSheet from the app */
 .mm-sheet {
   position: fixed; inset: 0;
   z-index: 90;
@@ -1306,7 +1306,7 @@ a.hub-card { display: block; color: inherit; }
 .sg-slider:disabled::-moz-range-thumb,
 .mm-vol-slider:disabled::-moz-range-thumb { background: var(--muted); }
 
-/* "Free in your browser" callout — small badge that sits above the
+/* "Free in your browser" callout - small badge that sits above the
    interactive tool demos. Reinforces the messaging that search
    engines pick up from the JSON-LD WebApplication entries. */
 .free-badge {
@@ -1435,7 +1435,7 @@ a.hub-card { display: block; color: inherit; }
   position: relative;
 }
 .sg-svg { width: 100%; height: 200px; display: block; }
-/* Frequency axis labels — absolute-positioned at log-spaced positions
+/* Frequency axis labels - absolute-positioned at log-spaced positions
    to match the spectrum's log x-axis exactly.
    Log positions across [30, 20000] Hz:
      30 →   0.00%
@@ -1618,17 +1618,17 @@ a.hub-card { display: block; color: inherit; }
 .module-demo.mc--signalgen  { color: var(--c-signalgen); --demo-accent: var(--c-signalgen); }
 
 /* =========================================================
-   Animations — match the actual app's motion language
+   Animations - match the actual app's motion language
    Color palette pulled from source: ui/theme/InstrumentHubSkin.kt
    ========================================================= */
 
-/* Module accent palette — exact values from MainScreen.kt */
+/* Module accent palette - exact values from MainScreen.kt */
 :root {
   --c-play:        #FF8B3D;   /* current instrument default */
   --c-audio:       #E05A6B;   /* muted red */
   --c-midi:        #B18BFF;   /* lavender */
   --c-practice:    #5DCAA5;   /* mint */
-  --c-metronome:   #50C878;   /* green — matches the app's real metronome accent */
+  --c-metronome:   #50C878;   /* green - matches the app's real metronome accent */
   --c-tuner:       #85B7EB;   /* sky blue */
   --c-signalgen:   #4FD1C5;   /* teal */
   --c-meters:      #F38BA0;   /* coral */
@@ -1640,7 +1640,7 @@ a.hub-card { display: block; color: inherit; }
   --c-card-line:   rgba(255,255,255,0.06);
 }
 
-/* GlowingO logo — the inner wave runs a traveling sine ripple driven by JS
+/* GlowingO logo - the inner wave runs a traveling sine ripple driven by JS
    (assets/js/ose-main.js), matching the app's GlowingO exactly. No CSS
    transform here: a scale pulse would distort the JS-rebuilt path. */
 .anim-glowo-wave { animation: none; }
@@ -1657,7 +1657,7 @@ a.hub-card { display: block; color: inherit; }
 .anim-rec      { animation: rec-pulse 1.0s ease-in-out infinite; }
 .anim-rec-glow { animation: rec-glow  1.0s ease-in-out infinite; }
 
-/* Keyboard key cycle (Play tile) — 7 keys, one highlights at a time */
+/* Keyboard key cycle (Play tile) - 7 keys, one highlights at a time */
 @keyframes key-cycle-1 { 0%, 14% { opacity: 1; } 14.01%, 100% { opacity: 0; } }
 @keyframes key-cycle-2 { 14.01%, 28% { opacity: 1; } 28.01%, 100% { opacity: 0; } 0%, 14% { opacity: 0; } }
 @keyframes key-cycle-3 { 28.01%, 42% { opacity: 1; } 42.01%, 100% { opacity: 0; } 0%, 28% { opacity: 0; } }
@@ -1673,14 +1673,14 @@ a.hub-card { display: block; color: inherit; }
 .anim-key-6 { animation: key-cycle-6 14s linear infinite; }
 .anim-key-7 { animation: key-cycle-7 14s linear infinite; }
 
-/* Audio waveform ribbon — moving brightness wave through 22 bars */
+/* Audio waveform ribbon - moving brightness wave through 22 bars */
 @keyframes audio-ribbon {
   0%   { transform: translateX(0); }
   100% { transform: translateX(160px); }
 }
 .anim-audio-ribbon { animation: audio-ribbon 5s linear infinite; }
 
-/* MIDI note pulse — staggered phases */
+/* MIDI note pulse - staggered phases */
 @keyframes midi-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
 .anim-midi-1 { animation: midi-pulse 3s ease-in-out infinite; }
 .anim-midi-2 { animation: midi-pulse 3s ease-in-out infinite; animation-delay: -0.4s; }
@@ -1693,7 +1693,7 @@ a.hub-card { display: block; color: inherit; }
 @keyframes practice-sweep { 0% { transform: translateX(0); } 50% { transform: translateX(140px); } 100% { transform: translateX(0); } }
 .anim-practice-head { animation: practice-sweep 8s ease-in-out infinite; }
 
-/* Metronome — 4 beat pillars, one accented at a time, period 2s */
+/* Metronome - 4 beat pillars, one accented at a time, period 2s */
 @keyframes met-beat-1 { 0%, 24% { fill: var(--c-metronome); transform: scaleY(1.0); } 25%, 100% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } }
 @keyframes met-beat-2 { 0%, 24% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } 25%, 49% { fill: var(--c-metronome); transform: scaleY(1.0); } 50%, 100% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } }
 @keyframes met-beat-3 { 0%, 49% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } 50%, 74% { fill: var(--c-metronome); transform: scaleY(1.0); } 75%, 100% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } }
@@ -1703,7 +1703,7 @@ a.hub-card { display: block; color: inherit; }
 .anim-met-3 { animation: met-beat-3 2s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
 .anim-met-4 { animation: met-beat-4 2s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
 
-/* Tuner needle — gentle drift around centre (settles to in-tune), snaps green */
+/* Tuner needle - gentle drift around centre (settles to in-tune), snaps green */
 @keyframes tuner-drift {
   0%, 100% { transform: rotate(-5deg); }
   35%      { transform: rotate(4deg); }
@@ -1717,11 +1717,11 @@ a.hub-card { display: block; color: inherit; }
 .anim-tuner-needle  { animation: tuner-drift     7s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
 .anim-tuner-snap    { animation: tuner-snap-flash 7s linear      infinite; }
 
-/* Signal Generator — sine wave scrolling */
+/* Signal Generator - sine wave scrolling */
 @keyframes sig-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-60px); } }
 .anim-sig-sine { animation: sig-scroll 1.4s linear infinite; }
 
-/* Meters — 8 bar wobble */
+/* Meters - 8 bar wobble */
 @keyframes meters-bar-1 { 0%, 100% { transform: scaleY(0.45); } 50% { transform: scaleY(0.85); } }
 @keyframes meters-bar-2 { 0%, 100% { transform: scaleY(0.62); } 50% { transform: scaleY(0.95); } }
 @keyframes meters-bar-3 { 0%, 100% { transform: scaleY(0.38); } 50% { transform: scaleY(0.72); } }
@@ -1746,7 +1746,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .anim-playhead { animation: playhead-glow 1.6s ease-in-out infinite; }
 
-/* Card stagger fade on first appearance — used by module-card hero grid */
+/* Card stagger fade on first appearance - used by module-card hero grid */
 @keyframes tile-in {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -1784,14 +1784,14 @@ a.hub-card { display: block; color: inherit; }
   position: relative;
 }
 
-/* Play card — clickable piano keys */
+/* Play card - clickable piano keys */
 .mcw-play-key { cursor: pointer; transition: filter .12s, opacity .12s; pointer-events: auto; }
 .mcw-play-w:hover { filter: brightness(0.92); }
 .mcw-play-b:hover { filter: brightness(1.4); }
 .mcw-play-w.is-down { filter: brightness(0.70) saturate(1.5); }
 .mcw-play-b.is-down { filter: brightness(1.7); }
 
-/* Metronome card — 4 bars + play glyph + status below */
+/* Metronome card - 4 bars + play glyph + status below */
 .module-card.mc--metronome .mc-viz {
   flex-direction: column;
   height: auto;
@@ -1821,7 +1821,7 @@ a.hub-card { display: block; color: inherit; }
   margin-top: 8px;
 }
 
-/* Signal Gen card — waveform + chip row layout */
+/* Signal Gen card - waveform + chip row layout */
 .mcw-sig-wrap {
   width: 100%;
   display: flex;
@@ -1873,7 +1873,7 @@ a.hub-card { display: block; color: inherit; }
   opacity: 0.85;
 }
 
-/* The signal-gen card uses a vertical layout in its viz — disable the
+/* The signal-gen card uses a vertical layout in its viz - disable the
    default max-height so the chips and status row fit. */
 .module-card.mc--signalgen .mc-viz {
   height: auto;
@@ -1882,7 +1882,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .module-card.mc--signalgen .mc-viz svg { max-height: 90px; }
 
-/* TempoPolygon spin — slow rotation matching BPM */
+/* TempoPolygon spin - slow rotation matching BPM */
 @keyframes tempo-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 .anim-tempo-spin { animation: tempo-spin 8s linear infinite; transform-origin: 50% 50%; transform-box: fill-box; }
 
@@ -1895,12 +1895,12 @@ a.hub-card { display: block; color: inherit; }
 
 /* =========================================================
    Wide-icon animations for the home grid
-   Match MainScreenIconsAnimated.kt — ambient pass (slow
+   Match MainScreenIconsAnimated.kt - ambient pass (slow
    loops, low-amplitude motion). Cards read as alive without
    distracting.
    ========================================================= */
 
-/* PLAY — 7 white keys, accent tint cycles L→R on a 14s loop.
+/* PLAY - 7 white keys, accent tint cycles L→R on a 14s loop.
    Each key gets the same animation with a 2s delay offset. */
 @keyframes mcw-play-key-tint {
   0%, 4%, 100% { opacity: 0; }
@@ -1914,15 +1914,15 @@ a.hub-card { display: block; color: inherit; }
 .mcw-play-tint-5 { animation-delay: -10s; }
 .mcw-play-tint-6 { animation-delay: -12s; }
 
-/* AUDIO — 22 vertical bars, gentle alpha L→R drift on 12s.
-   Almost imperceptible — just enough to feel alive. */
+/* AUDIO - 22 vertical bars, gentle alpha L→R drift on 12s.
+   Almost imperceptible - just enough to feel alive. */
 @keyframes mcw-audio-drift {
   0%, 100% { opacity: 0.65; }
   50%      { opacity: 0.78; }
 }
 .mcw-audio-bar { animation: mcw-audio-drift 12s linear infinite; }
 
-/* MIDI — 6 note bars on 4 lanes, alpha pulses out-of-phase, 12s loop. */
+/* MIDI - 6 note bars on 4 lanes, alpha pulses out-of-phase, 12s loop. */
 @keyframes mcw-midi-pulse {
   0%, 100% { opacity: 0.70; }
   50%      { opacity: 0.84; }
@@ -1934,7 +1934,7 @@ a.hub-card { display: block; color: inherit; }
 .mcw-midi-5 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -6s; }
 .mcw-midi-6 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -7.5s; }
 
-/* PRACTICE — playhead sweeps L→R on a 14s loop.
+/* PRACTICE - playhead sweeps L→R on a 14s loop.
    The filled rail grows behind it, then both snap back. */
 @keyframes mcw-practice-sweep {
   0%   { transform: translateX(0%); }
@@ -1947,7 +1947,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .mcw-practice-fill { animation: mcw-practice-fill 14s linear infinite; transform-origin: left center; }
 
-/* METRONOME — 4 pillars, one active at a time. 6s cycle (≈40 bpm equiv) */
+/* METRONOME - 4 pillars, one active at a time. 6s cycle (≈40 bpm equiv) */
 @keyframes mcw-met-1 { 0%, 24% { opacity: .62; transform: scaleY(1.20); } 25%, 100% { opacity: .42; transform: scaleY(1.0); } }
 @keyframes mcw-met-2 { 0%, 24% { opacity: .42; transform: scaleY(1.0); } 25%, 49% { opacity: .62; transform: scaleY(1.20); } 50%, 100% { opacity: .42; transform: scaleY(1.0); } }
 @keyframes mcw-met-3 { 0%, 49% { opacity: .42; transform: scaleY(1.0); } 50%, 74% { opacity: .62; transform: scaleY(1.20); } 75%, 100% { opacity: .42; transform: scaleY(1.0); } }
@@ -1957,21 +1957,21 @@ a.hub-card { display: block; color: inherit; }
 .mcw-met-3 { animation: mcw-met-3 6s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
 .mcw-met-4 { animation: mcw-met-4 6s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
 
-/* TUNER — needle drifts ±3% on 10s ping-pong */
+/* TUNER - needle drifts ±3% on 10s ping-pong */
 @keyframes mcw-tuner-drift {
   0%, 100% { transform: translateX(-3%); }
   50%      { transform: translateX(3%);  }
 }
 .mcw-tuner-needle { animation: mcw-tuner-drift 10s ease-in-out infinite; }
 
-/* SIGNAL GEN — sine phase scrolls L→R on a 13s linear loop */
+/* SIGNAL GEN - sine phase scrolls L→R on a 13s linear loop */
 @keyframes mcw-sine-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-100px); }
 }
 .mcw-sine { animation: mcw-sine-scroll 13s linear infinite; }
 
-/* METERS — 8 FFT bars, ±4% height swing on 9s loop */
+/* METERS - 8 FFT bars, ±4% height swing on 9s loop */
 @keyframes mcw-meter-1 { 0%,100% { transform: scaleY(0.96); } 50% { transform: scaleY(1.04); } }
 @keyframes mcw-meter-2 { 0%,100% { transform: scaleY(1.02); } 50% { transform: scaleY(0.96); } }
 @keyframes mcw-meter-3 { 0%,100% { transform: scaleY(0.98); } 50% { transform: scaleY(1.04); } }
@@ -1986,7 +1986,7 @@ a.hub-card { display: block; color: inherit; }
 .mcw-meter-8 { animation: mcw-meter-4 9s ease-in-out infinite; animation-delay: -7.2s; transform-origin: 50% 100%; transform-box: fill-box; }
 
 /* =========================================================
-   Tutorial scene animations — for tutorials.html
+   Tutorial scene animations - for tutorials.html
    ========================================================= */
 
 /* Scene reveal on scroll */
@@ -1995,7 +1995,7 @@ a.hub-card { display: block; color: inherit; }
   to   { opacity: 1; transform: none; }
 }
 
-/* Tap ripple — a circle expands and fades from a tap point */
+/* Tap ripple - a circle expands and fades from a tap point */
 @keyframes tut-tap-ripple {
   0%   { opacity: 0;   transform: scale(0.4); }
   20%  { opacity: 0.85; }
@@ -2003,7 +2003,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .tut-ripple { animation: tut-tap-ripple 1.6s ease-out infinite; transform-origin: center; transform-box: fill-box; }
 
-/* Finger pointer cycle — slides in, taps (scales), holds, fades */
+/* Finger pointer cycle - slides in, taps (scales), holds, fades */
 @keyframes tut-finger-tap {
   0%, 5%   { opacity: 0; transform: translate(0,8px) scale(1); }
   18%      { opacity: 1; transform: translate(0,0) scale(1); }
@@ -2013,7 +2013,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .tut-finger { animation: tut-finger-tap 4s ease-in-out infinite; transform-origin: 50% 90%; transform-box: fill-box; }
 
-/* Long-press hold — finger holds for 1.5s, ring grows, MIDI Learn sheet slides up */
+/* Long-press hold - finger holds for 1.5s, ring grows, MIDI Learn sheet slides up */
 @keyframes tut-long-press-ring {
   0%, 10%  { opacity: 0;   r: 6; }
   20%      { opacity: 0.55; r: 6; }
@@ -2022,7 +2022,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .tut-long-ring { animation: tut-long-press-ring 4.4s ease-out infinite; }
 
-/* Speed wheel — rotating + waveform stretching tied to it */
+/* Speed wheel - rotating + waveform stretching tied to it */
 @keyframes tut-speed-wheel {
   0%, 100% { transform: rotate(0deg);   }
   40%, 60% { transform: rotate(-100deg); }
@@ -2034,7 +2034,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .tut-waveform-stretch { animation: tut-waveform-stretch 5s ease-in-out infinite; transform-origin: left center; transform-box: fill-box; }
 
-/* Tuner needle — drifts, then snaps to centre + green halo flashes */
+/* Tuner needle - drifts, then snaps to centre + green halo flashes */
 @keyframes tut-tuner-needle-snap {
   0%   { transform: rotate(-22deg); }
   20%  { transform: rotate(15deg);  }
@@ -2051,14 +2051,14 @@ a.hub-card { display: block; color: inherit; }
 }
 .tut-tuner-snap { animation: tut-tuner-snap-flash 7s ease-in-out infinite; }
 
-/* TempoPolygon morph — square → pentagon */
+/* TempoPolygon morph - square → pentagon */
 @keyframes tut-poly-morph-4-5 {
   0%, 30%  { d: path('M 50,10 L 90,50 L 50,90 L 10,50 Z'); }
   50%, 100%{ d: path('M 50,10 L 88,38 L 73,82 L 27,82 L 12,38 Z'); }
 }
 .tut-poly-morph { animation: tut-poly-morph-4-5 5s ease-in-out infinite; }
 
-/* TempoPolygon orbit dot — moves around the pentagon's 5 vertices */
+/* TempoPolygon orbit dot - moves around the pentagon's 5 vertices */
 @keyframes tut-poly-dot {
   0%   { transform: translate(38px, -42px); }
   20%  { transform: translate(36px, -10px);  }
@@ -2069,14 +2069,14 @@ a.hub-card { display: block; color: inherit; }
 }
 .tut-poly-dot { animation: tut-poly-dot 2.5s steps(5, end) infinite; }
 
-/* REC pill — red pulse */
+/* REC pill - red pulse */
 @keyframes tut-rec-pulse {
   0%, 100% { transform: scale(1);    opacity: 0.85; }
   50%      { transform: scale(1.05); opacity: 1.0;  }
 }
 .tut-rec { animation: tut-rec-pulse 1s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
 
-/* Live waveform draw — bars appearing one by one, sweeping right to left */
+/* Live waveform draw - bars appearing one by one, sweeping right to left */
 @keyframes tut-live-bar-1  { 0%, 8%  { opacity: 0; } 12%, 100% { opacity: 0.92; } }
 @keyframes tut-live-bar-2  { 0%, 16% { opacity: 0; } 20%, 100% { opacity: 0.92; } }
 @keyframes tut-live-bar-3  { 0%, 24% { opacity: 0; } 28%, 100% { opacity: 0.92; } }
@@ -2098,7 +2098,7 @@ a.hub-card { display: block; color: inherit; }
 .tut-live-9  { animation: tut-live-bar-9  4.5s linear infinite; }
 .tut-live-10 { animation: tut-live-bar-10 4.5s linear infinite; }
 
-/* Layer dropping in — slides down + fades */
+/* Layer dropping in - slides down + fades */
 @keyframes tut-layer-drop {
   0%, 30%  { opacity: 0; transform: translateY(-12px); }
   45%, 100%{ opacity: 1; transform: none; }
@@ -2126,7 +2126,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .tut-loop-pillar { animation: tut-loop-pillar 5s ease-out infinite; }
 
-/* Tile highlight — for "tap this tile" demo */
+/* Tile highlight - for "tap this tile" demo */
 @keyframes tut-tile-highlight {
   0%, 30%  { box-shadow: 0 0 0 0 rgba(255,138,42,0); }
   50%      { box-shadow: 0 0 0 6px rgba(255,138,42,0.45); }
@@ -2292,7 +2292,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .tut-scene-viz svg { width: 100%; height: 100%; display: block; }
 
-/* Interactive demo block — sits between the hero and the walkthrough */
+/* Interactive demo block - sits between the hero and the walkthrough */
 .tut-demo {
   background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
   border: 1px solid var(--line);
@@ -2353,7 +2353,7 @@ a.hub-card { display: block; color: inherit; }
   min-width: 70px;
 }
 
-/* Range slider — accent-styled */
+/* Range slider - accent-styled */
 .tut-slider {
   -webkit-appearance: none;
   appearance: none;
@@ -2535,7 +2535,7 @@ a.hub-card { display: block; color: inherit; }
   50%      { opacity: 1;  transform: scale(1.2); }
 }
 
-/* Speed-pitch demo waveform — animates scaleX with the slider */
+/* Speed-pitch demo waveform - animates scaleX with the slider */
 .tut-wave-display {
   width: 100%;
   height: 80px;
@@ -2593,11 +2593,11 @@ a.hub-card { display: block; color: inherit; }
   pointer-events: none;
 }
 
-/* Tutorial hero visual — also smaller now */
+/* Tutorial hero visual - also smaller now */
 .tut-hero .tut-scene-viz { max-width: 260px; }
 @media (min-width: 920px) { .tut-hero .tut-scene-viz { max-width: 280px; } }
 
-/* Tuner demo LEDs — driven by data-on attribute from JS */
+/* Tuner demo LEDs - driven by data-on attribute from JS */
 .tut-tuner-led {
   width: 38px; height: 18px;
   border-radius: 4px;
@@ -2685,7 +2685,7 @@ a.hub-card { display: block; color: inherit; }
 
 /* =========================================================
    VintageMeterFace (Tuner demo)
-   Real ClickTrackFace/VintageMeterFace nesting — rim, glass,
+   Real ClickTrackFace/VintageMeterFace nesting - rim, glass,
    warm amber tint, half-arc with pivot far below canvas.
    ========================================================= */
 .vmf-rim {
@@ -2711,7 +2711,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .vmf-svg { width: 100%; height: 100%; display: block; }
 
-/* Cents readout row below the rim — same idiom as in the app */
+/* Cents readout row below the rim - same idiom as in the app */
 .vmf-readout-row {
   display: flex;
   align-items: center;
@@ -2930,7 +2930,7 @@ a.hub-card { display: block; color: inherit; }
   box-shadow: 0 0 6px rgba(255,255,255,0.45);
 }
 
-/* Long-press demo pad — make the ring more visible */
+/* Long-press demo pad - make the ring more visible */
 .tut-longpress-pad[data-pressing="true"] .tut-longpress-ring {
   opacity: 0.95;
   border-width: 3px;
@@ -2968,7 +2968,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .tut-tips li { margin-bottom: 8px; line-height: 1.55; }
 
-/* Per-tutorial accent — applied to the top-level <article class="tutorial mc--X"> */
+/* Per-tutorial accent - applied to the top-level <article class="tutorial mc--X"> */
 .tutorial.mc--play       { --tut-accent: var(--c-play); }
 .tutorial.mc--audio      { --tut-accent: var(--c-audio); }
 .tutorial.mc--midi       { --tut-accent: var(--c-midi); }

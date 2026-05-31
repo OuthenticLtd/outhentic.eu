@@ -12,7 +12,7 @@
   var C = window.OSE_CONTENT;
 
   // ────────────────────────────────────────────────────────────────────
-  // CTA resolution — pick the effective primary-CTA URL and label based
+  // CTA resolution - pick the effective primary-CTA URL and label based
   // on the meta.released flag. When NOT released (default), the CTA
   // points at meta.waitlistUrl with label "Join the waitlist". When
   // released, it switches to meta.playStoreUrl with "Get it on Google
@@ -245,7 +245,7 @@
         '<rect x="0" y="' + railTop + '" width="' + W + '" height="' + railH + '" rx="' + (railH/2) + '" fill="currentColor" opacity="0.20"/>' +
         // Cent ticks
         ticks +
-        // Needle (drifts ±3% — translateX animates the group)
+        // Needle (drifts ±3% - translateX animates the group)
         '<g class="mcw-tuner-needle">' +
           '<rect x="' + (centerX - needleW * 1.6).toFixed(1) + '" y="' + (midY - needleH/2).toFixed(1) + '" width="' + (needleW * 3.2).toFixed(1) + '" height="' + needleH.toFixed(1) + '" rx="' + (needleW * 1.6).toFixed(1) + '" fill="currentColor" opacity="0.28"/>' +
           '<rect x="' + (centerX - needleW/2).toFixed(1) + '" y="' + (midY - needleH/2).toFixed(1) + '" width="' + needleW.toFixed(1) + '" height="' + needleH.toFixed(1) + '" rx="' + (needleW/2).toFixed(1) + '" fill="currentColor"/>' +
@@ -376,7 +376,7 @@
   // -------- meta tags / title --------
   var titleEl = document.querySelector('[data-ose-title]');
   if (titleEl) {
-    titleEl.textContent = (get('meta.siteName') || 'OSE') + ' — ' + (get('meta.tagline') || '');
+    titleEl.textContent = (get('meta.siteName') || 'OSE') + ' - ' + (get('meta.tagline') || '');
   }
 
   // -------- module list (manual page) --------

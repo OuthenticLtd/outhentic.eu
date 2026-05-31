@@ -1,5 +1,5 @@
 /* =========================================================
-   OSE — self-hosted web fonts (GDPR-safe, no Google CDN).
+   OSE - self-hosted web fonts (GDPR-safe, no Google CDN).
 
    Replaces the Google Fonts <link> tags in each page <head>.
    Loading fonts from fonts.googleapis.com / fonts.gstatic.com
@@ -7,7 +7,7 @@
    which the Munich Regional Court (LG München, 20 Jan 2022,
    3 O 17493/20) ruled is an unlawful processing of personal
    data under the GDPR when done without consent. Self-hosting
-   the woff2 files removes that transfer entirely — the browser
+   the woff2 files removes that transfer entirely - the browser
    only ever talks to outhentic.eu.
 
    Fonts: Inter and JetBrains Mono, both downloaded from the
@@ -19,7 +19,7 @@
    site uses. Licences: both fonts are SIL Open Font License 1.1
    (free to self-host and redistribute).
 
-   HOW TO WIRE THIS IN (main session — page <head> edits):
+   HOW TO WIRE THIS IN (main session - page <head> edits):
      1. Remove these three lines from every HTML <head>:
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,11 +34,11 @@
      3. (Optional, perf) preload the latin Inter file:
           <link rel="preload" href="assets/fonts/inter-variable-latin.woff2"
                 as="font" type="font/woff2" crossorigin />
-   No changes to ose-styles.css are required — the family names
+   No changes to ose-styles.css are required - the family names
    "Inter" and "JetBrains Mono" are unchanged.
    ========================================================= */
 
-/* ---------------- Inter (variable, 100–900) ---------------- */
+/* ---------------- Inter (variable, 100-900) ---------------- */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -56,7 +56,7 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* ------------- JetBrains Mono (variable, 100–800) ------------- */
+/* ------------- JetBrains Mono (variable, 100-800) ------------- */
 @font-face {
   font-family: 'JetBrains Mono';
   font-style: normal;

@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Audio Meters Module — Peak, RMS &amp; Ballistics for Android | OSE</title>
-<meta name="description" content="OSE's Meters module reads what's actually arriving at the converter — peak, RMS, calibrated ballistics, clip indicator. Verify a signal chain in seconds on Android, with USB audio interface support." />
+<title>Audio Meters Module - Peak, RMS &amp; Ballistics for Android | OSE</title>
+<meta name="description" content="OSE's Meters module reads what's actually arriving at the converter - peak, RMS, calibrated ballistics, clip indicator. Verify a signal chain in seconds on Android, with USB audio interface support." />
 <meta name="theme-color" content="#050507" />
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
 
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="OSE — Outhentic Sound Engine" />
+<meta property="og:site_name" content="OSE - Outhentic Sound Engine" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:title" content="Audio Meters — Peak, RMS &amp; ballistics — OSE" />
+<meta property="og:title" content="Audio Meters - Peak, RMS &amp; ballistics - OSE" />
 <meta property="og:description" content="Peak, RMS and ballistics from a real metering engine. Verify a signal chain in seconds on Android." />
 <meta property="og:url" content="https://outhentic.eu/ose/modules/meters.html" />
 <meta property="og:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Audio Meters — Peak, RMS &amp; ballistics — OSE" />
+<meta name="twitter:title" content="Audio Meters - Peak, RMS &amp; ballistics - OSE" />
 <meta name="twitter:description" content="Peak, RMS and ballistics from a real metering engine." />
 <meta name="twitter:image" content="https://outhentic.eu/ose/assets/img/ose-og.svg" />
 
@@ -79,7 +79,7 @@
               <rect class="mk-press" x="332" y="2" width="22" height="22" rx="6" fill="#F38BA0" fill-opacity="0.92" stroke="#FFFFFF" stroke-opacity="0.25"/>
             </g>
 
-            <!-- ════ MODE TAB BAR — ALL / SPL / FFT / SGM ════ -->
+            <!-- ════ MODE TAB BAR - ALL / SPL / FFT / SGM ════ -->
             <!-- one OseCard: hubSurface bg + accent hairline border, 14dp corner; 4 equal cells with 1px dividers -->
             <rect x="14" y="80" width="352" height="56" rx="14" fill="#1a1216" stroke="rgba(243,139,160,0.45)" stroke-width="1"/>
             <line x1="102" y1="84" x2="102" y2="132" stroke="#2a2228" stroke-width="1"/>
@@ -114,14 +114,14 @@
               <g data-panel="all">
                 <!-- SPL gauge card -->
                 <rect x="14" y="146" width="352" height="148" rx="14" fill="#1a1216" stroke="rgba(243,139,160,0.45)" stroke-width="1"/>
-                <!-- Gauge: range 20–120 dB swept 270° (start 135° CW). Zones green<70 / amber<85 / orange<100 / red. centre 118,222 r70 -->
+                <!-- Gauge: range 20-120 dB swept 270° (start 135° CW). Zones green<70 / amber<85 / orange<100 / red. centre 118,222 r70 -->
                 <!-- zone arcs (alpha 0.6) -->
                 <!-- green 20..70 (135°→270°), amber 70..85, orange 85..100, red 100..120 -->
                 <path d="M 68.5 271.5 A 70 70 0 0 1 118 152" fill="none" stroke="#43E07A" stroke-opacity="0.6" stroke-width="6" stroke-linecap="round"/>
                 <path d="M 118 152 A 70 70 0 0 1 163.5 168.8" fill="none" stroke="#F2C94C" stroke-opacity="0.6" stroke-width="6" stroke-linecap="round"/>
                 <path d="M 163.5 168.8 A 70 70 0 0 1 187.1 211" fill="none" stroke="#F2994A" stroke-opacity="0.6" stroke-width="6" stroke-linecap="round"/>
                 <path d="M 187.1 211 A 70 70 0 0 1 167.5 271.5" fill="none" stroke="#EF5350" stroke-opacity="0.6" stroke-width="6" stroke-linecap="round"/>
-                <!-- scale labels (every 10dB) — turn red at 90+ -->
+                <!-- scale labels (every 10dB) - turn red at 90+ -->
                 <g font-family="Roboto, Inter, sans-serif" font-size="9.5" font-weight="700" text-anchor="middle">
                   <text x="58.6" y="284.4" fill="#b7a7ab">20</text>
                   <text x="38.1" y="251" fill="#b7a7ab">30</text>
@@ -231,18 +231,18 @@
               </g>
             </g>
 
-            <!-- ════ BOTTOM ACTION BAR — HOLD / FULL / PAUSE / CHART / RESET / WEIGHT ════ -->
+            <!-- ════ BOTTOM ACTION BAR - HOLD / FULL / PAUSE / CHART / RESET / WEIGHT ════ -->
             <!-- one OseCard (hubSurface + accent hairline), 6 dark button cells -->
             <rect x="14" y="654" width="352" height="120" rx="14" fill="#1a1216" stroke="rgba(243,139,160,0.45)" stroke-width="1"/>
 
-            <!-- HOLD (∞) — idle -->
+            <!-- HOLD (∞) - idle -->
             <g class="mk-press" transform="translate(22,664)">
               <rect x="0" y="0" width="50" height="100" rx="10" fill="#1C1D22" stroke="#2A2D33" stroke-width="0.5"/>
               <g transform="translate(16,32) scale(0.7500)" pointer-events="none"><path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L7.8 14.39c-.64.64-1.49.99-2.4.99-1.87 0-3.39-1.51-3.39-3.38S3.53 8.62 5.4 8.62c.91 0 1.76.35 2.44 1.03l1.13 1 1.51-1.34L9.22 8.2C8.2 7.18 6.84 6.62 5.4 6.62 2.42 6.62 0 9.04 0 12s2.42 5.38 5.4 5.38c1.44 0 2.8-.56 3.77-1.53l7.03-6.24c.64-.64 1.49-.99 2.4-.99 1.87 0 3.39 1.51 3.39 3.38s-1.52 3.38-3.39 3.38c-.9 0-1.76-.35-2.44-1.03l-1.14-1.01-1.51 1.34 1.27 1.12c1.02 1.02 2.38 1.58 3.82 1.58 2.98 0 5.4-2.42 5.4-5.38s-2.42-5.38-5.4-5.38z" fill="#CCCFD5"/></g>
               <text x="25" y="74" fill="#CCCFD5" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="0.6" text-anchor="middle">HOLD</text>
             </g>
 
-            <!-- FULL (fullscreen) — idle -->
+            <!-- FULL (fullscreen) - idle -->
             <g class="mk-press" transform="translate(80,664)">
               <rect x="0" y="0" width="50" height="100" rx="10" fill="#1C1D22" stroke="#2A2D33" stroke-width="0.5"/>
               <g transform="translate(16,32) scale(0.7500)" pointer-events="none"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" fill="#CCCFD5"/></g>
@@ -256,21 +256,21 @@
               <text x="25" y="74" fill="#EF5350" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="0.6" text-anchor="middle" pointer-events="none">PAUSE</text>
             </g>
 
-            <!-- CHART (Timeline) — idle -->
+            <!-- CHART (Timeline) - idle -->
             <g class="mk-press" transform="translate(196,664)">
               <rect x="0" y="0" width="50" height="100" rx="10" fill="#1C1D22" stroke="#2A2D33" stroke-width="0.5"/>
               <g transform="translate(16,32) scale(0.7500)" pointer-events="none"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z" fill="#CCCFD5"/></g>
               <text x="25" y="74" fill="#CCCFD5" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="0.6" text-anchor="middle">CHART</text>
             </g>
 
-            <!-- RESET (Refresh) — idle -->
+            <!-- RESET (Refresh) - idle -->
             <g class="mk-press" transform="translate(254,664)">
               <rect x="0" y="0" width="50" height="100" rx="10" fill="#1C1D22" stroke="#2A2D33" stroke-width="0.5"/>
               <g transform="translate(16,32) scale(0.7500)" pointer-events="none"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" fill="#CCCFD5"/></g>
               <text x="25" y="74" fill="#CCCFD5" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="0.6" text-anchor="middle">RESET</text>
             </g>
 
-            <!-- WEIGHT (letter "A" / cycle weighting) — idle -->
+            <!-- WEIGHT (letter "A" / cycle weighting) - idle -->
             <g class="mk-press" transform="translate(312,664)">
               <rect x="0" y="0" width="50" height="100" rx="10" fill="#1C1D22" stroke="#2A2D33" stroke-width="0.5"/>
               <text x="25" y="48" fill="#CCCFD5" font-family="Inter, sans-serif" font-size="22" font-weight="700" text-anchor="middle">A</text>

@@ -1,5 +1,5 @@
 /* =========================================================
-   OSE — newsletter signup form (footer)
+   OSE - newsletter signup form (footer)
 
    Static-site-friendly: NO backend assumed.
      • If `meta.newsletter.endpointUrl` is set → POSTs JSON to it
@@ -10,14 +10,14 @@
        export to CSV for Mailchimp import.
 
    Spam protection (no captcha):
-     • Honeypot: hidden text input "company" — bots fill it, real
+     • Honeypot: hidden text input "company" - bots fill it, real
        users don't see it. Submit silently drops if it's not empty.
      • Time-check: form must have been on the page ≥ 3 seconds
        before submit (rules out auto-submitters).
      • Email regex: basic shape check (RFC-5322 simplified).
      • One-submit lockout: prevents form mash-submit.
 
-   Idempotent — safe to include on any page that has the
+   Idempotent - safe to include on any page that has the
    `<div data-ose-newsletter></div>` host in the footer.
    ========================================================= */
 (function () {
@@ -38,11 +38,11 @@
     var emailPlaceholder = C.emailPlaceholder || 'you@yourband.com';
     var namePlaceholder = C.namePlaceholder || 'Name (optional)';
     var submitLabel = C.submitLabel || 'Subscribe';
-    var successMailto = C.successMailto || 'Thanks — your email client just opened pre-filled. Hit send to confirm.';
-    var successEndpoint = C.successEndpoint || 'Thanks — you\'re on the list.';
+    var successMailto = C.successMailto || 'Thanks - your email client just opened pre-filled. Hit send to confirm.';
+    var successEndpoint = C.successEndpoint || 'Thanks - you\'re on the list.';
     var errorMessage = C.errorMessage || 'That email doesn\'t look right.';
 
-    // Render — minimal, footer-friendly markup.
+    // Render - minimal, footer-friendly markup.
     host.innerHTML = ''
       + '<div class="nl-card">'
       +   '<div class="nl-head">'
@@ -55,7 +55,7 @@
       +       '<input class="nl-email" data-nl-email type="email" required autocomplete="email" />'
       +       '<button class="nl-submit" data-nl-submit type="submit"></button>'
       +     '</div>'
-      // Honeypot — visually hidden + aria-hidden so screen readers skip
+      // Honeypot - visually hidden + aria-hidden so screen readers skip
       // it. Real users won't touch it; spam bots blindly fill every
       // input they find.
       +     '<div class="nl-trap" aria-hidden="true">'
@@ -63,7 +63,7 @@
       +     '</div>'
       +     '<div class="nl-feedback" data-nl-feedback role="status" aria-live="polite"></div>'
       +     '<div class="nl-fineprint">'
-      +       'We use your email only to send the OSE newsletter — never sold, never shared. '
+      +       'We use your email only to send the OSE newsletter - never sold, never shared. '
       +       'Unsubscribe with one click in any email.'
       +     '</div>'
       +   '</form>'
@@ -85,7 +85,7 @@
     var renderedAt = Date.now();
     var sent = false;
 
-    // Reasonable RFC-5322 "shape" regex — won't catch every edge
+    // Reasonable RFC-5322 "shape" regex - won't catch every edge
     // case but rejects obvious garbage. Backend should still validate.
     var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -102,7 +102,7 @@
       e.preventDefault();
       if (sent) return;
 
-      // ── Spam checks (silent fail on honeypot — don't tip off bots) ──
+      // ── Spam checks (silent fail on honeypot - don't tip off bots) ──
       if (trap.value && trap.value.trim().length > 0) {
         // Pretend success so the bot moves on.
         showSuccess(endpoint ? successEndpoint : successMailto);
@@ -122,7 +122,7 @@
         return;
       }
 
-      // Build payload — used by both branches.
+      // Build payload - used by both branches.
       var payload = {
         email: email,
         name: name,
@@ -165,7 +165,7 @@
     }
 
     function openMailto(p) {
-      var subject = 'OSE newsletter signup — ' + p.email;
+      var subject = 'OSE newsletter signup - ' + p.email;
       var body = ''
         + 'Hi Outhentic team,\n\n'
         + 'Please add me to the OSE newsletter list.\n\n'

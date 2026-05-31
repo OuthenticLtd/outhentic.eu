@@ -1,4 +1,4 @@
-OSE — outhentic.eu/ose
+OSE - outhentic.eu/ose
 ======================================
 
 A self-contained sub-site for the Outhentic Sound Engine (OSE) Android app.
@@ -8,7 +8,7 @@ NOT modified. Public URL after deploy: https://outhentic.eu/ose/
 STRUCTURE
 ---------
   index.html              Landing page (hero, 8-module grid, pitch, CTA)
-  manual.html             Manual hub — links to every module page
+  manual.html             Manual hub - links to every module page
   tutorials.html          Task-first step-by-step tutorials
   help.html               FAQ + troubleshooting
   privacy.html            Privacy policy (GDPR)
@@ -17,9 +17,9 @@ STRUCTURE
   404.html                Not-found page
 
   modules/
-    play.html             Play Module — synth + instruments (Play Hub)
-    audio.html            Audio Module — Recorder lens + Library lens + Audio Editor
-    midi.html             MIDI Module — Piano Roll Editor
+    play.html             Play Module - synth + instruments (Play Hub)
+    audio.html            Audio Module - Recorder lens + Library lens + Audio Editor
+    midi.html             MIDI Module - Piano Roll Editor
     practice.html         Practice Module
     metronome.html        Metronome
     tuner.html            Tuner
@@ -33,7 +33,7 @@ STRUCTURE
       ose-main.js         Nav, scroll, mobile menu, lazy reveals
       editor-github.js    GitHub direct save (reused pattern from parent)
     data/
-      ose-content.js      ALL editable text/images — single source of truth
+      ose-content.js      ALL editable text/images - single source of truth
     img/
       ose-logo.svg        Vector logo (used as primary favicon)
       ose-logo.png        Bitmap logo (drop the 2600×2600 master here)
@@ -47,7 +47,7 @@ HOW THE EDITOR WORKS
 --------------------
   1. Open https://outhentic.eu/ose/editor.html
   2. Enter password (default: change PASSWORD_HASH inside editor.html)
-  3. Edit any field — everything is wired to the same JS data file
+  3. Edit any field - everything is wired to the same JS data file
   4. Click "Save to GitHub" (after pasting a fine-grained PAT once) OR
      click "Download ose-content.js" and upload it to /ose/assets/data/
      manually
@@ -56,7 +56,7 @@ HOW THE EDITOR WORKS
 
 FAVICON + BRAND ASSETS
 ----------------------
-The site uses the canonical OSE brand mark — same SVG that's in the app
+The site uses the canonical OSE brand mark - same SVG that's in the app
 repo at branding/ose_logo.svg. Source of truth lives there; this folder
 holds a synced copy.
 

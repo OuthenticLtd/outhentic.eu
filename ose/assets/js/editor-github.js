@@ -1,4 +1,4 @@
-/* OSE editor — GitHub direct-save layer (mirrors parent site's editor-github.js
+/* OSE editor - GitHub direct-save layer (mirrors parent site's editor-github.js
  * pattern; targets /ose/assets/data/ose-content.js).
  *
  * Adds:

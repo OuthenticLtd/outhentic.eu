@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════════════
-   ose-mockups.js — makes the phone-frame mockups actually work, so they
+   ose-mockups.js - makes the phone-frame mockups actually work, so they
    feel like the real app. Works on the inline-fill SVG art.
 
    Opt in: <div class="phone-frame" data-interactive> … </div>.
@@ -155,7 +155,7 @@
     if (!svg || !name) return;
     var grp = svg.querySelector('[data-panel-group="' + group + '"]'); if (!grp) return;
     grp.querySelectorAll('[data-panel]').forEach(function (p) {
-      // Only this group's own panels — skip panels that belong to a nested group.
+      // Only this group's own panels - skip panels that belong to a nested group.
       if (p.closest('[data-panel-group]') !== grp) return;
       p.style.display = (p.getAttribute('data-panel') === name) ? '' : 'none';
     });
