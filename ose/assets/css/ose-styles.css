@@ -134,15 +134,20 @@ code, kbd { font-family: var(--mono-font); font-size: .9em; background: var(--bg
   background-clip: text;
   color: transparent;
 }
-/* Brand wordmark adapts to the space: "OSE - Music App" normally, just
-   "OSE" on small phones. The full "Outhentic Sound Engine" name is used in
-   titles, the hero and the footer, where there is room for it. */
-.nav-logo .nav-wordmark .wm-s { display: none; }
+/* Brand wordmark adapts to the available space, using one of three forms:
+   - nav bar: "OSE - Music App", collapsing to just "OSE" on small phones;
+   - footer: the full "Outhentic Sound Engine" (there is room for it). */
+.nav-wordmark .wm-l, .nav-wordmark .wm-s { display: none; }
+.nav-wordmark .wm-m { display: inline; }
 @media (max-width: 560px) {
   .nav-logo .nav-wordmark { font-size: 1rem; letter-spacing: .14em; }
   .nav-logo .nav-wordmark .wm-m { display: none; }
   .nav-logo .nav-wordmark .wm-s { display: inline; }
 }
+/* Footer has room for the full name. */
+.foot-mark .nav-wordmark .wm-m,
+.foot-mark .nav-wordmark .wm-s { display: none; }
+.foot-mark .nav-wordmark .wm-l { display: inline; }
 .nav-links { display: flex; align-items: center; gap: 28px; }
 .nav-links a {
   font-size: .86rem; font-weight: 500; letter-spacing: .02em;
