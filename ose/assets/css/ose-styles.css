@@ -2986,25 +2986,50 @@ a.hub-card { display: block; color: inherit; }
 /* =========================================================
    Tutorials v2 - per-module guide: live app mockup + how-tos
    ========================================================= */
+.tut-shell { position: relative; }
+/* Floating module switcher - sticks just under the site header across the
+   whole tutorials shell, shows the current module, and jumps between them. */
 .tut-modnav {
-  position: sticky; top: 0; z-index: 30;
-  display: flex; flex-wrap: wrap; gap: 8px;
-  padding: 12px 0; margin-bottom: 8px;
-  background: color-mix(in srgb, var(--bg, #050507) 88%, transparent);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: sticky; top: 58px; z-index: 40;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0; margin: 0;
+  background: color-mix(in srgb, #050507 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  --tut-now-accent: var(--accent-orange);
 }
-.tut-modnav a {
-  font-size: .74rem; font-weight: 700; letter-spacing: 0.4px;
-  padding: 7px 13px; border-radius: 999px;
-  color: var(--ink-soft, #c9ccd4);
-  border: 1px solid rgba(255,255,255,0.10);
-  text-decoration: none; white-space: nowrap;
+.tut-modnav-now {
+  display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto;
+  font-size: .8rem; font-weight: 800; letter-spacing: .3px; color: #fff;
+  padding-right: 12px; border-right: 1px solid rgba(255,255,255,0.14);
+  white-space: nowrap;
+}
+.tut-modnav-now-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--tut-now-accent); transition: background .2s;
+  box-shadow: 0 0 8px var(--tut-now-accent);
+}
+.tut-modnav-chips {
+  display: flex; gap: 7px; overflow-x: auto; padding: 2px 0;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.tut-modnav-chips::-webkit-scrollbar { display: none; }
+.tut-modnav-chips a {
+  font-size: .73rem; font-weight: 700; white-space: nowrap;
+  padding: 6px 12px; border-radius: 999px; text-decoration: none;
+  color: var(--ink-soft, #c9ccd4); border: 1px solid rgba(255,255,255,0.10);
   transition: background .15s, color .15s, border-color .15s;
 }
-.tut-modnav a:hover { color: #fff; border-color: rgba(255,255,255,0.28); }
+.tut-modnav-chips a:hover { color: #fff; border-color: rgba(255,255,255,0.30); }
+.tut-modnav-chips a.is-active {
+  color: #0a0a0d; background: var(--tut-now-accent); border-color: transparent;
+}
+@media (max-width: 620px) {
+  .tut-modnav-now { font-size: .72rem; padding-right: 9px; }
+  .tut-modnav-now [data-tut-now] { max-width: 88px; overflow: hidden; text-overflow: ellipsis; }
+}
 
-.tut-mod { padding: 64px 0 8px; scroll-margin-top: 64px; --tut-accent: var(--accent-orange); }
+.tut-mod { padding: 56px 0 8px; scroll-margin-top: 116px; --tut-accent: var(--accent-orange); }
 .tut-mod.mc--play       { --tut-accent: var(--c-play); }
 .tut-mod.mc--audio      { --tut-accent: var(--c-audio); }
 .tut-mod.mc--midi       { --tut-accent: var(--c-midi); }
@@ -3029,7 +3054,7 @@ a.hub-card { display: block; color: inherit; }
 }
 .tut-mod-stage { position: relative; }
 @media (min-width: 940px) {
-  .tut-mod-stage { position: sticky; top: 76px; }
+  .tut-mod-stage { position: sticky; top: 116px; }
 }
 .tut-mod-stage .phone-frame { margin: 0 auto; max-width: 340px; }
 .tut-mod-stagehint {

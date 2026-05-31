@@ -150,3 +150,52 @@
   }
   requestAnimationFrame(frame);
 })();
+
+/* =========================================================================
+   Tutorials - floating module switcher with scroll-spy. Runs only on the
+   tutorials page (where .tut-modnav exists). Highlights the module you are
+   currently in, tints the bar to its accent, and jumps with a header offset.
+   ========================================================================= */
+(function () {
+  var nav = document.querySelector('.tut-modnav');
+  if (!nav) return;
+  var nowEl = nav.querySelector('[data-tut-now]');
+  var chips = Array.prototype.slice.call(nav.querySelectorAll('[data-tut-chip]'));
+  var sections = chips.map(function (c) {
+    return document.getElementById('t-' + c.getAttribute('data-tut-chip'));
+  });
+  var OFFSET = 112; // height of site header + this bar
+
+  function setActive(i) {
+    chips.forEach(function (c, j) { c.classList.toggle('is-active', j === i); });
+    var sec = sections[i];
+    if (!sec) return;
+    var kick = sec.querySelector('.tut-mod-kicker');
+    if (nowEl && kick) nowEl.textContent = kick.textContent;
+    var acc = getComputedStyle(sec).getPropertyValue('--tut-accent');
+    if (acc) nav.style.setProperty('--tut-now-accent', acc.trim());
+  }
+
+  function onScroll() {
+    var y = window.scrollY + OFFSET + 28;
+    var idx = 0;
+    for (var k = 0; k < sections.length; k++) {
+      if (sections[k] && sections[k].offsetTop <= y) idx = k;
+    }
+    setActive(idx);
+  }
+
+  chips.forEach(function (c, i) {
+    c.addEventListener('click', function (e) {
+      var sec = sections[i];
+      if (!sec) return;
+      e.preventDefault();
+      var top = sec.getBoundingClientRect().top + window.scrollY - OFFSET;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+})();
