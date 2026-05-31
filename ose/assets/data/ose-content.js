@@ -9,7 +9,7 @@
 window.OSE_CONTENT = {
   "meta": {
     "siteName": "OSE",
-    "fullName": "Outhentic Sound Engine",
+    "fullName": "OSE Music App",
     "tagline": "Not a toy. Music tools that work.",
     "shortDescription": "OSE is an Android instrument and toolkit for people who play: synth, recorder, MIDI editor, metronome, tuner and more. Eight focused music tools that fit in your pocket and complement the desktop DAW you already use.",
     "released": false,
@@ -31,7 +31,7 @@ window.OSE_CONTENT = {
   ],
 
   "hero": {
-    "eyebrow": "Outhentic Sound Engine · Android",
+    "eyebrow": "OSE Music App · Android",
     "title_a": "Not a toy.",
     "title_b": "Music tools that work.",
     "title_c": "",
@@ -314,7 +314,7 @@ window.OSE_CONTENT = {
   },
 
   "footer": {
-    "tagline": "Outhentic Sound Engine. By Outhentic Ltd. - Sofia, Bulgaria.",
+    "tagline": "OSE Music App. By Outhentic Ltd. - Sofia, Bulgaria.",
     "columns": [
       {
         "title": "Product",
