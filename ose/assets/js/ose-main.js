@@ -199,3 +199,35 @@
   window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 })();
+
+/* =========================================================================
+   Scroll-to-top button - added to every page. Appears once you have scrolled
+   down, smooth-scrolls back to the top, and lifts above the cookie notice
+   while that notice is on screen.
+   ========================================================================= */
+(function () {
+  if (!document.body) return;
+  var btn = document.createElement('button');
+  btn.className = 'to-top';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Scroll back to top');
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+    'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>';
+  document.body.appendChild(btn);
+
+  var consent = document.querySelector('.ose-consent');
+  function update() {
+    if (window.scrollY > 420) btn.classList.add('is-visible');
+    else btn.classList.remove('is-visible');
+    var c = consent || document.querySelector('.ose-consent');
+    var noteUp = !!(c && c.offsetHeight > 0 && getComputedStyle(c).display !== 'none');
+    btn.classList.toggle('to-top--raised', noteUp);
+  }
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+})();
