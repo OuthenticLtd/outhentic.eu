@@ -35,7 +35,7 @@ window.OSE_CONTENT = {
     "title_a": "Not a toy.",
     "title_b": "Music tools that work.",
     "title_c": "",
-    "lead": "OSE is an Android instrument and toolkit for people who play. Synth, recorder, piano roll, metronome, tuner: eight focused tools that fit in your pocket and complement the desktop DAW you already use rather than replace it.",
+    "lead": "OSE - Music App (Outhentic Sound Engine) is an Android instrument and toolkit for people who play. Synth, recorder, piano roll, metronome, tuner: eight focused tools that fit in your pocket and complement the desktop DAW you already use rather than replace it.",
     "ctaPrimaryLabel": "Get it on Google Play",
     "ctaPrimaryHref": "#",
     "ctaSecondaryLabel": "Read the manual",
