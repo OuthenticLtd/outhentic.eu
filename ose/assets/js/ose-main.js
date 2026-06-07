@@ -14,12 +14,16 @@
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) {
+        // Reveal once 15% is visible, OR - for elements taller than ~6.6x the
+        // viewport (e.g. full legal pages), which can never reach a 15% ratio
+        // and would otherwise stay invisible - as soon as any part scrolls in.
+        if (e.intersectionRatio >= 0.15 ||
+            (e.isIntersecting && e.target.offsetHeight * 0.15 > window.innerHeight)) {
           e.target.classList.add('is-in');
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: [0, 0.15] });
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   } else {
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-in'); });
