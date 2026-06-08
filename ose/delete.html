@@ -27,19 +27,17 @@
   <div class="wrap">
     <div class="reveal content" style="max-width: 760px;">
       <h1>Request data deletion - OSE (Outhentic Sound Engine)</h1>
-      <p>OSE collects only one piece of data off your device: a one-way hashed device identifier, stored solely to prevent the same device from repeatedly claiming the free trial. No account, name, email, or personal data is collected.</p>
+      <p>OSE is an on-device music app by Outhentic Ltd. The only data held off your device is a one-way hashed device identifier, stored solely to prevent the same device from repeatedly claiming the free 3-day Pro trial. No account, name, email, or other personal data is collected. There are two kinds of data you can delete, and a different step for each.</p>
 
-      <h2>How to request deletion</h2>
-      <p>Email <a href="mailto:ose@outhentic.eu?subject=Delete%20my%20data" style="color: var(--accent-orange); text-decoration: underline;">ose@outhentic.eu</a> from any address with the subject <strong>"Delete my data"</strong>. We will delete your device's trial record. (Because the value we store is an anonymous one-way hash not linked to any identity, simply emailing us is enough - we clear the record on request.)</p>
+      <h2>1. On-device content (your recordings, instruments, MIDI, presets, settings)</h2>
+      <p>All of your content lives only on your device. To remove it, <strong>uninstall the app</strong>, or <strong>clear its data</strong> in Android settings (Settings &rarr; Apps &rarr; OSE &rarr; Storage &rarr; Clear data). This deletes everything the app stored on your device. We never receive this content, so there is nothing for us to delete on our side.</p>
+
+      <h2>2. The trial-prevention hash held by us</h2>
+      <p>To delete the one-way hashed device identifier we hold, email <a href="mailto:ose@outhentic.eu?subject=Delete%20my%20data" style="color: var(--accent-orange); text-decoration: underline;">ose@outhentic.eu</a> with the subject <strong>"Delete my data"</strong>. We will remove the Firebase record <strong>within 30 days</strong>, <strong>free of charge</strong>. Because the value we store is an anonymous one-way hash not linked to any name, email, or account, emailing us is enough for us to clear it on request.</p>
 
       <p><a class="btn btn--accent" href="mailto:ose@outhentic.eu?subject=Delete%20my%20data">Email ose@outhentic.eu to delete my data</a></p>
 
-      <h2>What is deleted, and what is kept</h2>
-      <ul>
-        <li><strong>What is deleted:</strong> the hashed device-trial record.</li>
-        <li><strong>What is kept:</strong> nothing else is stored server-side. All your recordings, instruments, and settings live only on your device and are removed when you uninstall the app.</li>
-        <li><strong>Retention:</strong> the hashed record is kept only as long as needed to enforce the one-trial-per-device limit; deleted on request.</li>
-      </ul>
+      <p><strong>Please note:</strong> deleting the hash makes that device eligible for the free Pro trial again.</p>
     </div>
 
     <hr class="divider"/>
