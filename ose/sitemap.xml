@@ -4,11 +4,11 @@
   <!-- Home: highest priority. Linked from every page. -->
   <url>
     <loc>https://outhentic.eu/ose/</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
     <image:image>
-      <image:loc>https://outhentic.eu/ose/assets/img/ose-og.svg</image:loc>
+      <image:loc>https://outhentic.eu/ose/assets/img/ose-og.png</image:loc>
       <image:title>OSE - Outhentic Sound Engine</image:title>
       <image:caption>Not a toy. Music tools that work.</image:caption>
     </image:image>
@@ -19,19 +19,19 @@
        / "free online tuner" / "online tone generator" searches. -->
   <url>
     <loc>https://outhentic.eu/ose/modules/metronome.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://outhentic.eu/ose/modules/signal-generator.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://outhentic.eu/ose/modules/play.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -39,31 +39,31 @@
   <!-- Module reference pages (no in-browser demo yet but rich docs). -->
   <url>
     <loc>https://outhentic.eu/ose/modules/tuner.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://outhentic.eu/ose/modules/audio.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://outhentic.eu/ose/modules/midi.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://outhentic.eu/ose/modules/meters.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://outhentic.eu/ose/modules/practice.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -71,19 +71,19 @@
   <!-- Documentation hubs. -->
   <url>
     <loc>https://outhentic.eu/ose/manual.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://outhentic.eu/ose/tutorials.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://outhentic.eu/ose/help.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
@@ -91,14 +91,38 @@
   <!-- Legal. Indexed but low priority. -->
   <url>
     <loc>https://outhentic.eu/ose/privacy.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.30</priority>
   </url>
   <url>
     <loc>https://outhentic.eu/ose/terms.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/cookies.html</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.20</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/legal-notice.html</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.20</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/accessibility.html</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.20</priority>
+  </url>
+  <url>
+    <loc>https://outhentic.eu/ose/delete.html</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.20</priority>
   </url>
 </urlset>

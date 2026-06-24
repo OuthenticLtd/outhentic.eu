@@ -105,6 +105,18 @@
     }).join('');
   }
 
+  // Persistent "Get the app" CTA on EVERY page's nav (the landing page builds
+  // its nav from [data-ose-nav]; module/doc pages have a static .nav-links).
+  // Only appears once the app is released. Idempotent (won't double-add).
+  if (C.meta && C.meta.released === true && C.meta.playStoreUrl) {
+    document.querySelectorAll('.nav-links').forEach(function (nl) {
+      if (!nl.querySelector('.nav-cta')) {
+        nl.insertAdjacentHTML('beforeend',
+          '<a class="nav-cta" href="' + C.meta.playStoreUrl + '" target="_blank" rel="noopener">Get the app</a>');
+      }
+    });
+  }
+
   // -------- footer columns --------
   var footHost = document.querySelector('[data-ose-foot-cols]');
   if (footHost && C.footer && Array.isArray(C.footer.columns)) {

@@ -12,15 +12,15 @@ window.OSE_CONTENT = {
     "fullName": "Outhentic Sound Engine",
     "tagline": "Not a toy. Music tools that work.",
     "shortDescription": "OSE is an Android instrument and toolkit for people who play: synth, recorder, MIDI editor, metronome, tuner and more. Eight focused music tools that fit in your pocket and complement the desktop DAW you already use.",
-    "released": false,
+    "released": true,
     "waitlistUrl": "https://waitlister.me/p/ose",
-    "playStoreUrl": "",
+    "playStoreUrl": "https://play.google.com/store/apps/details?id=com.outhentic.ose",
     "contactEmail": "ose@outhentic.eu",
     "addressLine": "Sofia 1592, Bulgaria",
     "twitterHandle": "",
-    "ogImage": "assets/img/ose-logo.svg",
-    "version": "1.0",
-    "lastUpdated": "2026-05-10"
+    "ogImage": "assets/img/ose-og.png",
+    "version": "1.2",
+    "lastUpdated": "2026-06-25"
   },
 
   "nav": [
@@ -302,7 +302,7 @@ window.OSE_CONTENT = {
   "newsletter": {
     "enabled": true,
     "headline": "Stay in the loop",
-    "subline": "One short email when we ship - new modules, new sound packs, the OSE 1.0 release. No spam, no resale, you can leave any time.",
+    "subline": "One short email when there's something worth it - new modules, new sound packs, big updates. No spam, no resale, you can leave any time.",
     "emailLabel": "Your email",
     "emailPlaceholder": "you@yourband.com",
     "namePlaceholder": "Name (optional)",
