@@ -32,11 +32,11 @@
       "url": "https://outhentic.eu/ose/help.html",
       "mainEntity": [
         { "@type": "Question", "name": "Is OSE a DAW?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. OSE is an Android instrument and toolkit for people who play. There is no multitrack arranger, no mixing console, no mastering chain - and that's intentional. OSE is built to complement the desktop DAW you already use, not replace it." } },
+          "acceptedAnswer": { "@type": "Answer", "text": "No. OSE is an iPhone & Android instrument and toolkit for people who play. There is no multitrack arranger, no mixing console, no mastering chain - and that's intentional. OSE is built to complement the desktop DAW you already use, not replace it." } },
         { "@type": "Question", "name": "Who is OSE for?",
           "acceptedAnswer": { "@type": "Answer", "text": "Gigging keyboard players, songwriters who play piano or keyboard, music students past the absolute-beginner stage, producers who keep a phone in their pocket for the moments a desktop DAW can't reach, cover-band members learning new songs, hobbyists who collect SoundFont files. The unifier: you actually play, you care about how it sounds." } },
         { "@type": "Question", "name": "What does OSE do that the apps I already use don't?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Three things: a real synth (OseSynth, a native C++ engine - not a sample-pack toy) with multi-instrument layering and any-SoundFont import; a metronome built to be the best on Android; and a phone-first piano roll designed around stylus input for pixel-precise note editing. Plus a tuner, a recorder, a slow-down practice tool, a signal generator and meters - all on one home grid." } },
+          "acceptedAnswer": { "@type": "Answer", "text": "Three things: a real synth (OseSynth, a native C++ engine - not a sample-pack toy) with multi-instrument layering and any-SoundFont import; a metronome built to be the best on a phone; and a phone-first piano roll designed around stylus input for pixel-precise note editing. Plus a tuner, a recorder, a slow-down practice tool, a signal generator and meters - all on one home grid." } },
         { "@type": "Question", "name": "Why are some of my microphones missing from the input list?",
           "acceptedAnswer": { "@type": "Answer", "text": "OSE collapses every built-in microphone into a single 'Internal device' row to keep the list short. Phantom inputs (telephony, remote submix) are filtered out - they're never useful for music. Plug in a USB interface and every real channel will appear." } },
         { "@type": "Question", "name": "What's the difference between MONITOR and PRINT?",
@@ -46,7 +46,7 @@
         { "@type": "Question", "name": "Why is my recording silent when I'm sure I plugged something in?",
           "acceptedAnswer": { "@type": "Answer", "text": "Open Settings → Audio and check that the input device matches your physical input. If it's a USB interface, the channel chooser inside Settings has to point to the right channel. The Tuner and Meters modules can confirm signal arrival in seconds." } },
         { "@type": "Question", "name": "Does OSE work on a tablet or in Android desktop mode?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Piano Roll Editor was built stylus-first - stylus tilt, pressure and side-button axes are read where MotionEvent exposes them - so phone, tablet and Android desktop mode share one codebase. Layout adapts to landscape and portrait independently rather than scaling a phone view." } },
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Piano Roll Editor was built stylus-first - on Android, stylus tilt, pressure and side-button axes are read where MotionEvent exposes them - so phone, tablet and Android desktop mode share one codebase. Layout adapts to landscape and portrait independently rather than scaling a phone view." } },
         { "@type": "Question", "name": "Can I bind hardware controllers?",
           "acceptedAnswer": { "@type": "Answer", "text": "Yes - long-press any knob, slider or toggle to enter MIDI Learn. Bindings are global and channel-aware. The Settings sheet shows all current bindings." } },
         { "@type": "Question", "name": "How do I import an audio file from my device?",
@@ -92,7 +92,7 @@
     <hr class="divider"/>
 
     <h2 class="reveal" id="permissions">Permissions &amp; the microphone</h2>
-    <p class="reveal" style="max-width: 760px;">OSE only asks for a permission when a feature needs it, and everything is processed on your device - <strong>nothing you record or play is ever uploaded or shared</strong>, and there's no account or tracking. The <strong>microphone</strong> is used <strong>only</strong> to detect pitch in the Tuner and to record the audio you choose to capture; deny it and the rest of the app still works. For the full list - Bluetooth, media/storage, notifications and the legacy location-for-Bluetooth-scan gate (Android&nbsp;11 and below only) - and the exact purpose of each, see the <a href="privacy.html" style="color: var(--accent-orange); text-decoration: underline;">Privacy Policy</a>.</p>
+    <p class="reveal" style="max-width: 760px;">OSE only asks for a permission when a feature needs it, and everything is processed on your device - <strong>nothing you record or play is ever uploaded or shared</strong>, and there's no account or tracking. The <strong>microphone</strong> is used <strong>only</strong> to detect pitch in the Tuner and to record the audio you choose to capture; deny it and the rest of the app still works. For the full list - Bluetooth, media/storage, notifications and, on Android, the legacy location-for-Bluetooth-scan gate (Android&nbsp;11 and below only) - and the exact purpose of each, see the <a href="privacy.html" style="color: var(--accent-orange); text-decoration: underline;">Privacy Policy</a>.</p>
 
     <hr class="divider"/>
 
@@ -119,7 +119,7 @@
       <div class="hub-card">
         <h3>USB device disappears mid-session</h3>
         <ol>
-          <li>OSE recovers automatically through Android's audio device callbacks; give it a couple of seconds.</li>
+          <li>OSE recovers automatically through the platform's audio device callbacks; give it a couple of seconds.</li>
           <li>If it still doesn't reappear, unplug and replug the device. The picker re-populates on hotplug.</li>
         </ol>
       </div>

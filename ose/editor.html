@@ -360,10 +360,11 @@
     // user sees in the Site tab.
     var releaseHelp = document.createElement('p');
     releaseHelp.style.cssText = 'margin:0 0 18px;padding:14px 16px;background:var(--bg-1);border-left:3px solid var(--accent-orange);border-radius:6px;font-size:.86rem;color:var(--ink-soft);';
-    releaseHelp.innerHTML = 'Flip <strong>Released</strong> ON when the app is on Google Play. ' +
-      'While OFF, the big "Get it on Google Play" button on the site shows ' +
+    releaseHelp.innerHTML = 'Flip <strong>Released</strong> ON when the app is live in the stores. ' +
+      'While OFF, the big store button on the site shows ' +
       '<strong>Coming soon · Join the waitlist</strong> and links to the Waitlist URL below. ' +
-      'When ON, it switches to <strong>Get it on · Google Play</strong> and links to the Play Store URL.';
+      'When ON, it switches to <strong>Get it on · Google Play</strong> and links to the Play Store URL. ' +
+      'The App Store badge is controlled separately by the hero.ctaApple* fields (set to Coming soon until iOS is approved).';
     host.appendChild(releaseHelp);
 
     [

@@ -1,6 +1,10 @@
 # OSE - Legal & Compliance Checklist
 
-**Scope:** the OSE Android app (Outhentic Sound Engine) and the website `outhentic.eu/ose`.
+**Scope:** the OSE app (Outhentic Sound Engine) on **Android and iOS**, and the website `outhentic.eu/ose`.
+
+> Note: the checklists below were written for the Google Play launch and remain Android/Play-specific.
+> The iOS/App Store equivalents (App Privacy labels, ATT, consent-gated measurement, StoreKit purchase
+> and the Firestore trial records) are tracked in the app repo at `docs/ios-production-gating.md`.
 **Controller:** Outhentic Ltd., Druzhba 72, vh. D, ap. 95, Sofia 1592, Bulgaria. UIC 204923841 · VAT BG204923841 · ose@outhentic.eu.
 **Last reviewed:** 2026-05-30.
 
