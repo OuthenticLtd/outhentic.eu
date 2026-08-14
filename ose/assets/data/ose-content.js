@@ -15,13 +15,13 @@ window.OSE_CONTENT = {
     "released": true,
     "waitlistUrl": "https://waitlister.me/p/ose",
     "playStoreUrl": "https://play.google.com/store/apps/details?id=com.outhentic.ose",
-    "appStoreUrl": "https://apps.apple.com/app/id6793905449",
+    "appStoreUrl": "https://apps.apple.com/app/ose-music-app/id6793905449",
     "contactEmail": "ose@outhentic.eu",
     "addressLine": "Sofia 1592, Bulgaria",
     "twitterHandle": "",
     "ogImage": "assets/img/ose-og.png",
-    "version": "1.2",
-    "lastUpdated": "2026-06-25"
+    "version": "1.3",
+    "lastUpdated": "2026-08-14"
   },
 
   "nav": [
@@ -40,9 +40,9 @@ window.OSE_CONTENT = {
     "ctaPrimaryPre": "Get it on",
     "ctaPrimaryLabel": "Google Play",
     "ctaPrimaryHref": "https://play.google.com/store/apps/details?id=com.outhentic.ose",
-    "ctaApplePre": "Coming soon to",
+    "ctaApplePre": "Download on the",
     "ctaAppleLabel": "App Store",
-    "ctaAppleHref": "#",
+    "ctaAppleHref": "https://apps.apple.com/app/ose-music-app/id6793905449",
     "ctaSecondaryLabel": "Read the manual",
     "ctaSecondaryHref": "manual.html"
   },
