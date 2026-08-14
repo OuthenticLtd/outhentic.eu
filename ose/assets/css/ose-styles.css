@@ -167,6 +167,20 @@ code, kbd { font-family: var(--mono-font); font-size: .9em; background: var(--bg
   background: var(--accent-grad);
   color: #000;
 }
+/* Split "get the app" pill: one rounded shape divided into an App Store half
+   and a Google Play half. Each half lights up on hover; the divider keeps them
+   reading as a single, universal control. */
+.nav-links .nav-cta--split {
+  display: inline-flex; align-items: stretch; padding: 0; overflow: hidden;
+  border: 1px solid var(--line-strong); border-radius: 999px;
+}
+.nav-links .nav-cta--split a {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 8px 16px; color: var(--ink); transition: background .2s ease, color .2s ease;
+}
+.nav-links .nav-cta--split a + a { border-left: 1px solid var(--line-strong); }
+.nav-links .nav-cta--split a svg { width: 17px; height: 17px; display: block; }
+.nav-links .nav-cta--split a:hover { background: var(--accent-grad); color: #000; }
 .nav-toggle { display: none; }
 
 @media (max-width: 880px) {
@@ -190,6 +204,10 @@ code, kbd { font-family: var(--mono-font); font-size: .9em; background: var(--bg
   .nav-links a { width: 100%; padding: 14px 0; border-bottom: 1px solid var(--line); }
   .nav-links a:last-child { border-bottom: 0; }
   .nav-links a.nav-cta { padding: 12px 26px; text-align: center; margin-top: 8px; align-self: stretch; }
+  /* Keep the split pill horizontal and centered in the mobile menu instead of
+     letting the full-width nav-link rule stack and border its two halves. */
+  .nav-links .nav-cta--split { align-self: center; margin-top: 12px; }
+  .nav-links .nav-cta--split a { width: auto; padding: 11px 24px; border-bottom: 0; }
 }
 
 /* =========================================================
@@ -240,7 +258,7 @@ code, kbd { font-family: var(--mono-font); font-size: .9em; background: var(--bg
   color: #000;
 }
 .store-badge svg { width: 22px; height: 22px; flex: 0 0 auto; }
-.store-badge .store-line { display: flex; flex-direction: column; line-height: 1.1; align-items: flex-start; }
+.store-badge .store-line { display: flex; flex-direction: column; line-height: 1.1; align-items: center; text-align: center; }
 .store-badge .store-pre { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .store-badge:hover .store-pre { color: rgba(0,0,0,.72); }
 /* The global `strong{color:var(--ink)}` rule (light) overrides the inherited
