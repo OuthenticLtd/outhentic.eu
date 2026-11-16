@@ -95,135 +95,197 @@
       </div>
       <div class="reveal">
         <div class="phone-frame" data-interactive aria-hidden="true">
-          <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet" data-accent="#4FD1C5" data-idle="#7f8a8a" data-siggen>
+          <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet" data-accent="#4FD1C5" data-idle="#595959" data-siggen>
             <defs>
-              <linearGradient id="sgPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a1413"/><stop offset="1" stop-color="#08100f"/></linearGradient>
-              <linearGradient id="sgSpecFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FD1C5" stop-opacity="0.32"/><stop offset="1" stop-color="#4FD1C5" stop-opacity="0.04"/></linearGradient>
-              <linearGradient id="sgPlay" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4FD1C5"/><stop offset="1" stop-color="#3fb8ad"/></linearGradient>
+              <!-- OsePlate grain: tiled grayscale noise at mainPlateGrainAlpha (0.09) -->
+              <filter id="sgGrain" x="0" y="0" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="42" stitchTiles="stitch"/>
+                <feColorMatrix type="matrix" values="0.229 0.229 0.229 0 0.314  0.229 0.229 0.229 0 0.314  0.229 0.229 0.229 0 0.314  0 0 0 0 0.09"/>
+              </filter>
+              <linearGradient id="sgSwatch" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4FD1C5"/><stop offset="1" stop-color="#4FD1C5" stop-opacity="0.55"/></linearGradient>
+              <style>
+                .sg-logo-glyph { d: path("M15 4.92 L11.64 8.28 L8.28 11.64 L4.92 15 L11.64 15 L18.36 15 L25.08 15 L18.36 15 L11.64 15 L4.92 15 L8.28 18.36 L11.64 21.72 L15 25.08"); }
+                @media (prefers-reduced-motion: no-preference) {
+                  /* GlowingO entry morph: brand wave -> back arrow (FastOutSlowIn) */
+                  .sg-logo-glyph { animation: sgMorph 600ms cubic-bezier(0.4, 0, 0.2, 1) 300ms both; }
+                  /* Strip title slides in 28dp -> 0 over 600 ms */
+                  .sg-title { animation: sgTitle 600ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+                  @keyframes sgMorph {
+                    from { d: path("M3.8 15 L6.6 15 L8.28 11.64 L9.96 18.36 L11.64 9.4 L13.32 20.6 L15 7.16 L16.68 22.84 L18.36 9.4 L20.04 18.36 L21.72 11.64 L23.4 15 L26.2 15"); }
+                    to   { d: path("M15 4.92 L11.64 8.28 L8.28 11.64 L4.92 15 L11.64 15 L18.36 15 L25.08 15 L18.36 15 L11.64 15 L4.92 15 L8.28 18.36 L11.64 21.72 L15 25.08"); }
+                  }
+                  @keyframes sgTitle { from { transform: translateX(28px); } to { transform: translateX(0); } }
+                }
+              </style>
             </defs>
-            <rect width="380" height="800" fill="url(#sgPlate)"/>
 
-            <!-- TOP BAR (HubFullScreenTopBar) -->
-            <g transform="translate(18,38)">
-              <!-- back arrow (Material ArrowBack, accent) -->
-              <g class="mk-nav" data-href="../index.html">
-                <g transform="translate(2,4)" fill="#4FD1C5"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></g>
+            <!-- OSE PLATE: mainPlateBase #0A0A0C + accent wash @0.154 + grain -->
+            <rect width="380" height="800" fill="#0A0A0C"/>
+            <rect width="380" height="800" fill="#4FD1C5" fill-opacity="0.154"/>
+            <rect width="380" height="800" filter="url(#sgGrain)"/>
+
+            <!-- SCREEN STRIP (HubFullScreenTopBar -> OseScreenStrip, 64dp): GlowingO back logo, title, gear, skin swatch -->
+            <g class="mk-nav" data-href="../index.html" transform="translate(16,41)">
+              <circle cx="15" cy="15" r="13.4" fill="none" stroke="#4FD1C5" stroke-width="2.46"/>
+              <path class="sg-logo-glyph" d="M15 4.92 L11.64 8.28 L8.28 11.64 L4.92 15 L11.64 15 L18.36 15 L25.08 15 L18.36 15 L11.64 15 L4.92 15 L8.28 18.36 L11.64 21.72 L15 25.08" fill="none" stroke="#4FD1C5" stroke-width="1.57" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <text class="sg-title" x="58" y="62.5" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="18" font-weight="600" letter-spacing="0.4">Signal Generator</text>
+            <!-- OseSettingsGear: Material Settings, 32dp glyph, accent tint -->
+            <g class="mk-press" transform="translate(292,40) scale(1.3333)" fill="#4FD1C5"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></g>
+            <!-- ModuleScreenSkin swatch: 22dp, 6dp corner, accent -> accent@0.55, 1dp white@0.35 border -->
+            <rect class="mk-press" x="342" y="45" width="22" height="22" rx="6" fill="url(#sgSwatch)" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+
+            <!-- 1. LIVE SPECTRUM VISUALISER (OseCard, 10dp padding) — idle: bands drained to zero -->
+            <rect x="16" y="88" width="348" height="128" rx="14" fill="#121212" stroke="#4FD1C5" stroke-width="0.5"/>
+            <g>
+              <!-- dB grid: -60 / -40 / -20 (white@0.04, 0.5) and 0 dBFS (white@0.10, 1) on a -72..0 scale -->
+              <line x1="26" y1="176.3" x2="354" y2="176.3" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+              <line x1="26" y1="150.2" x2="354" y2="150.2" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+              <line x1="26" y1="124.1" x2="354" y2="124.1" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+              <line x1="26" y1="98" x2="354" y2="98" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="1"/>
+              <!-- decade marks 100 / 1k / 10k on a 30 Hz..20 kHz log axis -->
+              <line x1="86.7" y1="98" x2="86.7" y2="192" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+              <line x1="202.9" y1="98" x2="202.9" y2="192" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+              <line x1="319" y1="98" x2="319" y2="192" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+              <!-- trace (stopped): flat accent@0.85 line on the floor -->
+              <line x1="26.7" y1="192" x2="353.3" y2="192" stroke="#4FD1C5" stroke-opacity="0.85" stroke-width="1.5" stroke-linecap="round"/>
+            </g>
+            <g fill="#5A5F68" font-family="Inter, sans-serif" font-size="8" font-weight="700" letter-spacing="1.2">
+              <text x="26" y="204">30</text>
+              <text x="102" y="204">100</text>
+              <text x="183.5" y="204">1k</text>
+              <text x="259" y="204">10k</text>
+              <text x="354" y="204" text-anchor="end">20k</text>
+            </g>
+
+            <!-- 2. FREQUENCY CARD -->
+            <rect x="16" y="232" width="348" height="128" rx="14" fill="#121212" stroke="#4FD1C5" stroke-width="0.5"/>
+            <text x="32" y="262" fill="#898989" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">FREQUENCY</text>
+            <!-- "✎ EDIT" pill (accent@0.12, full-round) -->
+            <g class="mk-press">
+              <rect x="272" y="244" width="76" height="29" rx="14.5" fill="#4FD1C5" fill-opacity="0.12"/>
+              <g transform="translate(284.5,252.5) scale(-0.52,0.52) translate(-24,0)" fill="#4FD1C5"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></g>
+              <text x="301" y="262.5" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="1.5">EDIT</text>
+            </g>
+            <!-- readout: 38sp Light number + 13sp Bold "Hz" (textCaption) + 20sp Bold note (accent) -->
+            <text x="32" y="318" font-family="Inter, sans-serif"><tspan data-knob-val="sgFreq" data-val="440" fill="#ECECEC" font-size="38" font-weight="300" letter-spacing="-1" style="font-variant-numeric: tabular-nums">440.00</tspan><tspan dx="7" fill="#A0A0A0" font-size="13" font-weight="700">Hz</tspan><tspan dx="16" fill="#4FD1C5" font-size="20" font-weight="700">A4</tspan></text>
+            <!-- log scrubber (OseSlider: 4dp track, 6x22 brush thumb) at 440 Hz = 44.8% -->
+            <rect x="35" y="341" width="310" height="4" rx="2" fill="#212121"/>
+            <rect x="35" y="341" width="138.7" height="4" rx="2" fill="#4FD1C5"/>
+            <rect x="170.7" y="332" width="6" height="22" rx="3" fill="#4FD1C5"/>
+
+            <!-- 3. WAVE + OUTPUT (one OseCard in portrait) -->
+            <rect x="16" y="376" width="348" height="243" rx="14" fill="#121212" stroke="#4FD1C5" stroke-width="0.5"/>
+            <text x="32" y="398" fill="#898989" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">WAVE</text>
+            <text x="349.5" y="398.5" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="1.5" text-anchor="end">SINE</text>
+
+            <g font-family="Inter, sans-serif" font-size="10" font-weight="900" letter-spacing="1.5" text-anchor="middle">
+              <!-- row 1: SINE / TRI / SAW / SQR (48dp chips, 8dp corner, 6dp gap) -->
+              <g class="mk-pick" data-pick="sgwave" data-wave="sine">
+                <text x="70" y="445.5" fill="#4FD1C5">SINE</text>
+                <rect x="32" y="409" width="74.5" height="48" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+                <path transform="translate(53.25,418)" d="M0 8 L1.33 6.34 L2.67 4.8 L4 3.47 L5.33 2.46 L6.67 1.82 L8 1.6 L9.33 1.82 L10.67 2.46 L12 3.47 L13.33 4.8 L14.67 6.34 L16 8 L17.33 9.66 L18.67 11.2 L20 12.53 L21.33 13.54 L22.67 14.18 L24 14.4 L25.33 14.18 L26.67 13.54 L28 12.53 L29.33 11.2 L30.67 9.66 L32 8" fill="none" stroke="#595959" stroke-width="1.5"/>
+                <g class="mk-fill">
+                  <rect x="32" y="409" width="74.5" height="48" rx="8" fill="#4FD1C5" fill-opacity="0.20" stroke="#4FD1C5" stroke-opacity="0.55" stroke-width="0.8"/>
+                  <path transform="translate(53.25,418)" d="M0 8 L1.33 6.34 L2.67 4.8 L4 3.47 L5.33 2.46 L6.67 1.82 L8 1.6 L9.33 1.82 L10.67 2.46 L12 3.47 L13.33 4.8 L14.67 6.34 L16 8 L17.33 9.66 L18.67 11.2 L20 12.53 L21.33 13.54 L22.67 14.18 L24 14.4 L25.33 14.18 L26.67 13.54 L28 12.53 L29.33 11.2 L30.67 9.66 L32 8" fill="none" stroke="#4FD1C5" stroke-width="1.5"/>
+                </g>
               </g>
-              <text x="40" y="20" fill="#EAF4F2" font-family="Inter, sans-serif" font-size="17" font-weight="700" letter-spacing="0.4">Signal Generator</text>
-              <!-- settings cog (Material Settings, FILLED, accent) -->
-              <g class="mk-press" transform="translate(296,2)" fill="#4FD1C5"><path fill-rule="evenodd" d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></g>
-              <!-- module accent swatch -->
-              <rect class="mk-press" x="332" y="3" width="22" height="22" rx="5" fill="#4FD1C5" fill-opacity="0.9" stroke="#FFFFFF" stroke-opacity="0.2"/>
+              <g class="mk-pick" data-pick="sgwave" data-wave="triangle">
+                <text x="150.5" y="445.5" fill="#595959">TRI</text>
+                <rect x="112.5" y="409" width="74.5" height="48" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+                <path transform="translate(133.75,418)" d="M0 8 L8 1.6 L16 8 L24 14.4 L32 8" fill="none" stroke="#595959" stroke-width="1.5"/>
+                <g class="mk-fill" style="display:none">
+                  <rect x="112.5" y="409" width="74.5" height="48" rx="8" fill="#4FD1C5" fill-opacity="0.20" stroke="#4FD1C5" stroke-opacity="0.55" stroke-width="0.8"/>
+                  <path transform="translate(133.75,418)" d="M0 8 L8 1.6 L16 8 L24 14.4 L32 8" fill="none" stroke="#4FD1C5" stroke-width="1.5"/>
+                </g>
+              </g>
+              <g class="mk-pick" data-pick="sgwave" data-wave="sawtooth">
+                <text x="231" y="445.5" fill="#595959">SAW</text>
+                <rect x="193" y="409" width="74.5" height="48" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+                <path transform="translate(214.25,418)" d="M0 14.4 L16 1.6 L16 14.4 L32 1.6" fill="none" stroke="#595959" stroke-width="1.5"/>
+                <g class="mk-fill" style="display:none">
+                  <rect x="193" y="409" width="74.5" height="48" rx="8" fill="#4FD1C5" fill-opacity="0.20" stroke="#4FD1C5" stroke-opacity="0.55" stroke-width="0.8"/>
+                  <path transform="translate(214.25,418)" d="M0 14.4 L16 1.6 L16 14.4 L32 1.6" fill="none" stroke="#4FD1C5" stroke-width="1.5"/>
+                </g>
+              </g>
+              <g class="mk-pick" data-pick="sgwave" data-wave="square">
+                <text x="311.5" y="445.5" fill="#595959">SQR</text>
+                <rect x="273.5" y="409" width="74.5" height="48" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+                <path transform="translate(294.75,418)" d="M0 1.6 L16 1.6 L16 14.4 L32 14.4" fill="none" stroke="#595959" stroke-width="1.5"/>
+                <g class="mk-fill" style="display:none">
+                  <rect x="273.5" y="409" width="74.5" height="48" rx="8" fill="#4FD1C5" fill-opacity="0.20" stroke="#4FD1C5" stroke-opacity="0.55" stroke-width="0.8"/>
+                  <path transform="translate(294.75,418)" d="M0 1.6 L16 1.6 L16 14.4 L32 14.4" fill="none" stroke="#4FD1C5" stroke-width="1.5"/>
+                </g>
+              </g>
+              <!-- row 2: WHITE / PINK / BROWN (seeded noise-bar glyphs: 42 / 7 / 13) -->
+              <g class="mk-pick" data-pick="sgwave" data-wave="white">
+                <text x="83.4" y="499.5" fill="#595959">WHITE</text>
+                <rect x="32" y="463" width="101.33" height="48" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+                <path transform="translate(66.67,472)" d="M1.6 8 V3.63 M4.8 8 V3.86 M8 8 V10.22 M11.2 8 V10.06 M14.4 8 V3.95 M17.6 8 V2.73 M20.8 8 V5.47 M24 8 V10.05 M27.2 8 V11.01 M30.4 8 V12.65" fill="none" stroke="#595959" stroke-width="1.5"/>
+                <g class="mk-fill" style="display:none">
+                  <rect x="32" y="463" width="101.33" height="48" rx="8" fill="#4FD1C5" fill-opacity="0.20" stroke="#4FD1C5" stroke-opacity="0.55" stroke-width="0.8"/>
+                  <path transform="translate(66.67,472)" d="M1.6 8 V3.63 M4.8 8 V3.86 M8 8 V10.22 M11.2 8 V10.06 M14.4 8 V3.95 M17.6 8 V2.73 M20.8 8 V5.47 M24 8 V10.05 M27.2 8 V11.01 M30.4 8 V12.65" fill="none" stroke="#4FD1C5" stroke-width="1.5"/>
+                </g>
+              </g>
+              <g class="mk-pick" data-pick="sgwave" data-wave="pink">
+                <text x="190.75" y="499.5" fill="#595959">PINK</text>
+                <rect x="139.33" y="463" width="101.33" height="48" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+                <path transform="translate(174,472)" d="M1.6 8 V12.38 M4.8 8 V3.79 M8 8 V5.87 M11.2 8 V12.29 M14.4 8 V11.24 M17.6 8 V9.71 M20.8 8 V7.19 M24 8 V10.9 M27.2 8 V8.55 M30.4 8 V5.52" fill="none" stroke="#595959" stroke-width="1.5"/>
+                <g class="mk-fill" style="display:none">
+                  <rect x="139.33" y="463" width="101.33" height="48" rx="8" fill="#4FD1C5" fill-opacity="0.20" stroke="#4FD1C5" stroke-opacity="0.55" stroke-width="0.8"/>
+                  <path transform="translate(174,472)" d="M1.6 8 V12.38 M4.8 8 V3.79 M8 8 V5.87 M11.2 8 V12.29 M14.4 8 V11.24 M17.6 8 V9.71 M20.8 8 V7.19 M24 8 V10.9 M27.2 8 V8.55 M30.4 8 V5.52" fill="none" stroke="#4FD1C5" stroke-width="1.5"/>
+                </g>
+              </g>
+              <g class="mk-pick" data-pick="sgwave" data-wave="brown">
+                <text x="298.1" y="499.5" fill="#595959">BROWN</text>
+                <rect x="246.67" y="463" width="101.33" height="48" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
+                <path transform="translate(281.33,472)" d="M1.6 8 V3.62 M4.8 8 V5.38 M8 8 V8.72 M11.2 8 V4.97 M14.4 8 V9.64 M17.6 8 V8.53 M20.8 8 V10.11 M24 8 V7.19 M27.2 8 V8.91 M30.4 8 V7.48" fill="none" stroke="#595959" stroke-width="1.5"/>
+                <g class="mk-fill" style="display:none">
+                  <rect x="246.67" y="463" width="101.33" height="48" rx="8" fill="#4FD1C5" fill-opacity="0.20" stroke="#4FD1C5" stroke-opacity="0.55" stroke-width="0.8"/>
+                  <path transform="translate(281.33,472)" d="M1.6 8 V3.62 M4.8 8 V5.38 M8 8 V8.72 M11.2 8 V4.97 M14.4 8 V9.64 M17.6 8 V8.53 M20.8 8 V10.11 M24 8 V7.19 M27.2 8 V8.91 M30.4 8 V7.48" fill="none" stroke="#4FD1C5" stroke-width="1.5"/>
+                </g>
+              </g>
             </g>
 
-            <!-- LIVE SPECTRUM VISUALISER CARD (OseCard chrome, smooth filled curve) -->
-            <rect x="14" y="74" width="352" height="86" rx="14" fill="#0d1716" stroke="rgba(79,209,197,0.30)" stroke-width="0.6"/>
-            <g transform="translate(24,84)">
-              <!-- grid: horizontal dB lines (-60/-40/-20 faint, 0 emphasised) + vertical decade marks (100/1k/10k) -->
-              <line x1="0" y1="55" x2="332" y2="55" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
-              <line x1="0" y1="42" x2="332" y2="42" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
-              <line x1="0" y1="28" x2="332" y2="28" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
-              <line x1="0" y1="2"  x2="332" y2="2"  stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="1"/>
-              <line x1="86"  y1="0" x2="86"  y2="55" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
-              <line x1="180" y1="0" x2="180" y2="55" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
-              <line x1="273" y1="0" x2="273" y2="55" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/>
-              <!-- spectrum trace: idle near-baseline analog curve (gradient fill + accent outline) -->
-              <path d="M0 55 L0 53 Q14 52 28 53 Q42 54 56 52 Q70 51 84 53 Q98 54 112 52 Q126 50 140 53 Q154 54 168 52 Q182 53 196 54 Q210 53 224 54 Q238 53 252 54 Q266 53 280 54 Q294 53 308 54 Q321 54 332 54 L332 55 L0 55 Z" fill="url(#sgSpecFill)"/>
-              <path d="M0 53 Q14 52 28 53 Q42 54 56 52 Q70 51 84 53 Q98 54 112 52 Q126 50 140 53 Q154 54 168 52 Q182 53 196 54 Q210 53 224 54 Q238 53 252 54 Q266 53 280 54 Q294 53 308 54 Q321 54 332 54" fill="none" stroke="#4FD1C5" stroke-opacity="0.85" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-            <!-- axis labels: 30 / 100 / 1k / 10k / 20k (SpaceBetween) -->
-            <g fill="#5A5F68" font-family="Inter, sans-serif" font-size="7.5" font-weight="700" letter-spacing="0.4">
-              <text x="24"  y="153" text-anchor="start">30</text>
-              <text x="106" y="153" text-anchor="middle">100</text>
-              <text x="190" y="153" text-anchor="middle">1k</text>
-              <text x="280" y="153" text-anchor="middle">10k</text>
-              <text x="356" y="153" text-anchor="end">20k</text>
-            </g>
+            <!-- hairline divider (accent@0.18) -->
+            <rect x="32" y="523" width="316" height="0.5" fill="#4FD1C5" fill-opacity="0.18"/>
+            <!-- OUTPUT: amplitude 0.5 linear (= -6.0 dB) -> slider at 50% -->
+            <text x="32" y="547.5" fill="#898989" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">OUTPUT</text>
+            <text x="348" y="548" fill="#ECECEC" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="end">-6.0 dB</text>
+            <rect x="35" y="581.5" width="310" height="4" rx="2" fill="#212121"/>
+            <rect x="35" y="581.5" width="155" height="4" rx="2" fill="#4FD1C5"/>
+            <rect x="187" y="572.5" width="6" height="22" rx="3" fill="#4FD1C5"/>
 
-            <!-- FREQUENCY CARD -->
-            <rect x="14" y="170" width="352" height="86" rx="14" fill="#0d1716" stroke="rgba(79,209,197,0.30)" stroke-width="0.6"/>
-            <text x="30" y="190" fill="#7f8a8a" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.4">FREQUENCY</text>
-            <!-- pill: "✎ EDIT" (filled accent wash, accent text) -->
-            <g class="mk-press" transform="translate(298,176)"><rect x="0" y="0" width="54" height="24" rx="12" fill="rgba(79,209,197,0.10)"/><g transform="translate(7,5)" fill="#4FD1C5"><path transform="scale(0.58)" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></g><text x="35" y="16" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="1" text-anchor="middle">EDIT</text></g>
-            <text data-knob-val="sgFreq" data-val="440" x="30" y="228" fill="#EAF4F2" font-family="Inter, sans-serif" font-size="36" font-weight="300" letter-spacing="-1">440.00</text>
-            <text x="172" y="228" fill="#9aa6a4" font-family="Inter, sans-serif" font-size="13" font-weight="600">Hz</text>
-            <text x="196" y="228" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="16" font-weight="700">A4</text>
-            <g class="mk-slider" data-param="sgFreq" data-min="20" data-max="20000" data-log="1" data-fmt="hz" data-val="440" data-x0="30" data-x1="350">
-              <rect x="30" y="242" width="320" height="4" rx="2" fill="rgba(255,255,255,0.10)"/>
-              <rect class="mk-sfill" x="30" y="242" width="143" height="4" rx="2" fill="#4FD1C5"/>
-              <circle class="mk-sthumb" cx="173" cy="244" r="7" fill="#4FD1C5" stroke="#0d1716" stroke-width="2"/>
-            </g>
-
-            <!-- WAVE + OUTPUT CARD (combined, portrait) -->
-            <rect x="14" y="266" width="352" height="194" rx="14" fill="#0d1716" stroke="rgba(79,209,197,0.30)" stroke-width="0.6"/>
-            <text x="30" y="286" fill="#7f8a8a" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.4">WAVE</text>
-            <text x="350" y="286" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.4" text-anchor="end">SINE</text>
-            <!-- top row: SINE / TRI / SAW / SQR (chip 78 wide, gap 6) -->
-            <g class="mk-pick" data-pick="sgwave" data-wave="sine">
-              <rect class="mk-fill" x="28" y="294" width="78" height="48" rx="10" fill="rgba(79,209,197,0.16)" stroke="#4FD1C5" stroke-width="1.2"/>
-              <path d="M51 318 q4 -10 8 0 t8 0" fill="none" stroke="#4FD1C5" stroke-width="1.5" stroke-linecap="round"/>
-              <text x="67" y="334" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.8" text-anchor="middle">SINE</text>
-            </g>
-            <g class="mk-pick" data-pick="sgwave" data-wave="triangle">
-              <rect class="mk-fill" x="112" y="294" width="78" height="48" rx="10" fill="rgba(79,209,197,0.16)" stroke="#4FD1C5" stroke-width="1.2" style="display:none"/>
-              <path d="M135 318 l4 -6 4 6 4 6 4 -6" fill="none" stroke="#9aa6a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="151" y="334" fill="#9aa6a4" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.8" text-anchor="middle">TRI</text>
-            </g>
-            <g class="mk-pick" data-pick="sgwave" data-wave="sawtooth">
-              <rect class="mk-fill" x="196" y="294" width="78" height="48" rx="10" fill="rgba(79,209,197,0.16)" stroke="#4FD1C5" stroke-width="1.2" style="display:none"/>
-              <path d="M219 324 l8 -12 0 12 8 -12" fill="none" stroke="#9aa6a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="235" y="334" fill="#9aa6a4" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.8" text-anchor="middle">SAW</text>
-            </g>
-            <g class="mk-pick" data-pick="sgwave" data-wave="square">
-              <rect class="mk-fill" x="280" y="294" width="72" height="48" rx="10" fill="rgba(79,209,197,0.16)" stroke="#4FD1C5" stroke-width="1.2" style="display:none"/>
-              <path d="M300 312 l8 0 0 12 8 0" fill="none" stroke="#9aa6a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="316" y="334" fill="#9aa6a4" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.8" text-anchor="middle">SQR</text>
-            </g>
-            <!-- bottom row: WHITE / PINK / BROWN (3 even chips) -->
-            <g class="mk-pick" data-pick="sgwave" data-wave="white">
-              <rect class="mk-fill" x="28" y="348" width="103" height="48" rx="10" fill="rgba(79,209,197,0.16)" stroke="#4FD1C5" stroke-width="1.2" style="display:none"/>
-              <g stroke="#9aa6a4" stroke-width="1.4" stroke-linecap="round"><path d="M64 367 v-7 M68 367 v9 M72 367 v-10 M76 367 v6 M80 367 v-8 M84 367 v8 M88 367 v-5 M92 367 v7 M96 367 v-9"/></g>
-              <text x="79" y="386" fill="#9aa6a4" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.8" text-anchor="middle">WHITE</text>
-            </g>
-            <g class="mk-pick" data-pick="sgwave" data-wave="pink">
-              <rect class="mk-fill" x="135" y="348" width="103" height="48" rx="10" fill="rgba(79,209,197,0.16)" stroke="#4FD1C5" stroke-width="1.2" style="display:none"/>
-              <g stroke="#9aa6a4" stroke-width="1.4" stroke-linecap="round"><path d="M171 367 v-7 M175 367 v8 M179 367 v-8 M183 367 v5 M187 367 v-6 M191 367 v6 M195 367 v-4 M199 367 v5 M203 367 v-6"/></g>
-              <text x="186" y="386" fill="#9aa6a4" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.8" text-anchor="middle">PINK</text>
-            </g>
-            <g class="mk-pick" data-pick="sgwave" data-wave="brown">
-              <rect class="mk-fill" x="242" y="348" width="110" height="48" rx="10" fill="rgba(79,209,197,0.16)" stroke="#4FD1C5" stroke-width="1.2" style="display:none"/>
-              <g stroke="#9aa6a4" stroke-width="1.4" stroke-linecap="round"><path d="M281 367 v-6 M285 367 v7 M289 367 v-6 M293 367 v4 M297 367 v-4 M301 367 v4 M305 367 v-3 M309 367 v3 M313 367 v-3"/></g>
-              <text x="297" y="386" fill="#9aa6a4" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.8" text-anchor="middle">BROWN</text>
-            </g>
-            <!-- inner divider -->
-            <line x1="30" y1="412" x2="350" y2="412" stroke="#4FD1C5" stroke-opacity="0.18" stroke-width="0.5"/>
-            <!-- OUTPUT section -->
-            <text x="30" y="434" fill="#7f8a8a" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.4">OUTPUT</text>
-            <text data-knob-val="sgGain" data-val="-6" x="350" y="434" fill="#EAF4F2" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="end">-6.0 dB</text>
-            <g class="mk-slider" data-param="sgGain" data-min="-60" data-max="0" data-fmt="" data-val="-6" data-x0="30" data-x1="350">
-              <rect x="30" y="446" width="320" height="4" rx="2" fill="rgba(255,255,255,0.10)"/>
-              <rect class="mk-sfill" x="30" y="446" width="288" height="4" rx="2" fill="#4FD1C5"/>
-              <circle class="mk-sthumb" cx="318" cy="448" r="7" fill="#4FD1C5" stroke="#0d1716" stroke-width="2"/>
-            </g>
-
-            <!-- TIMER + SWEEP SUMMARY CARDS -->
-            <g class="mk-press"><rect x="14" y="470" width="170" height="56" rx="14" fill="#0d1716" stroke="rgba(79,209,197,0.30)" stroke-width="0.6"/><text x="30" y="492" fill="#7f8a8a" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.4">TIMER</text><text x="170" y="496" fill="#7f8a8a" font-family="Inter, sans-serif" font-size="18" font-weight="300" text-anchor="end">&#8250;</text><text x="30" y="512" fill="#c4cecc" font-family="Inter, sans-serif" font-size="12" font-weight="500">OFF</text></g>
-            <g class="mk-press"><rect x="196" y="470" width="170" height="56" rx="14" fill="#0d1716" stroke="rgba(79,209,197,0.30)" stroke-width="0.6"/><text x="212" y="492" fill="#7f8a8a" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.4">SWEEP</text><text x="352" y="496" fill="#7f8a8a" font-family="Inter, sans-serif" font-size="18" font-weight="300" text-anchor="end">&#8250;</text><text x="212" y="512" fill="#c4cecc" font-family="Inter, sans-serif" font-size="12" font-weight="500">OFF</text></g>
-
-            <!-- PLAY + EXPORT TRANSPORT -->
-            <g class="mk-press mk-sg">
-              <rect x="14" y="540" width="170" height="64" rx="16" fill="url(#sgPlay)"/>
-              <g transform="translate(54,560)" fill="#052B3A"><path transform="scale(1)" d="M8 5v14l11-7z"/></g>
-              <text data-sg-label x="98" y="578" fill="#052B3A" font-family="Inter, sans-serif" font-size="16" font-weight="800" letter-spacing="1.5">PLAY</text>
+            <!-- 4. TIMER + SWEEP summary tiles -->
+            <g class="mk-press">
+              <rect x="16" y="635" width="166" height="60" rx="14" fill="#121212" stroke="#4FD1C5" stroke-width="0.5"/>
+              <text x="28" y="661.5" fill="#595959" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">TIMER</text>
+              <text x="170" y="663.5" fill="#595959" font-family="Inter, sans-serif" font-size="16" font-weight="300" text-anchor="end">&#8250;</text>
+              <text x="28" y="680" fill="#B8B8B8" font-family="Inter, sans-serif" font-size="11" font-weight="500">OFF</text>
             </g>
             <g class="mk-press">
-              <rect x="196" y="540" width="170" height="64" rx="16" fill="rgba(79,209,197,0.10)" stroke="#4FD1C5" stroke-width="1.4"/>
-              <g transform="translate(234,560)" fill="#4FD1C5"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></g>
-              <text x="266" y="578" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="16" font-weight="800" letter-spacing="1.5">EXPORT</text>
+              <rect x="198" y="635" width="166" height="60" rx="14" fill="#121212" stroke="#4FD1C5" stroke-width="0.5"/>
+              <text x="210" y="661.5" fill="#595959" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">SWEEP</text>
+              <text x="352" y="663.5" fill="#595959" font-family="Inter, sans-serif" font-size="16" font-weight="300" text-anchor="end">&#8250;</text>
+              <text x="210" y="680" fill="#B8B8B8" font-family="Inter, sans-serif" font-size="11" font-weight="500">OFF</text>
             </g>
 
-            <!-- home indicator -->
-            <rect x="130" y="780" width="120" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
+            <!-- 5. TRANSPORT: PLAY (solid accent, #052B3A ink) + EXPORT (accent@0.08, 0.8dp accent border) -->
+            <g class="mk-press mk-sg">
+              <rect x="16" y="711" width="166" height="60" rx="14" fill="#4FD1C5"/>
+              <path d="M65 732.5 L80 741 L65 749.5 Z" fill="#052B3A"/>
+              <text data-sg-label x="88" y="746" fill="#052B3A" font-family="Inter, sans-serif" font-size="14" font-weight="700" letter-spacing="1.5">PLAY</text>
+            </g>
+            <g class="mk-press">
+              <rect x="198" y="711" width="166" height="60" rx="14" fill="#4FD1C5" fill-opacity="0.08" stroke="#4FD1C5" stroke-width="0.8"/>
+              <g transform="translate(234,731)" stroke="#4FD1C5" stroke-width="2" fill="none">
+                <path d="M9 2 V13 M3.6 9 L9 14 M14.4 9 L9 14 M3.24 18.4 H14.76"/>
+              </g>
+              <text x="260" y="746" fill="#4FD1C5" font-family="Inter, sans-serif" font-size="14" font-weight="700" letter-spacing="1.5">EXPORT</text>
+            </g>
+
+            <!-- gesture-nav home indicator -->
+            <rect x="130" y="782" width="120" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
           </svg>
         </div>
       </div>

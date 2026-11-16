@@ -97,156 +97,178 @@
       <div class="reveal">
         <div class="phone-frame" data-interactive aria-hidden="true">
           <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet" data-accent="#50C878" data-idle="#7c8a80" data-metro>
+            <!-- Mirrors MetronomeModule.kt / MetronomePortrait, default state: 120 BPM, 4/4, accents [ACC,ON,ON,ON],
+                 click volume 80 %, preset DEFAULT, stopped. 380 dp phone, 24 dp status bar, 64 dp OseScreenStrip,
+                 body column padding 16 / gaps 16: face, controls card, TAP + PRESETS, START. -->
+            <style>
+              .mtr-live, .mtr-orbit { opacity: 0; }
+              @media (prefers-reduced-motion: no-preference) {
+                .mtr-live { animation: mtr-beat 2s linear infinite; }
+                .mtr-live-2 { animation-delay: .5s; }
+                .mtr-live-3 { animation-delay: 1s; }
+                .mtr-live-4 { animation-delay: 1.5s; }
+                .mtr-orbit { opacity: 1; animation: mtr-orbit 2s linear infinite; }
+                .mtr-poly { stroke-width: 1.4; }
+              }
+              @keyframes mtr-beat { 0%, 25% { opacity: 1; } 34%, 100% { opacity: 0; } }
+              @keyframes mtr-orbit {
+                0% { transform: translate(0px, -21.3px); }
+                25% { transform: translate(21.3px, 0px); }
+                50% { transform: translate(0px, 21.3px); }
+                75% { transform: translate(-21.3px, 0px); }
+                100% { transform: translate(0px, -21.3px); }
+              }
+            </style>
             <defs>
-              <linearGradient id="mtPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0a0a"/><stop offset="1" stop-color="#0d0d0d"/></linearGradient>
-              <!-- ClickTrackFace vertical gradient: accent@0.20 → accent@0.05 → #1C1814@0.5 -->
-              <linearGradient id="mtFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#50C878" stop-opacity="0.20"/><stop offset="0.5" stop-color="#50C878" stop-opacity="0.05"/><stop offset="1" stop-color="#1C1814" stop-opacity="0.5"/></linearGradient>
-              <!-- ACC beat column: accent → accent@0.45 -->
-              <linearGradient id="mtAcc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#50C878"/><stop offset="1" stop-color="#50C878" stop-opacity="0.45"/></linearGradient>
-              <!-- ON beat column: accent@0.62 → accent@0.18 -->
-              <linearGradient id="mtOn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#50C878" stop-opacity="0.62"/><stop offset="1" stop-color="#50C878" stop-opacity="0.18"/></linearGradient>
-              <!-- GlowingO ring brand gradient unused here (accent mode) -->
+              <!-- OsePlate grain: grayscale noise @ 0.09 -->
+              <filter id="mtrGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="42"/><feColorMatrix type="saturate" values="0"/></filter>
+              <!-- ClickTrackFace bg: accent@0.20 -> accent@0.05 -> #1C1814@0.5 -->
+              <linearGradient id="mtrFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#50C878" stop-opacity="0.20"/><stop offset="0.5" stop-color="#50C878" stop-opacity="0.05"/><stop offset="1" stop-color="#1C1814" stop-opacity="0.5"/></linearGradient>
+              <!-- BeatColumn fills: ACC accent -> accent@0.45 ; ON accent@0.62 -> accent@0.18 -->
+              <linearGradient id="mtrAcc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#50C878"/><stop offset="1" stop-color="#50C878" stop-opacity="0.45"/></linearGradient>
+              <linearGradient id="mtrOn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#50C878" stop-opacity="0.62"/><stop offset="1" stop-color="#50C878" stop-opacity="0.18"/></linearGradient>
+              <!-- Skin swatch: accent -> accent@0.55 diagonal -->
+              <linearGradient id="mtrSwatch" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#50C878"/><stop offset="1" stop-color="#50C878" stop-opacity="0.55"/></linearGradient>
+              <!-- BpmWheel edge fade (DstIn: 0 -> 1 @30 % ... 70 % -> 0) -->
+              <linearGradient id="mtrWheelFade" gradientUnits="userSpaceOnUse" x1="82" y1="0" x2="298" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.3" stop-color="#fff"/><stop offset="0.7" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+              <mask id="mtrWheelMask" maskUnits="userSpaceOnUse" x="82" y="272" width="216" height="60"><rect x="82" y="272" width="216" height="60" fill="url(#mtrWheelFade)"/></mask>
             </defs>
-            <rect width="380" height="800" fill="url(#mtPlate)"/>
 
-            <!-- ════ TOP BAR (OseScreenStrip) ════ -->
-            <!-- GlowingO in back-hint state: two-arc ring (round caps) + back-arrow glyph,
-                 painted in accent. Ring radius 12/30, stroke 2.2/30; arrow stroke 1.4/30.
-                 Logo box ~30dp → 28px here, centred at (32,55). unit = 28/30 ≈ 0.933. -->
-            <g class="mk-nav" data-href="../index.html" transform="translate(18,41)">
-              <!-- ring: two semicircle arcs, round caps -->
-              <path d="M2.8 14 A11.2 11.2 0 0 1 25.2 14" fill="none" stroke="#50C878" stroke-width="2.05" stroke-linecap="round"/>
-              <path d="M25.2 14 A11.2 11.2 0 0 1 2.8 14" fill="none" stroke="#50C878" stroke-width="2.05" stroke-linecap="round"/>
-              <!-- back-arrow glyph (BackArrowPoints scaled by unit, anchored at box centre 14,14):
-                   tip (6,15)->(5.6,14); arms from (15,6)->(14,5.6) and (15,24)->(14,22.4);
-                   shaft to (24,15)->(22.4,14). -->
-              <path d="M14 5.6 L5.6 14 L14 22.4 M5.6 14 L22.4 14" fill="none" stroke="#50C878" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- ==== OsePlate: #0A0A0C base + accent wash @0.154 + grain @0.09 ==== -->
+            <rect width="380" height="800" fill="#0A0A0C"/>
+            <rect width="380" height="800" fill="#50C878" fill-opacity="0.154"/>
+            <rect width="380" height="800" filter="url(#mtrGrain)" opacity="0.09"/>
+
+            <!-- ==== OseScreenStrip (64 dp, pad 16): GlowingO back-hint, "Metronome", gear, skin swatch ==== -->
+            <!-- GlowingO 30 dp box centred (31,56): two-arc ring r13.4 / stroke 2.46, back-arrow glyph stroke 1.57 -->
+            <g class="mk-nav" data-href="../index.html">
+              <rect x="10" y="40" width="40" height="32" fill="transparent"/>
+              <path d="M17.6 56 A13.4 13.4 0 0 1 44.4 56" fill="none" stroke="#50C878" stroke-width="2.46" stroke-linecap="round"/>
+              <path d="M44.4 56 A13.4 13.4 0 0 1 17.6 56" fill="none" stroke="#50C878" stroke-width="2.46" stroke-linecap="round"/>
+              <path d="M31 44.92 L19.92 56 L42.08 56 M19.92 56 L31 67.08" fill="none" stroke="#50C878" stroke-width="1.57" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
-            <text x="64" y="61" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="18" font-weight="700">Metronome</text>
-
-            <!-- Settings gear (Material Settings FILLED, 24×24) tinted accent, ~24dp box -->
-            <g class="mk-press" transform="translate(312,42)">
-              <g transform="scale(1.05)"><path fill="#50C878" fill-rule="evenodd" d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></g>
+            <text x="58" y="62.5" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="18" font-weight="600" letter-spacing="0.4">Metronome</text>
+            <!-- OseSettingsGear: 48 dp target, 32 dp Icons.Filled.Settings tinted accent -->
+            <g class="mk-press" transform="translate(292,40) scale(1.3333)">
+              <rect width="24" height="24" fill="transparent"/>
+              <path fill="#50C878" d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.650c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.690-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
             </g>
-            <!-- skin-chooser swatch (32dp reserved slot) -->
-            <rect class="mk-press" x="346" y="44" width="20" height="20" rx="5" fill="#50C878"/>
+            <!-- MainScreenModuleSkinSwatch: 22 dp, corner 6, accent gradient, white@0.35 1 dp border -->
+            <rect class="mk-press" x="342.5" y="45.5" width="21" height="21" rx="5.5" fill="url(#mtrSwatch)" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
 
-            <!-- ════ CLICK-TRACK FACE (hero card) ════ -->
-            <!-- frame 14dp inset, corner 14, bg mtFace, 0.5 accent border -->
-            <rect x="14" y="86" width="352" height="190" rx="14" fill="url(#mtFace)" stroke="#50C878" stroke-width="0.5"/>
+            <!-- ==== ClickTrackFace (weight 3.5): corner 14, gradient bg, 0.5 dp accent border, padding 14 ==== -->
+            <rect x="16.25" y="88.25" width="347.5" height="153.5" rx="14" fill="url(#mtrFace)" stroke="#50C878" stroke-width="0.5"/>
+            <!-- BPM block: 38 sp mono Light, -2.5 tracking; "BPM · ALLEGRO" 9 sp ExtraBold white@0.85, tracking 2.4 -->
+            <text x="32" y="140" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="38" font-weight="300" letter-spacing="-2.5">120</text>
+            <text x="32" y="161" fill="#FFFFFF" fill-opacity="0.85" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" letter-spacing="2.4">BPM · ALLEGRO</text>
+            <!-- TempoPolygonIcon 52 dp, n=4 -> diamond (vertex 0 at 12 o'clock), radius 0.82*26, idle stroke 0.8 dp -->
+            <path class="mtr-poly" d="M190 106.7 L211.3 128 L190 149.3 L168.7 128 Z" fill="none" stroke="#50C878" stroke-width="0.8"/>
+            <circle class="mtr-orbit" cx="190" cy="128" r="2.3" fill="#50C878"/>
+            <!-- Meter: "4 / 4" 26 sp mono Black, " / " 18 sp Light white@0.55, bottom-aligned; METER 9 sp white@0.55 -->
+            <text x="348" y="128.5" text-anchor="end" font-family="JetBrains Mono, monospace" xml:space="preserve"><tspan fill="#FFFFFF" font-size="26" font-weight="900">4</tspan><tspan fill="#FFFFFF" fill-opacity="0.55" font-size="18" font-weight="300" dy="2.4"> / </tspan><tspan fill="#FFFFFF" font-size="26" font-weight="900" dy="-2.4">4</tspan></text>
+            <text x="348" y="145.5" text-anchor="end" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" letter-spacing="2.4">METER</text>
 
-            <!-- HEADER row (padding 14) -->
-            <!-- BPM digit: monospace Light ~38px white, letter-spacing -2.5 -->
-            <text x="28" y="138" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="38" font-weight="300" letter-spacing="-2.5">120</text>
-            <!-- sub: BPM · ALLEGRO  monospace ExtraBold white@0.85 9px wide -->
-            <text x="29" y="158" fill="#FFFFFF" fill-opacity="0.85" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" letter-spacing="2.4">BPM · ALLEGRO</text>
-
-            <!-- TempoPolygonIcon: 4/4 → square outline, accent stroke, ~52dp box, idle hairline.
-                 Square vertices at -90°/0°/90°/180°, radius 0.82·(box/2). box centred ~(195,124). -->
-            <path d="M195 105 L213 124 L195 143 L177 124 Z" fill="none" stroke="#50C878" stroke-width="1.3" stroke-linejoin="round"/>
-
-            <!-- METER cluster right-aligned: "4 / 4" mono Black white, "/" Light white@0.55 -->
-            <text x="346" y="136" text-anchor="end" font-family="JetBrains Mono, monospace"><tspan fill="#FFFFFF" font-size="26" font-weight="900">4</tspan><tspan fill="#FFFFFF" fill-opacity="0.55" font-size="18" font-weight="300"> / </tspan><tspan fill="#FFFFFF" font-size="26" font-weight="900">4</tspan></text>
-            <text x="346" y="155" text-anchor="end" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" letter-spacing="2.4">METER</text>
-
-            <!-- click-track strip: bg #55000000, border accent@0.30 0.5, corner 8.
-                 Columns bottom-aligned (vertical pad 6), spacedBy 8, width tapers; corner 5.
-                 4 beats: beat1 ACC (78% h), beats 2-4 ON (46% h). Strip box x14+14..366-14, y172..262. -->
-            <rect x="28" y="172" width="324" height="90" rx="8" fill="#000000" fill-opacity="0.33" stroke="#50C878" stroke-opacity="0.30" stroke-width="0.5"/>
-            <!-- inner content area: x 36..344 (vpad 6 → y 178..256, height 78) ; 4 slots width 44, gap 8 ; centred -->
-            <!-- ACC beat 1 : 78% of 78 = 60.8 tall, bottom at 256 -->
-            <g class="mk-beat" pointer-events="none">
-              <rect x="56" y="195" width="44" height="61" rx="5" fill="url(#mtAcc)" stroke="#50C878" stroke-width="1.5"/>
-              <text x="78" y="251" fill="#1C1814" font-family="JetBrains Mono, monospace" font-size="12" font-weight="900" text-anchor="middle">1</text>
+            <!-- ClickTrackStrip: #55000000 bg, accent@0.30 0.5 dp border, corner 8; columns 44 dp, gap 8, centred,
+                 bottom-aligned (v-pad 6); ACC = 78 %, ON = 46 % of the column area; corner 5 -->
+            <rect x="30.25" y="178.25" width="319.5" height="49.5" rx="8" fill="#000000" fill-opacity="0.333" stroke="#50C878" stroke-opacity="0.30" stroke-width="0.5"/>
+            <rect class="mk-beat" x="90.75" y="193.15" width="42.5" height="28.1" rx="5" fill="url(#mtrAcc)" stroke="#50C878" stroke-width="1.5"/>
+            <rect class="mk-beat" x="142.5" y="205" width="43" height="17" rx="5" fill="url(#mtrOn)" stroke="#50C878" stroke-opacity="0.5" stroke-width="1"/>
+            <rect class="mk-beat" x="194.5" y="205" width="43" height="17" rx="5" fill="url(#mtrOn)" stroke="#50C878" stroke-opacity="0.5" stroke-width="1"/>
+            <rect class="mk-beat" x="246.5" y="205" width="43" height="17" rx="5" fill="url(#mtrOn)" stroke="#50C878" stroke-opacity="0.5" stroke-width="1"/>
+            <g font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" pointer-events="none">
+              <text x="112" y="214.4" fill="#1C1814" font-weight="900">1</text>
+              <text x="164" y="214.4" fill="#FFFFFF" fill-opacity="0.85" font-weight="600">2</text>
+              <text x="216" y="214.4" fill="#FFFFFF" fill-opacity="0.85" font-weight="600">3</text>
+              <text x="268" y="214.4" fill="#FFFFFF" fill-opacity="0.85" font-weight="600">4</text>
             </g>
-            <!-- ON beats 2-4 : 46% of 78 = 35.9 tall -->
-            <g class="mk-beat" pointer-events="none">
-              <rect x="108" y="220" width="44" height="36" rx="5" fill="url(#mtOn)" stroke="#50C878" stroke-opacity="0.5" stroke-width="1"/>
-              <text x="130" y="251" fill="#FFFFFF" fill-opacity="0.85" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" text-anchor="middle">2</text>
-            </g>
-            <g class="mk-beat" pointer-events="none">
-              <rect x="160" y="220" width="44" height="36" rx="5" fill="url(#mtOn)" stroke="#50C878" stroke-opacity="0.5" stroke-width="1"/>
-              <text x="182" y="251" fill="#FFFFFF" fill-opacity="0.85" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" text-anchor="middle">3</text>
-            </g>
-            <g class="mk-beat" pointer-events="none">
-              <rect x="212" y="220" width="44" height="36" rx="5" fill="url(#mtOn)" stroke="#50C878" stroke-opacity="0.5" stroke-width="1"/>
-              <text x="234" y="251" fill="#FFFFFF" fill-opacity="0.85" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" text-anchor="middle">4</text>
+            <!-- live-beat highlight (white 1.5 dp border, dark Black digit) cycling at 120 BPM; hidden under reduced motion -->
+            <g font-family="JetBrains Mono, monospace" font-size="12" font-weight="900" text-anchor="middle" pointer-events="none">
+              <g class="mtr-live mtr-live-1"><rect x="90.75" y="193.15" width="42.5" height="28.1" rx="5" fill="none" stroke="#FFFFFF" stroke-width="1.5"/></g>
+              <g class="mtr-live mtr-live-2"><rect x="142.75" y="205.25" width="42.5" height="16.5" rx="5" fill="none" stroke="#FFFFFF" stroke-width="1.5"/><text x="164" y="214.4" fill="#1C1814">2</text></g>
+              <g class="mtr-live mtr-live-3"><rect x="194.75" y="205.25" width="42.5" height="16.5" rx="5" fill="none" stroke="#FFFFFF" stroke-width="1.5"/><text x="216" y="214.4" fill="#1C1814">3</text></g>
+              <g class="mtr-live mtr-live-4"><rect x="246.75" y="205.25" width="42.5" height="16.5" rx="5" fill="none" stroke="#FFFFFF" stroke-width="1.5"/><text x="268" y="214.4" fill="#1C1814">4</text></g>
             </g>
 
-            <!-- ════ COMBINED CONTROLS CARD (OseCard hubSurface, corner 14, 0.5 accent) ════ -->
-            <rect x="14" y="288" width="352" height="184" rx="14" fill="#121212" stroke="#50C878" stroke-width="0.5"/>
+            <!-- ==== Combined controls OseCard (weight 4.5): hubSurface, corner 14, 0.5 dp accent; pad 14, gap 18 ==== -->
+            <rect x="16.25" y="258.25" width="347.5" height="381.5" rx="14" fill="#121212" stroke="#50C878" stroke-width="0.5"/>
 
-            <!-- BPM scrubber row: ± pills (44dp, accent@0.22 fill, accent border, corner 12),
-                 centre wheel (white@0.04 fill, accent border, corner 12) with big mono BPM +
-                 faint neighbour digits. Row centred in top half. -->
+            <!-- MetronomeBpmRow (60 dp): minus pill, BpmWheel, plus pill. Pills 44 dp, corner 12, accent@0.22, 0.5 dp accent -->
             <g class="mk-press mk-step" data-step-target="metroBpm" data-step="-1">
-              <rect x="28" y="306" width="44" height="44" rx="12" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.5"/>
-              <text x="50" y="335" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="22" font-weight="300" text-anchor="middle" pointer-events="none">-</text>
+              <rect x="30.25" y="280.25" width="43.5" height="43.5" rx="12" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.5"/>
+              <text x="52" y="309" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="20" font-weight="300" text-anchor="middle" pointer-events="none">−</text>
             </g>
-            <rect x="80" y="306" width="220" height="44" rx="12" fill="#FFFFFF" fill-opacity="0.04" stroke="#50C878" stroke-width="0.5"/>
-            <!-- faint neighbour BPM (the iPhone wheel's edge numbers) -->
-            <text x="108" y="334" fill="#FFFFFF" fill-opacity="0.18" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="middle" pointer-events="none">119</text>
-            <text id="metroBpm" data-metro-bpm data-val="120" x="190" y="338" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="30" font-weight="300" letter-spacing="-1.5" text-anchor="middle" pointer-events="none">120</text>
-            <text x="272" y="334" fill="#FFFFFF" fill-opacity="0.18" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="middle" pointer-events="none">121</text>
+            <rect x="82.25" y="272.25" width="215.5" height="59.5" rx="12" fill="#FFFFFF" fill-opacity="0.04" stroke="#50C878" stroke-width="0.5"/>
+            <!-- wheel items 80 dp apart: centre 32 sp mono Black (-1 tracking), neighbours 22 sp Medium @0.55, edge-faded -->
+            <g mask="url(#mtrWheelMask)" font-family="JetBrains Mono, monospace" text-anchor="middle" pointer-events="none">
+              <text x="110" y="310" fill="#FFFFFF" fill-opacity="0.55" font-size="22" font-weight="500">119</text>
+              <text id="metroBpm" data-metro-bpm data-val="120" x="190" y="313.7" fill="#FFFFFF" font-size="32" font-weight="900" letter-spacing="-1">120</text>
+              <text x="270" y="310" fill="#FFFFFF" fill-opacity="0.55" font-size="22" font-weight="500">121</text>
+            </g>
             <g class="mk-press mk-step" data-step-target="metroBpm" data-step="1">
-              <rect x="308" y="306" width="44" height="44" rx="12" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.5"/>
-              <text x="330" y="335" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="22" font-weight="300" text-anchor="middle" pointer-events="none">+</text>
+              <rect x="306.25" y="280.25" width="43.5" height="43.5" rx="12" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.5"/>
+              <text x="328" y="309" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="20" font-weight="300" text-anchor="middle" pointer-events="none">+</text>
             </g>
 
-            <!-- section divider: accent@0.18, 1px -->
-            <rect x="28" y="364" width="324" height="1" fill="#50C878" fill-opacity="0.18"/>
+            <!-- SectionDivider: 1 dp accent@0.18 -->
+            <rect x="30" y="350" width="320" height="1" fill="#50C878" fill-opacity="0.18"/>
 
-            <!-- TIME-SIGNATURE row: - [num] + on left, BEATS · NOTE label centre, 4/8/16 chips right.
-                 Pills 44dp corner 12 accent@0.22 ; chips corner 12 (selected accent@0.25, border 0.5). -->
+            <!-- TimeSignatureRow (44 dp): [- 4 +], BEATS · NOTE, [4][8][16] chips (44 dp tall, corner 12) -->
             <g class="mk-press">
-              <rect x="28" y="372" width="44" height="44" rx="12" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.5"/>
-              <text x="50" y="401" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="22" font-weight="300" text-anchor="middle" pointer-events="none">-</text>
+              <rect x="30.25" y="369.25" width="43.5" height="43.5" rx="12" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.5"/>
+              <text x="52" y="398" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="20" font-weight="300" text-anchor="middle" pointer-events="none">−</text>
             </g>
-            <text x="92" y="403" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="26" font-weight="900" letter-spacing="-1" text-anchor="middle">4</text>
+            <text x="92" y="400.5" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="26" font-weight="900" letter-spacing="-1" text-anchor="middle">4</text>
             <g class="mk-press">
-              <rect x="112" y="372" width="44" height="44" rx="12" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.5"/>
-              <text x="134" y="401" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="22" font-weight="300" text-anchor="middle" pointer-events="none">+</text>
+              <rect x="110.25" y="369.25" width="43.5" height="43.5" rx="12" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="0.5"/>
+              <text x="132" y="398" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="20" font-weight="300" text-anchor="middle" pointer-events="none">+</text>
             </g>
-            <!-- centre label cluster: BEATS · NOTE -->
-            <text x="206" y="397" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="800" letter-spacing="1.6"><tspan fill="#FFFFFF" fill-opacity="0.55">BEATS</tspan><tspan fill="#FFFFFF" fill-opacity="0.30" font-size="11" font-weight="400"> · </tspan><tspan fill="#FFFFFF" fill-opacity="0.55">NOTE</tspan></text>
-            <!-- note-value chips 4 / 8 / 16 (selected = 4) -->
-            <g class="mk-pick" data-pick="note"><rect class="mk-fill" x="252" y="378" width="30" height="32" rx="12" fill="#50C878" fill-opacity="0.25" stroke="#50C878" stroke-width="0.5"/><text x="267" y="400" fill="#50C878" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700" text-anchor="middle" pointer-events="none">4</text></g>
-            <g class="mk-pick" data-pick="note"><rect class="mk-fill" x="286" y="378" width="30" height="32" rx="12" fill="#50C878" fill-opacity="0.25" stroke="#50C878" stroke-width="0.5" style="display:none"/><rect x="286" y="378" width="30" height="32" rx="12" fill="none" stroke="#50C878" stroke-width="0.5"/><text x="301" y="400" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="14" font-weight="400" text-anchor="middle" pointer-events="none">8</text></g>
-            <g class="mk-pick" data-pick="note"><rect class="mk-fill" x="320" y="378" width="32" height="32" rx="12" fill="#50C878" fill-opacity="0.25" stroke="#50C878" stroke-width="0.5" style="display:none"/><rect x="320" y="378" width="32" height="32" rx="12" fill="none" stroke="#50C878" stroke-width="0.5"/><text x="336" y="400" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="14" font-weight="400" text-anchor="middle" pointer-events="none">16</text></g>
+            <text x="207" y="394.3" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="800" letter-spacing="1.6"><tspan fill="#FFFFFF" fill-opacity="0.55">BEATS</tspan><tspan fill="#FFFFFF" fill-opacity="0.30" font-size="11" font-weight="400" letter-spacing="0" dx="6.4">·</tspan><tspan fill="#FFFFFF" fill-opacity="0.55" dx="8">NOTE</tspan></text>
+            <g class="mk-pick" data-pick="mtrnote"><rect class="mk-fill" x="260.5" y="369.25" width="24" height="43.5" rx="12" fill="#50C878" fill-opacity="0.25"/><rect x="260.5" y="369.25" width="24" height="43.5" rx="12" fill="none" stroke="#50C878" stroke-width="0.5"/><text x="272.5" y="396" fill="#50C878" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700" text-anchor="middle" pointer-events="none">4</text></g>
+            <g class="mk-pick" data-pick="mtrnote"><rect class="mk-fill" x="288.75" y="369.25" width="24.5" height="43.5" rx="12" fill="#50C878" fill-opacity="0.25" style="display:none"/><rect x="288.75" y="369.25" width="24.5" height="43.5" rx="12" fill="none" stroke="#50C878" stroke-width="0.5"/><text x="301" y="396" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="14" font-weight="400" text-anchor="middle" pointer-events="none">8</text></g>
+            <g class="mk-pick" data-pick="mtrnote"><rect class="mk-fill" x="317.25" y="369.25" width="32.5" height="43.5" rx="12" fill="#50C878" fill-opacity="0.25" style="display:none"/><rect x="317.25" y="369.25" width="32.5" height="43.5" rx="12" fill="none" stroke="#50C878" stroke-width="0.5"/><text x="333.5" y="396" fill="#FFFFFF" fill-opacity="0.55" font-family="JetBrains Mono, monospace" font-size="14" font-weight="400" text-anchor="middle" pointer-events="none">16</text></g>
 
-            <!-- section divider -->
-            <rect x="28" y="424" width="324" height="1" fill="#50C878" fill-opacity="0.18"/>
+            <rect x="30" y="431" width="320" height="1" fill="#50C878" fill-opacity="0.18"/>
 
-            <!-- CLICK VOLUME : label left (accent eyebrow), % right (white mono), slider below.
-                 Track 4px DarkGray@0.3 rounded ; active accent fill ; thumb = 6×22 rounded accent bar. -->
-            <text x="28" y="445" fill="#50C878" fill-opacity="0.9" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" letter-spacing="1.6">CLICK VOLUME</text>
-            <text data-knob-val="metroVol" data-fmt="pct" x="352" y="445" text-anchor="end" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800">80%</text>
-            <g class="mk-slider" data-param="metroVol" data-fmt="pct" data-min="0" data-max="1" data-val="0.8" data-x0="31" data-x1="349">
-              <rect x="28" y="456" width="324" height="4" rx="2" fill="#A9A9A9" fill-opacity="0.3"/>
-              <rect class="mk-sfill" x="28" y="456" width="256.4" height="4" rx="2" fill="#50C878"/>
-              <rect class="mk-sthumb" x="281.4" y="447" width="6" height="22" rx="3" fill="#50C878"/>
+            <!-- MetronomeSliderGeneric: "CLICK VOLUME" 10 sp Bold white@0.55 (tracking 1.6), value 10 sp Bold mono accent;
+                 OseSlider 18 dp below: 4 dp track DarkGray@0.3, accent fill, 6x22 dp accent capsule thumb -->
+            <text x="30" y="459.5" fill="#FFFFFF" fill-opacity="0.55" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.6">CLICK VOLUME</text>
+            <text data-knob-val="metroVol" data-fmt="pct" x="350" y="459.5" text-anchor="end" fill="#50C878" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">80%</text>
+            <g class="mk-slider" data-param="metroVol" data-fmt="pct" data-min="0" data-max="1" data-val="0.8" data-x0="33" data-x1="347">
+              <rect x="30" y="482" width="320" height="44" fill="transparent"/>
+              <rect x="33" y="502" width="314" height="4" rx="2" fill="#A9A9A9" fill-opacity="0.3"/>
+              <rect class="mk-sfill" x="33" y="502" width="251.2" height="4" rx="2" fill="#50C878"/>
+              <ellipse class="mk-sthumb" cx="284.2" cy="504" rx="3" ry="11" fill="#50C878"/>
             </g>
 
-            <!-- ════ TAP / PRESETS row (ActionButton chrome: hubSurface, 0.5 accent border, corner 14) ════ -->
+            <rect x="30" y="546" width="320" height="1" fill="#50C878" fill-opacity="0.18"/>
+
+            <!-- OutputDeviceDropdown: "OUTPUT" eyebrow accent@0.7 9 sp, then 48 dp hubSurface field, corner 10, accent@0.4 border -->
+            <text x="30" y="574" fill="#50C878" fill-opacity="0.7" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="1.5">OUTPUT</text>
             <g class="mk-press">
-              <rect x="14" y="488" width="170" height="50" rx="14" fill="#121212" stroke="#50C878" stroke-width="0.5"/>
-              <text x="99" y="518" fill="#50C878" font-family="Inter, sans-serif" font-size="12" font-weight="800" letter-spacing="1.6" text-anchor="middle" pointer-events="none">TAP</text>
-            </g>
-            <g class="mk-press">
-              <rect x="196" y="488" width="170" height="50" rx="14" fill="#121212" stroke="#50C878" stroke-width="0.5"/>
-              <text x="281" y="518" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" letter-spacing="1.6" pointer-events="none"><tspan fill="#50C878">PRESETS · </tspan><tspan fill="#FFFFFF">DEFAULT</tspan><tspan fill="#50C878" font-weight="300"> ›</tspan></text>
+              <rect x="30.25" y="578.25" width="319.5" height="47.5" rx="10" fill="#121212" stroke="#50C878" stroke-opacity="0.4" stroke-width="0.5"/>
+              <text x="42" y="606" fill="#50C878" fill-opacity="0.9" font-family="Inter, sans-serif" font-size="11" pointer-events="none">Device speakers</text>
+              <text x="338" y="605.5" text-anchor="end" fill="#50C878" fill-opacity="0.4" font-family="Inter, sans-serif" font-size="10" pointer-events="none">▼</text>
             </g>
 
-            <!-- ════ START button (StartButton: #43A047 solid, corner 12, PowerSettingsNew + STOP/START) ════ -->
+            <!-- ==== TAP + PRESETS row (weight 0.75, gap 12): hubSurface, corner 14, 0.5 dp accent ==== -->
+            <g class="mk-press">
+              <rect x="16.25" y="656.25" width="167.5" height="32.5" rx="14" fill="#121212" stroke="#50C878" stroke-width="0.5"/>
+              <text x="100" y="676.8" fill="#50C878" font-family="Inter, sans-serif" font-size="12" font-weight="800" letter-spacing="1.6" text-anchor="middle" pointer-events="none">TAP</text>
+            </g>
+            <g class="mk-press">
+              <rect x="196.25" y="656.25" width="167.5" height="32.5" rx="14" fill="#121212" stroke="#50C878" stroke-width="0.5"/>
+              <text x="280" y="676.2" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="800" letter-spacing="1.4" pointer-events="none"><tspan fill="#50C878">PRESETS ·</tspan><tspan fill="#FFFFFF" dx="2.6">DEFAULT</tspan><tspan fill="#50C878" font-size="14" font-weight="300" letter-spacing="0" dx="2.6">›</tspan></text>
+            </g>
+
+            <!-- ==== StartButton (weight 1.5): #43A047, corner 12, PowerSettingsNew 18 dp + START 15 sp Black, tracking 2.4 ==== -->
             <g class="mk-press mk-metro">
-              <rect x="14" y="552" width="352" height="110" rx="12" fill="#43A047"/>
-              <!-- Material PowerSettingsNew (filled) 24×24, white, ~18dp box, vertically centred -->
-              <g transform="translate(122,597)"><path fill="#FFFFFF" d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></g>
-              <text data-metro-label x="158" y="615" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="15" font-weight="900" letter-spacing="2.4" pointer-events="none">START</text>
+              <rect x="16" y="705" width="348" height="67" rx="12" fill="#43A047"/>
+              <g transform="translate(146,729.5) scale(0.75)" pointer-events="none"><path fill="#FFFFFF" d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.810 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.740-1.23-5.18-3.17-6.83z"/></g>
+              <text data-metro-label x="172" y="743.9" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="15" font-weight="900" letter-spacing="2.4" pointer-events="none">START</text>
             </g>
 
             <!-- gesture bar -->
-            <rect x="130" y="780" width="120" height="4" rx="2" fill="#2a2a2a"/>
+            <rect x="130" y="784" width="120" height="4" rx="2" fill="#FFFFFF" fill-opacity="0.18"/>
           </svg>
         </div>
       </div>

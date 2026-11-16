@@ -65,204 +65,102 @@
       </div>
       <div class="reveal">
         <div class="phone-frame" data-interactive aria-hidden="true">
-          <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet" data-accent="#85B7EB" data-idle="#6f8094">
-            <defs>
-              <linearGradient id="tnPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070a0e"/><stop offset="1" stop-color="#0b0f15"/></linearGradient>
-              <linearGradient id="tnRim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f1f1f"/><stop offset="1" stop-color="#050505"/></linearGradient>
-              <linearGradient id="tnFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5478a0"/><stop offset="0.55" stop-color="#3e5b78"/><stop offset="1" stop-color="#32485f"/></linearGradient>
-              <radialGradient id="tnVig" cx="0.5" cy="0.55" r="0.85"><stop offset="0.6" stop-color="#000" stop-opacity="0"/><stop offset="0.92" stop-color="#000" stop-opacity="0.14"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></radialGradient>
-              <linearGradient id="tnTopShadow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.55"/><stop offset="0.1" stop-color="#000" stop-opacity="0.25"/><stop offset="0.4" stop-color="#000" stop-opacity="0.04"/><stop offset="0.55" stop-color="#000" stop-opacity="0"/></linearGradient>
-              <linearGradient id="tnLed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#080808"/><stop offset="1" stop-color="#1a1a1a"/></linearGradient>
-              <linearGradient id="tnCalib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c4258" stop-opacity="0.55"/><stop offset="0.5" stop-color="#1a2330" stop-opacity="0.5"/><stop offset="1" stop-color="#1c1814" stop-opacity="0.55"/></linearGradient>
-              <style>
-                @keyframes tnSway { 0%,100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.2deg); } }
-                .tn-needle { transform-box: fill-box; transform-origin: 50% 100%; animation: tnSway 4.4s ease-in-out infinite; }
-              </style>
-            </defs>
-
-            <rect width="380" height="800" fill="url(#tnPlate)"/>
-
-            <!-- ── TOP BAR ─────────────────────────────────────────────────── -->
-            <g transform="translate(18,40)">
-              <!-- back: ArrowBack (Material) in accent ring -->
-              <g class="mk-nav" data-href="../index.html"><circle cx="14" cy="14" r="13" fill="none" stroke="#85B7EB" stroke-width="2"/><g transform="translate(2,2)" fill="#85B7EB"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></g></g>
-              <text x="40" y="20" fill="#F2F4F8" font-family="Inter, sans-serif" font-size="15" font-weight="700" letter-spacing="3">TUNER</text>
-              <!-- Settings cog (Material, FILLED) -->
-              <g class="mk-press" transform="translate(296,2)" fill="#85B7EB"><path fill-rule="evenodd" d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></g>
-              <!-- skin swatch -->
-              <rect class="mk-press" x="330" y="2" width="24" height="24" rx="6" fill="#85B7EB" fill-opacity="0.9" stroke="#FFFFFF" stroke-opacity="0.3"/>
-            </g>
-
-            <!-- ════════════ METER CARD ════════════ -->
-            <rect x="14" y="78" width="352" height="290" rx="14" fill="#121821" stroke="rgba(133,183,235,0.30)" stroke-width="0.8"/>
-
-            <!-- MIC + five dots (MicStatus) + PTU · OSE strip -->
-            <text x="30" y="106" fill="#7d8da0" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="1">MIC</text>
-            <g fill="#85B7EB" fill-opacity="0.30"><circle cx="56" cy="102.5" r="1.5"/><circle cx="62" cy="102.5" r="1.5"/><circle cx="68" cy="102.5" r="1.5"/><circle cx="74" cy="102.5" r="1.5"/><circle cx="80" cy="102.5" r="1.5"/></g>
-            <text x="350" y="106" fill="#5a6678" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="2.5" text-anchor="end">PTU · OSE</text>
-
-            <!-- meter face (bezelled screen): outer rim lip + accent-tinted recess -->
-            <rect x="28" y="114" width="324" height="148" rx="12" fill="url(#tnRim)" stroke="rgba(255,255,255,0.12)" stroke-width="0.6"/>
-            <rect x="33" y="119" width="314" height="138" rx="8" fill="url(#tnFace)" stroke="rgba(0,0,0,0.7)" stroke-width="0.6"/>
-            <rect x="33" y="119" width="314" height="138" rx="8" fill="url(#tnTopShadow)"/>
-            <rect x="33" y="119" width="314" height="138" rx="8" fill="url(#tnVig)"/>
-            <line x1="47" y1="121.5" x2="333" y2="121.5" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="0.6"/>
-
-            <!-- ghost note A4 -->
-            <text x="184" y="178" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="56" font-weight="700" text-anchor="middle" letter-spacing="-1">A</text>
-            <text x="213" y="178" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="22" font-weight="700">4</text>
-
-            <!-- "0" label above centre tick · CENT label hugged right level with 0 -->
-            <text x="190" y="202" fill="#FFFFFF" fill-opacity="0.92" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">0</text>
-            <text x="341" y="210" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="8.5" font-weight="700" letter-spacing="1" text-anchor="end">CENT</text>
-
-            <!-- flat scale arc + ticks. Pivot far below face (cx=190), half-sweep 22°.
-                 Centre "0" tick at y≈207 (≈60% of face). Ticks pre-computed to match
-                 the app's per-1¢ hierarchy: 0/±50/±25 = primary, %10 = secondary,
-                 %5 = tertiary, else faint. Triangle markers at ±25. -->
-            <g stroke-linecap="square">
-              <!-- faint arc baseline (the rail the ticks sit on) -->
-              <path d="M62 235 A 330 330 0 0 1 318 235" fill="none" stroke="#FFFFFF" stroke-opacity="0.62" stroke-width="1"/>
-
-              <!-- faint 1¢ ticks (else branch, alpha 0.18) -->
-              <g stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="0.8">
-                <line x1="70.5" y1="231.8" x2="70.7" y2="235.3"/><line x1="75.2" y1="229.9" x2="75.4" y2="233.4"/><line x1="80.1" y1="228.2" x2="80.3" y2="231.7"/>
-                <line x1="89.9" y1="225.0" x2="90.1" y2="228.5"/><line x1="95.0" y1="223.6" x2="95.1" y2="227.1"/><line x1="100.1" y1="222.3" x2="100.2" y2="225.8"/>
-                <line x1="110.6" y1="219.9" x2="110.7" y2="223.4"/><line x1="115.9" y1="218.9" x2="116.0" y2="222.4"/><line x1="121.3" y1="217.9" x2="121.4" y2="221.4"/>
-                <line x1="132.2" y1="216.3" x2="132.3" y2="219.8"/><line x1="137.8" y1="215.6" x2="137.8" y2="219.1"/><line x1="143.3" y1="215.0" x2="143.4" y2="218.5"/>
-                <line x1="154.5" y1="214.0" x2="154.5" y2="217.5"/><line x1="160.1" y1="213.6" x2="160.2" y2="217.1"/><line x1="165.8" y1="213.3" x2="165.8" y2="216.8"/>
-                <line x1="177.1" y1="212.8" x2="177.1" y2="216.3"/><line x1="182.8" y1="212.7" x2="182.8" y2="216.2"/>
-                <line x1="197.2" y1="212.7" x2="197.2" y2="216.2"/><line x1="202.9" y1="212.8" x2="202.9" y2="216.3"/>
-                <line x1="214.2" y1="213.3" x2="214.2" y2="216.8"/><line x1="219.8" y1="213.6" x2="219.9" y2="217.1"/><line x1="225.5" y1="214.0" x2="225.5" y2="217.5"/>
-                <line x1="236.6" y1="215.0" x2="236.7" y2="218.5"/><line x1="242.2" y1="215.6" x2="242.2" y2="219.1"/><line x1="247.7" y1="216.3" x2="247.8" y2="219.8"/>
-                <line x1="258.6" y1="217.9" x2="258.7" y2="221.4"/><line x1="264.0" y1="218.9" x2="264.1" y2="222.4"/><line x1="269.3" y1="219.9" x2="269.4" y2="223.4"/>
-                <line x1="279.8" y1="222.3" x2="279.9" y2="225.8"/><line x1="284.9" y1="223.6" x2="285.0" y2="227.1"/><line x1="289.9" y1="225.0" x2="290.1" y2="228.5"/>
-                <line x1="299.7" y1="228.2" x2="299.9" y2="231.7"/><line x1="304.6" y1="229.9" x2="304.8" y2="233.4"/><line x1="309.3" y1="231.8" x2="309.5" y2="235.3"/>
-              </g>
-
-              <!-- %5 ticks (tertiary, alpha 0.36) -->
-              <g stroke="#FFFFFF" stroke-opacity="0.36" stroke-width="1">
-                <line x1="85.0" y1="226.5" x2="85.3" y2="231.6"/><line x1="105.4" y1="220.9" x2="105.6" y2="226.0"/>
-                <line x1="126.8" y1="216.8" x2="126.9" y2="221.9"/><line x1="148.9" y1="214.2" x2="149.0" y2="219.3"/>
-                <line x1="171.4" y1="212.9" x2="171.5" y2="218.0"/><line x1="208.6" y1="212.9" x2="208.5" y2="218.0"/>
-                <line x1="231.1" y1="214.2" x2="231.0" y2="219.3"/><line x1="253.2" y1="216.8" x2="253.1" y2="221.9"/>
-                <line x1="274.6" y1="220.9" x2="274.4" y2="226.0"/><line x1="295.0" y1="226.5" x2="294.7" y2="231.6"/>
-              </g>
-
-              <!-- %10 ticks (secondary, alpha 0.62) -->
-              <g stroke="#FFFFFF" stroke-opacity="0.62" stroke-width="1">
-                <line x1="116.0" y1="218.0" x2="116.3" y2="224.8"/><line x1="137.6" y1="214.8" x2="137.7" y2="221.6"/>
-                <line x1="160.0" y1="212.9" x2="160.1" y2="219.7"/><line x1="220.0" y1="212.9" x2="219.9" y2="219.7"/>
-                <line x1="242.4" y1="214.8" x2="242.3" y2="221.6"/><line x1="264.0" y1="218.0" x2="263.7" y2="224.8"/>
-              </g>
-
-              <!-- ±25 ticks (primary) + triangle markers -->
-              <line x1="106.5" y1="219.2" x2="107.0" y2="229.4" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
-              <line x1="273.5" y1="219.2" x2="273.0" y2="229.4" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
-              <path d="M105.8 217.6 L102.2 213.2 L110.1 213.6 Z" fill="#FFFFFF" fill-opacity="0.92"/>
-              <path d="M274.2 217.6 L269.9 213.6 L277.8 213.2 Z" fill="#FFFFFF" fill-opacity="0.92"/>
-
-              <!-- ±50 end ticks (primary) -->
-              <line x1="62.0" y1="232.5" x2="64.4" y2="245.4" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
-              <line x1="318.0" y1="232.5" x2="315.6" y2="245.4" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4"/>
-
-              <!-- centre "0" tick (primary, longest, widest) -->
-              <line x1="190" y1="207" x2="190" y2="223" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.8"/>
-            </g>
-
-            <!-- dashed centerline rail from "0" tick down through the face -->
-            <line x1="190" y1="207" x2="190" y2="253" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="0.7" stroke-dasharray="2 2"/>
-
-            <!-- needle (near-vertical = in tune); subtle idle sway via CSS -->
-            <g class="tn-needle">
-              <line x1="191" y1="240" x2="191" y2="125" stroke="#000000" stroke-opacity="0.35" stroke-width="2.5" stroke-linecap="round"/>
-              <line x1="190" y1="240" x2="190" y2="124" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.8" stroke-linecap="round"/>
-            </g>
-
-            <!-- end labels + Hz readout -->
-            <text x="64" y="248" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5">-50</text>
-            <text x="316" y="248" fill="#FFFFFF" fill-opacity="0.62" font-family="Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5" text-anchor="end">+50</text>
-            <text x="190" y="250" fill="#FFFFFF" fill-opacity="0.92" font-family="Inter, sans-serif" font-size="15" font-weight="700" letter-spacing="0.5" text-anchor="middle">440.0 Hz</text>
-
-            <!-- black recessed display gap (under the meter face, above LISTENING) -->
-            <rect x="28" y="268" width="324" height="26" rx="6" fill="#080808" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="0.6"/>
-
-            <!-- LISTENING + 3-LED strip -->
-            <text x="190" y="318" fill="#8b99ab" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">LISTENING</text>
-            <rect x="130" y="330" width="120" height="30" rx="10" fill="url(#tnLed)" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="0.6"/>
-            <text x="146" y="349" fill="#E2503A" fill-opacity="0.3" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">♭</text>
-            <circle cx="166" cy="345" r="5" fill="#E2503A" fill-opacity="0.20"/><circle cx="166" cy="345" r="5" fill="none" stroke="#000000" stroke-opacity="0.45" stroke-width="0.5"/>
-            <circle cx="190" cy="345" r="7" fill="#3CCB69"/><circle cx="190" cy="345" r="7" fill="none" stroke="#000000" stroke-opacity="0.45" stroke-width="0.5"/><circle cx="188" cy="343" r="1.6" fill="#FFFFFF" fill-opacity="0.55"/>
-            <circle cx="214" cy="345" r="5" fill="#E2503A" fill-opacity="0.20"/><circle cx="214" cy="345" r="5" fill="none" stroke="#000000" stroke-opacity="0.45" stroke-width="0.5"/>
-            <text x="234" y="349" fill="#E2503A" fill-opacity="0.3" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">♯</text>
-
-            <!-- ════════════ REFERENCE & CALIBRATION ════════════ -->
-            <rect x="14" y="380" width="352" height="118" rx="14" fill="#121821" stroke="rgba(133,183,235,0.30)" stroke-width="0.8"/>
-            <text x="30" y="402" fill="#8b99ab" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="2">REFERENCE &amp; CALIBRATION</text>
-
-            <!-- FORK pill (TuningForkIcon, 24×24 app glyph) -->
-            <g class="mk-press"><rect x="28" y="414" width="58" height="68" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(45,436)" fill="#7d8da0"><path d="M7 2 L10 2 L10 13 Q10 15 12 15 Q14 15 14 13 L14 2 L17 2 L17 13 Q17 19 13 19 L13 23 L11 23 L11 19 Q7 19 7 13 Z"/></g>
-            </g>
-            <!-- minus stepper (Remove, Material) -->
-            <g class="mk-step" data-step-target="tunerRef" data-step="-1"><rect x="92" y="414" width="50" height="68" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(105,436)" fill="#d3dbe6"><path d="M19 13H5v-2h14v2z"/></g>
-            </g>
-            <!-- calibration value (boxed, mono light) -->
-            <rect x="148" y="414" width="84" height="68" rx="8" fill="url(#tnCalib)" stroke="rgba(133,183,235,0.55)" stroke-width="0.8"/>
-            <text id="tunerRef" data-val="440" data-suffix=" Hz" x="187" y="455" fill="#FFFFFF" font-family="'JetBrains Mono', monospace" font-size="24" font-weight="300" text-anchor="middle" letter-spacing="-1">440<tspan font-size="9" fill="#FFFFFF" fill-opacity="0.78" font-weight="800" dx="4" dy="-1" letter-spacing="1"> Hz</tspan></text>
-            <!-- plus stepper (Add, Material) -->
-            <g class="mk-step" data-step-target="tunerRef" data-step="1"><rect x="238" y="414" width="50" height="68" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(251,436)" fill="#d3dbe6"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></g>
-            </g>
-            <!-- SPEAKER pill (VolumeUp, Material) -->
-            <g class="mk-press"><rect x="294" y="414" width="58" height="68" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(311,436)" fill="#7d8da0"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></g>
-            </g>
-
-            <!-- ════════════ SENSITIVITY ════════════ -->
-            <rect x="14" y="510" width="352" height="252" rx="14" fill="#121821" stroke="rgba(133,183,235,0.30)" stroke-width="0.8"/>
-            <text x="30" y="534" fill="#8b99ab" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="2">SENSITIVITY</text>
-
-            <!-- MEDIUM (selected, full-width) - SignalCellularAlt2Bar -->
-            <g class="mk-pick" data-pick="sens">
-              <rect class="mk-fill" x="28" y="544" width="324" height="56" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1.5"/>
-              <g transform="translate(132,560)" fill="#85B7EB"><path d="M5 14h3v6H5zm6-5h3v11h-3z"/></g>
-              <text x="200" y="578" fill="#85B7EB" font-family="Inter, sans-serif" font-size="13" font-weight="900" letter-spacing="1.5" text-anchor="middle">MEDIUM</text>
-            </g>
-
-            <!-- 2×2 grid -->
-            <!-- VERY SENSITIVE - SignalCellular4Bar (filled triangle) -->
-            <g class="mk-pick" data-pick="sens">
-              <rect class="mk-fill" x="28" y="608" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1.5" style="display:none"/>
-              <rect x="28" y="608" width="158" height="64" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(40,628)" fill="#9aa6b6"><path d="M2 22h20V2z"/></g>
-              <text x="118" y="645" fill="#9aa6b6" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="0.5" text-anchor="middle">VERY SENSITIVE</text>
-            </g>
-            <!-- SENSITIVE - SignalCellularAlt (3 bars) -->
-            <g class="mk-pick" data-pick="sens">
-              <rect class="mk-fill" x="194" y="608" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1.5" style="display:none"/>
-              <rect x="194" y="608" width="158" height="64" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(214,628)" fill="#9aa6b6"><path d="M17 4h3v16h-3zM5 14h3v6H5zm6-5h3v11h-3z"/></g>
-              <text x="282" y="645" fill="#9aa6b6" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="0.5" text-anchor="middle">SENSITIVE</text>
-            </g>
-            <!-- DULL - SignalCellularAlt1Bar (1 bar) -->
-            <g class="mk-pick" data-pick="sens">
-              <rect class="mk-fill" x="28" y="682" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1.5" style="display:none"/>
-              <rect x="28" y="682" width="158" height="64" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(58,702)" fill="#9aa6b6"><path d="M5 14h3v6H5z"/></g>
-              <text x="118" y="719" fill="#9aa6b6" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="0.5" text-anchor="middle">DULL</text>
-            </g>
-            <!-- VERY DULL - SignalCellular0Bar (outlined empty triangle) -->
-            <g class="mk-pick" data-pick="sens">
-              <rect class="mk-fill" x="194" y="682" width="158" height="64" rx="11" fill="#85B7EB" fill-opacity="0.18" stroke="#85B7EB" stroke-width="1.5" style="display:none"/>
-              <rect x="194" y="682" width="158" height="64" rx="11" fill="#0f1620" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-              <g transform="translate(218,702)" fill="#9aa6b6"><path d="M2 22h20V2L2 22zm18-4.83L20 20H6.83L20 6.83z"/></g>
-              <text x="282" y="719" fill="#9aa6b6" font-family="Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="0.5" text-anchor="middle">VERY DULL</text>
-            </g>
-
-            <!-- home indicator -->
-            <rect x="130" y="772" width="120" height="4" rx="2" fill="#1c2530"/>
+          <svg viewBox="0 0 380 800" preserveAspectRatio="xMidYMid meet" data-accent="#85B7EB" data-idle="#5f5f5f">
+          <defs>
+            <filter id="tnGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+            <linearGradient id="tnRim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1F1F1F"/><stop offset="1" stop-color="#050505"/></linearGradient>
+            <linearGradient id="tnFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#85B7EB" stop-opacity="0.55"/><stop offset="0.55" stop-color="#85B7EB" stop-opacity="0.32"/><stop offset="1" stop-color="#85B7EB" stop-opacity="0.18"/></linearGradient>
+            <linearGradient id="tnTopShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.62"/><stop offset="0.04" stop-color="#000" stop-opacity="0.45"/><stop offset="0.10" stop-color="#000" stop-opacity="0.27"/><stop offset="0.20" stop-color="#000" stop-opacity="0.13"/><stop offset="0.35" stop-color="#000" stop-opacity="0.05"/><stop offset="0.55" stop-color="#000" stop-opacity="0"/></linearGradient>
+            <radialGradient id="tnVig" gradientUnits="userSpaceOnUse" cx="190" cy="205.7" r="266.9"><stop offset="0.6" stop-color="#000" stop-opacity="0"/><stop offset="0.78" stop-color="#000" stop-opacity="0.05"/><stop offset="0.92" stop-color="#000" stop-opacity="0.14"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></radialGradient>
+            <linearGradient id="tnSheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0.85" stop-color="#FFF" stop-opacity="0"/><stop offset="0.93" stop-color="#FFF" stop-opacity="0.03"/><stop offset="1" stop-color="#FFF" stop-opacity="0.08"/></linearGradient>
+            <linearGradient id="tnSpec" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#85B7EB" stop-opacity="0.55"/><stop offset="0.33" stop-color="#85B7EB" stop-opacity="0.22"/><stop offset="0.66" stop-color="#85B7EB" stop-opacity="0.05"/><stop offset="1" stop-color="#85B7EB" stop-opacity="0"/></linearGradient>
+            <linearGradient id="tnLed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#080808"/><stop offset="1" stop-color="#1A1A1A"/></linearGradient>
+            <linearGradient id="tnCalib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#85B7EB" stop-opacity="0.22"/><stop offset="0.5" stop-color="#85B7EB" stop-opacity="0.07"/><stop offset="1" stop-color="#1C1814" stop-opacity="0.55"/></linearGradient>
+            <linearGradient id="tnSwatch" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#85B7EB"/><stop offset="1" stop-color="#85B7EB" stop-opacity="0.55"/></linearGradient>
+            <clipPath id="tnFaceClip"><rect x="33" y="121" width="314" height="154" rx="8"/></clipPath>
+            <style>
+              .tn-sens .tn-ic { fill: #5f5f5f; }
+              .tn-sens:has(> .mk-fill:not([style*="none"])) .tn-ic { fill: #85B7EB; }
+              .tn-needle { transform-origin: 190px 595.13px; transform: rotate(1.72deg); }
+              @media (prefers-reduced-motion: no-preference) {
+                @keyframes tnNeedle { 0% { transform: rotate(1.72deg); } 22% { transform: rotate(1.98deg); } 47% { transform: rotate(1.58deg); } 71% { transform: rotate(1.86deg); } 100% { transform: rotate(1.72deg); } }
+                .tn-needle { animation: tnNeedle 3.6s ease-in-out infinite; }
+                @keyframes tnMic { 0%,100% { opacity: 0.3; } 35% { opacity: 1; } 60% { opacity: 0.3; } }
+                .tn-mic4 { animation: tnMic 1.3s ease-in-out infinite; }
+                @keyframes tnSpecB { 0%,100% { opacity: 1; } 50% { opacity: 0.86; } }
+                .tn-spec { animation: tnSpecB 1.7s ease-in-out infinite; }
+              }
+            </style>
+          </defs>
+          <rect width="380" height="800" fill="#0A0A0C"/>
+          <rect width="380" height="800" fill="#85B7EB" fill-opacity="0.154"/>
+          <rect width="380" height="800" filter="url(#tnGrain)" opacity="0.07"/>
+          <g class="mk-nav" data-href="../index.html"><g transform="translate(16,41)"><circle cx="15" cy="15" r="13.4" fill="none" stroke="#85B7EB" stroke-width="2.46"/><path d="M15 4.92 L4.92 15 L25.08 15 M4.92 15 L15 25.08" fill="none" stroke="#85B7EB" stroke-width="1.57" stroke-linecap="round" stroke-linejoin="round"/></g><text x="58" y="62.5" fill="#FFFFFF" font-family="Roboto, Inter, sans-serif" font-size="18" font-weight="600" letter-spacing="0.4">Tuner</text></g>
+          <g class="mk-press" transform="translate(292,40) scale(1.3333)" fill="#85B7EB"><path fill-rule="evenodd" d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></g>
+          <rect class="mk-press" x="342" y="45" width="22" height="22" rx="6" fill="url(#tnSwatch)" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+          <rect x="16.25" y="88.25" width="347.5" height="331.5" rx="14" fill="#121212" stroke="#85B7EB" stroke-width="0.5"/>
+          <text x="28" y="107.3" fill="#FFFFFF" fill-opacity="0.7" font-family="Roboto, Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="1.5">MIC</text>
+          <circle cx="55.5" cy="104" r="1.5" fill="#85B7EB"/>
+          <circle cx="61.5" cy="104" r="1.5" fill="#85B7EB"/>
+          <circle cx="67.5" cy="104" r="1.5" fill="#85B7EB"/>
+          <circle class="tn-mic4" cx="73.5" cy="104" r="1.5" fill="#85B7EB" opacity="0.3"/>
+          <circle cx="79.5" cy="104" r="1.5" fill="#85B7EB" fill-opacity="0.3"/>
+          <text x="352" y="107.3" fill="#FFFFFF" fill-opacity="0.3" font-family="Roboto, Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="2" text-anchor="end">PTU · OSE</text>
+          <rect x="28.25" y="116.25" width="323.5" height="163.5" rx="12" fill="url(#tnRim)" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="0.5"/>
+          <g clip-path="url(#tnFaceClip)">
+          <rect x="33" y="121" width="314" height="154" fill="#0b0b0b"/>
+          <rect x="33" y="121" width="314" height="154" fill="url(#tnFace)"/>
+          <rect x="33" y="121" width="314" height="154" filter="url(#tnGrain)" opacity="0.10"/>
+          <rect x="33" y="121" width="314" height="154" fill="url(#tnTopShade)"/>
+          <rect x="33" y="121" width="314" height="154" fill="url(#tnVig)"/>
+          <rect x="33" y="121" width="314" height="154" fill="url(#tnSheen)"/>
+          <line x1="47" y1="123" x2="333" y2="123" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="0.6" stroke-linecap="round"/>
+          <text x="162.0" y="193.6" fill="#FFFFFF" fill-opacity="0.62" font-family="Roboto, Inter, sans-serif" font-size="61.6" font-weight="700" letter-spacing="-1">A</text>
+          <text x="205.7" y="196.2" fill="#FFFFFF" fill-opacity="0.62" font-family="Roboto, Inter, sans-serif" font-size="24.6" font-weight="700" letter-spacing="-1">4</text>
+          <path d="M47.00 241.20 A 381.73 381.73 0 0 1 333.00 241.20" fill="none" stroke="#FFFFFF" stroke-opacity="0.62" stroke-width="1" stroke-linecap="round"/>
+          <g stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.4" stroke-linecap="square"><line x1="52.24" y1="254.18" x2="47.00" y2="241.20"/><line x1="119.45" y1="232.19" x2="117.16" y2="220.41"/><line x1="260.55" y1="232.19" x2="262.84" y2="220.41"/><line x1="327.76" y1="254.18" x2="333.00" y2="241.20"/></g>
+          <g stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="0.5" stroke-linecap="square"><line x1="51.01" y1="243.36" x2="49.72" y2="240.11"/><line x1="53.71" y1="242.31" x2="52.45" y2="239.04"/><line x1="56.43" y1="241.27" x2="55.19" y2="238.00"/><line x1="59.15" y1="240.26" x2="57.94" y2="236.97"/><line x1="64.61" y1="238.29" x2="63.45" y2="234.99"/><line x1="67.36" y1="237.34" x2="66.22" y2="234.02"/><line x1="70.11" y1="236.40" x2="69.00" y2="233.08"/><line x1="72.87" y1="235.49" x2="71.78" y2="232.17"/><line x1="78.41" y1="233.74" x2="77.37" y2="230.39"/><line x1="81.18" y1="232.89" x2="80.18" y2="229.54"/><line x1="83.97" y1="232.07" x2="82.99" y2="228.71"/><line x1="86.76" y1="231.26" x2="85.81" y2="227.90"/><line x1="92.36" y1="229.72" x2="91.46" y2="226.34"/><line x1="95.17" y1="228.98" x2="94.29" y2="225.59"/><line x1="97.98" y1="228.26" x2="97.13" y2="224.87"/><line x1="100.80" y1="227.57" x2="99.98" y2="224.17"/><line x1="106.46" y1="226.24" x2="105.69" y2="222.83"/><line x1="109.30" y1="225.61" x2="108.55" y2="222.19"/><line x1="112.14" y1="225.00" x2="111.42" y2="221.58"/><line x1="114.98" y1="224.41" x2="114.29" y2="220.98"/><line x1="120.68" y1="223.31" x2="120.04" y2="219.87"/><line x1="123.54" y1="222.78" x2="122.93" y2="219.34"/><line x1="126.40" y1="222.29" x2="125.81" y2="218.84"/><line x1="129.27" y1="221.81" x2="128.70" y2="218.35"/><line x1="135.01" y1="220.92" x2="134.50" y2="217.46"/><line x1="137.88" y1="220.51" x2="137.40" y2="217.04"/><line x1="140.76" y1="220.12" x2="140.31" y2="216.65"/><line x1="143.64" y1="219.75" x2="143.21" y2="216.28"/><line x1="149.41" y1="219.08" x2="149.04" y2="215.60"/><line x1="152.30" y1="218.78" x2="151.95" y2="215.30"/><line x1="155.19" y1="218.50" x2="154.87" y2="215.02"/><line x1="158.09" y1="218.25" x2="157.79" y2="214.76"/><line x1="163.88" y1="217.80" x2="163.64" y2="214.31"/><line x1="166.78" y1="217.61" x2="166.56" y2="214.12"/><line x1="169.68" y1="217.45" x2="169.49" y2="213.95"/><line x1="172.58" y1="217.30" x2="172.42" y2="213.81"/><line x1="178.38" y1="217.08" x2="178.28" y2="213.58"/><line x1="181.29" y1="217.00" x2="181.21" y2="213.50"/><line x1="184.19" y1="216.94" x2="184.14" y2="213.45"/><line x1="187.10" y1="216.91" x2="187.07" y2="213.41"/><line x1="192.90" y1="216.91" x2="192.93" y2="213.41"/><line x1="195.81" y1="216.94" x2="195.86" y2="213.45"/><line x1="198.71" y1="217.00" x2="198.79" y2="213.50"/><line x1="201.62" y1="217.08" x2="201.72" y2="213.58"/><line x1="207.42" y1="217.30" x2="207.58" y2="213.81"/><line x1="210.32" y1="217.45" x2="210.51" y2="213.95"/><line x1="213.22" y1="217.61" x2="213.44" y2="214.12"/><line x1="216.12" y1="217.80" x2="216.36" y2="214.31"/><line x1="221.91" y1="218.25" x2="222.21" y2="214.76"/><line x1="224.81" y1="218.50" x2="225.13" y2="215.02"/><line x1="227.70" y1="218.78" x2="228.05" y2="215.30"/><line x1="230.59" y1="219.08" x2="230.96" y2="215.60"/><line x1="236.36" y1="219.75" x2="236.79" y2="216.28"/><line x1="239.24" y1="220.12" x2="239.69" y2="216.65"/><line x1="242.12" y1="220.51" x2="242.60" y2="217.04"/><line x1="244.99" y1="220.92" x2="245.50" y2="217.46"/><line x1="250.73" y1="221.81" x2="251.30" y2="218.35"/><line x1="253.60" y1="222.29" x2="254.19" y2="218.84"/><line x1="256.46" y1="222.78" x2="257.07" y2="219.34"/><line x1="259.32" y1="223.31" x2="259.96" y2="219.87"/><line x1="265.02" y1="224.41" x2="265.71" y2="220.98"/><line x1="267.86" y1="225.00" x2="268.58" y2="221.58"/><line x1="270.70" y1="225.61" x2="271.45" y2="222.19"/><line x1="273.54" y1="226.24" x2="274.31" y2="222.83"/><line x1="279.20" y1="227.57" x2="280.02" y2="224.17"/><line x1="282.02" y1="228.26" x2="282.87" y2="224.87"/><line x1="284.83" y1="228.98" x2="285.71" y2="225.59"/><line x1="287.64" y1="229.72" x2="288.54" y2="226.34"/><line x1="293.24" y1="231.26" x2="294.19" y2="227.90"/><line x1="296.03" y1="232.07" x2="297.01" y2="228.71"/><line x1="298.82" y1="232.89" x2="299.82" y2="229.54"/><line x1="301.59" y1="233.74" x2="302.63" y2="230.39"/><line x1="307.13" y1="235.49" x2="308.22" y2="232.17"/><line x1="309.89" y1="236.40" x2="311.00" y2="233.08"/><line x1="312.64" y1="237.34" x2="313.78" y2="234.02"/><line x1="315.39" y1="238.29" x2="316.55" y2="234.99"/><line x1="320.85" y1="240.26" x2="322.06" y2="236.97"/><line x1="323.57" y1="241.27" x2="324.81" y2="238.00"/><line x1="326.29" y1="242.31" x2="327.55" y2="239.04"/><line x1="328.99" y1="243.36" x2="330.28" y2="240.11"/></g>
+          <g stroke="#FFFFFF" stroke-opacity="0.36" stroke-width="0.5" stroke-linecap="square"><line x1="62.72" y1="241.61" x2="60.69" y2="235.97"/><line x1="90.22" y1="232.89" x2="88.63" y2="227.11"/><line x1="146.81" y1="221.89" x2="146.12" y2="215.93"/><line x1="175.58" y1="219.68" x2="175.35" y2="213.68"/><line x1="204.42" y1="219.68" x2="204.65" y2="213.68"/><line x1="233.19" y1="221.89" x2="233.88" y2="215.93"/><line x1="289.78" y1="232.89" x2="291.37" y2="227.11"/><line x1="317.28" y1="241.61" x2="319.31" y2="235.97"/></g>
+          <g stroke="#FFFFFF" stroke-opacity="0.62" stroke-width="0.5" stroke-linecap="square"><line x1="76.99" y1="238.89" x2="74.58" y2="231.27"/><line x1="104.66" y1="231.27" x2="102.83" y2="223.49"/><line x1="132.82" y1="225.80" x2="131.60" y2="217.89"/><line x1="161.33" y1="222.50" x2="160.71" y2="214.53"/><line x1="218.67" y1="222.50" x2="219.29" y2="214.53"/><line x1="247.18" y1="225.80" x2="248.40" y2="217.89"/><line x1="275.34" y1="231.27" x2="277.17" y2="223.49"/><line x1="303.01" y1="238.89" x2="305.42" y2="231.27"/></g>
+          <g stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.8" stroke-linecap="square"><line x1="190.00" y1="229.40" x2="190.00" y2="213.40"/></g>
+          <path d="M116.97 219.43 L119.94 213.76 L112.09 215.29 Z" fill="#FFFFFF" fill-opacity="0.92"/>
+          <path d="M263.03 219.43 L267.91 215.29 L260.06 213.76 Z" fill="#FFFFFF" fill-opacity="0.92"/>
+          <text x="190.0" y="209.3" fill="#FFFFFF" fill-opacity="0.92" font-family="Roboto, Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">0</text>
+          <text x="55.2" y="264.8" fill="#FFFFFF" fill-opacity="0.62" font-family="Roboto, Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5" text-anchor="middle">-50</text>
+          <text x="324.8" y="264.8" fill="#FFFFFF" fill-opacity="0.62" font-family="Roboto, Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5" text-anchor="middle">+50</text>
+          <text x="341" y="216.6" fill="#FFFFFF" fill-opacity="0.62" font-family="Roboto, Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5" text-anchor="end">CENT</text>
+          <line x1="190.0" y1="209.4" x2="190.0" y2="271" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="0.7" stroke-dasharray="2 2"/>
+          <g class="tn-needle"><line x1="191.0" y1="596.13" x2="191.0" y2="218.40" stroke="#000000" stroke-opacity="0.35" stroke-width="2.5" stroke-linecap="round"/><line x1="190.0" y1="595.13" x2="190.0" y2="217.40" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="1.8" stroke-linecap="round"/></g>
+          <text x="190.0" y="257.6" fill="#FFFFFF" fill-opacity="0.92" font-family="Roboto, Inter, sans-serif" font-size="20" font-weight="700" letter-spacing="0.5" text-anchor="middle">441.0 Hz</text>
+          </g>
+          <rect x="33.25" y="121.25" width="313.5" height="153.5" rx="8" fill="none" stroke="#000000" stroke-opacity="0.7" stroke-width="0.5"/>
+          <rect x="28.25" y="284.25" width="323.5" height="59.5" rx="6" fill="#080808" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="0.5"/>
+          <line x1="34" y1="340.5" x2="346" y2="340.5" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="0.5"/>
+          <g class="tn-spec"><path d="M34.0 337.0 L36.0 336.0 L37.9 335.4 L39.9 335.7 L41.8 335.7 L43.8 335.6 L45.8 335.7 L47.7 334.9 L49.7 333.7 L51.7 333.6 L53.6 334.3 L55.6 334.5 L57.5 333.6 L59.5 332.1 L61.5 332.0 L63.4 332.4 L65.4 330.9 L67.4 330.3 L69.3 331.1 L71.3 332.2 L73.2 333.7 L75.2 334.3 L77.2 334.1 L79.1 334.9 L81.1 335.4 L83.1 335.8 L85.0 336.2 L87.0 335.8 L88.9 335.3 L90.9 335.1 L92.9 335.5 L94.8 336.0 L96.8 336.3 L98.8 336.5 L100.7 337.1 L102.7 337.0 L104.6 335.7 L106.6 335.1 L108.6 335.7 L110.5 336.7 L112.5 337.8 L114.5 338.4 L116.4 338.6 L118.4 338.3 L120.3 337.4 L122.3 336.9 L124.3 336.9 L126.2 336.7 L128.2 336.1 L130.2 336.7 L132.1 338.5 L134.1 338.2 L136.0 336.8 L138.0 336.5 L140.0 336.5 L141.9 337.6 L143.9 338.3 L145.8 337.3 L147.8 336.9 L149.8 338.1 L151.7 338.8 L153.7 337.7 L155.7 336.3 L157.6 336.7 L159.6 338.3 L161.5 338.8 L163.5 339.1 L165.5 333.5 L167.4 316.2 L169.4 299.8 L171.4 302.9 L173.3 321.4 L175.3 334.8 L177.2 337.6 L179.2 337.8 L181.2 337.9 L183.1 338.2 L185.1 338.3 L187.1 338.4 L189.0 337.7 L191.0 336.3 L192.9 336.4 L194.9 337.1 L196.9 337.1 L198.8 337.7 L200.8 337.6 L202.8 336.6 L204.7 337.1 L206.7 337.6 L208.6 337.1 L210.6 337.8 L212.6 338.0 L214.5 337.3 L216.5 337.7 L218.5 338.5 L220.4 334.6 L222.4 320.9 L224.3 306.3 L226.3 305.3 L228.3 318.9 L230.2 333.0 L232.2 337.1 L234.2 336.4 L236.1 336.8 L238.1 336.8 L240.0 336.8 L242.0 338.1 L244.0 338.1 L245.9 336.5 L247.9 336.5 L249.8 338.0 L251.8 337.7 L253.8 330.3 L255.7 316.3 L257.7 308.6 L259.7 315.4 L261.6 328.7 L263.6 336.2 L265.5 337.9 L267.5 338.9 L269.5 338.4 L271.4 337.2 L273.4 337.2 L275.4 334.7 L277.3 326.2 L279.3 316.3 L281.2 313.7 L283.2 322.3 L285.2 333.5 L287.1 337.8 L289.1 338.4 L291.1 338.4 L293.0 335.9 L295.0 329.3 L296.9 321.0 L298.9 318.3 L300.9 324.8 L302.8 334.7 L304.8 339.0 L306.8 338.5 L308.7 334.9 L310.7 327.4 L312.6 322.4 L314.6 324.6 L316.6 331.8 L318.5 337.2 L320.5 336.7 L322.5 331.7 L324.4 327.1 L326.4 327.3 L328.3 331.8 L330.3 336.2 L332.3 336.0 L334.2 332.0 L336.2 329.8 L338.2 332.1 L340.1 335.0 L342.1 335.1 L344.0 333.4 L346.0 332.2 L346 341 L34 341 Z" fill="url(#tnSpec)"/><path d="M34.0 337.0 L36.0 336.0 L37.9 335.4 L39.9 335.7 L41.8 335.7 L43.8 335.6 L45.8 335.7 L47.7 334.9 L49.7 333.7 L51.7 333.6 L53.6 334.3 L55.6 334.5 L57.5 333.6 L59.5 332.1 L61.5 332.0 L63.4 332.4 L65.4 330.9 L67.4 330.3 L69.3 331.1 L71.3 332.2 L73.2 333.7 L75.2 334.3 L77.2 334.1 L79.1 334.9 L81.1 335.4 L83.1 335.8 L85.0 336.2 L87.0 335.8 L88.9 335.3 L90.9 335.1 L92.9 335.5 L94.8 336.0 L96.8 336.3 L98.8 336.5 L100.7 337.1 L102.7 337.0 L104.6 335.7 L106.6 335.1 L108.6 335.7 L110.5 336.7 L112.5 337.8 L114.5 338.4 L116.4 338.6 L118.4 338.3 L120.3 337.4 L122.3 336.9 L124.3 336.9 L126.2 336.7 L128.2 336.1 L130.2 336.7 L132.1 338.5 L134.1 338.2 L136.0 336.8 L138.0 336.5 L140.0 336.5 L141.9 337.6 L143.9 338.3 L145.8 337.3 L147.8 336.9 L149.8 338.1 L151.7 338.8 L153.7 337.7 L155.7 336.3 L157.6 336.7 L159.6 338.3 L161.5 338.8 L163.5 339.1 L165.5 333.5 L167.4 316.2 L169.4 299.8 L171.4 302.9 L173.3 321.4 L175.3 334.8 L177.2 337.6 L179.2 337.8 L181.2 337.9 L183.1 338.2 L185.1 338.3 L187.1 338.4 L189.0 337.7 L191.0 336.3 L192.9 336.4 L194.9 337.1 L196.9 337.1 L198.8 337.7 L200.8 337.6 L202.8 336.6 L204.7 337.1 L206.7 337.6 L208.6 337.1 L210.6 337.8 L212.6 338.0 L214.5 337.3 L216.5 337.7 L218.5 338.5 L220.4 334.6 L222.4 320.9 L224.3 306.3 L226.3 305.3 L228.3 318.9 L230.2 333.0 L232.2 337.1 L234.2 336.4 L236.1 336.8 L238.1 336.8 L240.0 336.8 L242.0 338.1 L244.0 338.1 L245.9 336.5 L247.9 336.5 L249.8 338.0 L251.8 337.7 L253.8 330.3 L255.7 316.3 L257.7 308.6 L259.7 315.4 L261.6 328.7 L263.6 336.2 L265.5 337.9 L267.5 338.9 L269.5 338.4 L271.4 337.2 L273.4 337.2 L275.4 334.7 L277.3 326.2 L279.3 316.3 L281.2 313.7 L283.2 322.3 L285.2 333.5 L287.1 337.8 L289.1 338.4 L291.1 338.4 L293.0 335.9 L295.0 329.3 L296.9 321.0 L298.9 318.3 L300.9 324.8 L302.8 334.7 L304.8 339.0 L306.8 338.5 L308.7 334.9 L310.7 327.4 L312.6 322.4 L314.6 324.6 L316.6 331.8 L318.5 337.2 L320.5 336.7 L322.5 331.7 L324.4 327.1 L326.4 327.3 L328.3 331.8 L330.3 336.2 L332.3 336.0 L334.2 332.0 L336.2 329.8 L338.2 332.1 L340.1 335.0 L342.1 335.1 L344.0 333.4 L346.0 332.2" fill="none" stroke="#85B7EB" stroke-opacity="0.20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M34.0 337.0 L36.0 336.0 L37.9 335.4 L39.9 335.7 L41.8 335.7 L43.8 335.6 L45.8 335.7 L47.7 334.9 L49.7 333.7 L51.7 333.6 L53.6 334.3 L55.6 334.5 L57.5 333.6 L59.5 332.1 L61.5 332.0 L63.4 332.4 L65.4 330.9 L67.4 330.3 L69.3 331.1 L71.3 332.2 L73.2 333.7 L75.2 334.3 L77.2 334.1 L79.1 334.9 L81.1 335.4 L83.1 335.8 L85.0 336.2 L87.0 335.8 L88.9 335.3 L90.9 335.1 L92.9 335.5 L94.8 336.0 L96.8 336.3 L98.8 336.5 L100.7 337.1 L102.7 337.0 L104.6 335.7 L106.6 335.1 L108.6 335.7 L110.5 336.7 L112.5 337.8 L114.5 338.4 L116.4 338.6 L118.4 338.3 L120.3 337.4 L122.3 336.9 L124.3 336.9 L126.2 336.7 L128.2 336.1 L130.2 336.7 L132.1 338.5 L134.1 338.2 L136.0 336.8 L138.0 336.5 L140.0 336.5 L141.9 337.6 L143.9 338.3 L145.8 337.3 L147.8 336.9 L149.8 338.1 L151.7 338.8 L153.7 337.7 L155.7 336.3 L157.6 336.7 L159.6 338.3 L161.5 338.8 L163.5 339.1 L165.5 333.5 L167.4 316.2 L169.4 299.8 L171.4 302.9 L173.3 321.4 L175.3 334.8 L177.2 337.6 L179.2 337.8 L181.2 337.9 L183.1 338.2 L185.1 338.3 L187.1 338.4 L189.0 337.7 L191.0 336.3 L192.9 336.4 L194.9 337.1 L196.9 337.1 L198.8 337.7 L200.8 337.6 L202.8 336.6 L204.7 337.1 L206.7 337.6 L208.6 337.1 L210.6 337.8 L212.6 338.0 L214.5 337.3 L216.5 337.7 L218.5 338.5 L220.4 334.6 L222.4 320.9 L224.3 306.3 L226.3 305.3 L228.3 318.9 L230.2 333.0 L232.2 337.1 L234.2 336.4 L236.1 336.8 L238.1 336.8 L240.0 336.8 L242.0 338.1 L244.0 338.1 L245.9 336.5 L247.9 336.5 L249.8 338.0 L251.8 337.7 L253.8 330.3 L255.7 316.3 L257.7 308.6 L259.7 315.4 L261.6 328.7 L263.6 336.2 L265.5 337.9 L267.5 338.9 L269.5 338.4 L271.4 337.2 L273.4 337.2 L275.4 334.7 L277.3 326.2 L279.3 316.3 L281.2 313.7 L283.2 322.3 L285.2 333.5 L287.1 337.8 L289.1 338.4 L291.1 338.4 L293.0 335.9 L295.0 329.3 L296.9 321.0 L298.9 318.3 L300.9 324.8 L302.8 334.7 L304.8 339.0 L306.8 338.5 L308.7 334.9 L310.7 327.4 L312.6 322.4 L314.6 324.6 L316.6 331.8 L318.5 337.2 L320.5 336.7 L322.5 331.7 L324.4 327.1 L326.4 327.3 L328.3 331.8 L330.3 336.2 L332.3 336.0 L334.2 332.0 L336.2 329.8 L338.2 332.1 L340.1 335.0 L342.1 335.1 L344.0 333.4 L346.0 332.2" fill="none" stroke="#85B7EB" stroke-opacity="0.95" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"/></g>
+          <text x="190" y="361" fill="#85B7EB" fill-opacity="0.95" font-family="Roboto, Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" text-anchor="middle">+3.9 ¢</text>
+          <rect x="114.75" y="368.25" width="150.5" height="41.5" rx="10" fill="url(#tnLed)" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="0.5"/>
+          <text x="134" y="395.5" fill="#E2503A" fill-opacity="0.2" font-family="Roboto, Inter, sans-serif" font-size="18" font-weight="700" text-anchor="middle">♭</text>
+          <circle cx="158" cy="389" r="7" fill="#E2503A" fill-opacity="0.2" stroke="#000000" stroke-opacity="0.45" stroke-width="0.5"/>
+          <circle cx="190" cy="389" r="9" fill="#3CCB69" stroke="#000000" stroke-opacity="0.45" stroke-width="0.5"/><circle cx="186.3" cy="385.8" r="3.6" fill="#FFFFFF" fill-opacity="0.55"/>
+          <circle cx="222" cy="389" r="7" fill="#E2503A" fill-opacity="0.2" stroke="#000000" stroke-opacity="0.45" stroke-width="0.5"/>
+          <text x="246" y="395.5" fill="#E2503A" fill-opacity="0.2" font-family="Roboto, Inter, sans-serif" font-size="18" font-weight="700" text-anchor="middle">♯</text>
+          <rect x="16.25" y="436.25" width="347.5" height="165.5" rx="14" fill="#121212" stroke="#85B7EB" stroke-width="0.5"/>
+          <text x="32" y="457.5" fill="#FFFFFF" fill-opacity="0.5" font-family="Roboto, Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">REFERENCE &amp; CALIBRATION</text>
+          <g class="mk-press"><rect x="32.25" y="468.25" width="55.65" height="121.5" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/><g transform="translate(46.08,515.0) scale(1.1667)" fill="#FFFFFF" fill-opacity="0.3"><path d="M7 2 L10 2 L10 13 Q10 15 12 15 Q14 15 14 13 L14 2 L17 2 L17 13 Q17 19 13 19 L13 23 L11 23 L11 19 Q7 19 7 13 Z"/></g></g>
+          <g class="mk-step" data-step-target="tnRef" data-step="-1"><rect x="94.40" y="468.25" width="44.42" height="121.5" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/><text x="116.62" y="536.0" fill="#FFFFFF" fill-opacity="0.3" font-family="Roboto, Inter, sans-serif" font-size="20" font-weight="900" letter-spacing="1.5" text-anchor="middle">−</text></g>
+          <rect x="145.33" y="468.25" width="89.35" height="121.5" rx="8" fill="url(#tnCalib)" stroke="#85B7EB" stroke-opacity="0.55" stroke-width="0.5"/>
+          <text id="tnRef" data-val="440" x="182.00" y="536.0" fill="#FFFFFF" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="300" letter-spacing="-1" text-anchor="middle">440</text>
+          <text x="202.00" y="534.0" fill="#FFFFFF" fill-opacity="0.78" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="800" letter-spacing="2">Hz</text>
+          <g class="mk-step" data-step-target="tnRef" data-step="1"><rect x="241.17" y="468.25" width="44.42" height="121.5" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/><text x="263.38" y="536.0" fill="#FFFFFF" fill-opacity="0.3" font-family="Roboto, Inter, sans-serif" font-size="20" font-weight="900" letter-spacing="1.5" text-anchor="middle">+</text></g>
+          <g class="mk-press"><rect x="292.10" y="468.25" width="55.65" height="121.5" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/><g transform="translate(305.92,515.0) scale(1.1667)" fill="#FFFFFF" fill-opacity="0.3"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></g></g>
+          <rect x="16.25" y="618.25" width="347.5" height="165.5" rx="14" fill="#121212" stroke="#85B7EB" stroke-width="0.5"/>
+          <text x="32" y="639.5" fill="#FFFFFF" fill-opacity="0.5" font-family="Roboto, Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">SENSITIVITY</text>
+          <g class="mk-pick tn-sens" data-pick="tnsens"><rect x="32.25" y="650.25" width="315.50" height="34.83" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/><rect class="mk-fill" x="32.40" y="650.40" width="315.20" height="34.53" rx="8" fill="#85B7EB" fill-opacity="0.2" stroke="#85B7EB" stroke-opacity="0.55" stroke-width="0.8"/><text x="183.40" y="671.67" fill="#85B7EB" font-family="Roboto, Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="1.5">MEDIUM</text><g class="tn-ic" transform="translate(153.40,656.67) scale(0.9167)"><path d="M5 14h3v6H5zm6-5h3v11h-3z"/></g></g>
+          <g class="mk-pick tn-sens" data-pick="tnsens"><rect x="32.25" y="693.58" width="154.50" height="34.83" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/><rect class="mk-fill" x="32.40" y="693.73" width="154.20" height="34.53" rx="8" fill="#85B7EB" fill-opacity="0.2" stroke="#85B7EB" stroke-opacity="0.55" stroke-width="0.8" style="display:none"/><text x="75.45" y="715.00" fill="#5f5f5f" font-family="Roboto, Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="1.5">VERY SENSITIVE</text><g class="tn-ic" transform="translate(45.45,700.00) scale(0.9167)"><path d="M2 22h20V2z"/></g></g>
+          <g class="mk-pick tn-sens" data-pick="tnsens"><rect x="193.25" y="693.58" width="154.50" height="34.83" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/><rect class="mk-fill" x="193.40" y="693.73" width="154.20" height="34.53" rx="8" fill="#85B7EB" fill-opacity="0.2" stroke="#85B7EB" stroke-opacity="0.55" stroke-width="0.8" style="display:none"/><text x="253.10" y="715.00" fill="#5f5f5f" font-family="Roboto, Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="1.5">SENSITIVE</text><g class="tn-ic" transform="translate(223.10,700.00) scale(0.9167)"><path d="M17 4h3v16h-3zM5 14h3v6H5zm6-5h3v11h-3z"/></g></g>
+          <g class="mk-pick tn-sens" data-pick="tnsens"><rect x="32.25" y="736.92" width="154.50" height="34.83" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/><rect class="mk-fill" x="32.40" y="737.07" width="154.20" height="34.53" rx="8" fill="#85B7EB" fill-opacity="0.2" stroke="#85B7EB" stroke-opacity="0.55" stroke-width="0.8" style="display:none"/><text x="110.10" y="758.33" fill="#5f5f5f" font-family="Roboto, Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="1.5">DULL</text><g class="tn-ic" transform="translate(80.10,743.33) scale(0.9167)"><path d="M5 14h3v6H5z"/></g></g>
+          <g class="mk-pick tn-sens" data-pick="tnsens"><rect x="193.25" y="736.92" width="154.50" height="34.83" rx="8" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="0.5"/><rect class="mk-fill" x="193.40" y="737.07" width="154.20" height="34.53" rx="8" fill="#85B7EB" fill-opacity="0.2" stroke="#85B7EB" stroke-opacity="0.55" stroke-width="0.8" style="display:none"/><text x="254.45" y="758.33" fill="#5f5f5f" font-family="Roboto, Inter, sans-serif" font-size="11" font-weight="900" letter-spacing="1.5">VERY DULL</text><g class="tn-ic" transform="translate(224.45,743.33) scale(0.9167)"><path d="M2 22h20V2L2 22zm18-2H6.83L20 6.83V20z"/></g></g>
+          <rect x="140" y="790" width="100" height="4" rx="2" fill="#FFFFFF" fill-opacity="0.35"/>
           </svg>
         </div>
       </div>
