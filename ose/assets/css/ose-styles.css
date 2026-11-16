@@ -82,6 +82,15 @@ code, kbd { font-family: var(--mono-font); font-size: .9em; background: var(--bg
   margin-bottom: 1em;
 }
 .eyebrow--blue { color: var(--accent-blue); }
+/* Outhentic Scores app icon (the SVG carries its own rounded paper tile) */
+.app-icon {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 0 0 22px;
+  filter: drop-shadow(0 8px 22px rgba(0,0,0,.45));
+}
+.app-icon--sm { width: 56px; height: 56px; margin-bottom: 18px; }
 .eyebrow--grad {
   background: var(--accent-grad);
   -webkit-background-clip: text;
