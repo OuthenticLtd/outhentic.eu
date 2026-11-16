@@ -77,7 +77,11 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="reveal">
-        <img class="app-icon" src="assets/img/scores/scores-icon.svg" width="72" height="72" alt="Outhentic Scores icon" />
+        <!-- The icon's own motion (systems scrolling past the reading band, as on the OSE tile); static under reduced motion. -->
+        <picture>
+          <source srcset="assets/img/scores/scores-icon.svg" media="(prefers-reduced-motion: reduce)" />
+          <img class="app-icon" src="assets/img/scores/scores-icon-animated.svg" width="72" height="72" alt="Outhentic Scores icon" />
+        </picture>
         <span class="eyebrow eyebrow--grad">Outhentic Scores · Windows &amp; Linux</span>
         <h1>
           <span>Outhentic</span>
