@@ -3193,3 +3193,30 @@ a.hub-card { display: block; color: inherit; }
 .sub-nav a:hover, .sub-nav a.is-active {
   background: var(--accent-grad); color: #000; border-color: transparent;
 }
+
+/* =========================================================
+   Outhentic Scores page - real app screenshots
+   Same chrome as .phone-frame (black body, thin bezel,
+   deep shadow, faint outer ring) but for raster desktop /
+   tablet screenshots at their own aspect ratio.
+   ========================================================= */
+.shot-frame {
+  margin: 0;
+  background: #000;
+  border-radius: var(--radius);
+  border: 5px solid #0a0a0a;
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.6),
+    0 0 0 1.5px rgba(255,255,255,0.10),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+.shot-frame img { width: 100%; height: auto; display: block; }
+.shot-frame--square { max-width: 520px; margin: 0 auto; }
+.shot-frame--tablet { max-width: 380px; margin: 0 auto; }
+
+/* Text + screenshot rows */
+.feature-row { align-items: center; gap: clamp(28px, 5vw, 64px); }
+@media (min-width: 720px) {
+  .feature-row--flip > :first-child { order: 2; }
+}

@@ -327,7 +327,8 @@ window.OSE_CONTENT = {
           { "href": "index.html",     "label": "Overview" },
           { "href": "manual.html",    "label": "Manual" },
           { "href": "tutorials.html", "label": "Tutorials" },
-          { "href": "help.html",      "label": "Help & FAQ" }
+          { "href": "help.html",      "label": "Help & FAQ" },
+          { "href": "scores.html",    "label": "Outhentic Scores" }
         ]
       },
       {

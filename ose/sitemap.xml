@@ -68,6 +68,18 @@
     <priority>0.80</priority>
   </url>
 
+  <!-- Outhentic Scores (desktop companion app). -->
+  <url>
+    <loc>https://outhentic.eu/ose/scores.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <image:image>
+      <image:loc>https://outhentic.eu/ose/assets/img/scores/library-desktop.webp</image:loc>
+      <image:title>Outhentic Scores library</image:title>
+    </image:image>
+  </url>
+
   <!-- Documentation hubs. -->
   <url>
     <loc>https://outhentic.eu/ose/manual.html</loc>
