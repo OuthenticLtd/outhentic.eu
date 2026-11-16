@@ -318,88 +318,113 @@ code, kbd { font-family: var(--mono-font); font-size: .9em; background: var(--bg
 a.hub-card { display: block; color: inherit; }
 
 /* =========================================================
-   Home grid - matches MainScreen.kt
-   Each card: title (accent) + subtitle on top, wide-icon
-   visualization fills the bottom (per *Wide functions in
-   MainScreenIconsAnimated.kt). 14dp corners, 0.5dp accent
-   border, 12dp outer / 16dp gap.
+   Home grid - the OSE home screen (MainScreen.kt)
+   Tiles are MainScreenCardSlot (MainScreenCard.kt): 8dp corners,
+   horizontal wash accent 10 % -> white 2 %, 0.5dp border at
+   accent 26 %, a 2dp leading pill stripe at accent 55 % inset
+   10dp, padding 11/12/11/14, title 14 bold uppercase white,
+   description 11 medium #8A8A92, *Wide artwork bottom-aligned
+   10dp below. Play is emphasised (16 % / 4 % / 42 %). Press:
+   wash 26 % -> 12 %, border 55 %, stripe 90 %, scale .96.
+   The grid sits on the home plate: #0A0A0C, an 8-stop wash of
+   every tile's accent at 5 %, grain at 9 %; 16dp gaps.
+   Portrait = 2 columns, landscape = 4 (same reading order).
    ========================================================= */
 .module-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  padding: 16px;
+  border-radius: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='42' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1.5 0 0 0 -.12 1.5 0 0 0 -.12 1.5 0 0 0 -.12 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='.09'/%3E%3C/svg%3E"), linear-gradient(90deg, rgba(201,169,110,.05) 0%, rgba(224,90,107,.05) 14.29%, rgba(177,139,255,.05) 28.57%, rgba(93,202,165,.05) 42.86%, rgba(80,200,120,.05) 57.14%, rgba(133,183,235,.05) 71.43%, rgba(79,209,197,.05) 85.71%, rgba(243,139,160,.05) 100%), #0A0A0C;
+  background-size: 256px 256px, auto, auto;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
 }
-@media (min-width: 720px) { .module-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+@media (min-width: 720px) { .module-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
 .module-card {
-  aspect-ratio: 1 / 1;
+  --acc: var(--c-play);
+  position: relative;
   display: flex; flex-direction: column;
+  min-width: 0;
   text-align: left;
-  padding: 18px 18px 0;
-  background: rgba(20,20,26,0.80);
-  border: 1px solid;
-  border-color: rgba(255,255,255,0.05);
-  border-radius: 14px;
-  position: relative; overflow: hidden;
-  transition: transform .25s, background .25s, border-color .2s;
-  /* The card's accent color drives both the title text and the SVG
-     stroke/fill via currentColor. */
-  color: var(--c-play);
+  padding: 11px 12px 11px 14px;
+  border-radius: 8px;
+  border: 0.5px solid color-mix(in srgb, var(--acc) 26%, transparent);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--acc) 10%, transparent), rgba(255,255,255,0.02));
+  color: var(--acc);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), border-color .2s;
 }
-.module-card:hover { background: rgba(28,28,34,0.92); transform: translateY(-2px); }
-
-.module-card.mc--play       { color: var(--c-play);       border-color: rgba(255,138,42,0.45); }
-.module-card.mc--audio      { color: var(--c-audio);      border-color: rgba(224,90,107,0.45); }
-.module-card.mc--midi       { color: var(--c-midi);       border-color: rgba(177,139,255,0.45); }
-.module-card.mc--practice   { color: var(--c-practice);   border-color: rgba(93,202,165,0.45); }
-.module-card.mc--metronome  { color: var(--c-metronome);  border-color: rgba(80,200,120,0.45); }
-.module-card.mc--tuner      { color: var(--c-tuner);      border-color: rgba(133,183,235,0.45); }
-.module-card.mc--signalgen  { color: var(--c-signalgen);  border-color: rgba(79,209,197,0.45); }
-.module-card.mc--meters     { color: var(--c-meters);     border-color: rgba(243,139,160,0.45); }
-
+.module-card::before {
+  /* leading accent stripe */
+  content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 2px; border-radius: 2px;
+  background: color-mix(in srgb, var(--acc) 55%, transparent);
+  transition: background-color .2s;
+}
 .module-card.is-emphasized {
-  background:
-    radial-gradient(120% 80% at 80% 100%, rgba(255,138,42,0.30), transparent 60%),
-    radial-gradient(80% 60% at 0% 0%,    rgba(74,163,255,0.10), transparent 70%),
-    rgba(20,20,26,0.92);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--acc) 16%, transparent), rgba(255,255,255,0.04));
+  border-color: color-mix(in srgb, var(--acc) 42%, transparent);
+}
+.module-card:hover,
+.module-card:focus-visible { border-color: color-mix(in srgb, var(--acc) 55%, transparent); }
+.module-card:hover::before,
+.module-card:focus-visible::before { background: color-mix(in srgb, var(--acc) 90%, transparent); }
+.module-card:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+.module-card:active {
+  transform: scale(.96);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--acc) 26%, transparent), color-mix(in srgb, var(--acc) 12%, transparent));
 }
 
-.module-card .mc-head {
-  flex: 0 0 auto;
-}
+.module-card.mc--play       { --acc: var(--c-play); }
+.module-card.mc--audio      { --acc: var(--c-audio); }
+.module-card.mc--midi       { --acc: var(--c-midi); }
+.module-card.mc--practice   { --acc: var(--c-practice); }
+.module-card.mc--metronome  { --acc: var(--c-metronome); }
+.module-card.mc--tuner      { --acc: var(--c-tuner); }
+.module-card.mc--signalgen  { --acc: var(--c-signalgen); }
+.module-card.mc--meters     { --acc: var(--c-meters); }
+
+.module-card .mc-head { flex: 0 0 auto; min-width: 0; }
 .module-card .mc-name {
-  font-size: clamp(.95rem, 1.8vw, 1.15rem);
+  font-size: 14px;
+  line-height: 16px;
   font-weight: 700;
-  letter-spacing: .05em;
+  letter-spacing: -0.1px;
   text-transform: uppercase;
-  color: currentColor;
-  line-height: 1.1;
+  color: #FFFFFF;
 }
 .module-card .mc-sub {
-  font-size: .72rem;
+  font-size: 11px;
+  line-height: 13px;
   font-weight: 500;
-  color: var(--muted);
-  letter-spacing: .02em;
-  margin-top: 6px;
-  line-height: 1.3;
+  color: #8A8A92;
+  margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-
 .module-card .mc-viz {
-  flex: 1;
-  margin-top: 14px;
-  display: flex;
-  align-items: end;
-  justify-content: stretch;
-  overflow: hidden;
+  margin-top: auto;
+  padding-top: 10px;
 }
 .module-card .mc-viz svg {
-  width: 100%;
-  height: 60%;
-  max-height: 70px;
   display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
-@media (min-width: 720px) {
-  .module-card .mc-viz svg { max-height: 90px; }
+@media (prefers-reduced-motion: no-preference) {
+  /* entry: fade + rise 24dp over 250ms, 60ms stagger */
+  .module-grid.is-in .module-card { animation: otTileIn 250ms ease-out backwards; animation-delay: calc(60ms + var(--i, 0) * 60ms); }
+}
+
+/* Hero phone: the home plate behind the SVG home screen */
+.phone-frame.phone-frame--home { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='42' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1.5 0 0 0 -.12 1.5 0 0 0 -.12 1.5 0 0 0 -.12 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='.09'/%3E%3C/svg%3E"), linear-gradient(90deg, rgba(201,169,110,.05) 0%, rgba(224,90,107,.05) 14.29%, rgba(177,139,255,.05) 28.57%, rgba(93,202,165,.05) 42.86%, rgba(80,200,120,.05) 57.14%, rgba(133,183,235,.05) 71.43%, rgba(79,209,197,.05) 85.71%, rgba(243,139,160,.05) 100%), #0A0A0C; background-size: 256px 256px, auto, auto; }
+.phone-frame--home .ot-tt { font-family: var(--sans-font); font-size: 14px; font-weight: 700; letter-spacing: -0.1px; fill: #FFFFFF; }
+.phone-frame--home .ot-td { font-family: var(--sans-font); font-size: 11px; font-weight: 500; fill: #8A8A92; }
+.phone-frame--home .ot-art { overflow: visible; }
+@media (prefers-reduced-motion: no-preference) {
+  .phone-frame--home .ot-in { animation: otTileIn 250ms ease-out backwards; animation-delay: calc(60ms + var(--i, 0) * 60ms); }
 }
 
 /* Module page header card */
@@ -1676,9 +1701,9 @@ a.hub-card { display: block; color: inherit; }
    Color palette pulled from source: ui/theme/InstrumentHubSkin.kt
    ========================================================= */
 
-/* Module accent palette - exact values from MainScreen.kt */
+/* Module accent palette - exact values from MainScreenModule.kt (Play: the default instrument's skin accent) */
 :root {
-  --c-play:        #FF8B3D;   /* current instrument default */
+  --c-play:        #C9A96E;   /* default instrument (Outhentic Synth): Champagne, InstrumentHubSkin.kt */
   --c-audio:       #E05A6B;   /* muted red */
   --c-midi:        #B18BFF;   /* lavender */
   --c-practice:    #5DCAA5;   /* mint */
@@ -1711,103 +1736,12 @@ a.hub-card { display: block; color: inherit; }
 .anim-rec      { animation: rec-pulse 1.0s ease-in-out infinite; }
 .anim-rec-glow { animation: rec-glow  1.0s ease-in-out infinite; }
 
-/* Keyboard key cycle (Play tile) - 7 keys, one highlights at a time */
-@keyframes key-cycle-1 { 0%, 14% { opacity: 1; } 14.01%, 100% { opacity: 0; } }
-@keyframes key-cycle-2 { 14.01%, 28% { opacity: 1; } 28.01%, 100% { opacity: 0; } 0%, 14% { opacity: 0; } }
-@keyframes key-cycle-3 { 28.01%, 42% { opacity: 1; } 42.01%, 100% { opacity: 0; } 0%, 28% { opacity: 0; } }
-@keyframes key-cycle-4 { 42.01%, 57% { opacity: 1; } 57.01%, 100% { opacity: 0; } 0%, 42% { opacity: 0; } }
-@keyframes key-cycle-5 { 57.01%, 71% { opacity: 1; } 71.01%, 100% { opacity: 0; } 0%, 57% { opacity: 0; } }
-@keyframes key-cycle-6 { 71.01%, 85% { opacity: 1; } 85.01%, 100% { opacity: 0; } 0%, 71% { opacity: 0; } }
-@keyframes key-cycle-7 { 85.01%, 100% { opacity: 1; } 0%, 85% { opacity: 0; } }
-.anim-key-1 { animation: key-cycle-1 14s linear infinite; }
-.anim-key-2 { animation: key-cycle-2 14s linear infinite; }
-.anim-key-3 { animation: key-cycle-3 14s linear infinite; }
-.anim-key-4 { animation: key-cycle-4 14s linear infinite; }
-.anim-key-5 { animation: key-cycle-5 14s linear infinite; }
-.anim-key-6 { animation: key-cycle-6 14s linear infinite; }
-.anim-key-7 { animation: key-cycle-7 14s linear infinite; }
-
-/* Audio waveform ribbon - moving brightness wave through 22 bars */
-@keyframes audio-ribbon {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(160px); }
-}
-.anim-audio-ribbon { animation: audio-ribbon 5s linear infinite; }
-
-/* MIDI note pulse - staggered phases */
-@keyframes midi-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
-.anim-midi-1 { animation: midi-pulse 3s ease-in-out infinite; }
-.anim-midi-2 { animation: midi-pulse 3s ease-in-out infinite; animation-delay: -0.4s; }
-.anim-midi-3 { animation: midi-pulse 3s ease-in-out infinite; animation-delay: -0.8s; }
-.anim-midi-4 { animation: midi-pulse 3s ease-in-out infinite; animation-delay: -1.2s; }
-.anim-midi-5 { animation: midi-pulse 3s ease-in-out infinite; animation-delay: -1.6s; }
-.anim-midi-6 { animation: midi-pulse 3s ease-in-out infinite; animation-delay: -2.0s; }
-
-/* Practice playhead sweep */
-@keyframes practice-sweep { 0% { transform: translateX(0); } 50% { transform: translateX(140px); } 100% { transform: translateX(0); } }
-.anim-practice-head { animation: practice-sweep 8s ease-in-out infinite; }
-
-/* Metronome - 4 beat pillars, one accented at a time, period 2s */
-@keyframes met-beat-1 { 0%, 24% { fill: var(--c-metronome); transform: scaleY(1.0); } 25%, 100% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } }
-@keyframes met-beat-2 { 0%, 24% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } 25%, 49% { fill: var(--c-metronome); transform: scaleY(1.0); } 50%, 100% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } }
-@keyframes met-beat-3 { 0%, 49% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } 50%, 74% { fill: var(--c-metronome); transform: scaleY(1.0); } 75%, 100% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } }
-@keyframes met-beat-4 { 0%, 74% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } 75%, 99% { fill: var(--c-metronome); transform: scaleY(1.0); } 100% { fill: rgba(255,255,255,0.18); transform: scaleY(0.55); } }
-.anim-met-1 { animation: met-beat-1 2s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-met-2 { animation: met-beat-2 2s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-met-3 { animation: met-beat-3 2s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-met-4 { animation: met-beat-4 2s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-
-/* Tuner needle - gentle drift around centre (settles to in-tune), snaps green */
-@keyframes tuner-drift {
-  0%, 100% { transform: rotate(-5deg); }
-  35%      { transform: rotate(4deg); }
-  55%, 75% { transform: rotate(0deg);  }
-  85%      { transform: rotate(-3deg); }
-}
-@keyframes tuner-snap-flash {
-  0%, 50%, 80%, 100% { opacity: 0; }
-  55%, 75%           { opacity: 1; }
-}
-.anim-tuner-needle  { animation: tuner-drift     7s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-tuner-snap    { animation: tuner-snap-flash 7s linear      infinite; }
-
-/* Signal Generator - sine wave scrolling */
-@keyframes sig-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-60px); } }
-.anim-sig-sine { animation: sig-scroll 1.4s linear infinite; }
-
-/* Meters - 8 bar wobble */
-@keyframes meters-bar-1 { 0%, 100% { transform: scaleY(0.45); } 50% { transform: scaleY(0.85); } }
-@keyframes meters-bar-2 { 0%, 100% { transform: scaleY(0.62); } 50% { transform: scaleY(0.95); } }
-@keyframes meters-bar-3 { 0%, 100% { transform: scaleY(0.38); } 50% { transform: scaleY(0.72); } }
-@keyframes meters-bar-4 { 0%, 100% { transform: scaleY(0.55); } 50% { transform: scaleY(0.88); } }
-@keyframes meters-bar-5 { 0%, 100% { transform: scaleY(0.50); } 50% { transform: scaleY(0.78); } }
-@keyframes meters-bar-6 { 0%, 100% { transform: scaleY(0.42); } 50% { transform: scaleY(0.68); } }
-@keyframes meters-bar-7 { 0%, 100% { transform: scaleY(0.30); } 50% { transform: scaleY(0.55); } }
-@keyframes meters-bar-8 { 0%, 100% { transform: scaleY(0.22); } 50% { transform: scaleY(0.40); } }
-.anim-mb-1 { animation: meters-bar-1 1.4s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-mb-2 { animation: meters-bar-2 1.6s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-mb-3 { animation: meters-bar-3 1.2s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-mb-4 { animation: meters-bar-4 1.8s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-mb-5 { animation: meters-bar-5 1.4s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-mb-6 { animation: meters-bar-6 1.7s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-mb-7 { animation: meters-bar-7 1.3s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.anim-mb-8 { animation: meters-bar-8 1.5s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-
 /* Playhead breathing for piano roll / audio editor */
 @keyframes playhead-glow {
   0%, 100% { opacity: 0.7; }
   50%      { opacity: 1.0; }
 }
 .anim-playhead { animation: playhead-glow 1.6s ease-in-out infinite; }
-
-/* Card stagger fade on first appearance - used by module-card hero grid */
-@keyframes tile-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.anim-tile-in {
-  animation: tile-in 0.6s ease-out backwards;
-}
 
 /* Live spectrum flow */
 @keyframes spectrum-flow {
@@ -1846,14 +1780,14 @@ a.hub-card { display: block; color: inherit; }
 .mcw-play-b.is-down { filter: brightness(1.7); }
 
 /* Metronome card - 4 bars + play glyph + status below */
-.module-card.mc--metronome .mc-viz {
+.module-card.is-interactive.mc--metronome .mc-viz {
   flex-direction: column;
   height: auto;
   flex: 1;
   align-items: stretch;
   justify-content: flex-end;
 }
-.module-card.mc--metronome .mc-viz svg {
+.module-card.is-interactive.mc--metronome .mc-viz svg {
   width: 100%;
   flex: 1;
   min-height: 60px;
@@ -1929,12 +1863,12 @@ a.hub-card { display: block; color: inherit; }
 
 /* The signal-gen card uses a vertical layout in its viz - disable the
    default max-height so the chips and status row fit. */
-.module-card.mc--signalgen .mc-viz {
+.module-card.is-interactive.mc--signalgen .mc-viz {
   height: auto;
   flex: 1;
   align-items: stretch;
 }
-.module-card.mc--signalgen .mc-viz svg { max-height: 90px; }
+.module-card.is-interactive.mc--signalgen .mc-viz svg { max-height: 90px; }
 
 /* TempoPolygon spin - slow rotation matching BPM */
 @keyframes tempo-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
@@ -1948,96 +1882,22 @@ a.hub-card { display: block; color: inherit; }
 .anim-cutoff { animation: cutoff-sweep 2.6s linear infinite; }
 
 /* =========================================================
-   Wide-icon animations for the home grid
-   Match MainScreenIconsAnimated.kt - ambient pass (slow
-   loops, low-amplitude motion). Cards read as alive without
-   distracting.
+   OSE home-tile artwork motion (ose-renderer.js: oseTileArt)
+   MainScreenIconsAnimated.kt *Wide, 2026-05-01 ambient pass:
+   Play 14 s key tint (10 %), Audio 12 s height/alpha (0.04 stagger),
+   MIDI 12 s alpha .70-.78 (0.12 stagger), Practice 14 s linear sweep,
+   Metronome 6 s (one beat per 1.5 s), Tuner 10 s FastOutSlowIn
+   ping-pong +-3 %, Signal Gen 13 s linear phase, Meters 9 s height
+   96-104 % (0.18 stagger). Geometry vars are set per element.
    ========================================================= */
-
-/* PLAY - 7 white keys, accent tint cycles L→R on a 14s loop.
-   Each key gets the same animation with a 2s delay offset. */
-@keyframes mcw-play-key-tint {
-  0%, 4%, 100% { opacity: 0; }
-  10%, 14%      { opacity: 0.18; }
-}
-.mcw-play-tint   { animation: mcw-play-key-tint 14s linear infinite; }
-.mcw-play-tint-1 { animation-delay: -2s; }
-.mcw-play-tint-2 { animation-delay: -4s; }
-.mcw-play-tint-3 { animation-delay: -6s; }
-.mcw-play-tint-4 { animation-delay: -8s; }
-.mcw-play-tint-5 { animation-delay: -10s; }
-.mcw-play-tint-6 { animation-delay: -12s; }
-
-/* AUDIO - 22 vertical bars, gentle alpha L→R drift on 12s.
-   Almost imperceptible - just enough to feel alive. */
-@keyframes mcw-audio-drift {
-  0%, 100% { opacity: 0.65; }
-  50%      { opacity: 0.78; }
-}
-.mcw-audio-bar { animation: mcw-audio-drift 12s linear infinite; }
-
-/* MIDI - 6 note bars on 4 lanes, alpha pulses out-of-phase, 12s loop. */
-@keyframes mcw-midi-pulse {
-  0%, 100% { opacity: 0.70; }
-  50%      { opacity: 0.84; }
-}
-.mcw-midi-1 { animation: mcw-midi-pulse 12s ease-in-out infinite; }
-.mcw-midi-2 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -1.5s; }
-.mcw-midi-3 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -3s; }
-.mcw-midi-4 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -4.5s; }
-.mcw-midi-5 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -6s; }
-.mcw-midi-6 { animation: mcw-midi-pulse 12s ease-in-out infinite; animation-delay: -7.5s; }
-
-/* PRACTICE - playhead sweeps L→R on a 14s loop.
-   The filled rail grows behind it, then both snap back. */
-@keyframes mcw-practice-sweep {
-  0%   { transform: translateX(0%); }
-  100% { transform: translateX(100%); }
-}
-.mcw-practice-head { animation: mcw-practice-sweep 14s linear infinite; }
-@keyframes mcw-practice-fill {
-  0%   { transform: scaleX(0); }
-  100% { transform: scaleX(1); }
-}
-.mcw-practice-fill { animation: mcw-practice-fill 14s linear infinite; transform-origin: left center; }
-
-/* METRONOME - 4 pillars, one active at a time. 6s cycle (≈40 bpm equiv) */
-@keyframes mcw-met-1 { 0%, 24% { opacity: .62; transform: scaleY(1.20); } 25%, 100% { opacity: .42; transform: scaleY(1.0); } }
-@keyframes mcw-met-2 { 0%, 24% { opacity: .42; transform: scaleY(1.0); } 25%, 49% { opacity: .62; transform: scaleY(1.20); } 50%, 100% { opacity: .42; transform: scaleY(1.0); } }
-@keyframes mcw-met-3 { 0%, 49% { opacity: .42; transform: scaleY(1.0); } 50%, 74% { opacity: .62; transform: scaleY(1.20); } 75%, 100% { opacity: .42; transform: scaleY(1.0); } }
-@keyframes mcw-met-4 { 0%, 74% { opacity: .42; transform: scaleY(1.0); } 75%, 99% { opacity: .62; transform: scaleY(1.20); } 100% { opacity: .42; transform: scaleY(1.0); } }
-.mcw-met-1 { animation: mcw-met-1 6s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.mcw-met-2 { animation: mcw-met-2 6s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.mcw-met-3 { animation: mcw-met-3 6s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.mcw-met-4 { animation: mcw-met-4 6s steps(1, end) infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-
-/* TUNER - needle drifts ±3% on 10s ping-pong */
-@keyframes mcw-tuner-drift {
-  0%, 100% { transform: translateX(-3%); }
-  50%      { transform: translateX(3%);  }
-}
-.mcw-tuner-needle { animation: mcw-tuner-drift 10s ease-in-out infinite; }
-
-/* SIGNAL GEN - sine phase scrolls L→R on a 13s linear loop */
-@keyframes mcw-sine-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100px); }
-}
-.mcw-sine { animation: mcw-sine-scroll 13s linear infinite; }
-
-/* METERS - 8 FFT bars, ±4% height swing on 9s loop */
-@keyframes mcw-meter-1 { 0%,100% { transform: scaleY(0.96); } 50% { transform: scaleY(1.04); } }
-@keyframes mcw-meter-2 { 0%,100% { transform: scaleY(1.02); } 50% { transform: scaleY(0.96); } }
-@keyframes mcw-meter-3 { 0%,100% { transform: scaleY(0.98); } 50% { transform: scaleY(1.04); } }
-@keyframes mcw-meter-4 { 0%,100% { transform: scaleY(1.04); } 50% { transform: scaleY(0.96); } }
-.mcw-meter-1 { animation: mcw-meter-1 9s ease-in-out infinite; transform-origin: 50% 100%; transform-box: fill-box; }
-.mcw-meter-2 { animation: mcw-meter-2 9s ease-in-out infinite; animation-delay: -1.6s; transform-origin: 50% 100%; transform-box: fill-box; }
-.mcw-meter-3 { animation: mcw-meter-3 9s ease-in-out infinite; animation-delay: -3.2s; transform-origin: 50% 100%; transform-box: fill-box; }
-.mcw-meter-4 { animation: mcw-meter-4 9s ease-in-out infinite; animation-delay: -4.8s; transform-origin: 50% 100%; transform-box: fill-box; }
-.mcw-meter-5 { animation: mcw-meter-1 9s ease-in-out infinite; animation-delay: -6.4s; transform-origin: 50% 100%; transform-box: fill-box; }
-.mcw-meter-6 { animation: mcw-meter-2 9s ease-in-out infinite; animation-delay: -8.0s; transform-origin: 50% 100%; transform-box: fill-box; }
-.mcw-meter-7 { animation: mcw-meter-3 9s ease-in-out infinite; animation-delay: -2.4s; transform-origin: 50% 100%; transform-box: fill-box; }
-.mcw-meter-8 { animation: mcw-meter-4 9s ease-in-out infinite; animation-delay: -7.2s; transform-origin: 50% 100%; transform-box: fill-box; }
+@keyframes otTileIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes otGeo{from{height:var(--h0);y:var(--y0)}to{height:var(--h1);y:var(--y1)}}
+@keyframes otOp{from{opacity:var(--o0)}to{opacity:var(--o1)}}
+@keyframes otPk{0%{opacity:0}7.143%{opacity:.10}14.286%{opacity:0}100%{opacity:0}}
+@keyframes otPrFill{from{width:0px}to{width:156px}}@keyframes otPrHead{from{transform:translateX(0)}to{transform:translateX(156px)}}
+@keyframes otMw{0%{height:67.2px;y:28.8px;opacity:.62}16.875%{height:67.2px;y:28.8px;opacity:.62}20.625%{height:55.68px;y:40.32px;opacity:.62}24.99%{height:55.68px;y:40.32px;opacity:.62}25%{height:48px;y:48px;opacity:.42}100%{height:48px;y:48px;opacity:.42}}
+@keyframes otTw{from{transform:translateX(-4.68px)}to{transform:translateX(4.68px)}}
+@keyframes otSg{0%{d:path('M0,48 L2.44,55.49 L4.88,62.7 L7.31,69.33 L9.75,75.15 L12.19,79.93 L14.62,83.48 L17.06,85.66 L19.5,86.4 L21.94,85.66 L24.38,83.48 L26.81,79.93 L29.25,75.15 L31.69,69.33 L34.12,62.7 L36.56,55.49 L39,48 L41.44,40.51 L43.88,33.3 L46.31,26.67 L48.75,20.85 L51.19,16.07 L53.62,12.52 L56.06,10.34 L58.5,9.6 L60.94,10.34 L63.38,12.52 L65.81,16.07 L68.25,20.85 L70.69,26.67 L73.12,33.3 L75.56,40.51 L78,48 L80.44,55.49 L82.88,62.7 L85.31,69.33 L87.75,75.15 L90.19,79.93 L92.62,83.48 L95.06,85.66 L97.5,86.4 L99.94,85.66 L102.38,83.48 L104.81,79.93 L107.25,75.15 L109.69,69.33 L112.12,62.7 L114.56,55.49 L117,48 L119.44,40.51 L121.88,33.3 L124.31,26.67 L126.75,20.85 L129.19,16.07 L131.62,12.52 L134.06,10.34 L136.5,9.6 L138.94,10.34 L141.38,12.52 L143.81,16.07 L146.25,20.85 L148.69,26.67 L151.12,33.3 L153.56,40.51 L156,48')}8.33%{d:path('M0,67.2 L2.44,73.32 L4.88,78.46 L7.31,82.44 L9.75,85.09 L12.19,86.32 L14.62,86.07 L17.06,84.36 L19.5,81.26 L21.94,76.87 L24.38,71.38 L26.81,64.98 L29.25,57.94 L31.69,50.51 L34.12,42.99 L36.56,35.66 L39,28.8 L41.44,22.68 L43.88,17.54 L46.31,13.56 L48.75,10.91 L51.19,9.68 L53.62,9.93 L56.06,11.64 L58.5,14.74 L60.94,19.13 L63.38,24.62 L65.81,31.02 L68.25,38.06 L70.69,45.49 L73.12,53.01 L75.56,60.34 L78,67.2 L80.44,73.32 L82.88,78.46 L85.31,82.44 L87.75,85.09 L90.19,86.32 L92.62,86.07 L95.06,84.36 L97.5,81.26 L99.94,76.87 L102.38,71.38 L104.81,64.98 L107.25,57.94 L109.69,50.51 L112.12,42.99 L114.56,35.66 L117,28.8 L119.44,22.68 L121.88,17.54 L124.31,13.56 L126.75,10.91 L129.19,9.68 L131.62,9.93 L134.06,11.64 L136.5,14.74 L138.94,19.13 L141.38,24.62 L143.81,31.02 L146.25,38.06 L148.69,45.49 L151.12,53.01 L153.56,60.34 L156,67.2')}16.67%{d:path('M0,81.26 L2.44,84.36 L4.88,86.07 L7.31,86.32 L9.75,85.09 L12.19,82.44 L14.62,78.46 L17.06,73.32 L19.5,67.2 L21.94,60.34 L24.38,53.01 L26.81,45.49 L29.25,38.06 L31.69,31.02 L34.12,24.62 L36.56,19.13 L39,14.74 L41.44,11.64 L43.88,9.93 L46.31,9.68 L48.75,10.91 L51.19,13.56 L53.62,17.54 L56.06,22.68 L58.5,28.8 L60.94,35.66 L63.38,42.99 L65.81,50.51 L68.25,57.94 L70.69,64.98 L73.12,71.38 L75.56,76.87 L78,81.26 L80.44,84.36 L82.88,86.07 L85.31,86.32 L87.75,85.09 L90.19,82.44 L92.62,78.46 L95.06,73.32 L97.5,67.2 L99.94,60.34 L102.38,53.01 L104.81,45.49 L107.25,38.06 L109.69,31.02 L112.12,24.62 L114.56,19.13 L117,14.74 L119.44,11.64 L121.88,9.93 L124.31,9.68 L126.75,10.91 L129.19,13.56 L131.62,17.54 L134.06,22.68 L136.5,28.8 L138.94,35.66 L141.38,42.99 L143.81,50.51 L146.25,57.94 L148.69,64.98 L151.12,71.38 L153.56,76.87 L156,81.26')}25%{d:path('M0,86.4 L2.44,85.66 L4.88,83.48 L7.31,79.93 L9.75,75.15 L12.19,69.33 L14.62,62.7 L17.06,55.49 L19.5,48 L21.94,40.51 L24.38,33.3 L26.81,26.67 L29.25,20.85 L31.69,16.07 L34.12,12.52 L36.56,10.34 L39,9.6 L41.44,10.34 L43.88,12.52 L46.31,16.07 L48.75,20.85 L51.19,26.67 L53.62,33.3 L56.06,40.51 L58.5,48 L60.94,55.49 L63.38,62.7 L65.81,69.33 L68.25,75.15 L70.69,79.93 L73.12,83.48 L75.56,85.66 L78,86.4 L80.44,85.66 L82.88,83.48 L85.31,79.93 L87.75,75.15 L90.19,69.33 L92.62,62.7 L95.06,55.49 L97.5,48 L99.94,40.51 L102.38,33.3 L104.81,26.67 L107.25,20.85 L109.69,16.07 L112.12,12.52 L114.56,10.34 L117,9.6 L119.44,10.34 L121.88,12.52 L124.31,16.07 L126.75,20.85 L129.19,26.67 L131.62,33.3 L134.06,40.51 L136.5,48 L138.94,55.49 L141.38,62.7 L143.81,69.33 L146.25,75.15 L148.69,79.93 L151.12,83.48 L153.56,85.66 L156,86.4')}33.33%{d:path('M0,81.26 L2.44,76.87 L4.88,71.38 L7.31,64.98 L9.75,57.94 L12.19,50.51 L14.62,42.99 L17.06,35.66 L19.5,28.8 L21.94,22.68 L24.38,17.54 L26.81,13.56 L29.25,10.91 L31.69,9.68 L34.12,9.93 L36.56,11.64 L39,14.74 L41.44,19.13 L43.88,24.62 L46.31,31.02 L48.75,38.06 L51.19,45.49 L53.62,53.01 L56.06,60.34 L58.5,67.2 L60.94,73.32 L63.38,78.46 L65.81,82.44 L68.25,85.09 L70.69,86.32 L73.12,86.07 L75.56,84.36 L78,81.26 L80.44,76.87 L82.88,71.38 L85.31,64.98 L87.75,57.94 L90.19,50.51 L92.62,42.99 L95.06,35.66 L97.5,28.8 L99.94,22.68 L102.38,17.54 L104.81,13.56 L107.25,10.91 L109.69,9.68 L112.12,9.93 L114.56,11.64 L117,14.74 L119.44,19.13 L121.88,24.62 L124.31,31.02 L126.75,38.06 L129.19,45.49 L131.62,53.01 L134.06,60.34 L136.5,67.2 L138.94,73.32 L141.38,78.46 L143.81,82.44 L146.25,85.09 L148.69,86.32 L151.12,86.07 L153.56,84.36 L156,81.26')}41.67%{d:path('M0,67.2 L2.44,60.34 L4.88,53.01 L7.31,45.49 L9.75,38.06 L12.19,31.02 L14.62,24.62 L17.06,19.13 L19.5,14.74 L21.94,11.64 L24.38,9.93 L26.81,9.68 L29.25,10.91 L31.69,13.56 L34.12,17.54 L36.56,22.68 L39,28.8 L41.44,35.66 L43.88,42.99 L46.31,50.51 L48.75,57.94 L51.19,64.98 L53.62,71.38 L56.06,76.87 L58.5,81.26 L60.94,84.36 L63.38,86.07 L65.81,86.32 L68.25,85.09 L70.69,82.44 L73.12,78.46 L75.56,73.32 L78,67.2 L80.44,60.34 L82.88,53.01 L85.31,45.49 L87.75,38.06 L90.19,31.02 L92.62,24.62 L95.06,19.13 L97.5,14.74 L99.94,11.64 L102.38,9.93 L104.81,9.68 L107.25,10.91 L109.69,13.56 L112.12,17.54 L114.56,22.68 L117,28.8 L119.44,35.66 L121.88,42.99 L124.31,50.51 L126.75,57.94 L129.19,64.98 L131.62,71.38 L134.06,76.87 L136.5,81.26 L138.94,84.36 L141.38,86.07 L143.81,86.32 L146.25,85.09 L148.69,82.44 L151.12,78.46 L153.56,73.32 L156,67.2')}50%{d:path('M0,48 L2.44,40.51 L4.88,33.3 L7.31,26.67 L9.75,20.85 L12.19,16.07 L14.62,12.52 L17.06,10.34 L19.5,9.6 L21.94,10.34 L24.38,12.52 L26.81,16.07 L29.25,20.85 L31.69,26.67 L34.12,33.3 L36.56,40.51 L39,48 L41.44,55.49 L43.88,62.7 L46.31,69.33 L48.75,75.15 L51.19,79.93 L53.62,83.48 L56.06,85.66 L58.5,86.4 L60.94,85.66 L63.38,83.48 L65.81,79.93 L68.25,75.15 L70.69,69.33 L73.12,62.7 L75.56,55.49 L78,48 L80.44,40.51 L82.88,33.3 L85.31,26.67 L87.75,20.85 L90.19,16.07 L92.62,12.52 L95.06,10.34 L97.5,9.6 L99.94,10.34 L102.38,12.52 L104.81,16.07 L107.25,20.85 L109.69,26.67 L112.12,33.3 L114.56,40.51 L117,48 L119.44,55.49 L121.88,62.7 L124.31,69.33 L126.75,75.15 L129.19,79.93 L131.62,83.48 L134.06,85.66 L136.5,86.4 L138.94,85.66 L141.38,83.48 L143.81,79.93 L146.25,75.15 L148.69,69.33 L151.12,62.7 L153.56,55.49 L156,48')}58.33%{d:path('M0,28.8 L2.44,22.68 L4.88,17.54 L7.31,13.56 L9.75,10.91 L12.19,9.68 L14.62,9.93 L17.06,11.64 L19.5,14.74 L21.94,19.13 L24.38,24.62 L26.81,31.02 L29.25,38.06 L31.69,45.49 L34.12,53.01 L36.56,60.34 L39,67.2 L41.44,73.32 L43.88,78.46 L46.31,82.44 L48.75,85.09 L51.19,86.32 L53.62,86.07 L56.06,84.36 L58.5,81.26 L60.94,76.87 L63.38,71.38 L65.81,64.98 L68.25,57.94 L70.69,50.51 L73.12,42.99 L75.56,35.66 L78,28.8 L80.44,22.68 L82.88,17.54 L85.31,13.56 L87.75,10.91 L90.19,9.68 L92.62,9.93 L95.06,11.64 L97.5,14.74 L99.94,19.13 L102.38,24.62 L104.81,31.02 L107.25,38.06 L109.69,45.49 L112.12,53.01 L114.56,60.34 L117,67.2 L119.44,73.32 L121.88,78.46 L124.31,82.44 L126.75,85.09 L129.19,86.32 L131.62,86.07 L134.06,84.36 L136.5,81.26 L138.94,76.87 L141.38,71.38 L143.81,64.98 L146.25,57.94 L148.69,50.51 L151.12,42.99 L153.56,35.66 L156,28.8')}66.67%{d:path('M0,14.74 L2.44,11.64 L4.88,9.93 L7.31,9.68 L9.75,10.91 L12.19,13.56 L14.62,17.54 L17.06,22.68 L19.5,28.8 L21.94,35.66 L24.38,42.99 L26.81,50.51 L29.25,57.94 L31.69,64.98 L34.12,71.38 L36.56,76.87 L39,81.26 L41.44,84.36 L43.88,86.07 L46.31,86.32 L48.75,85.09 L51.19,82.44 L53.62,78.46 L56.06,73.32 L58.5,67.2 L60.94,60.34 L63.38,53.01 L65.81,45.49 L68.25,38.06 L70.69,31.02 L73.12,24.62 L75.56,19.13 L78,14.74 L80.44,11.64 L82.88,9.93 L85.31,9.68 L87.75,10.91 L90.19,13.56 L92.62,17.54 L95.06,22.68 L97.5,28.8 L99.94,35.66 L102.38,42.99 L104.81,50.51 L107.25,57.94 L109.69,64.98 L112.12,71.38 L114.56,76.87 L117,81.26 L119.44,84.36 L121.88,86.07 L124.31,86.32 L126.75,85.09 L129.19,82.44 L131.62,78.46 L134.06,73.32 L136.5,67.2 L138.94,60.34 L141.38,53.01 L143.81,45.49 L146.25,38.06 L148.69,31.02 L151.12,24.62 L153.56,19.13 L156,14.74')}75%{d:path('M0,9.6 L2.44,10.34 L4.88,12.52 L7.31,16.07 L9.75,20.85 L12.19,26.67 L14.62,33.3 L17.06,40.51 L19.5,48 L21.94,55.49 L24.38,62.7 L26.81,69.33 L29.25,75.15 L31.69,79.93 L34.12,83.48 L36.56,85.66 L39,86.4 L41.44,85.66 L43.88,83.48 L46.31,79.93 L48.75,75.15 L51.19,69.33 L53.62,62.7 L56.06,55.49 L58.5,48 L60.94,40.51 L63.38,33.3 L65.81,26.67 L68.25,20.85 L70.69,16.07 L73.12,12.52 L75.56,10.34 L78,9.6 L80.44,10.34 L82.88,12.52 L85.31,16.07 L87.75,20.85 L90.19,26.67 L92.62,33.3 L95.06,40.51 L97.5,48 L99.94,55.49 L102.38,62.7 L104.81,69.33 L107.25,75.15 L109.69,79.93 L112.12,83.48 L114.56,85.66 L117,86.4 L119.44,85.66 L121.88,83.48 L124.31,79.93 L126.75,75.15 L129.19,69.33 L131.62,62.7 L134.06,55.49 L136.5,48 L138.94,40.51 L141.38,33.3 L143.81,26.67 L146.25,20.85 L148.69,16.07 L151.12,12.52 L153.56,10.34 L156,9.6')}83.33%{d:path('M0,14.74 L2.44,19.13 L4.88,24.62 L7.31,31.02 L9.75,38.06 L12.19,45.49 L14.62,53.01 L17.06,60.34 L19.5,67.2 L21.94,73.32 L24.38,78.46 L26.81,82.44 L29.25,85.09 L31.69,86.32 L34.12,86.07 L36.56,84.36 L39,81.26 L41.44,76.87 L43.88,71.38 L46.31,64.98 L48.75,57.94 L51.19,50.51 L53.62,42.99 L56.06,35.66 L58.5,28.8 L60.94,22.68 L63.38,17.54 L65.81,13.56 L68.25,10.91 L70.69,9.68 L73.12,9.93 L75.56,11.64 L78,14.74 L80.44,19.13 L82.88,24.62 L85.31,31.02 L87.75,38.06 L90.19,45.49 L92.62,53.01 L95.06,60.34 L97.5,67.2 L99.94,73.32 L102.38,78.46 L104.81,82.44 L107.25,85.09 L109.69,86.32 L112.12,86.07 L114.56,84.36 L117,81.26 L119.44,76.87 L121.88,71.38 L124.31,64.98 L126.75,57.94 L129.19,50.51 L131.62,42.99 L134.06,35.66 L136.5,28.8 L138.94,22.68 L141.38,17.54 L143.81,13.56 L146.25,10.91 L148.69,9.68 L151.12,9.93 L153.56,11.64 L156,14.74')}91.67%{d:path('M0,28.8 L2.44,35.66 L4.88,42.99 L7.31,50.51 L9.75,57.94 L12.19,64.98 L14.62,71.38 L17.06,76.87 L19.5,81.26 L21.94,84.36 L24.38,86.07 L26.81,86.32 L29.25,85.09 L31.69,82.44 L34.12,78.46 L36.56,73.32 L39,67.2 L41.44,60.34 L43.88,53.01 L46.31,45.49 L48.75,38.06 L51.19,31.02 L53.62,24.62 L56.06,19.13 L58.5,14.74 L60.94,11.64 L63.38,9.93 L65.81,9.68 L68.25,10.91 L70.69,13.56 L73.12,17.54 L75.56,22.68 L78,28.8 L80.44,35.66 L82.88,42.99 L85.31,50.51 L87.75,57.94 L90.19,64.98 L92.62,71.38 L95.06,76.87 L97.5,81.26 L99.94,84.36 L102.38,86.07 L104.81,86.32 L107.25,85.09 L109.69,82.44 L112.12,78.46 L114.56,73.32 L117,67.2 L119.44,60.34 L121.88,53.01 L124.31,45.49 L126.75,38.06 L129.19,31.02 L131.62,24.62 L134.06,19.13 L136.5,14.74 L138.94,11.64 L141.38,9.93 L143.81,9.68 L146.25,10.91 L148.69,13.56 L151.12,17.54 L153.56,22.68 L156,28.8')}100%{d:path('M0,48 L2.44,55.49 L4.88,62.7 L7.31,69.33 L9.75,75.15 L12.19,79.93 L14.62,83.48 L17.06,85.66 L19.5,86.4 L21.94,85.66 L24.38,83.48 L26.81,79.93 L29.25,75.15 L31.69,69.33 L34.12,62.7 L36.56,55.49 L39,48 L41.44,40.51 L43.88,33.3 L46.31,26.67 L48.75,20.85 L51.19,16.07 L53.62,12.52 L56.06,10.34 L58.5,9.6 L60.94,10.34 L63.38,12.52 L65.81,16.07 L68.25,20.85 L70.69,26.67 L73.12,33.3 L75.56,40.51 L78,48 L80.44,55.49 L82.88,62.7 L85.31,69.33 L87.75,75.15 L90.19,79.93 L92.62,83.48 L95.06,85.66 L97.5,86.4 L99.94,85.66 L102.38,83.48 L104.81,79.93 L107.25,75.15 L109.69,69.33 L112.12,62.7 L114.56,55.49 L117,48 L119.44,40.51 L121.88,33.3 L124.31,26.67 L126.75,20.85 L129.19,16.07 L131.62,12.52 L134.06,10.34 L136.5,9.6 L138.94,10.34 L141.38,12.52 L143.81,16.07 L146.25,20.85 L148.69,26.67 L151.12,33.3 L153.56,40.51 L156,48')}}
 
 /* =========================================================
    Tutorial scene animations - for tutorials.html
@@ -2187,15 +2047,12 @@ a.hub-card { display: block; color: inherit; }
   70%, 100%{ box-shadow: 0 0 0 0 rgba(255,138,42,0); }
 }
 
-/* Reduced motion */
+/* Reduced motion: every loop freezes on its t = 0 frame (as the app does) */
 @media (prefers-reduced-motion: reduce) {
   .anim-glowo-wave, .anim-rec, .anim-rec-glow,
-  .anim-key-1, .anim-key-2, .anim-key-3, .anim-key-4, .anim-key-5, .anim-key-6, .anim-key-7,
-  .anim-audio-ribbon, .anim-midi-1, .anim-midi-2, .anim-midi-3, .anim-midi-4, .anim-midi-5, .anim-midi-6,
-  .anim-practice-head, .anim-met-1, .anim-met-2, .anim-met-3, .anim-met-4,
-  .anim-tuner-needle, .anim-tuner-snap, .anim-sig-sine,
-  .anim-mb-1, .anim-mb-2, .anim-mb-3, .anim-mb-4, .anim-mb-5, .anim-mb-6, .anim-mb-7, .anim-mb-8,
-  .anim-playhead, .anim-tempo-spin, .anim-cutoff { animation: none !important; }
+  .anim-playhead, .anim-tempo-spin, .anim-cutoff,
+  .module-card, .module-card *, .phone-frame--home .ot-in, .phone-frame--home .ot-art * { animation: none !important; }
+  .module-card { transition: none; }
 }
 
 /* =========================================================

@@ -139,183 +139,150 @@
     }).join('');
   }
 
+  // -------- OSE home-tile artwork --------
+  // A faithful port of the *Wide composables in
+  // app/.../main_screen/MainScreenIconsAnimated.kt (2026-05-01 ambient pass),
+  // drawn into a 156 x 96 box (a portrait phone tile's art area, in dp).
+  // Geometry, alpha tiers and loop timings are the Kotlin values; the CSS
+  // keyframes (ot*) live in ose-styles.css. Reduced motion freezes every
+  // loop on its t = 0 frame, exactly like rememberAnimationsEnabled() = false.
+  var oseTileArt = (function () {
+    var W = 156, H = 96;
+    var SINE = 'cubic-bezier(0.37,0,0.63,1)';      // half-sine ease (sin-modulated loops)
+    var FOSI = 'cubic-bezier(0.4,0,0.2,1)';        // Compose FastOutSlowInEasing
+    function f(v) { var s = (+v).toFixed(2).replace(/\.?0+$/, ''); return s === '-0' || s === '' ? '0' : s; }
+    function sinval(t) { return (Math.sin(2 * Math.PI * t) + 1) / 2; }
+    // Kotlin: value = (sin(2π((t - i·k) mod 1)) + 1) / 2 on a linear loop of
+    // period T. CSS equivalent: min→max over T/2 with a half-sine ease,
+    // alternating, phase-shifted per element.
+    function sinAnim(name, T, k, i) {
+      var d = (((0.75 + i * k) % 1) * T) - T;
+      return name + ' ' + f(T / 2) + 's ' + SINE + ' ' + f(d) + 's infinite alternate';
+    }
+    function rect(x, y, w, h, r, extra) {
+      return '<rect x="' + f(x) + '" y="' + f(y) + '" width="' + f(w) + '" height="' + f(h) + '" rx="' + f(r) + '" ' + extra + '/>';
+    }
+    function sineD(phase) {
+      var pts = [], steps = 64, mid = H * 0.5, amp = H * 0.40;
+      for (var i = 0; i <= steps; i++) {
+        var t = i / steps;
+        pts.push(f(W * t) + ',' + f(mid + Math.sin(t * 4 * Math.PI + phase) * amp));
+      }
+      return 'M' + pts.join(' L');
+    }
+    var A = {
+      // PlayKeysWide: 7 white keys + 5 sharps; one key at a time lerps 10 %
+      // toward the accent, 14 s linear loop.
+      play: function () {
+        var keyW = W / 7, gap = keyW * 0.06, ww = keyW - gap, r = keyW * 0.10, o = '';
+        for (var i = 0; i < 7; i++) {
+          var x = i * keyW + gap / 2;
+          o += rect(x, 0, ww, H, r, 'fill="#E8E8EC"');
+          o += rect(x, 0, ww, H, r, 'fill="currentColor" opacity="0" style="animation:otPk 14s linear ' + f(i * 2 - 14) + 's infinite"');
+        }
+        var sw = keyW * 0.55, sh = H * 0.62, sr = keyW * 0.08;
+        [0, 1, 3, 4, 5].forEach(function (idx) { o += rect((idx + 1) * keyW - sw / 2, 0, sw, sh, sr, 'fill="#0A0A0E"'); });
+        return o;
+      },
+      // AudioWaveWide: 22 bars, slot 62 %, height 93-100 %, alpha .65-.73,
+      // 12 s loop, 0.04 stagger.
+      audio: function () {
+        var base = [0.30,0.55,0.80,0.60,0.90,0.45,0.70,0.35,0.65,0.85,0.50,0.75,0.40,0.60,0.30,0.55,0.80,0.45,0.65,0.90,0.50,0.35];
+        var slot = W / base.length, bw = slot * 0.62, o = '';
+        base.forEach(function (b, i) {
+          var mod0 = 0.93 + sinval(-i * 0.04) * 0.07;
+          var h0 = Math.max(b * H * 0.93, 2), h1 = b * H, hs = Math.max(b * H * mod0, 2);
+          var st = '--h0:' + f(h0) + 'px;--y0:' + f(H - h0) + 'px;--h1:' + f(h1) + 'px;--y1:' + f(H - h1) + 'px;' +
+                   '--o0:' + f(0.65 + 0.93 * 0.08) + ';--o1:.73;animation:' + sinAnim('otGeo', 12, 0.04, i) + ',' + sinAnim('otOp', 12, 0.04, i);
+          o += rect(i * slot + (slot - bw) / 2, H - hs, bw, hs, bw * 0.25, 'fill="currentColor" opacity="' + f(0.65 + mod0 * 0.08) + '" style="' + st + '"');
+        });
+        return o;
+      },
+      // MidiWide: 6 notes on 4 lanes, bar 58 % of a lane, alpha .70-.78,
+      // 12 s loop, 0.12 stagger.
+      midi: function () {
+        var notes = [[0.02,0.16,1],[0.20,0.10,2],[0.32,0.18,0],[0.52,0.12,1],[0.66,0.18,3],[0.86,0.12,2]];
+        var laneH = H / 4, bh = laneH * 0.58, o = '';
+        notes.forEach(function (n, i) {
+          var a0 = 0.70 + sinval(-i * 0.12) * 0.08;
+          o += rect(n[0] * W, n[2] * laneH + (laneH - bh) / 2, n[1] * W, bh, bh * 0.32,
+                    'fill="currentColor" opacity="' + f(a0) + '" style="--o0:.70;--o1:.78;animation:' + sinAnim('otOp', 12, 0.12, i) + '"');
+        });
+        return o;
+      },
+      // PracticeWide: rail .18, fill .55 grows to the playhead, end pillars
+      // .85, playhead + 3.4x halo .32; 14 s linear sweep, restart.
+      practice: function () {
+        var mid = H * 0.5, rh = H * 0.18, rt = mid - rh / 2, rr = rh / 2;
+        var o = rect(0, rt, W, rh, rr, 'fill="currentColor" opacity=".18"') +
+                rect(0, rt, 0, rh, rr, 'fill="currentColor" opacity=".55" style="animation:otPrFill 14s linear infinite"');
+        var mw = W * 0.014, mh = H * 0.74;
+        [0, W - mw].forEach(function (mx) { o += rect(mx, mid - mh / 2, mw, mh, mw / 2, 'fill="currentColor" opacity=".85"'); });
+        var pw = W * 0.022, ph = H * 0.88;
+        return o + '<g style="animation:otPrHead 14s linear infinite">' +
+          rect(-pw * 1.7, mid - ph / 2, pw * 3.4, ph, pw * 1.7, 'fill="currentColor" opacity=".32"') +
+          rect(-pw / 2, mid - ph / 2, pw, ph, pw / 2, 'fill="currentColor"') + '</g>';
+      },
+      // MetronomeWide: 4 pillars, slot 32 %; idle h .50 @ .42, active
+      // .70 -> .58 @ .62; 6 s linear loop, one beat per 1.5 s.
+      metronome: function () {
+        var slot = W / 4, bw = slot * 0.32, r = bw * 0.45, hA = H * 0.70, hI = H * 0.50, o = '';
+        for (var i = 0; i < 4; i++) {
+          var hs = i === 0 ? hA : hI;
+          o += rect(i * slot + (slot - bw) / 2, H - hs, bw, hs, r,
+                    'fill="currentColor" opacity="' + (i === 0 ? '.62' : '.42') + '" style="animation:otMw 6s linear ' + f(i * 1.5 - 6) + 's infinite"');
+        }
+        return o;
+      },
+      // TunerWide: rail .20, cent ticks at ±40/±20/0, needle + 3.2x halo
+      // .28 drifting ±3 % on a 10 s FastOutSlowIn ping-pong.
+      tuner: function () {
+        var mid = H / 2, rh = H * 0.16;
+        var o = rect(0, mid - rh / 2, W, rh, rh / 2, 'fill="currentColor" opacity=".20"');
+        [-0.40, -0.20, 0, 0.20, 0.40].forEach(function (off) {
+          var c = off === 0, th = H * (c ? 0.68 : 0.45), tw = W * (c ? 0.018 : 0.012), tx = W / 2 + off * W;
+          o += rect(tx - tw / 2, mid - th / 2, tw, th, tw / 2, 'fill="currentColor" opacity="' + (c ? '.88' : '.40') + '"');
+        });
+        var nw = W * 0.024, nh = H * 0.88, nx = W / 2;
+        return o + '<g style="animation:otTw 10s ' + FOSI + ' infinite alternate">' +
+          rect(nx - nw * 1.6, mid - nh / 2, nw * 3.2, nh, nw * 1.6, 'fill="currentColor" opacity=".28"') +
+          rect(nx - nw / 2, mid - nh / 2, nw, nh, nw / 2, 'fill="currentColor"') + '</g>';
+      },
+      // SignalGenWide: 2-cycle sine, amplitude 40 % h, halo 14 % h @ .25 +
+      // core 6 % h; 13 s linear phase loop.
+      'signal-generator': function () {
+        var d = sineD(0), an = 'animation:otSg 13s linear infinite';
+        return '<path d="' + d + '" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="' + f(H * 0.14) + '" stroke-linecap="round" stroke-linejoin="round" style="' + an + '"/>' +
+               '<path d="' + d + '" fill="none" stroke="currentColor" stroke-width="' + f(H * 0.06) + '" stroke-linecap="round" stroke-linejoin="round" style="' + an + '"/>';
+      },
+      // MetersWide: 8 bars, slot 58 % @ .85, height 96-104 %, 9 s loop,
+      // 0.18 stagger.
+      meters: function () {
+        var base = [0.55, 0.78, 0.92, 0.70, 0.85, 0.62, 0.74, 0.50];
+        var slot = W / base.length, bw = slot * 0.58, o = '';
+        base.forEach(function (b, i) {
+          var h0 = b * H * 0.96, h1 = Math.min(b * H * 1.04, H - 2);
+          var hs = Math.min(b * H * (0.96 + sinval(-i * 0.18) * 0.08), H - 2);
+          o += rect(i * slot + (slot - bw) / 2, H - hs, bw, hs, bw * 0.18,
+                    'fill="currentColor" opacity=".85" style="--h0:' + f(h0) + 'px;--y0:' + f(H - h0) + 'px;--h1:' + f(h1) + 'px;--y1:' + f(H - h1) + 'px;animation:' + sinAnim('otGeo', 9, 0.18, i) + '"');
+        });
+        return o;
+      }
+    };
+    return function (id) { return A[id] ? A[id]() : ''; };
+  })();
+
+  // Fill any static art slot (the hero home-screen mock) from the same source.
+  document.querySelectorAll('[data-ose-tile-art]').forEach(function (el) {
+    el.innerHTML = oseTileArt(el.getAttribute('data-ose-tile-art'));
+  });
+
   // -------- 8-module grid (landing) --------
-  // Each card mirrors the corresponding *Wide composable in
-  // app/.../main_screen/MainScreenIconsAnimated.kt.
+  // The OSE home grid: MainScreenCardSlot tiles (MainScreenCard.kt) in the
+  // app's reading order, each with its *Wide artwork above. Play is the
+  // emphasised tile, as in MainScreen.kt.
   var gridHost = document.querySelector('[data-ose-module-grid]');
   if (gridHost && Array.isArray(C.modules)) {
-    // ---- PlayKeysWide: 7 white keys + 5 sharps, accent tint cycles L→R ----
-    function vizPlay() {
-      var whites = '';
-      var tints = '';
-      for (var i = 0; i < 7; i++) {
-        var x = i * 100 + 3;
-        whites += '<rect x="' + x + '" y="0" width="94" height="200" rx="10" fill="#E8E8EC"/>';
-        tints  += '<rect x="' + x + '" y="0" width="94" height="200" rx="10" fill="currentColor" class="mcw-play-tint mcw-play-tint-' + i + '" opacity="0"/>';
-      }
-      var sharpAfter = [0, 1, 3, 4, 5];
-      var sharps = '';
-      sharpAfter.forEach(function (idx) {
-        var cx = (idx + 1) * 100;
-        sharps += '<rect x="' + (cx - 27) + '" y="0" width="55" height="124" rx="8" fill="#0A0A0E"/>';
-      });
-      return '<svg viewBox="0 0 700 200" preserveAspectRatio="none">' +
-             '<g>' + whites + '</g>' +
-             '<g>' + tints + '</g>' +
-             '<g>' + sharps + '</g>' +
-             '</svg>';
-    }
-    // ---- AudioWaveWide: 22 vertical bars, pre-baked heights ----
-    function vizAudio() {
-      var heights = [0.30,0.55,0.80,0.60,0.90,0.45,0.70,0.35,0.65,0.85,0.50,0.75,0.40,0.60,0.30,0.55,0.80,0.45,0.65,0.90,0.50,0.35];
-      var slot = 700 / heights.length;
-      var barW = slot * 0.62;
-      var H = 200;
-      var bars = '';
-      for (var i = 0; i < heights.length; i++) {
-        var barH = heights[i] * H;
-        var x = i * slot + (slot - barW) / 2;
-        var y = H - barH;
-        bars += '<rect class="mcw-audio-bar" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" rx="' + (barW * 0.25).toFixed(1) + '" fill="currentColor"/>';
-      }
-      return '<svg viewBox="0 0 700 200" preserveAspectRatio="none">' + bars + '</svg>';
-    }
-    // ---- MidiWide: 6 note bars across 4 lanes ----
-    function vizMidi() {
-      var notes = [
-        [0.02, 0.16, 1, 'mcw-midi-1'],
-        [0.20, 0.10, 2, 'mcw-midi-2'],
-        [0.32, 0.18, 0, 'mcw-midi-3'],
-        [0.52, 0.12, 1, 'mcw-midi-4'],
-        [0.66, 0.18, 3, 'mcw-midi-5'],
-        [0.86, 0.12, 2, 'mcw-midi-6']
-      ];
-      var W = 700, H = 200;
-      var laneH = H / 4;
-      var barH  = laneH * 0.58;
-      var bars = '';
-      notes.forEach(function (n) {
-        var x = n[0] * W;
-        var w = n[1] * W;
-        var y = n[2] * laneH + (laneH - barH) / 2;
-        bars += '<rect class="' + n[3] + '" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + barH.toFixed(1) + '" rx="' + (barH * 0.32).toFixed(1) + '" fill="currentColor"/>';
-      });
-      return '<svg viewBox="0 0 700 200" preserveAspectRatio="none">' + bars + '</svg>';
-    }
-    // ---- PracticeWide: rail with growing fill + sweeping playhead ----
-    function vizPractice() {
-      var W = 700, H = 200;
-      var midY = H * 0.5;
-      var railH = H * 0.18;
-      var railTop = midY - railH / 2;
-      var markW = W * 0.014;
-      var markH = H * 0.74;
-      var phW = W * 0.022;
-      var phH = H * 0.88;
-      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' +
-        // Background rail
-        '<rect x="0" y="' + railTop + '" width="' + W + '" height="' + railH + '" rx="' + (railH/2) + '" fill="currentColor" opacity="0.18"/>' +
-        // Filled portion (animates scaleX)
-        '<rect class="mcw-practice-fill" x="0" y="' + railTop + '" width="' + W + '" height="' + railH + '" rx="' + (railH/2) + '" fill="currentColor" opacity="0.55"/>' +
-        // Loop start pillar
-        '<rect x="0" y="' + (midY - markH/2) + '" width="' + markW + '" height="' + markH + '" rx="' + (markW/2) + '" fill="currentColor" opacity="0.85"/>' +
-        // Loop end pillar
-        '<rect x="' + (W - markW) + '" y="' + (midY - markH/2) + '" width="' + markW + '" height="' + markH + '" rx="' + (markW/2) + '" fill="currentColor" opacity="0.85"/>' +
-        // Playhead (sweeps L→R)
-        '<g class="mcw-practice-head">' +
-          '<rect x="' + (-phW * 1.7) + '" y="' + (midY - phH/2) + '" width="' + (phW * 3.4) + '" height="' + phH + '" rx="' + (phW * 1.7) + '" fill="currentColor" opacity="0.32"/>' +
-          '<rect x="' + (-phW/2) + '" y="' + (midY - phH/2) + '" width="' + phW + '" height="' + phH + '" rx="' + (phW/2) + '" fill="currentColor"/>' +
-        '</g>' +
-        '</svg>';
-    }
-    // ---- MetronomeWide: 4 pillars with one active at a time ----
-    function vizMetronome() {
-      var W = 700, H = 200;
-      var slot = W / 4;
-      var barW = slot * 0.32;
-      var barH = H * 0.50;
-      var bars = '';
-      for (var i = 0; i < 4; i++) {
-        var x = i * slot + (slot - barW) / 2;
-        var y = H - barH;
-        bars += '<rect class="mcw-met-' + (i + 1) + '" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" rx="' + (barW * 0.45).toFixed(1) + '" fill="currentColor"/>';
-      }
-      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' + bars + '</svg>';
-    }
-    // ---- TunerWide: pitch ribbon, 5 cent ticks, drifting needle ----
-    function vizTuner() {
-      var W = 700, H = 200;
-      var midY = H * 0.5;
-      var railH = H * 0.16;
-      var railTop = midY - railH / 2;
-      var centerX = W / 2;
-      var ticks = '';
-      [-0.40, -0.20, 0, 0.20, 0.40].forEach(function (off) {
-        var isCenter = off === 0;
-        var tx = centerX + off * W;
-        var tickH = isCenter ? H * 0.68 : H * 0.45;
-        var tickW = isCenter ? W * 0.018 : W * 0.012;
-        ticks += '<rect x="' + (tx - tickW/2).toFixed(1) + '" y="' + (midY - tickH/2).toFixed(1) + '" width="' + tickW.toFixed(2) + '" height="' + tickH.toFixed(1) + '" rx="' + (tickW/2).toFixed(2) + '" fill="currentColor" opacity="' + (isCenter ? 0.88 : 0.40) + '"/>';
-      });
-      var needleW = W * 0.024;
-      var needleH = H * 0.88;
-      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' +
-        // Soft full-width rail
-        '<rect x="0" y="' + railTop + '" width="' + W + '" height="' + railH + '" rx="' + (railH/2) + '" fill="currentColor" opacity="0.20"/>' +
-        // Cent ticks
-        ticks +
-        // Needle (drifts ±3% - translateX animates the group)
-        '<g class="mcw-tuner-needle">' +
-          '<rect x="' + (centerX - needleW * 1.6).toFixed(1) + '" y="' + (midY - needleH/2).toFixed(1) + '" width="' + (needleW * 3.2).toFixed(1) + '" height="' + needleH.toFixed(1) + '" rx="' + (needleW * 1.6).toFixed(1) + '" fill="currentColor" opacity="0.28"/>' +
-          '<rect x="' + (centerX - needleW/2).toFixed(1) + '" y="' + (midY - needleH/2).toFixed(1) + '" width="' + needleW.toFixed(1) + '" height="' + needleH.toFixed(1) + '" rx="' + (needleW/2).toFixed(1) + '" fill="currentColor"/>' +
-        '</g>' +
-        '</svg>';
-    }
-    // ---- SignalGenWide: scrolling sine wave with halo ----
-    function vizSignalGen() {
-      var W = 700, H = 200;
-      var midY = H * 0.5;
-      var amp  = H * 0.40;
-      var d = 'M 0 ' + midY;
-      var steps = 80;
-      for (var i = 1; i <= steps; i++) {
-        var t = i / steps;
-        var x = t * (W + 100);
-        var y = midY + Math.sin(t * 4 * Math.PI) * amp;
-        d += ' L ' + x.toFixed(1) + ' ' + y.toFixed(2);
-      }
-      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" style="overflow:hidden;">' +
-        '<g class="mcw-sine">' +
-          '<path d="' + d + '" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="' + (H * 0.14) + '" stroke-linecap="round" stroke-linejoin="round"/>' +
-          '<path d="' + d + '" fill="none" stroke="currentColor" stroke-width="' + (H * 0.06) + '" stroke-linecap="round" stroke-linejoin="round"/>' +
-        '</g>' +
-        '</svg>';
-    }
-    // ---- MetersWide: 8 vertical FFT bars ----
-    function vizMeters() {
-      var heights = [0.55, 0.78, 0.92, 0.70, 0.85, 0.62, 0.74, 0.50];
-      var W = 700, H = 200;
-      var slot = W / heights.length;
-      var barW = slot * 0.58;
-      var bars = '';
-      for (var i = 0; i < heights.length; i++) {
-        var barH = heights[i] * H;
-        var x = i * slot + (slot - barW) / 2;
-        var y = H - barH;
-        bars += '<rect class="mcw-meter-' + (i + 1) + '" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" rx="' + (barW * 0.18).toFixed(1) + '" fill="currentColor" opacity="0.85"/>';
-      }
-      return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' + bars + '</svg>';
-    }
-    var vizFns = {
-      'play': vizPlay,
-      'audio': vizAudio,
-      'midi': vizMidi,
-      'practice': vizPractice,
-      'metronome': vizMetronome,
-      'tuner': vizTuner,
-      'signal-generator': vizSignalGen,
-      'meters': vizMeters
-    };
     var classMap = {
       'play': 'mc--play',
       'audio': 'mc--audio',
@@ -326,18 +293,18 @@
       'signal-generator': 'mc--signalgen',
       'meters': 'mc--meters'
     };
-    gridHost.innerHTML = C.modules.map(function (m) {
+    gridHost.innerHTML = C.modules.map(function (m, i) {
       var emph = m.id === 'play' ? ' is-emphasized' : '';
       var cls  = classMap[m.id] || '';
       var href = fixHref('modules/' + m.id + '.html');
-      var viz  = (vizFns[m.id] || function () { return ''; })();
+      var name = m.shortName || m.name;
       return (
-        '<a class="module-card ' + cls + emph + '" href="' + href + '">' +
+        '<a class="module-card ' + cls + emph + '" href="' + href + '" style="--i:' + i + '">' +
         '<div class="mc-head">' +
-          '<div class="mc-name">' + (m.shortName || m.name) + '</div>' +
+          '<div class="mc-name">' + name + '</div>' +
           '<div class="mc-sub">' + (m.tile_role || '') + '</div>' +
         '</div>' +
-        '<div class="mc-viz">' + viz + '</div>' +
+        '<div class="mc-viz"><svg viewBox="0 0 156 96" aria-hidden="true" focusable="false">' + oseTileArt(m.id) + '</svg></div>' +
         '</a>'
       );
     }).join('');
